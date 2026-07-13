@@ -189,5 +189,23 @@
             counters.forEach(c => observer.observe(c));
         });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const siteNav = document.querySelector('.site-nav');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                // تبديل ظهور القائمة
+                if (siteNav.classList.contains('mobile-menu-hide')) {
+                    siteNav.classList.remove('mobile-menu-hide');
+                } else {
+                    siteNav.classList.add('mobile-menu-hide');
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html> 
