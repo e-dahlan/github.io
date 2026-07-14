@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Well, this is awkward.</title>
+    
+    <!-- This script tag loads jQuery, which makes your animation work -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
+
+        body {
+            background-color: #222222;
+            background: -ms-radial-gradient(ellipse at center, #3a3a3a 0%, #111111 100%) fixed no-repeat;
+            background: -moz-radial-gradient(ellipse at center, #3a3a3a 0%, #111111 100%) fixed no-repeat;
+            background: -o-radial-gradient(ellipse at center, #3a3a3a 0%, #111111 100%) fixed no-repeat;
+            background: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, #3a3a3a), color-stop(1, #111111));
+            background: -webkit-radial-gradient(ellipse at center, #3a3a3a 0%, #111111 100%) fixed no-repeat;
+            background: radial-gradient(ellipse at center, #3a3a3a 0%, #111111 100%) fixed no-repeat;
+            font-family: 'Source Sans Pro', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            margin: 0px;
+            color: #e0e0e0;
+        }
+
+        ::selection { background-color: rgba(255,255,255,0.1); }
+        ::-moz-selection { background-color: rgba(255,255,255,0.1); }
+
+        a {
+            color: #e0e0e0;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(224,224,224,0.3);
+            transition: all 0.4s ease;
+            margin-right: 10px;
+        }
+
+        a:last-child { margin-right: 0px; }
+
+        a:hover {
+            text-shadow: 0px 0px 5px rgba(255,255,255,0.3);
+            border-bottom: 1px solid rgba(224,224,224,1);
+        }
+
+        /* === WRAP === */
+        #wrap {
+            width: 80%;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: auto;
+            position: relative;
+            margin-top: 8%;
+        }
+
+        /* === MAIN TEXT CONTENT === */
+        #main-content {
+            float: right;
+            max-width: 45%;
+            font-weight: 400;
+            font-size: 18px;
+            padding-bottom: 40px;
+            line-height: 28px;
+        }
+
+        #main-content h1 {
+            margin: 0px;
+            font-weight: 600;
+            font-size: 42px;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+        
+        #main-content p {
+            color: #b0b0b0;
+            margin-bottom: 25px;
+        }
+
+        /* === NAVIGATION BUTTONS === */
+        #navigation { margin-top: 10%; }
+
+        #navigation a.navigation {
+            display: inline-block;
+            background-color: rgba(255,255,255,0.08);
+            padding: 0 20px;
+            color: #ffffff;
+            height: 45px;
+            line-height: 45px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-right: 2%;
+            margin-bottom: 2%;
+            border-bottom: none;
+        }
+
+        #navigation a.navigation:hover {
+            background-color: #cccccc;
+            color: #111111;
+            border-bottom: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-shadow: none;
+        }
+
+        /* === WORDSEARCH === */
+        #wordsearch {
+            width: 45%;
+            float: left;
+        }
+
+        #wordsearch ul {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #wordsearch ul li {
+            float: left;
+            width: 12%;
+            background-color: rgba(255,255,255,0.03);
+            list-style: none;
+            margin-right: 0.5%;
+            margin-bottom: 0.5%;
+            padding: 0;
+            display: block;
+            text-align: center;
+            color: #555555;
+            text-transform: uppercase;
+            overflow: hidden;
+            font-size: 1.6vw;
+            font-weight: 600;
+            transition: all 0.5s ease;
+            border-radius: 2px;
+        }
+
+        #wordsearch ul li.selected {
+            background-color: #cccccc;
+            color: #111111;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        /* === RESPONSIVE CSS === */
+        @media all and (max-width: 899px) {
+            #wrap { width: 90%; }
+        }
+
+        @media all and (max-width: 799px) {
+            #wrap { width: 90%; height: auto; margin-top: 40px; top: 0%; }
+            #wordsearch { width: 90%; float: none; margin:0 auto; }
+            #wordsearch ul li { font-size: 4vw; }
+            #main-content { float: none; width: 90%; max-width: 90%; margin:0 auto; margin-top: 40px; text-align: left; }
+        }
+
+        @media all and (max-width: 499px) {
+            #main-content h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrap">
+    <div id="wordsearch">
+        <ul>
+            <li>😁</li><li>D</li><li>A</li><li>H</li><li>L</li><li>A</li><li>N</li><li>😊</li>
+            <li>M</li><li>a</li><li>x</li><li>l</li><li class="one">4</li><li class="two">0</li><li class="three">4</li><li>y</li>
+            <li>E</li><li>w</li><li>v</li><li>b</li><li>o</li><li>q</li><li>d</li><li>y</li>
+            <li>p</li><li>a</li><li class="four">p</li><li class="five">a</li><li class="six">g</li><li class="seven">e</li><li>v</li><li>j</li>
+            <li>a</li><li class="eight">n</li><li class="nine">o</li><li class="ten">t</li><li>s</li><li>c</li><li>e</li><li>w</li>
+            <li>v</li><li>x</li><li>e</li><li>p</li><li>c</li><li>f</li><li>h</li><li>q</li>
+            <li>e</li><li class="eleven">f</li><li class="twelve">o</li><li class="thirteen">u</li><li class="fourteen">n</li><li class="fifteen">d</li><li>s</li><li>w</li>
+            <li>q</li><li>v</li><li>o</li><li>s</li><li>m</li><li>v</li><li>f</li><li>u</li>
+        </ul>
+    </div>
+
+    <div id="main-content">
+        <h1>Well, this is awkward...</h1>
+
+        <p>You’ve stumbled into the digital void. This page was either abducted by aliens, took an unapproved vacation, or I just broke something. My money is on the aliens.</p>
+
+        <p>But hey, since you're stranded here for a minute, let me introduce myself. I'm Edrees. I don't build websites for a living—I'm actually a Computer Engineer and an Ecommerce Addict. When I'm not doing that, I'm usually tinkering with 3D printing and bringing physical ideas to life. Let me show you!</p>
+
+        <p>Want to see the parts of the site that actually work?</p>
+
+        <div id="navigation">
+            <a class="navigation" href="https://www.dahlan.me">Rescue Me (Go Home)</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var liWidth = $("li").css("width");
+        $("li").css("height", liWidth);
+        $("li").css("lineHeight", liWidth);
+        var totalHeight = $("#wordsearch").css("width");
+        $("#wordsearch").css("height", totalHeight);
+    });
+    
+    causeRepaintsOn = $("h1, h2, h3, p");
+    
+    $(window).resize(function () {
+        causeRepaintsOn.css("z-index", 1);
+    });
+    
+    $(window).on('resize', function () {
+        var liWidth = $(".one").css("width");
+        $("li").css("height", liWidth);
+        $("li").css("lineHeight", liWidth);
+        var totalHeight = $("#wordsearch").css("width");
+        $("#wordsearch").css("height", totalHeight);
+    });
+
+    $(function () {
+        /* 4 */
+        $(this).delay(1500).queue(function () {
+            $(".one").addClass("selected");
+            $(this).dequeue();
+        })
+        /* 0 */
+        .delay(400).queue(function () {
+            $(".two").addClass("selected");
+            $(this).dequeue();
+        })
+        /* 4 */
+        .delay(400).queue(function () {
+            $(".three").addClass("selected");
+            $(this).dequeue();
+        })
+        /* P */
+        .delay(400).queue(function () {
+            $(".four").addClass("selected");
+            $(this).dequeue();
+        })
+        /* A */
+        .delay(400).queue(function () {
+            $(".five").addClass("selected");
+            $(this).dequeue();
+        })
+        /* G */
+        .delay(400).queue(function () {
+            $(".six").addClass("selected");
+            $(this).dequeue();
+        })
+        /* E */
+        .delay(400).queue(function () {
+            $(".seven").addClass("selected");
+            $(this).dequeue();
+        })
+        /* N */
+        .delay(400).queue(function () {
+            $(".eight").addClass("selected");
+            $(this).dequeue();
+        })
+        /* O */
+        .delay(400).queue(function () {
+            $(".nine").addClass("selected");
+            $(this).dequeue();
+        })
+        /* T */
+        .delay(400).queue(function () {
+            $(".ten").addClass("selected");
+            $(this).dequeue();
+        })
+        /* F */
+        .delay(400).queue(function () {
+            $(".eleven").addClass("selected");
+            $(this).dequeue();
+        })
+        /* O */
+        .delay(400).queue(function () {
+            $(".twelve").addClass("selected");
+            $(this).dequeue();
+        })
+        /* U */
+        .delay(400).queue(function () {
+            $(".thirteen").addClass("selected");
+            $(this).dequeue();
+        })
+        /* N */
+        .delay(400).queue(function () {
+            $(".fourteen").addClass("selected");
+            $(this).dequeue();
+        })
+        /* D */
+        .delay(400).queue(function () {
+            $(".fifteen").addClass("selected");
+            $(this).dequeue()
+        });
+    });
+</script>
+
+</body>
+</html>
