@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
     <title>404 - Well, this is awkward.</title>
     
     <!-- This script tag loads jQuery, which makes your animation work -->
@@ -77,9 +78,57 @@
             margin-bottom: 25px;
         }
 
-        /* === NAVIGATION BUTTONS === */
-        #navigation { margin-top: 10%; }
+        /* === GAME BOX (WORD BANK) === */
+        #word-bank {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
 
+        #word-bank h3 {
+            margin: 0 0 5px 0;
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+        #word-bank p.instructions {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .word {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none; /* Prevents text from being highlighted when clicked */
+        }
+
+        .word:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* When the user clicks a word in the list, it gets crossed out */
+        .word.found {
+            text-decoration: line-through;
+            opacity: 0.4;
+            background-color: transparent;
+        }
+
+        /* === NAVIGATION BUTTONS === */
         #navigation a.navigation {
             display: inline-block;
             background-color: rgba(255,255,255,0.08);
@@ -131,12 +180,24 @@
             overflow: hidden;
             font-size: 1.6vw;
             font-weight: 600;
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             border-radius: 2px;
+            cursor: pointer; /* Makes all letters look clickable */
+            user-select: none;
         }
 
+        /* The automatic 404 animation */
         #wordsearch ul li.selected {
             background-color: #cccccc;
+            color: #111111;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            cursor: default;
+        }
+
+        /* When the user clicks a letter to highlight it */
+        #wordsearch ul li.user-selected {
+            background-color: #81b29a; /* A nice, soft green */
             color: #111111;
             transform: scale(1.05);
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
@@ -162,16 +223,16 @@
 <body>
 
 <div id="wrap">
-    <div id="wordsearch">
+    <div id="wordsearch" aria-hidden="true">
         <ul>
             <li>😁</li><li>D</li><li>A</li><li>H</li><li>L</li><li>A</li><li>N</li><li>😊</li>
-            <li>M</li><li>a</li><li>x</li><li>l</li><li class="one">4</li><li class="two">0</li><li class="three">4</li><li>y</li>
-            <li>E</li><li>w</li><li>v</li><li>b</li><li>o</li><li>q</li><li>d</li><li>y</li>
-            <li>p</li><li>a</li><li class="four">p</li><li class="five">a</li><li class="six">g</li><li class="seven">e</li><li>v</li><li>j</li>
-            <li>a</li><li class="eight">n</li><li class="nine">o</li><li class="ten">t</li><li>s</li><li>c</li><li>e</li><li>w</li>
-            <li>v</li><li>x</li><li>e</li><li>p</li><li>c</li><li>f</li><li>h</li><li>q</li>
-            <li>e</li><li class="eleven">f</li><li class="twelve">o</li><li class="thirteen">u</li><li class="fourteen">n</li><li class="fifteen">d</li><li>s</li><li>w</li>
-            <li>q</li><li>v</li><li>o</li><li>s</li><li>m</li><li>v</li><li>f</li><li>u</li>
+            <li>E</li><li>A</li><li>S</li><li>Y</li><li class="one">4</li><li class="two">0</li><li class="three">4</li><li>S</li>
+            <li>C</li><li>U</li><li>R</li><li>A</li><li>T</li><li>O</li><li>O</li><li>L</li>
+            <li>O</li><li>N</li><li class="four">P</li><li class="five">A</li><li class="six">G</li><li class="seven">E</li><li>3</li><li>D</li>
+            <li>M</li><li class="eight">N</li><li class="nine">O</li><li class="ten">T</li><li>L</li><li>I</li><li>D</li><li>O</li>
+            <li>W</li><li>K</li><li>L</li><li>I</li><li>P</li><li>P</li><li>E</li><li>R</li>
+            <li>E</li><li class="eleven">F</li><li class="twelve">O</li><li class="thirteen">U</li><li class="fourteen">N</li><li class="fifteen">D</li><li>I</li><li>T</li>
+            <li>B</li><li>A</li><li>J</li><li>A</li><li>K</li><li>I</li><li>M</li><li>O</li>
         </ul>
     </div>
 
@@ -180,9 +241,26 @@
 
         <p>You’ve stumbled into the digital void. This page was either abducted by aliens, took an unapproved vacation, or I just broke something. My money is on the aliens.</p>
 
-        <p>But hey, since you're stranded here for a minute, let me introduce myself. I'm Edrees. I don't build websites for a living—I'm actually a Computer Engineer and an Ecommerce Addict. When I'm not doing that, I'm usually tinkering with 3D printing and bringing physical ideas to life. Let me show you!</p>
+        <p>But hey, since you're stranded here for a minute, let me introduce myself. I'm Edrees. I don't build websites from scratch for a living—I'm actually a Computer Engineer and an Ecommerce Addict. When I'm not doing that, I'm usually tinkering with my 3D printer and bringing physical ideas to life.</p>
 
-        <p>Want to see the parts of the site that actually work?</p>
+        <!-- The new playable Word Bank box -->
+        <div id="word-bank">
+            <h3>Mini Word Search</h3>
+            <p class="instructions">Click the letters on the grid to highlight them. Click a word below to cross it off your list!</p>
+            <div class="words-container">
+                <span class="word">DAHLAN</span>
+                <span class="word">ECOMWEB</span>
+                <span class="word">EASY</span>
+                <span class="word">CURA</span>
+                <span class="word">TOOL</span>
+                <span class="word">3D</span>
+                <span class="word">LIDO</span>
+                <span class="word">KLIPPER</span>
+                <span class="word">IT</span>
+                <span class="word">BAJA</span>
+                <span class="word">KIMO</span>
+            </div>
+        </div>
 
         <div id="navigation">
             <a class="navigation" href="https://www.dahlan.me">Rescue Me (Go Home)</a>
@@ -214,80 +292,38 @@
     });
 
     $(function () {
-        /* 4 */
+        /* The 404 animation sequence */
         $(this).delay(1500).queue(function () {
             $(".one").addClass("selected");
             $(this).dequeue();
         })
-        /* 0 */
-        .delay(400).queue(function () {
-            $(".two").addClass("selected");
-            $(this).dequeue();
-        })
-        /* 4 */
-        .delay(400).queue(function () {
-            $(".three").addClass("selected");
-            $(this).dequeue();
-        })
-        /* P */
-        .delay(400).queue(function () {
-            $(".four").addClass("selected");
-            $(this).dequeue();
-        })
-        /* A */
-        .delay(400).queue(function () {
-            $(".five").addClass("selected");
-            $(this).dequeue();
-        })
-        /* G */
-        .delay(400).queue(function () {
-            $(".six").addClass("selected");
-            $(this).dequeue();
-        })
-        /* E */
-        .delay(400).queue(function () {
-            $(".seven").addClass("selected");
-            $(this).dequeue();
-        })
-        /* N */
-        .delay(400).queue(function () {
-            $(".eight").addClass("selected");
-            $(this).dequeue();
-        })
-        /* O */
-        .delay(400).queue(function () {
-            $(".nine").addClass("selected");
-            $(this).dequeue();
-        })
-        /* T */
-        .delay(400).queue(function () {
-            $(".ten").addClass("selected");
-            $(this).dequeue();
-        })
-        /* F */
-        .delay(400).queue(function () {
-            $(".eleven").addClass("selected");
-            $(this).dequeue();
-        })
-        /* O */
-        .delay(400).queue(function () {
-            $(".twelve").addClass("selected");
-            $(this).dequeue();
-        })
-        /* U */
-        .delay(400).queue(function () {
-            $(".thirteen").addClass("selected");
-            $(this).dequeue();
-        })
-        /* N */
-        .delay(400).queue(function () {
-            $(".fourteen").addClass("selected");
-            $(this).dequeue();
-        })
-        /* D */
-        .delay(400).queue(function () {
-            $(".fifteen").addClass("selected");
-            $(this).dequeue()
+        .delay(400).queue(function () { $(".two").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".three").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".four").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".five").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".six").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".seven").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".eight").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".nine").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".ten").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".eleven").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".twelve").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".thirteen").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".fourteen").addClass("selected"); $(this).dequeue(); })
+        .delay(400).queue(function () { $(".fifteen").addClass("selected"); $(this).dequeue(); });
+    });
+
+    /* --- NEW INTERACTIVE GAMEPLAY SCRIPT --- */
+    $(function() {
+        // Toggle strikethrough when a word in the word bank is clicked
+        $('.word').on('click', function() {
+            $(this).toggleClass('found');
+        });
+
+        // Toggle green highlight when a letter on the grid is clicked
+        // Note: The .not() selector prevents users from breaking the main 404 text animation!
+        $('#wordsearch ul li').not('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve, .thirteen, .fourteen, .fifteen').on('click', function() {
+            $(this).toggleClass('user-selected');
         });
     });
 </script>
