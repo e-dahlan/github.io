@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>404 - You are trapped.</title>
+    <title>404 - SYSTEM CRITICAL.</title>
     
     <!-- This script tag loads jQuery, which makes your animation work -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,900);
 
         body {
             background-color: #222222;
@@ -78,6 +78,22 @@
             margin-bottom: 25px;
         }
 
+        /* === COUNTDOWN TIMER === */
+        #timer-display {
+            font-size: 26px;
+            font-weight: 900;
+            color: #e07a5f;
+            background: rgba(224, 122, 95, 0.1);
+            border: 2px solid #e07a5f;
+            padding: 10px 20px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(224, 122, 95, 0.2);
+        }
+
         /* === GAME BOX (WORD BANK) === */
         #word-bank {
             background-color: rgba(0, 0, 0, 0.2);
@@ -130,7 +146,7 @@
         /* === LOCK MESSAGE === */
         #lock-message {
             font-size: 18px;
-            color: #e07a5f; /* Red/Orange for locked state */
+            color: #e07a5f; 
             background-color: rgba(0,0,0,0.3);
             padding: 15px;
             border-radius: 6px;
@@ -138,14 +154,41 @@
             transition: color 0.3s ease;
         }
 
+        /* === EMERGENCY STOP BUTTON === */
+        #estop-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #estop-btn {
+            display: inline-block;
+            background-color: #d62828;
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 15px 40px;
+            border: 4px solid #780000;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #780000, 0 15px 20px rgba(0,0,0,0.4);
+            transition: all 0.1s;
+            user-select: none;
+        }
+
+        #estop-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #780000, 0 5px 10px rgba(0,0,0,0.4);
+        }
+
         /* === NAVIGATION BUTTONS === */
         #navigation { 
-            display: none; /* Hides the exit button initially! */
+            display: none; /* Hides the exit button initially */
         }
 
         #navigation a.navigation {
             display: inline-block;
-            background-color: #81b29a; /* Highlight color for the escape button */
+            background-color: #81b29a; 
             padding: 0 25px;
             color: #ffffff;
             height: 50px;
@@ -247,21 +290,26 @@
     </div>
 
     <div id="main-content">
-        <h1>Well, this is awkward...</h1>
+        
+        <div id="timer-display">
+            ⏳ COLLAPSE IN: <span id="time-left">30</span>s
+        </div>
 
-        <p>You’ve stumbled into the digital void. This page was either abducted by aliens, took an unapproved vacation, or I just broke something.</p>
+        <h1>SYSTEM CRITICAL...</h1>
 
-        <p>But hey, since you're stranded here, let me introduce myself. I'm Edrees. I'm actually a Computer Engineer and an Ecommerce Addict. When I'm not doing that, I'm usually tinkering with my 3D printer and bringing physical ideas to life.</p>
+        <p>You’ve stumbled into the digital void. The server environment is unstable. You are currently locked in.</p>
+
+        <p>But hey, since you're stranded here, let me introduce myself. I'm Edrees. I'm a Computer Engineer and an Ecommerce Addict. When I'm not managing technical platforms, I'm usually pushing my 3D printer to its limits and bringing physical ideas to life.</p>
 
         <!-- The lock message -->
         <div id="lock-message">
-            🔒 <strong>You are officially trapped!</strong> Cross off all 11 words below to unlock the exit door. (0/11 found)
+            🔒 <strong>SECURITY PROTOCOL ACTIVE!</strong> Cross off all 11 words below to unlock the exit door. (0/11 found)
         </div>
 
         <!-- The playable Word Bank box -->
         <div id="word-bank">
-            <h3>Escape Room Word Search</h3>
-            <p class="instructions">Find the words in the grid and click the letters to highlight them. <strong>Click the words in this list to cross them off!</strong></p>
+            <h3>Manual Override Puzzle</h3>
+            <p class="instructions">Find the words in the grid. <strong>Click the words in this list to cross them off!</strong></p>
             <div class="words-container">
                 <span class="word">DAHLAN</span>
                 <span class="word">ECOMWEB</span>
@@ -277,7 +325,12 @@
             </div>
         </div>
 
-        <!-- Hidden until the game is solved -->
+        <!-- Panic Button -->
+        <div id="estop-container">
+            <div id="estop-btn">EMERGENCY OVERRIDE</div>
+        </div>
+
+        <!-- Hidden until the game is solved, E-Stopped, or time runs out -->
         <div id="navigation">
             <a class="navigation" href="https://www.dahlan.me">🔓 Escape to Dahlan.me</a>
         </div>
@@ -329,31 +382,77 @@
         .delay(400).queue(function () { $(".fifteen").addClass("selected"); $(this).dequeue(); });
     });
 
-    /* --- THE ESCAPE ROOM LOGIC --- */
+    /* --- ADRENALINE LOGIC: TIMER & E-STOP --- */
     $(function() {
         var totalWords = $('.word').length;
+        var timeLeft = 30;
+        var doorUnlocked = false;
+        
+        // Timer Logic
+        var countdown = setInterval(function() {
+            if(doorUnlocked) {
+                clearInterval(countdown);
+                return;
+            }
+            
+            timeLeft--;
+            $('#time-left').text(timeLeft);
+            
+            // Make the timer blink aggressively when time is running low
+            if (timeLeft <= 10) {
+                $('#timer-display').css('background-color', 'rgba(224, 122, 95, 0.4)');
+                $('#timer-display').fadeOut(150).fadeIn(150);
+            }
+            
+            // Time is up!
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                unlockProtocol('timeout');
+            }
+        }, 1000);
+
+        // Escape function handles all 3 ways out
+        function unlockProtocol(method) {
+            doorUnlocked = true;
+            $('#estop-container').slideUp(300); // Hide panic button
+            $('#timer-display').css('border-color', '#81b29a').css('color', '#81b29a').html('⏳ STATUS: STABILIZED');
+
+            if (method === 'win') {
+                $('#lock-message').html('🔓 <strong>Manual override successful. You cracked the code!</strong>');
+                $('#lock-message').css('color', '#81b29a');
+            } else if (method === 'estop') {
+                // Flash the screen red for dramatic effect
+                $('body').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+                $('#lock-message').html('🚨 <strong>EMERGENCY OVERRIDE ENGAGED!</strong> The security doors have been forced open!');
+                $('#lock-message').css('color', '#d62828');
+            } else if (method === 'timeout') {
+                $('#lock-message').html('💥 <strong>SYSTEM CRASH!</strong> The void collapsed, but the doors broke open. Run!');
+                $('#lock-message').css('color', '#d62828');
+            }
+            
+            // Reveal the escape button
+            $('#navigation').slideDown(500);
+        }
+
+        // Emergency Stop Button Click
+        $('#estop-btn').on('click', function() {
+            if(!doorUnlocked) {
+                unlockProtocol('estop');
+            }
+        });
 
         // When a word in the word bank is clicked
         $('.word').on('click', function() {
+            if(doorUnlocked) return; // Stop playing if door is open
+
             $(this).toggleClass('found');
-            
             var foundWords = $('.word.found').length;
             
-            // Check if they won
+            // Check if they won the puzzle
             if (foundWords === totalWords) {
-                // Change message to success state
-                $('#lock-message').html('🔓 <strong>Alright, fair play. You cracked the code. The exit is unlocked!</strong>');
-                $('#lock-message').css('color', '#81b29a'); // Turns text green
-                
-                // Show the escape button
-                $('#navigation').slideDown(500); 
+                unlockProtocol('win');
             } else {
-                // Update the counter
-                $('#lock-message').html('🔒 <strong>You are officially trapped!</strong> Cross off all ' + totalWords + ' words below to unlock the exit door. (' + foundWords + '/' + totalWords + ' found)');
-                $('#lock-message').css('color', '#e07a5f'); // Keep text red
-                
-                // Hide the button if they un-click a word
-                $('#navigation').slideUp(300);
+                $('#lock-message').html('🔒 <strong>SECURITY PROTOCOL ACTIVE!</strong> Cross off all ' + totalWords + ' words below to unlock the exit door. (' + foundWords + '/' + totalWords + ' found)');
             }
         });
 
