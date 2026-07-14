@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>404 - Well, this is awkward.</title>
+    <title>404 - You are trapped.</title>
     
     <!-- This script tag loads jQuery, which makes your animation work -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -84,7 +84,7 @@
             padding: 20px;
             border-radius: 8px;
             border: 1px dashed rgba(255,255,255,0.2);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         #word-bank h3 {
@@ -114,44 +114,56 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            user-select: none; /* Prevents text from being highlighted when clicked */
+            user-select: none;
         }
 
         .word:hover {
             background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* When the user clicks a word in the list, it gets crossed out */
         .word.found {
             text-decoration: line-through;
             opacity: 0.4;
             background-color: transparent;
         }
 
+        /* === LOCK MESSAGE === */
+        #lock-message {
+            font-size: 18px;
+            color: #e07a5f; /* Red/Orange for locked state */
+            background-color: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
         /* === NAVIGATION BUTTONS === */
+        #navigation { 
+            display: none; /* Hides the exit button initially! */
+        }
+
         #navigation a.navigation {
             display: inline-block;
-            background-color: rgba(255,255,255,0.08);
-            padding: 0 20px;
+            background-color: #81b29a; /* Highlight color for the escape button */
+            padding: 0 25px;
             color: #ffffff;
-            height: 45px;
-            line-height: 45px;
+            height: 50px;
+            line-height: 50px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             border-radius: 4px;
             transition: all 0.3s ease;
-            margin-right: 2%;
-            margin-bottom: 2%;
             border-bottom: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
         #navigation a.navigation:hover {
-            background-color: #cccccc;
-            color: #111111;
+            background-color: #65927c;
             border-bottom: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            text-shadow: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
 
         /* === WORDSEARCH === */
@@ -182,11 +194,10 @@
             font-weight: 600;
             transition: all 0.3s ease;
             border-radius: 2px;
-            cursor: pointer; /* Makes all letters look clickable */
+            cursor: pointer;
             user-select: none;
         }
 
-        /* The automatic 404 animation */
         #wordsearch ul li.selected {
             background-color: #cccccc;
             color: #111111;
@@ -195,9 +206,8 @@
             cursor: default;
         }
 
-        /* When the user clicks a letter to highlight it */
         #wordsearch ul li.user-selected {
-            background-color: #81b29a; /* A nice, soft green */
+            background-color: #81b29a;
             color: #111111;
             transform: scale(1.05);
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
@@ -239,14 +249,19 @@
     <div id="main-content">
         <h1>Well, this is awkward...</h1>
 
-        <p>You’ve stumbled into the digital void. This page was either abducted by aliens, took an unapproved vacation, or I just broke something. My money is on the aliens.</p>
+        <p>You’ve stumbled into the digital void. This page was either abducted by aliens, took an unapproved vacation, or I just broke something.</p>
 
-        <p>But hey, since you're stranded here for a minute, let me introduce myself. I'm Edrees. I don't build websites from scratch for a living—I'm actually a Computer Engineer and an Ecommerce Addict. When I'm not doing that, I'm usually tinkering with my 3D printer and bringing physical ideas to life.</p>
+        <p>But hey, since you're stranded here, let me introduce myself. I'm Edrees. I'm actually a Computer Engineer and an Ecommerce Addict. When I'm not doing that, I'm usually tinkering with my 3D printer and bringing physical ideas to life.</p>
 
-        <!-- The new playable Word Bank box -->
+        <!-- The lock message -->
+        <div id="lock-message">
+            🔒 <strong>You are officially trapped!</strong> Cross off all 11 words below to unlock the exit door. (0/11 found)
+        </div>
+
+        <!-- The playable Word Bank box -->
         <div id="word-bank">
-            <h3>Mini Word Search</h3>
-            <p class="instructions">Click the letters on the grid to highlight them. Click a word below to cross it off your list!</p>
+            <h3>Escape Room Word Search</h3>
+            <p class="instructions">Find the words in the grid and click the letters to highlight them. <strong>Click the words in this list to cross them off!</strong></p>
             <div class="words-container">
                 <span class="word">DAHLAN</span>
                 <span class="word">ECOMWEB</span>
@@ -262,8 +277,9 @@
             </div>
         </div>
 
+        <!-- Hidden until the game is solved -->
         <div id="navigation">
-            <a class="navigation" href="https://www.dahlan.me">Rescue Me (Go Home)</a>
+            <a class="navigation" href="https://www.dahlan.me">🔓 Escape to Dahlan.me</a>
         </div>
     </div>
 </div>
@@ -313,15 +329,35 @@
         .delay(400).queue(function () { $(".fifteen").addClass("selected"); $(this).dequeue(); });
     });
 
-    /* --- NEW INTERACTIVE GAMEPLAY SCRIPT --- */
+    /* --- THE ESCAPE ROOM LOGIC --- */
     $(function() {
-        // Toggle strikethrough when a word in the word bank is clicked
+        var totalWords = $('.word').length;
+
+        // When a word in the word bank is clicked
         $('.word').on('click', function() {
             $(this).toggleClass('found');
+            
+            var foundWords = $('.word.found').length;
+            
+            // Check if they won
+            if (foundWords === totalWords) {
+                // Change message to success state
+                $('#lock-message').html('🔓 <strong>Alright, fair play. You cracked the code. The exit is unlocked!</strong>');
+                $('#lock-message').css('color', '#81b29a'); // Turns text green
+                
+                // Show the escape button
+                $('#navigation').slideDown(500); 
+            } else {
+                // Update the counter
+                $('#lock-message').html('🔒 <strong>You are officially trapped!</strong> Cross off all ' + totalWords + ' words below to unlock the exit door. (' + foundWords + '/' + totalWords + ' found)');
+                $('#lock-message').css('color', '#e07a5f'); // Keep text red
+                
+                // Hide the button if they un-click a word
+                $('#navigation').slideUp(300);
+            }
         });
 
         // Toggle green highlight when a letter on the grid is clicked
-        // Note: The .not() selector prevents users from breaking the main 404 text animation!
         $('#wordsearch ul li').not('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve, .thirteen, .fourteen, .fifteen').on('click', function() {
             $(this).toggleClass('user-selected');
         });
