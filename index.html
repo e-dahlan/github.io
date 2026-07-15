@@ -27,74 +27,36 @@
     <script src="./assets/modernizr.custom.js.download"></script>
 
     <style>
+        /* 1. الحل الجذري لمنع الانزلاق الجانبي (المساحة الفارغة عند السحب) دون تخريب الألوان */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
 
-/* إجبار الفوتر على أخذ نفس لون المحتوى */
-.site-footer {
-    background-color: #222222 !important;
-    border: none !important;
-}
-        /* إصلاح حجم وتمركز الفوتر */
-.site-footer {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    padding: 20px 0 !important; /* يمكنك تقليل الـ 20px إذا أردت تصغيره أكثر */
-    margin: 0 !important;
-}
+        /* 2. إصلاح القائمة الجانبية للجوال */
+        @media (max-width: 991px) {
+            .site-nav {
+                display: none; 
+                width: 100%;
+                background-color: #222222;
+                padding: 15px;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 9999;
+            }
+            .site-nav.show-menu {
+                display: block !important; 
+            }
+            .mobile-menu-hide {
+                display: none !important;
+            }
+        }
 
-/* التأكد من أن الفوتر لا يخرج عن حدود الصفحة */
-.footer-copyrights {
-    width: 100% !important;
-    text-align: center !important;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-/* هذا الكود يمنع الانزلاق الجانبي ويشيل الخلفية الزرقاء */
-html, body {
-    overflow-x: hidden !important;
-    background-color: #d3d3d3 !important;
-    background-image: none !important;
-}
-.lm-animated-bg {
-    background-image: none !important;
-    background-color: #d3d3d3 !important;
-}
-/* إصلاح القائمة الجانبية للجوال */
-@media (max-width: 991px) {
-    .site-nav {
-        display: none; /* الوضع الافتراضي مخفي */
-        width: 100%;
-        background-color: #222222;
-        padding: 15px;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        z-index: 9999;
-    }
-    .site-nav.show-menu {
-        display: block !important; /* يظهر القائمة عند الضغط */
-    }
-    .mobile-menu-hide {
-        display: none !important;
-    }
-}
         /* 3D Photo Hover Effect */
         .home-photo { perspective: 1000px; }
         .hp-inner { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; transform-style: preserve-3d; }
         .home-photo:hover .hp-inner { transform: rotateX(8deg) rotateY(-10deg) scale(1.04); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5); }
-
-        /* Styles for By The Numbers - الرمادي الفاتح */
-        .modern-fact { padding: 20px 10px; transition: transform 0.3s ease; background: transparent; }
-        .modern-fact:hover { transform: translateY(-5px); }
-        .modern-fact h4 { font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: #d3d3d3; }
-        .modern-fact .fun-fact-value { font-size: 2.2rem; font-weight: 700; color: #d3d3d3; }
-
-        /* Buttons & UI - الرمادي الفاتح */
-        .btn-primary { background-color: #d3d3d3 !important; border-color: #d3d3d3 !important; color: #222222 !important; }
-        .btn-primary:hover { background-color: #b0b0b0 !important; border-color: #b0b0b0 !important; }
-        
-        /* Force Main Background to Light Grey */
-        .lm-animated-bg { background-image: none !important; background-color: #d3d3d3 !important; }
 
         /* Logo styling using favicon image */
         .header .logo-symbol { background-color: transparent !important; border: none !important; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -214,7 +176,7 @@ html, body {
     <script src="./assets/main.js.download"></script>
 
     <script>
-
+    // تم الإبقاء على كود واحد فقط للقائمة لمنع التعارض
     document.addEventListener("DOMContentLoaded", () => {
         const toggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.site-nav');
@@ -222,9 +184,7 @@ html, body {
         if(toggle && nav) {
             toggle.addEventListener('click', (e) => {
                 e.preventDefault();
-                // تبديل الكلاس لإظهار أو إخفاء القائمة
                 nav.classList.toggle('show-menu');
-                // إزالة الكلاس الذي يخفيها في القالب الأصلي
                 nav.classList.remove('mobile-menu-hide');
             });
         }
@@ -256,23 +216,5 @@ html, body {
             counters.forEach(c => observer.observe(c));
         });
     </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const siteNav = document.querySelector('.site-nav');
-
-        if (menuToggle) {
-            menuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                // تبديل ظهور القائمة
-                if (siteNav.classList.contains('mobile-menu-hide')) {
-                    siteNav.classList.remove('mobile-menu-hide');
-                } else {
-                    siteNav.classList.add('mobile-menu-hide');
-                }
-            });
-        }
-    });
-</script>
 </body>
-</html> 
+</html>
