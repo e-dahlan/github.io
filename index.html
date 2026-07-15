@@ -8,16 +8,7 @@
     <meta name="description" content="Edrees Dahlan - Professional Profile of an Ecommerce Supervisor and Computer Engineer.">
     <meta name="author" content="Edrees Dahlan">
     
-    <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - Ecommerce Supervisor & Computer Engineer">
-    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows in Saudi Arabia.">
-    <meta property="og:image" content="./img/main_photo.jpg">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./favicon.png">
-
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="./assets/owl.carousel.css" type="text/css">
@@ -27,52 +18,52 @@
     <script src="./assets/modernizr.custom.js.download"></script>
 
     <style>
-        /* 3D Photo Hover Effect */
+        /* إصلاح جذري للخلفية ومنع الانزلاق الجانبي */
+        html, body {
+            background-color: #d3d3d3 !important;
+            background-image: none !important;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        .page, .page-container, .lm-animated-bg, .site-main, .single-page-content {
+            background-color: #d3d3d3 !important;
+            background-image: none !important;
+        }
+
+        /* تحسين تباين النصوص */
+        h1, h2, h3, h4, h5, p, .modern-fact h4, .modern-fact .fun-fact-value { color: #222222 !important; }
+
+        /* القائمة الجانبية للجوال */
+        @media (max-width: 991px) {
+            .site-nav { background-color: #d3d3d3 !important; border-top: 1px solid #b0b0b0; }
+            .site-nav.mobile-menu-hide { display: none !important; }
+            .site-nav.show-mobile-menu { display: block !important; position: absolute; top: 60px; left: 0; width: 100%; z-index: 999; padding: 20px; }
+        }
+
         .home-photo { perspective: 1000px; }
         .hp-inner { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; transform-style: preserve-3d; }
         .home-photo:hover .hp-inner { transform: rotateX(8deg) rotateY(-10deg) scale(1.04); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5); }
 
-        /* Styles for By The Numbers - الرمادي الفاتح */
-        .modern-fact { padding: 20px 10px; transition: transform 0.3s ease; background: transparent; }
-        .modern-fact:hover { transform: translateY(-5px); }
-        .modern-fact h4 { font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: #d3d3d3; }
-        .modern-fact .fun-fact-value { font-size: 2.2rem; font-weight: 700; color: #d3d3d3; }
-
-        /* Buttons & UI - الرمادي الفاتح */
-        .btn-primary { background-color: #d3d3d3 !important; border-color: #d3d3d3 !important; color: #222222 !important; }
-        .btn-primary:hover { background-color: #b0b0b0 !important; border-color: #b0b0b0 !important; }
+        .btn-primary { background-color: #222222 !important; border-color: #222222 !important; color: #ffffff !important; }
         
-        /* Force Main Background to Light Grey */
-        .lm-animated-bg { background-image: none !important; background-color: #d3d3d3 !important; }
-
-        /* Logo styling using favicon image */
         .header .logo-symbol { background-color: transparent !important; border: none !important; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .header .logo-symbol img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-
-        .menu-toggle { font-size: 2rem; color: #d3d3d3; text-decoration: none !important; display: flex; align-items: center; justify-content: center; }
+        .menu-toggle { font-size: 2rem; color: #222222; cursor: pointer; }
     </style>
 </head>
 
 <body class="page">
     <div class="lm-animated-bg"></div>
-    
-    <div class="preloader" style="display: none;">
-        <div class="preloader-animation"><div class="preloader-spinner"></div></div>
-    </div>
-
     <div class="page-scroll">
-        <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right" data-animation="transition-flip-in-right">
-
-            <!-- Header -->
+        <div id="page_container" class="page-container">
             <header id="site_header" class="header">
                 <div class="header-content clearfix">
                     <div class="text-logo">
-                        <a href="index.html" aria-label="Go to Homepage">
+                        <a href="index.html">
                             <div class="logo-symbol"><img src="./favicon.png" alt="Logo"></div>
                             <div class="logo-text">Edrees <span>Dahlan</span></div>
                         </a>
                     </div>
-
                     <div class="site-nav mobile-menu-hide">
                         <ul class="leven-classic-menu site-main-menu">
                             <li class="menu-item current-menu-item"><a href="index.html">About Me</a></li>
@@ -80,131 +71,50 @@
                             <li class="menu-item"><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
-
-                    <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
+                    <a class="menu-toggle mobile-visible">&#9776;</a>
                 </div>
             </header>
 
             <div id="main" class="site-main">
                 <div id="main-content" class="single-page-content">
-                    <div id="primary" class="content-area"> 
-                        <div id="content" class="page-content site-content single-post" role="main">
-                            
-                            <!-- Profile Top Part -->
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="home-content">
-                                        <div class="row flex-v-align">
-                                            <div class="col-sm-12 col-md-5 col-lg-5">
-                                                <div class="home-photo">
-                                                    <div class="hp-inner" style="background-image: url('./img/main_photo.jpg');" role="img" aria-label="Portrait of Edrees Dahlan, Ecommerce Supervisor"></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-7 col-lg-7">
-                                                <div class="home-text hp-left">
-                                                    <h4>Computer Engineer &nbsp;|&nbsp; Ecommerce Supervisor</h4>
-                                                    <h1>EDREES DAHLAN</h1>
-                                                    <h5 style="color: #a4b0be; margin-bottom: 15px;">Dammam · Eastern Region, Saudi Arabia · <a href="mailto:e.dahlan@gmail.com" style="color: #d3d3d3;" aria-label="Send an email to Edrees Dahlan">e.dahlan@gmail.com</a></h5>
-                                                    <p>Highly analytical and data-driven Ecommerce Supervisor effectively scales online customer acquisition efforts and e-commerce capabilities to drive sales growth. Routinely tests new features and assets and measures results as the company grows and evolves. Strong understanding of e-commerce consumer behavior, website analytics, and backend operational workflows.</p>
-                                                    
-                                                    <div class="home-buttons">
-                                                        <a href="Edrees_Dahlan_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" download aria-label="Download Edrees Dahlan's Resume as a PDF">Download CV (PDF)</a>
-                                                        <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20was%20looking%20at%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background-color: #25D366; border-color: #25D366; color: white;" aria-label="Start a WhatsApp chat with Edrees Dahlan">WhatsApp Chat</a>
-                                                    </div>
+                    <div id="content" class="page-content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="home-content">
+                                    <div class="row flex-v-align">
+                                        <div class="col-sm-5"><div class="home-photo"><div class="hp-inner" style="background-image: url('./img/main_photo.jpg');"></div></div></div>
+                                        <div class="col-sm-7">
+                                            <div class="home-text">
+                                                <h4>Computer Engineer | Ecommerce Supervisor</h4>
+                                                <h1>EDREES DAHLAN</h1>
+                                                <p>Highly analytical Ecommerce Supervisor managing Magento content and operational workflows.</p>
+                                                <div class="home-buttons">
+                                                    <a href="Edrees_Dahlan_Resume.pdf" class="btn btn-primary" download>Download CV (PDF)</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Services -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-50"></div><div class="block-title"><h2>What I Do</h2></div></div></div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="info-list-w-icon">
-                                        <div class="info-block-w-icon"><h4>Ecommerce Management</h4><p>Optimizing e-commerce fulfillment strategies, managing acquisition and retention programs, and expanding brand presence across leading platforms.</p></div>
-                                        <div class="info-block-w-icon"><h4>Web Operations & Analytics</h4><p>Utilizing Google Analytics and A/B testing to track consumer behaviors, diagnose website issues, and improve end-user experiences.</p></div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="info-list-w-icon">
-                                        <div class="info-block-w-icon"><h4>SEO & Feature Integration</h4><p>Coordinating with technical teams to optimize websites for SEO, redesigning functionalities, and launching new extensions and plugins.</p></div>
-                                        <div class="info-block-w-icon"><h4>Network Infrastructure</h4><p>Equipped with solid expertise in deploying end-to-end IP routing solutions, network optimization, and diagnosing hardware configurations.</p></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- By The Numbers -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>By The Numbers</h2></div></div></div>
-                            <div class="row" id="counter-section">
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Years of Experience</h4><span class="fun-fact-value">+<span class="counter" data-target="7">0</span></span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Products Managed</h4><span class="fun-fact-value">+<span class="counter" data-target="10">0</span>k</span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Successful Migrations</h4><span class="fun-fact-value"><span class="counter" data-target="100">0</span>%</span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Coffee Cups Brewed</h4><span class="fun-fact-value"><span class="counter" id="coffee-counter" data-target="1286">0</span></span></div></div>
-                            </div>
-                            <div class="p-40"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <footer class="site-footer clearfix">
-                <div class="footer-social"><ul class="footer-social-links"><li><a href="https://www.linkedin.com/in/edahlan/" target="_blank" rel="noopener noreferrer" aria-label="Visit Edrees Dahlan's LinkedIn Profile">Linkedin</a></li></ul></div>
-                <div class="footer-copyrights"><p>© <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p></div>
-            </footer>
         </div>
     </div>
 
     <script src="./assets/jquery-2.1.3.min.js.download"></script>
-    <script src="./assets/bootstrap.min.js.download"></script>
-    <script src="./assets/owl.carousel.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            const coffeeCounter = document.getElementById('coffee-counter');
-            if (coffeeCounter) {
-                const startDate = new Date('2026-07-13T00:00:00'); 
-                const diffDays = Math.floor(Math.abs(new Date() - startDate) / (1000 * 60 * 60 * 24)); 
-                coffeeCounter.setAttribute('data-target', Math.min(1286 + (diffDays * 2), 9999));
-            }
-            const counters = document.querySelectorAll('.counter');
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const update = () => {
-                            const target = +counter.getAttribute('data-target');
-                            const count = +counter.innerText;
-                            if (count < target) { counter.innerText = Math.ceil(count + (target / 100)); setTimeout(update, 15); } else { counter.innerText = target; }
-                        };
-                        update();
-                        observer.unobserve(counter);
-                    }
-                });
-            }, { threshold: 0.5 });
-            counters.forEach(c => observer.observe(c));
+            // حل نهائي للقائمة الجانبية
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.site-nav');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('mobile-menu-hide');
+                nav.classList.toggle('show-mobile-menu');
+            });
         });
     </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const siteNav = document.querySelector('.site-nav');
-
-        if (menuToggle) {
-            menuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (siteNav.classList.contains('mobile-menu-hide')) {
-                    siteNav.classList.remove('mobile-menu-hide');
-                } else {
-                    siteNav.classList.add('mobile-menu-hide');
-                }
-            });
-        }
-    });
-</script>
 </body>
-</html> 
+</html>
