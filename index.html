@@ -27,13 +27,44 @@
     <script src="./assets/modernizr.custom.js.download"></script>
 
     <style>
-        /* 1. الحل الجذري لمنع الانزلاق الجانبي (المساحة الفارغة عند السحب) دون تخريب الألوان */
+        /* =========================================
+           1. الإصلاح النهائي لمشكلة الانزلاق الجانبي 
+           ========================================= */
         html, body {
             overflow-x: hidden !important;
             width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: relative;
         }
 
-        /* 2. إصلاح القائمة الجانبية للجوال */
+        .page-scroll, .page-container, .site-main {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        /* السبب الرئيسي للمشكلة: إصلاح هوامش البوتستراب التي تسبب تمدد الشاشة */
+        .row {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        /* =========================================
+           2. إخفاء الخلفية الزرقاء تماماً 
+           ========================================= */
+        .lm-animated-bg {
+            display: none !important; /* إخفاء العنصر المسبب للخلفية الزرقاء بالكامل */
+        }
+        .bg-move-effect {
+            background-image: none !important;
+        }
+
+        /* =========================================
+           3. إصلاح القائمة الجانبية في الجوال 
+           ========================================= */
         @media (max-width: 991px) {
             .site-nav {
                 display: none; 
@@ -44,25 +75,20 @@
                 top: 60px;
                 left: 0;
                 z-index: 9999;
+                box-sizing: border-box !important; /* يمنع القائمة من التمدد خارج الشاشة */
             }
             .site-nav.show-menu {
                 display: block !important; 
             }
-            .mobile-menu-hide {
-                display: none !important;
-            }
         }
 
-        /* 3D Photo Hover Effect */
+        /* تنسيقاتك الأصلية للصور والأزرار */
         .home-photo { perspective: 1000px; }
         .hp-inner { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; transform-style: preserve-3d; }
         .home-photo:hover .hp-inner { transform: rotateX(8deg) rotateY(-10deg) scale(1.04); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5); }
-
-        /* Logo styling using favicon image */
         .header .logo-symbol { background-color: transparent !important; border: none !important; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .header .logo-symbol img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-
-        .menu-toggle { font-size: 2rem; color: #d3d3d3; text-decoration: none !important; display: flex; align-items: center; justify-content: center; }
+        .menu-toggle { font-size: 2rem; color: #d3d3d3; text-decoration: none !important; display: flex; align-items: center; justify-content: center; cursor: pointer; }
     </style>
 </head>
 
@@ -176,20 +202,24 @@
     <script src="./assets/main.js.download"></script>
 
     <script>
-    // تم الإبقاء على كود واحد فقط للقائمة لمنع التعارض
-    document.addEventListener("DOMContentLoaded", () => {
-        const toggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('.site-nav');
-        
-        if(toggle && nav) {
-            toggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                nav.classList.toggle('show-menu');
-                nav.classList.remove('mobile-menu-hide');
-            });
-        }
-    });
+        // كود القائمة النهائي: تم استخدام تقنية استنساخ الزر لقتل أي أوامر متعارضة من القالب الأصلي
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.site-nav');
+            
+            if(toggle && nav) {
+                // نصنع نسخة جديدة من الزر لفك ارتباطه بأي أكواد سابقة خفية
+                const newToggle = toggle.cloneNode(true);
+                toggle.parentNode.replaceChild(newToggle, toggle);
+                
+                newToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    nav.classList.toggle('show-menu');
+                });
+            }
+        });
 
+        // كود العداد وتحديث السنة
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('current-year').textContent = new Date().getFullYear();
             const coffeeCounter = document.getElementById('coffee-counter');
