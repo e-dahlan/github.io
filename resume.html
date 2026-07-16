@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./favicon.png">
+    <link class="favicon-tag" rel="icon" type="image/png" href="./favicon.png">
 
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
@@ -50,7 +50,19 @@
         }
 
         /* =========================================
-           2. توحيد لون الخلفية الرمادي (مثل Index)
+           2. حل مشكلة اختفاء العناوين خلف الهيدر الثابت
+           ========================================= */
+        #main-content {
+            padding-top: 40px !important;
+        }
+        @media only screen and (max-width: 991px) {
+            #main-content {
+                padding-top: 90px !important; /* دفع العنوان ليتفادى شريط الهيدر على الجوال */
+            }
+        }
+
+        /* =========================================
+           3. توحيد لون الخلفية الرمادي (مثل Index)
            ========================================= */
         .lm-animated-bg {
             background-image: none !important;
@@ -58,7 +70,7 @@
         }
 
         /* =========================================
-           3. الهوية البصرية (اللوجو)
+           4. الهوية البصرية (اللوجو)
            ========================================= */
         .header .logo-symbol { 
             background-color: transparent !important; 
@@ -78,7 +90,7 @@
         }
 
         /* =========================================
-           4. زر قائمة الجوال (Menu Toggle)
+           5. زر قائمة الجوال (Menu Toggle)
            ========================================= */
         .menu-toggle {
             font-size: 2rem;
@@ -313,11 +325,13 @@
     <!-- سكريبت تشغيل القائمة وسنة الحقوق المدمج -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // 1. تحديث السنة تلقائياً
             const yearEl = document.getElementById('current-year');
             if (yearEl) {
                 yearEl.textContent = new Date().getFullYear();
             }
 
+            // 2. تشغيل القائمة الجانبية (نفس آلية index.html تماماً)
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
 
