@@ -20,16 +20,48 @@
 
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./assets/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="./assets/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./assets/main.css" type="text/css">
     
     <script src="./assets/modernizr.custom.js.download"></script>
-
+    
     <style>
-        /* =========================================
-           1. منع الانزلاق الجانبي (تم إصلاحه بنجاح)
-           ========================================= */
+        /* Force Main Background to Light Grey (Matching Resume Page) */
+        .lm-animated-bg {
+            background-image: none !important;
+            background-color: #d3d3d3 !important;
+            display: block !important;
+        }
+
+        /* Logo styling using favicon image */
+        .header .logo-symbol { 
+            background-color: transparent !important; 
+            border: none !important; 
+            width: 45px; 
+            height: 45px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+        }
+        .header .logo-symbol img { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+
+        /* Menu icon styling */
+        .menu-toggle {
+            font-size: 2rem;
+            color: #d3d3d3;
+            text-decoration: none !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Prevent Horizontal Scroll */
         html, body {
             overflow-x: hidden !important;
             width: 100% !important;
@@ -38,84 +70,66 @@
             padding: 0 !important;
             position: relative;
         }
-
         .page-scroll, .page-container, .site-main {
             overflow-x: hidden !important;
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
         }
-
         .row {
             margin-right: 0 !important;
             margin-left: 0 !important;
         }
 
-        /* =========================================
-           2. إخفاء الخلفية الزرقاء 
-           ========================================= */
-        .lm-animated-bg {
-            display: none !important; 
+        /* By The Numbers Custom Styles */
+        .modern-fact { 
+            padding: 20px 10px; 
+            transition: transform 0.3s ease; 
+            background: transparent; 
         }
-        .bg-move-effect {
-            background-image: none !important;
+        .modern-fact:hover { 
+            transform: translateY(-5px); 
         }
-
-        /* =========================================
-           3. إرجاع حجم الأرقام (By The Numbers)
-           ========================================= */
-        .modern-fact { padding: 20px 10px; transition: transform 0.3s ease; background: transparent; }
-        .modern-fact:hover { transform: translateY(-5px); }
-        .modern-fact h4 { font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: #d3d3d3; }
-        .modern-fact .fun-fact-value { font-size: 2.2rem; font-weight: 700; color: #d3d3d3; }
-
-        /* =========================================
-           4. القائمة الجانبية - حل جذري ومضمون
-           ========================================= */
-        @media (max-width: 991px) {
-            .site-nav {
-                display: none !important; /* مخفية افتراضياً في الجوال */
-                width: 100%;
-                background-color: #222222;
-                padding: 15px;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                z-index: 9999;
-                box-sizing: border-box !important; 
-            }
-            .site-nav.force-show {
-                display: block !important; /* إجبارها على الظهور عند الضغط */
-            }
+        .modern-fact h4 { 
+            font-size: 1.15rem; 
+            font-weight: 600; 
+            margin-bottom: 12px; 
+            color: #d3d3d3; 
         }
-        @media (min-width: 992px) {
-            .site-nav {
-                display: block !important; /* ضمان ظهورها دائماً في الكمبيوتر */
-            }
+        .modern-fact .fun-fact-value { 
+            font-size: 2.2rem; 
+            font-weight: 700; 
+            color: #d3d3d3; 
         }
 
-        /* =========================================
-           5. تنسيقاتك الأصلية للصور والأزرار
-           ========================================= */
-        .home-photo { perspective: 1000px; }
-        .hp-inner { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; transform-style: preserve-3d; }
-        .home-photo:hover .hp-inner { transform: rotateX(8deg) rotateY(-10deg) scale(1.04); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5); }
+        /* 3D Photo Hover Effect */
+        .home-photo { 
+            perspective: 1000px; 
+        }
+        .hp-inner { 
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
+            transform-style: preserve-3d; 
+        }
+        .home-photo:hover .hp-inner { 
+            transform: rotateX(8deg) rotateY(-10deg) scale(1.04); 
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5); 
+        }
         
-        .btn-primary { background-color: #d3d3d3 !important; border-color: #d3d3d3 !important; color: #222222 !important; }
-        .btn-primary:hover { background-color: #b0b0b0 !important; border-color: #b0b0b0 !important; }
-
-        .header .logo-symbol { background-color: transparent !important; border: none !important; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .header .logo-symbol img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .menu-toggle { font-size: 2rem; color: #d3d3d3; text-decoration: none !important; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        /* Buttons Custom Styles */
+        .btn-primary { 
+            background-color: #d3d3d3 !important; 
+            border-color: #d3d3d3 !important; 
+            color: #222222 !important; 
+        }
+        .btn-primary:hover { 
+            background-color: #b0b0b0 !important; 
+            border-color: #b0b0b0 !important; 
+        }
     </style>
 </head>
 
 <body class="page">
     <div class="lm-animated-bg"></div>
-    
-    <div class="preloader" style="display: none;">
-        <div class="preloader-animation"><div class="preloader-spinner"></div></div>
-    </div>
 
     <div class="page-scroll">
         <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right" data-animation="transition-flip-in-right">
@@ -132,12 +146,19 @@
 
                     <div class="site-nav mobile-menu-hide">
                         <ul class="leven-classic-menu site-main-menu">
-                            <li class="menu-item current-menu-item"><a href="index.html">About Me</a></li>
-                            <li class="menu-item"><a href="resume.html">Resume</a></li>
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
+                            <li class="menu-item current-menu-item">
+                                <a href="index.html">About Me</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="resume.html">Resume</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="contact.html">Contact</a>
+                            </li>
                         </ul>
                     </div>
 
+                    <!-- HTML Hamburger Menu Icon -->
                     <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
                 </div>
             </header>
@@ -177,29 +198,75 @@
                             </div>
 
                             <!-- Services -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-50"></div><div class="block-title"><h2>What I Do</h2></div></div></div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="p-50"></div>
+                                    <div class="block-title">
+                                        <h2>What I Do</h2>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="info-list-w-icon">
-                                        <div class="info-block-w-icon"><h4>Ecommerce Management</h4><p>Optimizing e-commerce fulfillment strategies, managing acquisition and retention programs, and expanding brand presence across leading platforms.</p></div>
-                                        <div class="info-block-w-icon"><h4>Web Operations & Analytics</h4><p>Utilizing Google Analytics and A/B testing to track consumer behaviors, diagnose website issues, and improve end-user experiences.</p></div>
+                                        <div class="info-block-w-icon">
+                                            <h4>Ecommerce Management</h4>
+                                            <p>Optimizing e-commerce fulfillment strategies, managing acquisition and retention programs, and expanding brand presence across leading platforms.</p>
+                                        </div>
+                                        <div class="info-block-w-icon">
+                                            <h4>Web Operations & Analytics</h4>
+                                            <p>Utilizing Google Analytics and A/B testing to track consumer behaviors, diagnose website issues, and improve end-user experiences.</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="info-list-w-icon">
-                                        <div class="info-block-w-icon"><h4>SEO & Feature Integration</h4><p>Coordinating with technical teams to optimize websites for SEO, redesigning functionalities, and launching new extensions and plugins.</p></div>
-                                        <div class="info-block-w-icon"><h4>Network Infrastructure</h4><p>Equipped with solid expertise in deploying end-to-end IP routing solutions, network optimization, and diagnosing hardware configurations.</p></div>
+                                        <div class="info-block-w-icon">
+                                            <h4>SEO & Feature Integration</h4>
+                                            <p>Coordinating with technical teams to optimize websites for SEO, redesigning functionalities, and launching new extensions and plugins.</p>
+                                        </div>
+                                        <div class="info-block-w-icon">
+                                            <h4>Network Infrastructure</h4>
+                                            <p>Equipped with solid expertise in deploying end-to-end IP routing solutions, network optimization, and diagnosing hardware configurations.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- By The Numbers -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>By The Numbers</h2></div></div></div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="p-40"></div>
+                                    <div class="block-title">
+                                        <h2>By The Numbers</h2>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row" id="counter-section">
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Years of Experience</h4><span class="fun-fact-value">+<span class="counter" data-target="7">0</span></span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Products Managed</h4><span class="fun-fact-value">+<span class="counter" data-target="10">0</span>k</span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Successful Migrations</h4><span class="fun-fact-value"><span class="counter" data-target="100">0</span>%</span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Coffee Cups Brewed</h4><span class="fun-fact-value"><span class="counter" id="coffee-counter" data-target="1286">0</span></span></div></div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <div class="fun-fact text-center modern-fact">
+                                        <h4>Years of Experience</h4>
+                                        <span class="fun-fact-value">+<span class="counter" data-target="7">0</span></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <div class="fun-fact text-center modern-fact">
+                                        <h4>Products Managed</h4>
+                                        <span class="fun-fact-value">+<span class="counter" data-target="10">0</span>k</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <div class="fun-fact text-center modern-fact">
+                                        <h4>Successful Migrations</h4>
+                                        <span class="fun-fact-value"><span class="counter" data-target="100">0</span>%</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <div class="fun-fact text-center modern-fact">
+                                        <h4>Coffee Cups Brewed</h4>
+                                        <span class="fun-fact-value"><span class="counter" id="coffee-counter" data-target="1286">0</span></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="p-40"></div>
                         </div>
@@ -207,46 +274,55 @@
                 </div>
             </div>
 
+            <!-- Footer -->
             <footer class="site-footer clearfix">
-                <div class="footer-social"><ul class="footer-social-links"><li><a href="https://www.linkedin.com/in/edahlan/" target="_blank" rel="noopener noreferrer" aria-label="Visit Edrees Dahlan's LinkedIn Profile">Linkedin</a></li></ul></div>
-                <div class="footer-copyrights"><p>© <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p></div>
+                <div class="footer-social">
+                    <ul class="footer-social-links">
+                        <li><a href="https://www.linkedin.com/in/edahlan/" target="_blank" rel="noopener noreferrer" aria-label="Visit Edrees Dahlan's LinkedIn Profile">Linkedin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-copyrights">
+                    <p>© <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p>
+                </div>
             </footer>
         </div>
     </div>
 
     <script src="./assets/jquery-2.1.3.min.js.download"></script>
     <script src="./assets/bootstrap.min.js.download"></script>
-    <script src="./assets/owl.carousel.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
 
+    <!-- Mobile Menu Toggle Script -->
     <script>
-        // الكود المحدث لضمان عمل القائمة الجانبية بنسبة 100%
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('.site-nav');
-            
-            if (toggle && nav) {
-                // نسخ الزر لفك ارتباطه بأي أوامر سابقة في القالب تعطل عمله
-                const newToggle = toggle.cloneNode(true);
-                toggle.parentNode.replaceChild(newToggle, toggle);
-                
-                newToggle.addEventListener('click', (e) => {
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const siteNav = document.querySelector('.site-nav');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function(e) {
                     e.preventDefault();
-                    // استخدام كلاس قوي جداً لإظهار القائمة
-                    nav.classList.toggle('force-show');
+                    if (siteNav.classList.contains('mobile-menu-hide')) {
+                        siteNav.classList.remove('mobile-menu-hide');
+                    } else {
+                        siteNav.classList.add('mobile-menu-hide');
+                    }
                 });
             }
         });
+    </script>
 
-        // كود العداد والسنوات
+    <!-- Dynamic Coffee Counter & Year Script -->
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('current-year').textContent = new Date().getFullYear();
+            
             const coffeeCounter = document.getElementById('coffee-counter');
             if (coffeeCounter) {
                 const startDate = new Date('2026-07-13T00:00:00'); 
                 const diffDays = Math.floor(Math.abs(new Date() - startDate) / (1000 * 60 * 60 * 24)); 
                 coffeeCounter.setAttribute('data-target', Math.min(1286 + (diffDays * 2), 9999));
             }
+
             const counters = document.querySelectorAll('.counter');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -255,7 +331,12 @@
                         const update = () => {
                             const target = +counter.getAttribute('data-target');
                             const count = +counter.innerText;
-                            if (count < target) { counter.innerText = Math.ceil(count + (target / 100)); setTimeout(update, 15); } else { counter.innerText = target; }
+                            if (count < target) { 
+                                counter.innerText = Math.ceil(count + (target / 100)); 
+                                setTimeout(update, 15); 
+                            } else { 
+                                counter.innerText = target; 
+                            }
                         };
                         update();
                         observer.unobserve(counter);
