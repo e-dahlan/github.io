@@ -26,7 +26,7 @@
 
     <style>
         /* =========================================
-           1. منع الانزلاق الجانبي المزعج وحل مشكلة الخط الأزرق
+           1. Card Layout and Container Styles (Matched to Resume & About)
            ========================================= */
         html, body {
             overflow-x: hidden !important;
@@ -35,13 +35,33 @@
             margin: 0 !important;
             padding: 0 !important;
             position: relative;
+            background-color: #111111 !important; /* Dark outer background */
         }
 
-        .page-scroll, .page-container, .site-main {
+        .page-scroll {
+            width: 100% !important;
+            padding: 40px 20px; /* Floating card space */
+            box-sizing: border-box !important;
+            overflow-x: hidden !important;
+        }
+
+        .page-container {
+            max-width: 1200px !important;
+            margin: 0 auto;
+            background: #222222 !important; /* Grayish-black main container */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+            overflow: hidden !important; /* Removes inner scrollbar */
+            position: relative;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .site-main {
             overflow-x: hidden !important;
             width: 100% !important;
-            max-width: 100% !important;
-            box-sizing: border-box !important;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .row {
@@ -50,27 +70,26 @@
         }
 
         /* =========================================
-           2. حل مشكلة اختفاء العناوين خلف الهيدر الثابت
-           ========================================= */
-        #main-content {
-            padding-top: 40px !important;
-        }
-        @media only screen and (max-width: 991px) {
-            #main-content {
-                padding-top: 90px !important; /* دفع العنوان ليتفادى شريط الهيدر على الجوال */
-            }
-        }
-
-        /* =========================================
-           3. توحيد لون الخلفية الرمادي (مثل Index)
+           2. Background Adjustments
            ========================================= */
         .lm-animated-bg {
             background-image: none !important;
-            background-color: #d3d3d3 !important;
+            background-color: transparent !important; 
         }
 
         /* =========================================
-           4. الهوية البصرية (اللوجو)
+           3. Typography & Titles
+           ========================================= */
+        h2, h3, h4, label {
+            color: #eeeeee !important;
+        }
+        
+        .block-title h2, .block-title h3 {
+            color: #eeeeee;
+        }
+
+        /* =========================================
+           4. Visual Elements (Logo, Menu)
            ========================================= */
         .header .logo-symbol { 
             background-color: transparent !important; 
@@ -89,12 +108,9 @@
             object-fit: cover; 
         }
 
-        /* =========================================
-           5. زر قائمة الجوال (Menu Toggle)
-           ========================================= */
         .menu-toggle {
             font-size: 2rem;
-            color: #d3d3d3;
+            color: #eeeeee;
             text-decoration: none !important;
             display: flex;
             align-items: center;
@@ -102,30 +118,84 @@
         }
 
         /* =========================================
-           6. تنسيقات صفحة الاتصال الخاصة
+           5. Contact Info Blocks (Dark Mode)
            ========================================= */
+        .lm-info-block {
+            padding: 20px !important;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .lm-info-block:hover {
+            transform: translateY(-3px);
+        }
+        
+        .lm-info-block.gray-default {
+            background-color: #2a2a2a !important; /* Darker card background */
+            border: 1px solid #333333;
+        }
+        .lm-info-block.gray-default h4,
+        .lm-info-block.gray-default h4 a {
+            color: #eeeeee !important;
+            text-decoration: none;
+        }
+        .lm-info-block-text {
+            color: #a4b0be !important;
+        }
+
+        /* WhatsApp Block */
         .custom-whatsapp-block {
-            background-color: rgba(37, 211, 102, 0.1); 
-            border: 1px solid #25D366;
+            background-color: rgba(37, 211, 102, 0.1) !important; 
+            border: 1px solid #25D366 !important;
         }
         .custom-whatsapp-block h4 a, 
         .custom-whatsapp-block .lm-info-block-text {
             color: #25D366 !important;
+            text-decoration: none;
+        }
+
+        /* =========================================
+           6. Contact Form Dark Theme
+           ========================================= */
+        .form-control {
+            background-color: #1a1a1a !important;
+            border: 1px solid #333333 !important;
+            color: #eeeeee !important;
+            border-radius: 8px;
+        }
+        .form-control::placeholder {
+            color: #666666 !important;
+        }
+        .form-control:focus {
+            border-color: #555555 !important;
+            box-shadow: 0 0 5px rgba(255,255,255,0.1) !important;
+            outline: none;
         }
 
         .btn-send {
             background-color: #d3d3d3 !important;
             color: #222222 !important;
             border: none !important;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 15px;
         }
         .btn-send:hover {
             background-color: #b0b0b0 !important;
+            cursor: pointer;
         }
-        
-        .lm-info-block {
-            padding-left: 20px !important;
-            padding-right: 20px !important;
-            text-align: center;
+
+        /* Header spacing on mobile */
+        #main-content {
+            padding-top: 40px !important;
+        }
+        @media only screen and (max-width: 991px) {
+            #main-content {
+                padding-top: 90px !important; 
+            }
         }
     </style>
 </head>
@@ -179,7 +249,7 @@
                                     </div>
 
                                     <div class="lm-info-block gray-default">
-                                        <h4><a href="mailto:e.dahlan@gmail.com" style="color: #d3d3d3;" aria-label="Send an email to Edrees Dahlan">e.dahlan@gmail.com</a></h4>
+                                        <h4><a href="mailto:e.dahlan@gmail.com" aria-label="Send an email to Edrees Dahlan">e.dahlan@gmail.com</a></h4>
                                         <span class="lm-info-block-text">Drop me an email anytime</span>
                                     </div>
 
@@ -250,16 +320,16 @@
     <script src="./assets/bootstrap.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
 
-    <!-- سكريبت تشغيل القائمة وسنة الحقوق المدمج -->
+    <!-- Script for mobile menu toggle and auto-updating copyright year -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. تحديث السنة تلقائياً
+            // 1. Auto-update Copyright Year
             const yearEl = document.getElementById('current-year');
             if (yearEl) {
                 yearEl.textContent = new Date().getFullYear();
             }
 
-            // 2. تشغيل القائمة الجانبية (نفس آلية index.html تماماً)
+            // 2. Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
 
