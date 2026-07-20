@@ -25,132 +25,47 @@
     <script src="./assets/modernizr.custom.js.download"></script>
     
     <style>
-        /* =========================================
-           1. Card Layout and Container Styles
-           ========================================= */
-        html, body {
-            margin: 0;
-            padding: 0;
-            background-color: #111111 !important;
-        }
+        /* 1. Card Layout and Container Styles */
+        html, body { margin: 0; padding: 0; background-color: #111111 !important; }
+        .page-scroll { width: 100%; padding: 40px 20px; box-sizing: border-box; }
+        .page-container { max-width: 1350px; margin: 0 auto; background: #222222 !important; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important; overflow: hidden !important; position: relative; }
+        .site-main { width: 100% !important; padding: 20px; box-sizing: border-box; }
+        .row { margin-right: 0 !important; margin-left: 0 !important; }
 
-        .page-scroll {
-            width: 100%;
-            padding: 40px 20px;
-            box-sizing: border-box;
-        }
+        /* 2. Visual Elements */
+        .lm-animated-bg { background-image: none !important; background-color: transparent !important; }
+        .header .logo-symbol { background-color: transparent !important; border: none !important; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .header .logo-symbol img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .menu-toggle { font-size: 2rem; color: #eeeeee; text-decoration: none !important; display: flex; align-items: center; justify-content: center; }
 
-        .page-container {
-            max-width: 1350px;
-            margin: 0 auto;
-            background: #222222 !important;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
-            overflow: hidden !important;
-            position: relative;
-        }
-
-        .site-main {
-            width: 100% !important;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .row {
-            margin-right: 0 !important;
-            margin-left: 0 !important;
-        }
-
-        /* =========================================
-           2. Visual Elements & Overrides
-           ========================================= */
-        .lm-animated-bg {
-            background-image: none !important;
-            background-color: transparent !important;
-        }
-
-        .header .logo-symbol { 
-            background-color: transparent !important; 
-            border: none !important; 
-            width: 45px; 
-            height: 45px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden; 
-        }
-        .header .logo-symbol img { 
-            width: 100%; 
-            height: 100%; 
-            border-radius: 50%; 
-            object-fit: cover; 
-        }
-
-        .menu-toggle {
-            font-size: 2rem;
-            color: #eeeeee;
-            text-decoration: none !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* =========================================
-           3. Contact Components
-           ========================================= */
-        .lm-info-block {
-            padding: 20px !important;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-            background-color: #2a2a2a !important;
-            border: 1px solid #333333;
-        }
-        
+        /* 3. Contact Components */
+        .lm-info-block { padding: 20px !important; text-align: center; border-radius: 10px; margin-bottom: 20px; transition: transform 0.3s ease; background-color: #2a2a2a !important; border: 1px solid #333333; }
         .lm-info-block:hover { transform: translateY(-3px); }
-        .lm-info-block h4, .lm-info-block h4 a { color: #eeeeee !important; text-decoration: none; }
-        .lm-info-block-text { color: #a4b0be !important; }
+        .lm-info-block h4 { color: #eeeeee !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
+        .lm-info-block h4 a { color: #eeeeee !important; text-decoration: none; }
+        .lm-info-block-text { color: #a4b0be !important; display: block; }
 
-        .custom-whatsapp-block {
-            background-color: rgba(37, 211, 102, 0.1) !important; 
-            border: 1px solid #25D366 !important;
-        }
-        .custom-whatsapp-block h4 a, .custom-whatsapp-block .lm-info-block-text { 
-            color: #25D366 !important; 
-        }
+        /* WhatsApp Block Color */
+        .custom-whatsapp-block { background-color: rgba(37, 211, 102, 0.1) !important; border: 1px solid #25D366 !important; }
+        .custom-whatsapp-block h4 { color: #25D366 !important; }
+        .custom-whatsapp-block h4 a { color: #25D366 !important; }
+        .custom-whatsapp-block .lm-info-block-text { color: #25D366 !important; opacity: 0.8; }
+
+        /* LinkedIn Block Color */
+        .custom-linkedin-block { background-color: rgba(0, 119, 181, 0.1) !important; border: 1px solid #0077b5 !important; }
+        .custom-linkedin-block h4 { color: #0077b5 !important; }
+        .custom-linkedin-block h4 a { color: #0077b5 !important; }
+        .custom-linkedin-block .lm-info-block-text { color: #0077b5 !important; opacity: 0.8; }
 
         /* Form Styling */
-        .form-control {
-            background-color: #1a1a1a !important;
-            border: 1px solid #333333 !important;
-            color: #eeeeee !important;
-            border-radius: 8px;
-        }
+        .form-control { background-color: #1a1a1a !important; border: 1px solid #333333 !important; color: #eeeeee !important; border-radius: 8px; }
         .form-control::placeholder { color: #666666 !important; }
         .form-control:focus { border-color: #555555 !important; box-shadow: none; outline: none; }
-
-        .btn-send {
-            background-color: #d3d3d3 !important;
-            color: #222222 !important;
-            border: none !important;
-            padding: 10px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-        }
+        .btn-send { background-color: #d3d3d3 !important; color: #222222 !important; border: none !important; padding: 10px 30px; border-radius: 30px; font-weight: 600; }
         .btn-send:hover { background-color: #b0b0b0 !important; cursor: pointer; }
 
-        /* =========================================
-           4. Mobile Optimization
-           ========================================= */
         @media (max-width: 767px) {
-            .page-container {
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
-                border-radius: 0 !important;
-                box-shadow: none !important;
-            }
+            .page-container { max-width: 100% !important; width: 100% !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
             .page-scroll { padding: 0 !important; }
         }
     </style>
@@ -160,7 +75,7 @@
     <div class="lm-animated-bg"></div>
 
     <div class="page-scroll">
-        <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right" data-animation="transition-flip-in-right">
+        <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right">
 
             <!-- Header -->
             <header id="site_header" class="header">
@@ -179,7 +94,6 @@
                             <li class="menu-item current-menu-item"><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
-
                     <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
                 </div>
             </header>
@@ -197,19 +111,40 @@
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4">
+                                    <!-- Location -->
                                     <div class="lm-info-block">
-                                        <h4>Dammam</h4>
+                                        <h4>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                            Dammam
+                                        </h4>
                                         <span class="lm-info-block-text">Eastern Region, Saudi Arabia</span>
                                     </div>
 
+                                    <!-- Email -->
                                     <div class="lm-info-block">
-                                        <h4><a href="mailto:e.dahlan@gmail.com">e.dahlan@gmail.com</a></h4>
+                                        <h4>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                                            <a href="mailto:e.dahlan@gmail.com">e.dahlan@gmail.com</a>
+                                        </h4>
                                         <span class="lm-info-block-text">Drop me an email anytime</span>
                                     </div>
 
+                                    <!-- WhatsApp Block -->
                                     <div class="lm-info-block custom-whatsapp-block">
-                                        <h4><a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer">+966 56 832 9898</a></h4>
+                                        <h4>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.591 5.52 0 10.002-4.48 10.002-10.002S17.57 2.001 12.05 2.001c-5.52 0-10.002 4.48-10.002 10.002 0 2.223.719 4.382 2.072 6.168l-1.345 4.912 4.822-1.266z"/></svg>
+                                            <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer">+966 56 832 9898</a>
+                                        </h4>
                                         <span class="lm-info-block-text">Instant Chat Available</span>
+                                    </div>
+
+                                    <!-- LinkedIn Block -->
+                                    <div class="lm-info-block custom-linkedin-block">
+                                        <h4>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                            <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                                        </h4>
+                                        <span class="lm-info-block-text">Let's connect</span>
                                     </div>
                                 </div>
 
@@ -219,33 +154,29 @@
                                     <form id="contact_form" class="contact-form" action="https://formspree.io/f/meeyqadj" method="post">
                                         <div class="messages"></div>
                                         <div class="controls">
-                                            <div class="form-group">
-                                                <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required">
-                                            </div>
-                                            <div class="form-group">
-                                                <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required">
-                                            </div>
-                                            <div class="form-group">
-                                                <input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required">
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required"></textarea>
-                                            </div>
+                                            <div class="form-group"><input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required"></div>
+                                            <div class="form-group"><input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required"></div>
+                                            <div class="form-group"><input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required"></div>
+                                            <div class="form-group"><textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required"></textarea></div>
                                             <input type="submit" class="button btn-send" value="Send message">
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="p-40"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Footer -->
             <footer class="site-footer clearfix">
                 <div class="footer-social">
                     <ul class="footer-social-links">
-                        <li><a href="https://www.linkedin.com/in/edahlan/" target="_blank" rel="noopener noreferrer" aria-label="Visit Edrees Dahlan's LinkedIn Profile">Linkedin</a></li>
+                        <li>
+                            <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="color: #a5a6a7; transition: color 0.3s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='#a5a6a7'">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="footer-copyrights">
@@ -258,15 +189,12 @@
     <script src="./assets/jquery-2.1.3.min.js.download"></script>
     <script src="./assets/bootstrap.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const yearEl = document.getElementById('current-year');
             if (yearEl) yearEl.textContent = new Date().getFullYear();
-
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
-
             if (menuToggle && siteNav) {
                 menuToggle.addEventListener('click', function(e) {
                     e.preventDefault();
