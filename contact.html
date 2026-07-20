@@ -9,56 +9,48 @@
     <meta name="author" content="Edrees Dahlan">
 
     <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - Ecommerce Supervisor & Computer Engineer">
-    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows in Saudi Arabia.">
+    <meta property="og:title" content="Edrees Dahlan - Contact">
+    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows.">
     <meta property="og:image" content="./img/main_photo.jpg">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:url" content="https://yourwebsite.com/contact.html">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link class="favicon-tag" rel="icon" type="image/png" href="./favicon.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
 
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="./assets/main.css" type="text/css">
     
     <script src="./assets/modernizr.custom.js.download"></script>
-
+    
     <style>
         /* =========================================
-           1. Card Layout and Container Styles (Matched to Resume & About)
+           1. Card Layout and Container Styles
            ========================================= */
         html, body {
-            overflow-x: hidden !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            position: relative;
-            background-color: #111111 !important; /* Dark outer background */
+            margin: 0;
+            padding: 0;
+            background-color: #111111 !important;
         }
 
         .page-scroll {
-            width: 100% !important;
-            padding: 40px 20px; /* Floating card space */
-            box-sizing: border-box !important;
-            overflow-x: hidden !important;
+            width: 100%;
+            padding: 40px 20px;
+            box-sizing: border-box;
         }
 
         .page-container {
-            max-width: 1350px !important;
+            max-width: 1350px;
             margin: 0 auto;
-            background: #222222 !important; /* Grayish-black main container */
+            background: #222222 !important;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
-            overflow: hidden !important; /* Removes inner scrollbar */
+            overflow: hidden !important;
             position: relative;
-            width: 100% !important;
-            box-sizing: border-box !important;
         }
 
         .site-main {
-            overflow-x: hidden !important;
             width: 100% !important;
             padding: 20px;
             box-sizing: border-box;
@@ -70,27 +62,13 @@
         }
 
         /* =========================================
-           2. Background Adjustments
+           2. Visual Elements & Overrides
            ========================================= */
         .lm-animated-bg {
             background-image: none !important;
-            background-color: transparent !important; 
+            background-color: transparent !important;
         }
 
-        /* =========================================
-           3. Typography & Titles
-           ========================================= */
-        h2, h3, h4, label {
-            color: #eeeeee !important;
-        }
-        
-        .block-title h2, .block-title h3 {
-            color: #eeeeee;
-        }
-
-        /* =========================================
-           4. Visual Elements (Logo, Menu)
-           ========================================= */
         .header .logo-symbol { 
             background-color: transparent !important; 
             border: none !important; 
@@ -118,7 +96,7 @@
         }
 
         /* =========================================
-           5. Contact Info Blocks (Dark Mode)
+           3. Contact Components
            ========================================= */
         .lm-info-block {
             padding: 20px !important;
@@ -126,52 +104,31 @@
             border-radius: 10px;
             margin-bottom: 20px;
             transition: transform 0.3s ease;
-        }
-        .lm-info-block:hover {
-            transform: translateY(-3px);
-        }
-        
-        .lm-info-block.gray-default {
-            background-color: #2a2a2a !important; /* Darker card background */
+            background-color: #2a2a2a !important;
             border: 1px solid #333333;
         }
-        .lm-info-block.gray-default h4,
-        .lm-info-block.gray-default h4 a {
-            color: #eeeeee !important;
-            text-decoration: none;
-        }
-        .lm-info-block-text {
-            color: #a4b0be !important;
-        }
+        
+        .lm-info-block:hover { transform: translateY(-3px); }
+        .lm-info-block h4, .lm-info-block h4 a { color: #eeeeee !important; text-decoration: none; }
+        .lm-info-block-text { color: #a4b0be !important; }
 
-        /* WhatsApp Block */
         .custom-whatsapp-block {
             background-color: rgba(37, 211, 102, 0.1) !important; 
             border: 1px solid #25D366 !important;
         }
-        .custom-whatsapp-block h4 a, 
-        .custom-whatsapp-block .lm-info-block-text {
-            color: #25D366 !important;
-            text-decoration: none;
+        .custom-whatsapp-block h4 a, .custom-whatsapp-block .lm-info-block-text { 
+            color: #25D366 !important; 
         }
 
-        /* =========================================
-           6. Contact Form Dark Theme
-           ========================================= */
+        /* Form Styling */
         .form-control {
             background-color: #1a1a1a !important;
             border: 1px solid #333333 !important;
             color: #eeeeee !important;
             border-radius: 8px;
         }
-        .form-control::placeholder {
-            color: #666666 !important;
-        }
-        .form-control:focus {
-            border-color: #555555 !important;
-            box-shadow: 0 0 5px rgba(255,255,255,0.1) !important;
-            outline: none;
-        }
+        .form-control::placeholder { color: #666666 !important; }
+        .form-control:focus { border-color: #555555 !important; box-shadow: none; outline: none; }
 
         .btn-send {
             background-color: #d3d3d3 !important;
@@ -180,22 +137,21 @@
             padding: 10px 30px;
             border-radius: 30px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 15px;
         }
-        .btn-send:hover {
-            background-color: #b0b0b0 !important;
-            cursor: pointer;
-        }
+        .btn-send:hover { background-color: #b0b0b0 !important; cursor: pointer; }
 
-        /* Header spacing on mobile */
-        #main-content {
-            padding-top: 40px !important;
-        }
-        @media only screen and (max-width: 991px) {
-            #main-content {
-                padding-top: 90px !important; 
+        /* =========================================
+           4. Mobile Optimization
+           ========================================= */
+        @media (max-width: 767px) {
+            .page-container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
             }
+            .page-scroll { padding: 0 !important; }
         }
     </style>
 </head>
@@ -235,68 +191,51 @@
                             
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
-                                    <div class="block-title">
-                                        <h2>Contact</h2>
-                                    </div>
+                                    <div class="block-title"><h2>Contact</h2></div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4">
-                                    <div class="lm-info-block gray-default">
+                                    <div class="lm-info-block">
                                         <h4>Dammam</h4>
                                         <span class="lm-info-block-text">Eastern Region, Saudi Arabia</span>
                                     </div>
 
-                                    <div class="lm-info-block gray-default">
-                                        <h4><a href="mailto:e.dahlan@gmail.com" aria-label="Send an email to Edrees Dahlan">e.dahlan@gmail.com</a></h4>
+                                    <div class="lm-info-block">
+                                        <h4><a href="mailto:e.dahlan@gmail.com">e.dahlan@gmail.com</a></h4>
                                         <span class="lm-info-block-text">Drop me an email anytime</span>
                                     </div>
 
                                     <div class="lm-info-block custom-whatsapp-block">
-                                        <h4><a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20was%20looking%20at%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" aria-label="Start a WhatsApp chat with Edrees Dahlan">+966 56 832 9898</a></h4>
+                                        <h4><a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer">+966 56 832 9898</a></h4>
                                         <span class="lm-info-block-text">Instant Chat Available</span>
                                     </div>
                                 </div>
 
-                                <!-- Contact Form -->
                                 <div class="col-xs-12 col-sm-8">
-                                    <div class="block-title">
-                                        <h3>How Can I Help You?</h3>
-                                    </div>
+                                    <div class="block-title"><h3>How Can I Help You?</h3></div>
                                     
                                     <form id="contact_form" class="contact-form" action="https://formspree.io/f/meeyqadj" method="post">
                                         <div class="messages"></div>
-
-                                        <div class="controls two-columns">
-                                            <div class="fields clearfix">
-                                                <div class="left-column">
-                                                    <div class="form-group form-group-with-icon">
-                                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required" aria-label="Enter your full name">
-                                                        <label>Full Name</label>
-                                                    </div>
-                                                    <div class="form-group form-group-with-icon">
-                                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required" aria-label="Enter your email address">
-                                                        <label>Email Address</label>
-                                                    </div>
-                                                    <div class="form-group form-group-with-icon">
-                                                        <input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required" aria-label="Enter the subject of your message">
-                                                        <label>Subject</label>
-                                                    </div>
-                                                </div>
-                                                <div class="right-column">
-                                                    <div class="form-group form-group-with-icon">
-                                                        <textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required" aria-label="Enter your message"></textarea>
-                                                        <label>Message</label>
-                                                    </div>
-                                                </div>
+                                        <div class="controls">
+                                            <div class="form-group">
+                                                <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required">
                                             </div>
-                                            <input type="submit" class="button btn-send" value="Send message" aria-label="Submit contact form">
+                                            <div class="form-group">
+                                                <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required"></textarea>
+                                            </div>
+                                            <input type="submit" class="button btn-send" value="Send message">
                                         </div>
                                     </form>
                                 </div>
                             </div>
-
                             <div class="p-40"></div>
                         </div>
                     </div>
@@ -320,27 +259,18 @@
     <script src="./assets/bootstrap.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
 
-    <!-- Script for mobile menu toggle and auto-updating copyright year -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. Auto-update Copyright Year
             const yearEl = document.getElementById('current-year');
-            if (yearEl) {
-                yearEl.textContent = new Date().getFullYear();
-            }
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-            // 2. Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
 
             if (menuToggle && siteNav) {
                 menuToggle.addEventListener('click', function(e) {
                     e.preventDefault();
-                    if (siteNav.classList.contains('mobile-menu-hide')) {
-                        siteNav.classList.remove('mobile-menu-hide');
-                    } else {
-                        siteNav.classList.add('mobile-menu-hide');
-                    }
+                    siteNav.classList.toggle('mobile-menu-hide');
                 });
             }
         });
