@@ -146,6 +146,22 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* =========================================
+           6. Mobile Optimization (NO CARD ON MOBILE)
+           ========================================= */
+        @media (max-width: 767px) {
+            .page-container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .page-scroll {
+                padding: 0 !important;
+            }
+        }
     </style>
 </head>
 
