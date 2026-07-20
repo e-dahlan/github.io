@@ -9,14 +9,14 @@
     <meta name="author" content="Edrees Dahlan">
 
     <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - Ecommerce Supervisor & Computer Engineer">
-    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows in Saudi Arabia.">
+    <meta property="og:title" content="Edrees Dahlan - Resume">
+    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows.">
     <meta property="og:image" content="./img/main_photo.jpg">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:url" content="https://yourwebsite.com/resume.html">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link class="favicon-tag" rel="icon" type="image/png" href="./favicon.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
 
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
@@ -31,7 +31,7 @@
         html, body {
             margin: 0;
             padding: 0;
-            background-color: #111111 !important; /* Dark outer background */
+            background-color: #111111 !important;
         }
 
         .page-scroll {
@@ -43,10 +43,10 @@
         .page-container {
             max-width: 1350px;
             margin: 0 auto;
-            background: #222222; /* Grayish-black background to match your dark theme */
+            background: #222222 !important;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); /* Darker shadow for depth */
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+            overflow: hidden !important;
             position: relative;
         }
 
@@ -62,19 +62,7 @@
         }
 
         /* =========================================
-           2. Content Adjustments
-           ========================================= */
-        #main-content {
-            padding-top: 40px !important;
-        }
-        @media only screen and (max-width: 991px) {
-            #main-content {
-                padding-top: 90px !important;
-            }
-        }
-
-        /* =========================================
-           3. Visual Elements
+           2. Visual Elements & Overrides
            ========================================= */
         .lm-animated-bg {
             background-image: none !important;
@@ -100,11 +88,27 @@
 
         .menu-toggle {
             font-size: 2rem;
-            color: #eeeeee; /* Lightened for the dark background */
+            color: #eeeeee;
             text-decoration: none !important;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* =========================================
+           3. Mobile Optimization
+           ========================================= */
+        @media (max-width: 767px) {
+            .page-container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .page-scroll {
+                padding: 0 !important;
+            }
         }
     </style>
 </head>
@@ -127,15 +131,9 @@
 
                     <div class="site-nav mobile-menu-hide">
                         <ul class="leven-classic-menu site-main-menu">
-                            <li class="menu-item">
-                                <a href="index.html">About Me</a>
-                            </li>
-                            <li class="menu-item current-menu-item">
-                                <a href="resume.html">Resume</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="contact.html">Contact</a>
-                            </li>
+                            <li class="menu-item"><a href="index.html">About Me</a></li>
+                            <li class="menu-item current-menu-item"><a href="resume.html">Resume</a></li>
+                            <li class="menu-item"><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
 
@@ -150,18 +148,14 @@
                             
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
-                                    <div class="block-title">
-                                        <h2>Resume</h2>
-                                    </div>
+                                    <div class="block-title"><h2>Resume</h2></div>
                                 </div>
                             </div>
 
                             <!-- Experience & Education -->
                             <div class="row">
                                 <div class="col-xs-12 col-sm-7">
-                                    <div class="block-title">
-                                        <h3>Experience</h3>
-                                    </div>
+                                    <div class="block-title"><h3>Experience</h3></div>
                                     <div class="timeline timeline-second-style clearfix">
                                         
                                         <div class="timeline-item clearfix">
@@ -194,14 +188,11 @@
                                                 <p>• Provided network support services for devices such as hubs, bridges, routers, and other hardware.</p>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-5">
-                                    <div class="block-title">
-                                        <h3>Education</h3>
-                                    </div>
+                                    <div class="block-title"><h3>Education</h3></div>
                                     <div class="timeline timeline-second-style clearfix">
                                         <div class="timeline-item clearfix">
                                             <div class="left-part">
@@ -218,9 +209,7 @@
 
                                     <div class="p-20"></div>
 
-                                    <div class="block-title">
-                                        <h3>Certifications</h3>
-                                    </div>
+                                    <div class="block-title"><h3>Certifications</h3></div>
                                     <div class="timeline timeline-second-style clearfix">
                                         <div class="timeline-item clearfix" style="padding-bottom:10px;">
                                             <div class="right-part" style="padding-left:0;">
@@ -269,9 +258,7 @@
                             <!-- Skills -->
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4">
-                                    <div class="block-title">
-                                        <h3>Skills</h3>
-                                    </div>
+                                    <div class="block-title"><h3>Skills</h3></div>
                                     <ul class="knowledges">
                                         <li>Magento Content Management</li>
                                         <li>Oracle ERP Integration</li>
@@ -285,25 +272,20 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-4">
-                                    <div class="block-title">
-                                        <h3>Affiliations</h3>
-                                    </div>
+                                    <div class="block-title"><h3>Affiliations</h3></div>
                                     <ul class="knowledges">
                                         <li>Member of Saudi Council of Engineers</li>
                                     </ul>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-4">
-                                    <div class="block-title">
-                                        <h3>Languages</h3>
-                                    </div>
+                                    <div class="block-title"><h3>Languages</h3></div>
                                     <ul class="knowledges">
                                         <li>Arabic (Excellent)</li>
                                         <li>English (Very Good)</li>
                                     </ul>
                                 </div>
                             </div>
-
                             <div class="p-40"></div>
                         </div>
                     </div>
@@ -329,11 +311,13 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Update Copyright Year
             const yearEl = document.getElementById('current-year');
             if (yearEl) {
                 yearEl.textContent = new Date().getFullYear();
             }
 
+            // Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
 
