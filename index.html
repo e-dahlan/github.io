@@ -28,22 +28,34 @@
 
     <style>
         /* =========================================
-           1. منع الانزلاق الجانبي المزعج
+           1. Card Layout and Container Styles (Matched to Resume)
            ========================================= */
         html, body {
-            overflow-x: hidden !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+            margin: 0;
+            padding: 0;
+            background-color: #111111 !important; /* Dark outer background */
+        }
+
+        .page-scroll {
+            width: 100%;
+            padding: 40px 20px; /* This gives the card the floating space */
+            box-sizing: border-box;
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #222222 !important; /* Grayish-black main container */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important; /* Matching depth shadow */
+            overflow: hidden !important; /* Removes that ugly inner scrollbar */
             position: relative;
         }
 
-        .page-scroll, .page-container, .site-main {
-            overflow-x: hidden !important;
+        .site-main {
             width: 100% !important;
-            max-width: 100% !important;
-            box-sizing: border-box !important;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .row {
@@ -52,15 +64,15 @@
         }
 
         /* =========================================
-           2. توحيد لون الخلفية الرمادي (مثل Resume)
+           2. Background Adjustments
            ========================================= */
         .lm-animated-bg {
             background-image: none !important;
-            background-color: #d3d3d3 !important;
+            background-color: transparent !important; 
         }
 
         /* =========================================
-           3. أرقام الإحصائيات (By The Numbers)
+           3. Statistics Numbers (By The Numbers)
            ========================================= */
         .modern-fact { 
             padding: 20px 10px; 
@@ -74,16 +86,16 @@
             font-size: 1.15rem; 
             font-weight: 600; 
             margin-bottom: 12px; 
-            color: #d3d3d3; 
+            color: #eeeeee; 
         }
         .modern-fact .fun-fact-value { 
             font-size: 2.2rem; 
             font-weight: 700; 
-            color: #d3d3d3; 
+            color: #eeeeee; 
         }
 
         /* =========================================
-           4. الهوية البصرية (اللوجو والأزرار)
+           4. Visual Elements (Logo & Buttons)
            ========================================= */
         .header .logo-symbol { 
             background-color: transparent !important; 
@@ -112,7 +124,7 @@
             border-color: #b0b0b0 !important; 
         }
 
-        /* تأثير الصورة ثلاثي الأبعاد */
+        /* 3D Image Hover Effect */
         .home-photo { perspective: 1000px; }
         .hp-inner { 
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
@@ -124,11 +136,11 @@
         }
 
         /* =========================================
-           5. زر قائمة الجوال (Menu Toggle)
+           5. Mobile Menu Toggle
            ========================================= */
         .menu-toggle {
             font-size: 2rem;
-            color: #d3d3d3;
+            color: #eeeeee;
             text-decoration: none !important;
             display: flex;
             align-items: center;
@@ -157,7 +169,7 @@
                         </a>
                     </div>
 
-                    <!-- القائمة المنسدلة -->
+                    <!-- Navigation Menu -->
                     <div class="site-nav mobile-menu-hide">
                         <ul class="leven-classic-menu site-main-menu">
                             <li class="menu-item current-menu-item"><a href="index.html">About Me</a></li>
@@ -166,7 +178,7 @@
                         </ul>
                     </div>
 
-                    <!-- زر الهامبرغر للجرّال -->
+                    <!-- Mobile Menu Hamburger -->
                     <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
                 </div>
             </header>
@@ -248,16 +260,16 @@
     <script src="./assets/owl.carousel.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
 
-    <!-- سكريبت تشغيل العداد، سنة الحقوق، وتفعيل قائمة الجوال القياسية -->
+    <!-- Script for counters, copyright year, and mobile menu toggle -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. تحديث السنة تلقائياً
+            // 1. Auto-update Copyright Year
             const yearEl = document.getElementById('current-year');
             if (yearEl) {
                 yearEl.textContent = new Date().getFullYear();
             }
 
-            // 2. تشغيل القائمة الجانبية (نفس آلية resume.html تماماً)
+            // 2. Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
 
@@ -272,7 +284,7 @@
                 });
             }
 
-            // 3. عداد أكواب القهوة التفاعلي
+            // 3. Interactive Coffee Counter
             const coffeeCounter = document.getElementById('coffee-counter');
             if (coffeeCounter) {
                 const startDate = new Date('2026-07-13T00:00:00'); 
@@ -280,7 +292,7 @@
                 coffeeCounter.setAttribute('data-target', Math.min(1286 + (diffDays * 2), 9999));
             }
 
-            // 4. تشغيل عداد الإحصائيات عند النزول إليها بالصفحة
+            // 4. Run Statistics Counter on scroll intersection
             const counters = document.querySelectorAll('.counter');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
