@@ -26,22 +26,34 @@
     
     <style>
         /* =========================================
-           1. منع الانزلاق الجانبي المزعج وحل مشكلة الخط الأزرق
+           1. Card Layout and Container Styles
            ========================================= */
         html, body {
-            overflow-x: hidden !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+            margin: 0;
+            padding: 0;
+            background-color: #111111 !important; /* Dark outer background */
+        }
+
+        .page-scroll {
+            width: 100%;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #222222; /* Grayish-black background to match your dark theme */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); /* Darker shadow for depth */
+            overflow: hidden;
             position: relative;
         }
 
-        .page-scroll, .page-container, .site-main {
-            overflow-x: hidden !important;
+        .site-main {
             width: 100% !important;
-            max-width: 100% !important;
-            box-sizing: border-box !important;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .row {
@@ -50,28 +62,25 @@
         }
 
         /* =========================================
-           2. حل مشكلة اختفاء العناوين خلف الهيدر الثابت
+           2. Content Adjustments
            ========================================= */
         #main-content {
             padding-top: 40px !important;
         }
         @media only screen and (max-width: 991px) {
             #main-content {
-                padding-top: 90px !important; /* دفع العنوان ليتفادى شريط الهيدر على الجوال */
+                padding-top: 90px !important;
             }
         }
 
         /* =========================================
-           3. توحيد لون الخلفية الرمادي (مثل Index)
+           3. Visual Elements
            ========================================= */
         .lm-animated-bg {
             background-image: none !important;
-            background-color: #d3d3d3 !important;
+            background-color: transparent !important;
         }
 
-        /* =========================================
-           4. الهوية البصرية (اللوجو)
-           ========================================= */
         .header .logo-symbol { 
             background-color: transparent !important; 
             border: none !important; 
@@ -89,12 +98,9 @@
             object-fit: cover; 
         }
 
-        /* =========================================
-           5. زر قائمة الجوال (Menu Toggle)
-           ========================================= */
         .menu-toggle {
             font-size: 2rem;
-            color: #d3d3d3;
+            color: #eeeeee; /* Lightened for the dark background */
             text-decoration: none !important;
             display: flex;
             align-items: center;
@@ -133,7 +139,6 @@
                         </ul>
                     </div>
 
-                    <!-- HTML Hamburger Menu Icon -->
                     <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
                 </div>
             </header>
@@ -322,16 +327,13 @@
     <script src="./assets/bootstrap.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
 
-    <!-- سكريبت تشغيل القائمة وسنة الحقوق المدمج -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. تحديث السنة تلقائياً
             const yearEl = document.getElementById('current-year');
             if (yearEl) {
                 yearEl.textContent = new Date().getFullYear();
             }
 
-            // 2. تشغيل القائمة الجانبية (نفس آلية index.html تماماً)
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
 
