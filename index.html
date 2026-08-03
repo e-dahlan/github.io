@@ -79,7 +79,22 @@
         }
 
         /* =========================================
-           2. Glassmorphism Sticky Header
+           2. Scroll Reveal Animation Effects
+           ========================================= */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           3. Glassmorphism Sticky Header
            ========================================= */
         .header {
             position: sticky;
@@ -110,7 +125,7 @@
         }
 
         /* =========================================
-           3. Modern Interactive Cards (What I Do)
+           4. Interactive Cards
            ========================================= */
         .info-block-card {
             background: var(--card-bg);
@@ -142,7 +157,7 @@
         }
 
         /* =========================================
-           4. Tech Stack & Tools Grid
+           5. Tech Stack & Tools Grid
            ========================================= */
         .tech-badge-container {
             display: flex;
@@ -172,7 +187,67 @@
         }
 
         /* =========================================
-           5. Statistics & Highlights Section
+           6. Beyond Work & Interests Section
+           ========================================= */
+        .interest-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .interest-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .interest-card h5 {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .interest-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           7. Call To Action (CTA) Section
+           ========================================= */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.12) 0%, rgba(30, 30, 30, 0.8) 100%);
+            border: 1px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .cta-banner h3 {
+            color: var(--text-light);
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .cta-banner p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* =========================================
+           8. Statistics & Highlights Section
            ========================================= */
         .modern-fact { 
             padding: 20px 10px; 
@@ -202,14 +277,14 @@
         }
 
         /* =========================================
-           6. Buttons & Interactive Links
+           9. Buttons & Interactive Links
            ========================================= */
         .btn-custom-primary { 
             background-color: var(--accent-color) !important; 
             border-color: var(--accent-color) !important; 
             color: #ffffff !important; 
             border-radius: 8px;
-            padding: 10px 20px;
+            padding: 10px 22px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
@@ -221,6 +296,7 @@
             background-color: var(--accent-hover) !important; 
             border-color: var(--accent-hover) !important; 
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
         }
 
         .btn-custom-outline {
@@ -257,7 +333,7 @@
         }
 
         /* =========================================
-           7. CV Modal Preview
+           10. CV Modal Preview
            ========================================= */
         .modal-overlay {
             position: fixed;
@@ -305,7 +381,7 @@
         }
 
         /* =========================================
-           8. Responsive Adjustments
+           11. Responsive Adjustments
            ========================================= */
         .menu-toggle {
             font-size: 2rem;
@@ -324,9 +400,11 @@
             .site-main {
                 padding: 15px;
             }
+            .interest-card {
+                margin-bottom: 15px;
+            }
         }
 
-        /* Footer Icons */
         .footer-social-links {
             list-style: none;
             padding: 0;
@@ -352,12 +430,14 @@
     <div class="page-scroll">
         <div id="page_container" class="page-container">
 
-            <!-- Header -->
+            <!-- Sticky Header -->
             <header id="site_header" class="header">
                 <div class="header-content clearfix">
                     <div class="text-logo">
                         <a href="index.html" aria-label="Go to Homepage">
-                            <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
+                            <div class="logo-symbol">
+                                <img src="./favicon.png" alt="Edrees Dahlan Logo" loading="lazy" width="45" height="45">
+                            </div>
                             <div class="logo-text">Edrees <span>Dahlan</span></div>
                         </a>
                     </div>
@@ -381,7 +461,7 @@
                     <div id="primary" class="content-area"> 
                         <div id="content" class="page-content site-content single-post" role="main">
                             
-                            <!-- Hero / Profile Top Part -->
+                            <!-- Hero / Profile Section -->
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="home-content">
@@ -414,9 +494,11 @@
                                 </div>
                             </div>
 
-                            <!-- Services / What I Do -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>What I Do</h2></div></div></div>
-                            <div class="row">
+                            <!-- Services / What I Do Section -->
+                            <div class="row reveal-on-scroll">
+                                <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>What I Do</h2></div></div>
+                            </div>
+                            <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="info-block-card">
                                         <h4>E-commerce Management</h4>
@@ -439,9 +521,11 @@
                                 </div>
                             </div>
 
-                            <!-- NEW SECTION: Tech Stack & Tools Grid -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-30"></div><div class="block-title"><h2>Tech Stack & Expertise</h2></div></div></div>
-                            <div class="row">
+                            <!-- Tech Stack & Tools Grid -->
+                            <div class="row reveal-on-scroll">
+                                <div class="col-xs-12 col-sm-12"><div class="p-30"></div><div class="block-title"><h2>Tech Stack & Expertise</h2></div></div>
+                            </div>
+                            <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12">
                                     <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px;">
                                         <h4 style="color: var(--text-light); margin-top: 0; font-size: 1.1rem;">E-commerce & Analytics</h4>
@@ -466,15 +550,54 @@
                                 </div>
                             </div>
 
-                            <!-- Highlights & Impact (Renamed from Random Numbers) -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>Impact & Key Highlights</h2></div></div></div>
-                            <div class="row" id="counter-section">
+                            <!-- NEW SECTION: Beyond Work / Hobbies & Engineering Projects -->
+                            <div class="row reveal-on-scroll">
+                                <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>Beyond Work</h2></div></div>
+                            </div>
+                            <div class="row reveal-on-scroll">
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="interest-card">
+                                        <h5>🛠️ 3D Printing & Firmware Customization</h5>
+                                        <p>Active 3D printing enthusiast running Klipper host environments for precision model manufacturing and custom hardware prototyping.</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="interest-card">
+                                        <h5>🚗 Automotive & Hardware Tinkering</h5>
+                                        <p>Passionate about hands-on mechanics, diagnosing electrical/mechanical vehicle systems, and automated micro-controllers.</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="interest-card">
+                                        <h5>☕ Specialty Coffee Crafting</h5>
+                                        <p>Dedicated to manual brewing techniques (V60, Cold Brew) and optimizing extraction ratios with engineering precision.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Highlights & Impact Section -->
+                            <div class="row reveal-on-scroll">
+                                <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>Impact & Key Highlights</h2></div></div>
+                            </div>
+                            <div class="row reveal-on-scroll" id="counter-section">
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Years of Experience</h4><span class="fun-fact-value">+<span class="counter" data-target="7">0</span></span></div></div>
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Products Managed</h4><span class="fun-fact-value">+<span class="counter" data-target="10">0</span>k</span></div></div>
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Migration Success Rate</h4><span class="fun-fact-value"><span class="counter" data-target="100">0</span>%</span></div></div>
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Coffee Cups Brewed</h4><span class="fun-fact-value"><span class="counter" id="coffee-counter" data-target="1286">0</span></span></div></div>
                             </div>
-                            <div class="p-30"></div>
+
+                            <!-- NEW SECTION: Call to Action (CTA) -->
+                            <div class="row reveal-on-scroll">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="cta-banner">
+                                        <h3>Ready to scale your e-commerce operations?</h3>
+                                        <p>Whether you're looking for platform migrations, technical SEO, or scalable web infrastructure, let's connect and build something impactful.</p>
+                                        <a href="contact.html" class="btn btn-custom-primary">Get in Touch</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-20"></div>
 
                         </div>
                     </div>
@@ -500,11 +623,11 @@
     </div>
 
     <!-- CV Modal Preview Window -->
-    <div id="cvModal" class="modal-overlay">
+    <div id="cvModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Resume Preview Modal">
         <div class="modal-content-wrapper">
             <div class="modal-header-bar">
                 <h4 style="margin: 0; color: #fff; font-size: 1.1rem;">Edrees Dahlan - Resume Preview</h4>
-                <button id="closeCvModal" class="modal-close-btn">&times;</button>
+                <button id="closeCvModal" class="modal-close-btn" aria-label="Close Preview Window">&times;</button>
             </div>
             <iframe src="Edrees_Dahlan_Resume.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
         </div>
@@ -532,16 +655,21 @@
                 });
             }
 
-            // 3. Modal Preview Handler
+            // 3. Modal Preview Handler (With ESC key support)
             const cvModal = document.getElementById('cvModal');
             const openBtn = document.getElementById('openCvModal');
             const closeBtn = document.getElementById('closeCvModal');
 
+            const closeModal = () => cvModal.style.display = 'none';
+
             if (openBtn && cvModal && closeBtn) {
                 openBtn.addEventListener('click', () => cvModal.style.display = 'flex');
-                closeBtn.addEventListener('click', () => cvModal.style.display = 'none');
+                closeBtn.addEventListener('click', closeModal);
                 cvModal.addEventListener('click', (e) => {
-                    if (e.target === cvModal) cvModal.style.display = 'none';
+                    if (e.target === cvModal) closeModal();
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && cvModal.style.display === 'flex') closeModal();
                 });
             }
 
@@ -553,9 +681,21 @@
                 coffeeCounter.setAttribute('data-target', Math.min(1286 + (diffDays * 2), 9999));
             }
 
-            // 5. Counter Animations via IntersectionObserver
+            // 5. Scroll Reveal Animations (IntersectionObserver)
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 6. Counter Animations
             const counters = document.querySelectorAll('.counter');
-            const observer = new IntersectionObserver((entries, observer) => {
+            const counterObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const counter = entry.target;
@@ -572,12 +712,12 @@
                             }
                         };
                         updateCount();
-                        observer.unobserve(counter);
+                        counterObserver.unobserve(counter);
                     }
                 });
             }, { threshold: 0.5 });
 
-            counters.forEach(c => observer.observe(c));
+            counters.forEach(c => counterObserver.observe(c));
         });
     </script>
 </body>
