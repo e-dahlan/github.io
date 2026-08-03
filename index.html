@@ -11,6 +11,7 @@
     
     <link rel="icon" type="image/png" href="./favicon.png">
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="./assets/owl.carousel.css" type="text/css">
@@ -32,10 +33,6 @@
             --border-hover: rgba(0, 122, 255, 0.5);
             --text-light: #f4f4f6;
             --text-muted: #8e8e93;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         html, body {
@@ -67,19 +64,19 @@
             box-sizing: border-box;
         }
 
-        /* تم تعديل الحاوية هنا لمنع ظهور زوايا سوداء وتحسين التوافق مع border-radius */
+        /* Fix for rounded corner issue */
         .page-container {
             max-width: 1300px;
             margin: 0 auto;
-            background: rgba(18, 18, 22, 0.85) !important;
+            background: rgba(18, 18, 22, 0.6) !important;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 24px !important;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+            overflow: hidden !important;
             position: relative;
             border: 1px solid var(--border-color) !important;
             isolation: isolate;
-            transform: translateZ(0); /* حل مشاكل الـ rendering في المتصفحات */
         }
 
         .site-main {
@@ -94,6 +91,7 @@
             margin-left: 0 !important;
         }
 
+        /* Flexbox Row for Equal Cards */
         .equal-height-row {
             display: flex;
             flex-wrap: wrap;
@@ -105,7 +103,7 @@
         }
 
         /* =========================================
-           2. Scroll Reveal Animations (Staggered)
+           2. Scroll Reveal Animations
            ========================================= */
         .reveal-on-scroll {
             opacity: 0;
@@ -120,19 +118,17 @@
         }
 
         /* =========================================
-           3. Glassmorphism Floating Header & Live Badge
+           3. Glassmorphism Floating Header
            ========================================= */
         .header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(14, 14, 18, 0.8) !important;
+            background: rgba(14, 14, 18, 0.7) !important;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             padding: 18px 40px;
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
         }
 
         .header .logo-symbol { 
@@ -151,36 +147,6 @@
             border-radius: 50%; 
             object-fit: cover; 
             box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
-        }
-
-        /* Live Availability Badge in Header or Subtitle */
-        .availability-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(37, 211, 102, 0.1);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #25D366;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .availability-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #25D366;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #25D366;
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         /* =========================================
@@ -226,9 +192,9 @@
         }
 
         /* =========================================
-           5. Ultra-Modern Cards & Spotlight Glow
+           5. Ultra-Modern Cards & Hover Glow
            ========================================= */
-        .info-block-card, .interest-card, .spotlight-card {
+        .info-block-card, .interest-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
@@ -248,7 +214,7 @@
             margin-bottom: 0;
         }
 
-        .info-block-card::after, .interest-card::after, .spotlight-card::after {
+        .info-block-card::after, .interest-card::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -258,13 +224,13 @@
             pointer-events: none;
         }
 
-        .info-block-card:hover, .interest-card:hover, .spotlight-card:hover {
+        .info-block-card:hover, .interest-card:hover {
             transform: translateY(-6px);
             border-color: var(--border-hover);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--accent-rgb), 0.15);
         }
 
-        .info-block-card:hover::after, .interest-card:hover::after, .spotlight-card:hover::after {
+        .info-block-card:hover::after, .interest-card:hover::after {
             opacity: 1;
         }
 
@@ -379,7 +345,7 @@
         }
 
         /* =========================================
-           9. Uniform Buttons Layout & Styling
+           9. Uniform Buttons Layout & Styling (Fixed Height Alignment)
            ========================================= */
         .home-buttons-wrapper {
             margin-top: 28px;
@@ -445,6 +411,7 @@
             transform: translateY(-2px);
         }
 
+        /* Responsive Fix for Buttons on Mobile */
         @media (max-width: 768px) {
             .home-buttons-wrapper {
                 flex-wrap: wrap;
@@ -454,9 +421,7 @@
             }
         }
 
-        /* =========================================
-           10. Modal Overlay & Loading Spinner
-           ========================================= */
+        /* Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -466,13 +431,6 @@
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(12px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
         }
 
         .modal-content-wrapper {
@@ -486,13 +444,6 @@
             flex-direction: column;
             border: 1px solid var(--border-color);
             box-shadow: 0 25px 50px rgba(0,0,0,0.9);
-            position: relative;
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .modal-overlay.active .modal-content-wrapper {
-            transform: scale(1);
         }
 
         .modal-header-bar {
@@ -508,81 +459,11 @@
             background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer;
         }
 
-        .pdf-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #1a1a1e;
-        }
-
-        .pdf-loader {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #141418;
-            color: var(--text-muted);
-            gap: 12px;
-            z-index: 2;
-            transition: opacity 0.3s ease;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--accent-glow);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* =========================================
-           11. Back to Top Button
-           ========================================= */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 45px;
-            height: 45px;
-            background: rgba(22, 22, 26, 0.9);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 900;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            border-color: var(--accent-glow);
-            background: rgba(var(--accent-rgb), 0.2);
-            transform: translateY(-3px);
-        }
-
-        /* تم إصلاح زوايا الفوتر لتتطابق بنسبة 100% مع الحاوية الرئيسية وتحافظ على الحواف الناعمة */
+        /* Footer Radius Reset Fix */
         .site-footer {
             border-top: 1px solid var(--border-color) !important;
             padding: 25px 40px !important;
-            background: rgba(14, 14, 18, 0.6) !important;
+            background: transparent !important;
             border-bottom-left-radius: 24px !important;
             border-bottom-right-radius: 24px !important;
         }
@@ -599,6 +480,7 @@
     <div class="page-scroll">
         <div id="page_container" class="page-container">
 
+            <!-- Glass Floating Header -->
             <header id="site_header" class="header">
                 <div class="header-content clearfix">
                     <div class="text-logo">
@@ -610,6 +492,7 @@
                         </a>
                     </div>
 
+                    <!-- Navigation Menu -->
                     <div class="site-nav mobile-menu-hide">
                         <ul class="leven-classic-menu site-main-menu">
                             <li class="menu-item current-menu-item"><a href="index.html">About Me</a></li>
@@ -627,6 +510,7 @@
                     <div id="primary" class="content-area"> 
                         <div id="content" class="page-content site-content single-post" role="main">
                             
+                            <!-- Hero Section -->
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="home-content">
@@ -639,15 +523,12 @@
 
                                             <div class="col-sm-12 col-md-7 col-lg-7">
                                                 <div class="home-text hp-left">
-                                                    <div class="availability-badge">
-                                                        <span class="availability-dot"></span>
-                                                        Available for opportunities
-                                                    </div>
                                                     <h4 style="color: var(--accent-glow); font-weight: 600; letter-spacing: 0.03em;">Computer Engineer &nbsp;|&nbsp; E-commerce Manager</h4>
                                                     <h1 style="font-weight: 800; font-size: 2.8rem; letter-spacing: -0.02em;">EDREES DAHLAN</h1>
                                                     <h5 style="color: var(--text-muted); margin-bottom: 22px; font-weight: 400;">Dammam · Eastern Region, Saudi Arabia · <a href="mailto:e.dahlan@gmail.com" style="color: #e5e5ea;" aria-label="Send an email">e.dahlan@gmail.com</a></h5>
                                                     <p style="color: var(--text-muted); font-size: 1.08rem; line-height: 1.75;">Highly analytical and data-driven E-commerce Manager effectively scaling online customer acquisition efforts and e-commerce capabilities to drive sustainable sales growth. Expert in e-commerce consumer behavior, web analytics, hardware integrations, and backend operational workflows.</p>
                                                     
+                                                    <!-- Aligned & Uniform Buttons -->
                                                     <div class="home-buttons-wrapper">
                                                         <button id="openCvModal" class="btn btn-custom-primary">
                                                             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -668,6 +549,7 @@
                                 </div>
                             </div>
 
+                            <!-- What I Do Section -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2 style="font-weight: 700;">What I Do</h2></div></div>
                             </div>
@@ -694,12 +576,13 @@
                                 </div>
                             </div>
 
+                            <!-- Tech Stack Grid -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12"><div class="p-30"></div><div class="block-title"><h2 style="font-weight: 700;">Tech Stack & Expertise</h2></div></div>
                             </div>
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12">
-                                    <div class="spotlight-card" style="padding: 30px;">
+                                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px);">
                                         <h4 style="color: var(--text-light); margin-top: 0; font-size: 1.1rem; font-weight: 600;">E-commerce & Analytics</h4>
                                         <div class="tech-badge-container">
                                             <span class="tech-badge">Magento / Adobe Commerce</span>
@@ -722,6 +605,7 @@
                                 </div>
                             </div>
 
+                            <!-- Beyond Work / Personal Hobbies (Equal Height Cards) -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2 style="font-weight: 700;">Beyond Work</h2></div></div>
                             </div>
@@ -746,6 +630,7 @@
                                 </div>
                             </div>
 
+                            <!-- Highlights & Numbers -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2 style="font-weight: 700;">Impact & Key Highlights</h2></div></div>
                             </div>
@@ -756,6 +641,7 @@
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Coffee Cups Brewed</h4><span class="fun-fact-value"><span class="counter" id="coffee-counter" data-target="1286">0</span></span></div></div>
                             </div>
 
+                            <!-- CTA Banner -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="cta-banner">
@@ -773,6 +659,7 @@
                 </div>
             </div>
 
+            <!-- Footer -->
             <footer class="site-footer clearfix">
                 <div class="footer-social">
                     <ul class="footer-social-links">
@@ -790,26 +677,18 @@
         </div>
     </div>
 
-    <button id="backToTop" class="back-to-top" aria-label="Back to top">
-        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
-    </button>
-
+    <!-- CV Modal -->
     <div id="cvModal" class="modal-overlay" role="dialog" aria-modal="true">
         <div class="modal-content-wrapper">
             <div class="modal-header-bar">
                 <h4 style="margin: 0; color: #fff; font-size: 1.1rem; font-weight: 600;">Edrees Dahlan - Resume Preview</h4>
                 <button id="closeCvModal" class="modal-close-btn" aria-label="Close">&times;</button>
             </div>
-            <div class="pdf-container">
-                <div id="pdfLoader" class="pdf-loader">
-                    <div class="spinner"></div>
-                    <span>Loading CV Preview...</span>
-                </div>
-                <iframe id="pdfIframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
-            </div>
+            <iframe src="Edrees_Dahlan_Resume.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="./assets/jquery-2.1.3.min.js.download"></script>
     <script src="./assets/bootstrap.min.js.download"></script>
     <script src="./assets/owl.carousel.min.js.download"></script>
@@ -829,3 +708,76 @@
                     e.preventDefault();
                     siteNav.classList.toggle('mobile-menu-hide');
                 });
+            }
+
+            // Interactive Mouse Spotlight Effect on Cards
+            document.querySelectorAll('.info-block-card, .interest-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+            });
+
+            // CV Modal Preview
+            const cvModal = document.getElementById('cvModal');
+            const openBtn = document.getElementById('openCvModal');
+            const closeBtn = document.getElementById('closeCvModal');
+            const closeModal = () => cvModal.style.display = 'none';
+
+            if (openBtn && cvModal && closeBtn) {
+                openBtn.addEventListener('click', () => cvModal.style.display = 'flex');
+                closeBtn.addEventListener('click', closeModal);
+                cvModal.addEventListener('click', (e) => { if (e.target === cvModal) closeModal(); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cvModal.style.display === 'flex') closeModal(); });
+            }
+
+            // Dynamic Coffee Counter Calculation
+            const coffeeCounter = document.getElementById('coffee-counter');
+            if (coffeeCounter) {
+                const startDate = new Date('2026-07-13T00:00:00'); 
+                const diffDays = Math.floor(Math.abs(new Date() - startDate) / (1000 * 60 * 60 * 24)); 
+                coffeeCounter.setAttribute('data-target', Math.min(1286 + (diffDays * 2), 9999));
+            }
+
+            // Scroll Reveal Observer
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Numbers Counter Animation
+            const counters = document.querySelectorAll('.counter');
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        const speed = target / 40; 
+
+                        const updateCount = () => {
+                            const count = +counter.innerText;
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + speed);
+                                setTimeout(updateCount, 25);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(c => counterObserver.observe(c));
+        });
+    </script>
+</body>
+</html>
