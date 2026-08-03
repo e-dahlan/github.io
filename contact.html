@@ -3,16 +3,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <title>Edrees Dahlan - Contact</title>
+    <title>Edrees Dahlan - Resume</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Get in touch with Edrees Dahlan for opportunities in E-commerce and IT.">
+    <meta name="description" content="Professional resume of Edrees Dahlan, E-commerce supervisor and IT specialist.">
     <meta name="author" content="Edrees Dahlan">
 
     <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - Contact">
-    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows.">
+    <meta property="og:title" content="Edrees Dahlan - Resume">
+    <meta property="og:description" content="Professional resume of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows.">
     <meta property="og:image" content="./img/main_photo.jpg">
-    <meta property="og:url" content="https://yourwebsite.com/contact.html">
+    <meta property="og:url" content="https://yourwebsite.com/resume.html">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
@@ -38,31 +38,29 @@
         .header .logo-symbol img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
         .menu-toggle { font-size: 2rem; color: #eeeeee; text-decoration: none !important; display: flex; align-items: center; justify-content: center; }
 
-        /* 3. Contact Components */
-        .lm-info-block { padding: 20px !important; text-align: center; border-radius: 10px; margin-bottom: 20px; transition: transform 0.3s ease; background-color: #2a2a2a !important; border: 1px solid #333333; }
-        .lm-info-block:hover { transform: translateY(-3px); }
-        .lm-info-block h4 { color: #eeeeee !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
-        .lm-info-block h4 a { color: #eeeeee !important; text-decoration: none; }
-        .lm-info-block-text { color: #a4b0be !important; display: block; }
+        /* 3. Resume Components */
+        .block-title h2, .block-title h3 { color: #eeeeee !important; }
+        
+        /* Timeline / Experience Items */
+        .timeline { border-left: 2px solid #333333; margin-left: 10px; padding-left: 20px; }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before { content: ''; position: absolute; left: -26px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background-color: #d3d3d3; border: 2px solid #222222; }
+        .item-period { font-size: 0.85rem; color: #a4b0be !important; margin-bottom: 5px; font-weight: 600; }
+        .item-title { font-size: 1.1rem; color: #eeeeee !important; margin-bottom: 5px; font-weight: 700; }
+        .item-details { font-size: 0.9rem; color: #888888 !important; margin-bottom: 10px; }
+        .item-description { color: #cccccc !important; font-size: 0.95rem; line-height: 1.6; }
 
-        /* WhatsApp Block Color */
-        .custom-whatsapp-block { background-color: rgba(37, 211, 102, 0.1) !important; border: 1px solid #25D366 !important; }
-        .custom-whatsapp-block h4 { color: #25D366 !important; }
-        .custom-whatsapp-block h4 a { color: #25D366 !important; }
-        .custom-whatsapp-block .lm-info-block-text { color: #25D366 !important; opacity: 0.8; }
+        /* Skills Progress Bars */
+        .skill-container { margin-bottom: 20px; }
+        .skill-title { color: #eeeeee !important; font-size: 0.95rem; margin-bottom: 8px; display: block; }
+        .skill-percentage { float: right; color: #a4b0be !important; }
+        .skill-progress-bar { width: 100%; background-color: #1a1a1a; border-radius: 4px; height: 8px; overflow: hidden; border: 1px solid #333333; }
+        .skill-value { height: 100%; background-color: #d3d3d3; border-radius: 4px; }
 
-        /* LinkedIn Block Color */
-        .custom-linkedin-block { background-color: rgba(0, 119, 181, 0.1) !important; border: 1px solid #0077b5 !important; }
-        .custom-linkedin-block h4 { color: #0077b5 !important; }
-        .custom-linkedin-block h4 a { color: #0077b5 !important; }
-        .custom-linkedin-block .lm-info-block-text { color: #0077b5 !important; opacity: 0.8; }
-
-        /* Form Styling */
-        .form-control { background-color: #1a1a1a !important; border: 1px solid #333333 !important; color: #eeeeee !important; border-radius: 8px; }
-        .form-control::placeholder { color: #666666 !important; }
-        .form-control:focus { border-color: #555555 !important; box-shadow: none; outline: none; }
-        .btn-send { background-color: #d3d3d3 !important; color: #222222 !important; border: none !important; padding: 10px 30px; border-radius: 30px; font-weight: 600; }
-        .btn-send:hover { background-color: #b0b0b0 !important; cursor: pointer; }
+        /* Download CV Button */
+        .btn-cv { background-color: #d3d3d3 !important; color: #222222 !important; border: none !important; padding: 10px 30px; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-block; margin-top: 20px; transition: background-color 0.3s; }
+        .btn-cv:hover { background-color: #b0b0b0 !important; color: #111111 !important; text-decoration: none; }
 
         @media (max-width: 767px) {
             .page-container { max-width: 100% !important; width: 100% !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
@@ -90,8 +88,8 @@
                     <div class="site-nav mobile-menu-hide">
                         <ul class="leven-classic-menu site-main-menu">
                             <li class="menu-item"><a href="index.html">About Me</a></li>
-                            <li class="menu-item"><a href="resume.html">Resume</a></li>
-                            <li class="menu-item current-menu-item"><a href="contact.html">Contact</a></li>
+                            <li class="menu-item current-menu-item"><a href="resume.html">Resume</a></li>
+                            <li class="menu-item"><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
                     <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
@@ -105,64 +103,73 @@
                             
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
-                                    <div class="block-title"><h2>Contact</h2></div>
+                                    <div class="block-title"><h2>Resume</h2></div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-12 col-sm-4">
-                                    <!-- Location -->
-                                    <div class="lm-info-block">
-                                        <h4>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                                            Dammam
-                                        </h4>
-                                        <span class="lm-info-block-text">Eastern Region, Saudi Arabia</span>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="lm-info-block">
-                                        <h4>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                                            <a href="mailto:e.dahlan@gmail.com">e.dahlan@gmail.com</a>
-                                        </h4>
-                                        <span class="lm-info-block-text">Drop me an email anytime</span>
-                                    </div>
-
-                                    <!-- WhatsApp Block -->
-                                    <div class="lm-info-block custom-whatsapp-block">
-                                        <h4>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.591 5.52 0 10.002-4.48 10.002-10.002S17.57 2.001 12.05 2.001c-5.52 0-10.002 4.48-10.002 10.002 0 2.223.719 4.382 2.072 6.168l-1.345 4.912 4.822-1.266z"/></svg>
-                                            <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer">+966 56 832 9898</a>
-                                        </h4>
-                                        <span class="lm-info-block-text">Instant Chat Available</span>
-                                    </div>
-
-                                    <!-- LinkedIn Block -->
-                                    <div class="lm-info-block custom-linkedin-block">
-                                        <h4>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                                            <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
-                                        </h4>
-                                        <span class="lm-info-block-text">Let's connect</span>
+                                <!-- Experience -->
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="block-title"><h3>Experience</h3></div>
+                                    <div class="timeline">
+                                        <div class="timeline-item">
+                                            <div class="item-period">2024 — Present</div>
+                                            <div class="item-title">E-commerce Supervisor</div>
+                                            <div class="item-details">Albawardi Tools & Hardware</div>
+                                            <div class="item-description">Managing the online storefront (albawarditools.com) across Magento and WooCommerce architectures, optimizing technical workflows, and handling backend integration procedures (Cart2Cart, MageMe extensions).</div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="item-period">Previous</div>
+                                            <div class="item-title">Tools & Hardware Department Specialist</div>
+                                            <div class="item-details">SACO</div>
+                                            <div class="item-description">Provided specialized technical guidance, inventory handling, and customer consultation regarding heavy hardware machinery, power tools, and mechanical equipment.</div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-8">
-                                    <div class="block-title"><h3>How Can I Help You?</h3></div>
-                                    
-                                    <form id="contact_form" class="contact-form" action="https://formspree.io/f/meeyqadj" method="post">
-                                        <div class="messages"></div>
-                                        <div class="controls">
-                                            <div class="form-group"><input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required"></div>
-                                            <div class="form-group"><input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required"></div>
-                                            <div class="form-group"><input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required"></div>
-                                            <div class="form-group"><textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required"></textarea></div>
-                                            <input type="submit" class="button btn-send" value="Send message">
+                                <!-- Education -->
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="block-title"><h3>Education</h3></div>
+                                    <div class="timeline">
+                                        <div class="timeline-item">
+                                            <div class="item-period">Background & Core Studies</div>
+                                            <div class="item-title">Information Technology & Operations</div>
+                                            <div class="item-details">Professional Track</div>
+                                            <div class="item-description">Continuous hands-on specialization in enterprise e-commerce platforms, server-side management, and hardware infrastructure systems.</div>
                                         </div>
-                                    </form>
+                                    </div>
+
+                                    <div class="block-title" style="margin-top: 40px;"><h3>Download</h3></div>
+                                    <a href="#" class="btn-cv" target="_blank" rel="noopener noreferrer">Download Curriculum Vitae</a>
                                 </div>
                             </div>
+
+                            <div class="row" style="margin-top: 40px;">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="block-title"><h3>Professional Skills</h3></div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="skill-container">
+                                        <span class="skill-title">E-Commerce Management (Magento / WooCommerce)<span class="skill-percentage">95%</span></span>
+                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 95%;"></div></div>
+                                    </div>
+                                    <div class="skill-container">
+                                        <span class="skill-title">Technical Operations & Workflows<span class="skill-percentage">90%</span></span>
+                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 90%;"></div></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="skill-container">
+                                        <span class="skill-title">Hardware & Tools Diagnostics<span class="skill-percentage">90%</span></span>
+                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 90%;"></div></div>
+                                    </div>
+                                    <div class="skill-container">
+                                        <span class="skill-title">System Integration & Automation<span class="skill-percentage">85%</span></span>
+                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 85%;"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
