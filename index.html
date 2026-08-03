@@ -345,7 +345,7 @@
         }
 
         /* =========================================
-           9. Uniform Buttons Layout & Styling
+           9. Uniform Buttons Layout & Styling (Fixed Height Alignment)
            ========================================= */
         .home-buttons-wrapper {
             margin-top: 28px;
@@ -356,18 +356,20 @@
         }
 
         .home-buttons-wrapper .btn {
-            height: 46px;
-            padding: 0 22px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            border-radius: 10px;
-            white-space: nowrap;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
+            height: 48px !important;
+            padding: 0 22px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            font-size: 0.92rem !important;
+            font-weight: 600 !important;
+            border-radius: 12px !important;
+            white-space: nowrap !important;
+            box-sizing: border-box !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+            transition: all 0.3s ease !important;
         }
 
         .btn-custom-primary { 
@@ -415,7 +417,7 @@
                 flex-wrap: wrap;
             }
             .home-buttons-wrapper .btn {
-                width: 100%;
+                width: 100% !important;
             }
         }
 
