@@ -35,6 +35,10 @@
             --text-muted: #8e8e93;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         html, body {
             margin: 0;
             padding: 0;
@@ -64,7 +68,6 @@
             box-sizing: border-box;
         }
 
-        /* Fix for rounded corner issue */
         .page-container {
             max-width: 1300px;
             margin: 0 auto;
@@ -91,7 +94,6 @@
             margin-left: 0 !important;
         }
 
-        /* Flexbox Row for Equal Cards */
         .equal-height-row {
             display: flex;
             flex-wrap: wrap;
@@ -103,7 +105,7 @@
         }
 
         /* =========================================
-           2. Scroll Reveal Animations
+           2. Scroll Reveal Animations (Staggered)
            ========================================= */
         .reveal-on-scroll {
             opacity: 0;
@@ -118,7 +120,7 @@
         }
 
         /* =========================================
-           3. Glassmorphism Floating Header
+           3. Glassmorphism Floating Header & Live Badge
            ========================================= */
         .header {
             position: sticky;
@@ -147,6 +149,36 @@
             border-radius: 50%; 
             object-fit: cover; 
             box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
+        }
+
+        /* Live Availability Badge in Header or Subtitle */
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #25D366;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .availability-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #25D366;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         /* =========================================
@@ -192,9 +224,9 @@
         }
 
         /* =========================================
-           5. Ultra-Modern Cards & Hover Glow
+           5. Ultra-Modern Cards & Spotlight Glow
            ========================================= */
-        .info-block-card, .interest-card {
+        .info-block-card, .interest-card, .spotlight-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
@@ -214,7 +246,7 @@
             margin-bottom: 0;
         }
 
-        .info-block-card::after, .interest-card::after {
+        .info-block-card::after, .interest-card::after, .spotlight-card::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -224,13 +256,13 @@
             pointer-events: none;
         }
 
-        .info-block-card:hover, .interest-card:hover {
+        .info-block-card:hover, .interest-card:hover, .spotlight-card:hover {
             transform: translateY(-6px);
             border-color: var(--border-hover);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--accent-rgb), 0.15);
         }
 
-        .info-block-card:hover::after, .interest-card:hover::after {
+        .info-block-card:hover::after, .interest-card:hover::after, .spotlight-card:hover::after {
             opacity: 1;
         }
 
@@ -345,7 +377,7 @@
         }
 
         /* =========================================
-           9. Uniform Buttons Layout & Styling (Fixed Height Alignment)
+           9. Uniform Buttons Layout & Styling
            ========================================= */
         .home-buttons-wrapper {
             margin-top: 28px;
@@ -411,7 +443,6 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Fix for Buttons on Mobile */
         @media (max-width: 768px) {
             .home-buttons-wrapper {
                 flex-wrap: wrap;
@@ -421,7 +452,9 @@
             }
         }
 
-        /* Modal Overlay */
+        /* =========================================
+           10. Modal Overlay & Loading Spinner
+           ========================================= */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -431,6 +464,13 @@
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(12px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
         }
 
         .modal-content-wrapper {
@@ -444,6 +484,13 @@
             flex-direction: column;
             border: 1px solid var(--border-color);
             box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal-content-wrapper {
+            transform: scale(1);
         }
 
         .modal-header-bar {
@@ -457,6 +504,76 @@
 
         .modal-close-btn {
             background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer;
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1e;
+        }
+
+        .pdf-loader {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #141418;
+            color: var(--text-muted);
+            gap: 12px;
+            z-index: 2;
+            transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent-glow);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* =========================================
+           11. Back to Top Button
+           ========================================= */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: rgba(22, 22, 26, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            border-color: var(--accent-glow);
+            background: rgba(var(--accent-rgb), 0.2);
+            transform: translateY(-3px);
         }
 
         /* Footer Radius Reset Fix */
@@ -523,6 +640,10 @@
 
                                             <div class="col-sm-12 col-md-7 col-lg-7">
                                                 <div class="home-text hp-left">
+                                                    <div class="availability-badge">
+                                                        <span class="availability-dot"></span>
+                                                        Available for opportunities
+                                                    </div>
                                                     <h4 style="color: var(--accent-glow); font-weight: 600; letter-spacing: 0.03em;">Computer Engineer &nbsp;|&nbsp; E-commerce Manager</h4>
                                                     <h1 style="font-weight: 800; font-size: 2.8rem; letter-spacing: -0.02em;">EDREES DAHLAN</h1>
                                                     <h5 style="color: var(--text-muted); margin-bottom: 22px; font-weight: 400;">Dammam · Eastern Region, Saudi Arabia · <a href="mailto:e.dahlan@gmail.com" style="color: #e5e5ea;" aria-label="Send an email">e.dahlan@gmail.com</a></h5>
@@ -576,13 +697,13 @@
                                 </div>
                             </div>
 
-                            <!-- Tech Stack Grid -->
+                            <!-- Tech Stack Grid (Spotlight Enabled) -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12"><div class="p-30"></div><div class="block-title"><h2 style="font-weight: 700;">Tech Stack & Expertise</h2></div></div>
                             </div>
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12">
-                                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px);">
+                                    <div class="spotlight-card" style="padding: 30px;">
                                         <h4 style="color: var(--text-light); margin-top: 0; font-size: 1.1rem; font-weight: 600;">E-commerce & Analytics</h4>
                                         <div class="tech-badge-container">
                                             <span class="tech-badge">Magento / Adobe Commerce</span>
@@ -605,7 +726,7 @@
                                 </div>
                             </div>
 
-                            <!-- Beyond Work / Personal Hobbies (Equal Height Cards) -->
+                            <!-- Beyond Work / Personal Hobbies -->
                             <div class="row reveal-on-scroll">
                                 <div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2 style="font-weight: 700;">Beyond Work</h2></div></div>
                             </div>
@@ -677,14 +798,25 @@
         </div>
     </div>
 
-    <!-- CV Modal -->
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <!-- CV Modal with Loading Spinner -->
     <div id="cvModal" class="modal-overlay" role="dialog" aria-modal="true">
         <div class="modal-content-wrapper">
             <div class="modal-header-bar">
                 <h4 style="margin: 0; color: #fff; font-size: 1.1rem; font-weight: 600;">Edrees Dahlan - Resume Preview</h4>
                 <button id="closeCvModal" class="modal-close-btn" aria-label="Close">&times;</button>
             </div>
-            <iframe src="Edrees_Dahlan_Resume.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            <div class="pdf-container">
+                <div id="pdfLoader" class="pdf-loader">
+                    <div class="spinner"></div>
+                    <span>Loading CV Preview...</span>
+                </div>
+                <iframe id="pdfIframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
         </div>
     </div>
 
@@ -711,26 +843,59 @@
             }
 
             // Interactive Mouse Spotlight Effect on Cards
-            document.querySelectorAll('.info-block-card, .interest-card').forEach(card => {
+            document.querySelectorAll('.info-block-card, .interest-card, .spotlight-card').forEach(card => {
                 card.addEventListener('mousemove', e => {
                     const rect = card.getBoundingClientRect();
                     card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                    card.style.setProperty('--mouse-y`, `${e.clientY - rect.top}px`);
                 });
             });
 
-            // CV Modal Preview
+            // CV Modal Preview & Loading Handling
             const cvModal = document.getElementById('cvModal');
             const openBtn = document.getElementById('openCvModal');
             const closeBtn = document.getElementById('closeCvModal');
-            const closeModal = () => cvModal.style.display = 'none';
+            const pdfIframe = document.getElementById('pdfIframe');
+            const pdfLoader = document.getElementById('pdfLoader');
+
+            const openModal = () => {
+                cvModal.classList.add('active');
+                pdfLoader.style.opacity = '1';
+                if (!pdfIframe.src || pdfIframe.src === window.location.href) {
+                    pdfIframe.src = "Edrees_Dahlan_Resume.pdf";
+                }
+            };
+
+            const closeModal = () => {
+                cvModal.classList.remove('active');
+            };
+
+            if (pdfIframe) {
+                pdfIframe.addEventListener('load', () => {
+                    pdfLoader.style.opacity = '0';
+                });
+            }
 
             if (openBtn && cvModal && closeBtn) {
-                openBtn.addEventListener('click', () => cvModal.style.display = 'flex');
+                openBtn.addEventListener('click', openModal);
                 closeBtn.addEventListener('click', closeModal);
                 cvModal.addEventListener('click', (e) => { if (e.target === cvModal) closeModal(); });
-                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cvModal.style.display === 'flex') closeModal(); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cvModal.classList.contains('active')) closeModal(); });
             }
+
+            // Back to Top Button Logic
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
             // Dynamic Coffee Counter Calculation
             const coffeeCounter = document.getElementById('coffee-counter');
