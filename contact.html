@@ -1,213 +1,719 @@
 <!DOCTYPE html>
-<html lang="en" class="js no-touch cssanimations csstransforms csstransforms3d csstransitions">
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <title>Edrees Dahlan - Resume</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Professional resume of Edrees Dahlan, E-commerce supervisor and IT specialist.">
-    <meta name="author" content="Edrees Dahlan">
-
-    <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - Resume">
-    <meta property="og:description" content="Professional resume of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows.">
-    <meta property="og:image" content="./img/main_photo.jpg">
-    <meta property="og:url" content="https://yourwebsite.com/resume.html">
-    <meta property="og:type" content="website">
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contact - Edrees Dahlan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Edrees Dahlan - E-commerce Manager and Computer Engineer.">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./favicon.png">
 
-    <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
-    <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./assets/main.css" type="text/css">
-    
-    <script src="./assets/modernizr.custom.js.download"></script>
-    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* 1. Card Layout and Container Styles */
-        html, body { margin: 0; padding: 0; background-color: #111111 !important; }
-        .page-scroll { width: 100%; padding: 40px 20px; box-sizing: border-box; }
-        .page-container { max-width: 1350px; margin: 0 auto; background: #222222 !important; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important; overflow: hidden !important; position: relative; }
-        .site-main { width: 100% !important; padding: 20px; box-sizing: border-box; }
-        .row { margin-right: 0 !important; margin-left: 0 !important; }
+        :root {
+            --bg-base: #020617;
+            --panel-bg: rgba(15, 23, 42, 0.7);
+            --neon-blue: #38bdf8;
+            --neon-purple: #c084fc;
+            --neon-pink: #f472b6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --whatsapp: #22c55e;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-        /* 2. Visual Elements */
-        .lm-animated-bg { background-image: none !important; background-color: transparent !important; }
-        .header .logo-symbol { background-color: transparent !important; border: none !important; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .header .logo-symbol img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .menu-toggle { font-size: 2rem; color: #eeeeee; text-decoration: none !important; display: flex; align-items: center; justify-content: center; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        /* 3. Resume Components */
-        .block-title h2, .block-title h3 { color: #eeeeee !important; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Interactive Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Custom Cursor Light Spot */
+        .cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(192, 132, 252, 0.05) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            filter: blur(50px);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        /* Main Holographic Wrapper */
+        .main-wrapper {
+            width: 100%;
+            max-width: 1180px;
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 36px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            overflow: hidden;
+            position: relative;
+            animation: heroEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes heroEntrance {
+            0% { opacity: 0; transform: translateY(40px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Header / Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(15, 23, 42, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-symbol {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            transition: var(--transition);
+        }
+
+        .logo-symbol:hover {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.7);
+        }
+
+        .logo-symbol img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 22px;
+            border-radius: 40px;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        nav ul li.current-menu-item a,
+        nav ul li a:hover {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-container {
+            padding: 65px 48px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent);
+        }
+
+        /* Services/Contact Cards Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 70px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.012);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 34px;
+            border-radius: 24px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(700px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(56, 189, 248, 0.12), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .service-icon {
+            width: 54px;
+            height: 54px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-blue);
+            font-size: 1.35rem;
+            margin-bottom: 22px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            transition: var(--transition);
+        }
         
-        /* Timeline / Experience Items */
-        .timeline { border-left: 2px solid #333333; margin-left: 10px; padding-left: 20px; }
-        .timeline-item { position: relative; margin-bottom: 30px; }
-        .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-item::before { content: ''; position: absolute; left: -26px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background-color: #d3d3d3; border: 2px solid #222222; }
-        .item-period { font-size: 0.85rem; color: #a4b0be !important; margin-bottom: 5px; font-weight: 600; }
-        .item-title { font-size: 1.1rem; color: #eeeeee !important; margin-bottom: 5px; font-weight: 700; }
-        .item-details { font-size: 0.9rem; color: #888888 !important; margin-bottom: 10px; }
-        .item-description { color: #cccccc !important; font-size: 0.95rem; line-height: 1.6; }
+        .whatsapp-icon {
+            color: var(--whatsapp);
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.25);
+        }
 
-        /* Skills Progress Bars */
-        .skill-container { margin-bottom: 20px; }
-        .skill-title { color: #eeeeee !important; font-size: 0.95rem; margin-bottom: 8px; display: block; }
-        .skill-percentage { float: right; color: #a4b0be !important; }
-        .skill-progress-bar { width: 100%; background-color: #1a1a1a; border-radius: 4px; height: 8px; overflow: hidden; border: 1px solid #333333; }
-        .skill-value { height: 100%; background-color: #d3d3d3; border-radius: 4px; }
+        .service-card:hover .service-icon {
+            background: var(--neon-blue);
+            color: #020617;
+            transform: scale(1.15) rotate(6deg);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+        }
 
-        /* Download CV Button */
-        .btn-cv { background-color: #d3d3d3 !important; color: #222222 !important; border: none !important; padding: 10px 30px; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-block; margin-top: 20px; transition: background-color 0.3s; }
-        .btn-cv:hover { background-color: #b0b0b0 !important; color: #111111 !important; text-decoration: none; }
+        .service-card:hover .whatsapp-icon {
+            background: var(--whatsapp);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.6);
+        }
 
-        @media (max-width: 767px) {
-            .page-container { max-width: 100% !important; width: 100% !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
-            .page-scroll { padding: 0 !important; }
+        .service-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Terminal Container (used for Form) */
+        .terminal-container {
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 22px;
+            margin-bottom: 70px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .terminal-header {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #22c55e; }
+
+        .terminal-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Custom Form Styles inside Terminal */
+        .contact-form-body {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-purple);
+            font-weight: 600;
+        }
+
+        .custom-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .custom-input:focus {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        textarea.custom-input {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 30px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+            margin-top: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 48px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(15, 23, 42, 0.6);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            list-style: none;
+            gap: 14px;
+        }
+
+        .footer-social-links a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-social-links a:hover {
+            background: #0a66c2;
+            color: #ffffff;
+            border-color: #0a66c2;
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 12px 25px rgba(10, 102, 194, 0.5);
+        }
+
+        .footer-copyrights p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .cursor-glow { display: none; }
+            .main-wrapper {
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
+            header { padding: 20px; }
+            .content-container { padding: 40px 20px; }
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 20px;
+            }
+            nav.active { display: block; }
+            nav ul {
+                flex-direction: column;
+                background: transparent;
+                border: none;
+                padding: 0;
+            }
+            nav ul li a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .menu-toggle { display: flex; }
+            footer {
+                padding: 24px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-form-body { padding: 25px; }
         }
     </style>
 </head>
+<body>
 
-<body class="page">
-    <div class="lm-animated-bg"></div>
+    <!-- Interactive Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="page-scroll">
-        <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right">
+    <!-- Cursor Follower Light -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
-            <!-- Header -->
-            <header id="site_header" class="header">
-                <div class="header-content clearfix">
-                    <div class="text-logo">
-                        <a href="index.html" aria-label="Go to Homepage">
-                            <div class="logo-symbol"><img src="./favicon.png" alt="Logo"></div>
-                            <div class="logo-text">Edrees <span>Dahlan</span></div>
-                        </a>
-                    </div>
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-area">
+                <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
+                <div class="logo-text">Edrees <span>Dahlan</span></div>
+            </a>
 
-                    <div class="site-nav mobile-menu-hide">
-                        <ul class="leven-classic-menu site-main-menu">
-                            <li class="menu-item"><a href="index.html">About Me</a></li>
-                            <li class="menu-item current-menu-item"><a href="resume.html">Resume</a></li>
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
-                </div>
-            </header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">About Me</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li class="current-menu-item"><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
 
-            <div id="main" class="site-main">
-                <div id="main-content" class="single-page-content">
-                    <div id="primary" class="content-area"> 
-                        <div id="content" class="page-content site-content single-post" role="main">
-                            
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="block-title"><h2>Resume</h2></div>
-                                </div>
-                            </div>
+            <button class="menu-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </header>
 
-                            <div class="row">
-                                <!-- Experience -->
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="block-title"><h3>Experience</h3></div>
-                                    <div class="timeline">
-                                        <div class="timeline-item">
-                                            <div class="item-period">2024 — Present</div>
-                                            <div class="item-title">E-commerce Supervisor</div>
-                                            <div class="item-details">Albawardi Tools & Hardware</div>
-                                            <div class="item-description">Managing the online storefront (albawarditools.com) across Magento and WooCommerce architectures, optimizing technical workflows, and handling backend integration procedures (Cart2Cart, MageMe extensions).</div>
-                                        </div>
-                                        <div class="timeline-item">
-                                            <div class="item-period">Previous</div>
-                                            <div class="item-title">Tools & Hardware Department Specialist</div>
-                                            <div class="item-details">SACO</div>
-                                            <div class="item-description">Provided specialized technical guidance, inventory handling, and customer consultation regarding heavy hardware machinery, power tools, and mechanical equipment.</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Education -->
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="block-title"><h3>Education</h3></div>
-                                    <div class="timeline">
-                                        <div class="timeline-item">
-                                            <div class="item-period">Background & Core Studies</div>
-                                            <div class="item-title">Information Technology & Operations</div>
-                                            <div class="item-details">Professional Track</div>
-                                            <div class="item-description">Continuous hands-on specialization in enterprise e-commerce platforms, server-side management, and hardware infrastructure systems.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="block-title" style="margin-top: 40px;"><h3>Download</h3></div>
-                                    <a href="#" class="btn-cv" target="_blank" rel="noopener noreferrer">Download Curriculum Vitae</a>
-                                </div>
-                            </div>
-
-                            <div class="row" style="margin-top: 40px;">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="block-title"><h3>Professional Skills</h3></div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="skill-container">
-                                        <span class="skill-title">E-Commerce Management (Magento / WooCommerce)<span class="skill-percentage">95%</span></span>
-                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 95%;"></div></div>
-                                    </div>
-                                    <div class="skill-container">
-                                        <span class="skill-title">Technical Operations & Workflows<span class="skill-percentage">90%</span></span>
-                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 90%;"></div></div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="skill-container">
-                                        <span class="skill-title">Hardware & Tools Diagnostics<span class="skill-percentage">90%</span></span>
-                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 90%;"></div></div>
-                                    </div>
-                                    <div class="skill-container">
-                                        <span class="skill-title">System Integration & Automation<span class="skill-percentage">85%</span></span>
-                                        <div class="skill-progress-bar"><div class="skill-value" style="width: 85%;"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+        <!-- Content Body -->
+        <div class="content-container">
+            
+            <!-- Contact Info Grid -->
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="services-grid">
+                <a href="mailto:e.dahlan@gmail.com" class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <h4>Email Me</h4>
+                    <p>e.dahlan@gmail.com</p>
+                </a>
+                <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="service-card">
+                    <div class="service-icon whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <h4>WhatsApp</h4>
+                    <p>+966 56 832 9898</p>
+                </a>
+                <div class="service-card" style="cursor: default;">
+                    <div class="service-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <h4>Location</h4>
+                    <p>Dammam, Saudi Arabia</p>
                 </div>
             </div>
 
-            <!-- Footer -->
-            <footer class="site-footer clearfix">
-                <div class="footer-social">
-                    <ul class="footer-social-links">
-                        <li>
-                            <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="color: #a5a6a7; transition: color 0.3s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='#a5a6a7'">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            </a>
-                        </li>
-                    </ul>
+            <!-- Terminal Styled Contact Form -->
+            <div class="section-header">
+                <h2>Send a Message</h2>
+            </div>
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div class="terminal-title">guest@message-protocol:~</div>
+                    <div></div>
                 </div>
-                <div class="footer-copyrights">
-                    <p>© <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p>
-                </div>
-            </footer>
+                
+                <form class="contact-form-body" onsubmit="event.preventDefault(); alert('Message feature ready to be connected to a backend!');">
+                    <div class="form-group">
+                        <label for="name">visitor_name@root:~$</label>
+                        <input type="text" id="name" class="custom-input" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">visitor_email@root:~$</label>
+                        <input type="email" id="email" class="custom-input" placeholder="Enter your email address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">visitor_message@root:~$</label>
+                        <textarea id="message" class="custom-input" placeholder="Write your message here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Execute Send
+                    </button>
+                </form>
+            </div>
+
         </div>
+
+        <!-- Footer -->
+        <footer>
+            <ul class="footer-social-links">
+                <li>
+                    <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="footer-copyrights">
+                <p>&copy; <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p>
+            </div>
+        </footer>
     </div>
 
-    <script src="./assets/jquery-2.1.3.min.js.download"></script>
-    <script src="./assets/bootstrap.min.js.download"></script>
-    <script src="./assets/main.js.download"></script>
+    <!-- Scripts for Canvas Particle Network & Effects -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // 1. Auto Year
             const yearEl = document.getElementById('current-year');
             if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            // 2. Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
-            const siteNav = document.querySelector('.site-nav');
-            if (menuToggle && siteNav) {
-                menuToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    siteNav.classList.toggle('mobile-menu-hide');
-                });
+            const nav = document.querySelector('nav');
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
             }
+
+            // 3. Mouse Follower Light
+            const cursorGlow = document.getElementById('cursorGlow');
+            window.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+            });
+
+            // 4. Service Cards Dynamic Mouse Glow Tracker
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+            });
+
+            // 5. Canvas Background Living Particle / Node Network Animation
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray = [];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.6;
+                    this.speedY = (Math.random() - 0.5) * 0.6;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x > canvas.width) this.x = 0;
+                    else if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    else if (this.y < 0) this.y = canvas.height;
+                }
+                draw() {
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.width * canvas.height) / 15000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+            initParticles();
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+
+                    for (let j = i; j < particlesArray.length; j++) {
+                        let dx = particlesArray[i].x - particlesArray[j].x;
+                        let dy = particlesArray[i].y - particlesArray[j].y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 110) {
+                            ctx.strokeStyle = `rgba(192, 132, 252, ${0.12 * (1 - distance / 110)})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
         });
     </script>
 </body>
