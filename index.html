@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" class="js no-touch cssanimations csstransforms csstransforms3d csstransitions">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edrees Dahlan - About Me</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Edrees Dahlan - Professional Profile of an E-commerce Manger and Computer Engineer.">
+    
+    <!-- Meta Descriptions & SEO -->
+    <meta name="description" content="Edrees Dahlan - Professional Profile of an E-commerce Manager and Computer Engineer.">
     <meta name="author" content="Edrees Dahlan">
     
     <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - E-commerce Manger & Computer Engineer">
+    <meta property="og:title" content="Edrees Dahlan - E-commerce Manager & Computer Engineer">
     <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows in Saudi Arabia.">
     <meta property="og:image" content="./img/main_photo.jpg">
     <meta property="og:url" content="https://yourwebsite.com">
@@ -18,6 +20,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./favicon.png">
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
     <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="./assets/owl.carousel.css" type="text/css">
@@ -28,33 +31,45 @@
 
     <style>
         /* =========================================
-           1. Card Layout and Container Styles (Matched to Resume)
+           1. Core Layout & Modern Dark Theme
            ========================================= */
+        :root {
+            --accent-color: #007AFF;
+            --accent-hover: #0056b3;
+            --bg-dark: #111111;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --text-light: #eeeeee;
+            --text-muted: #a4b0be;
+        }
+
         html, body {
             margin: 0;
             padding: 0;
-            background-color: #111111 !important; /* Dark outer background */
+            background-color: var(--bg-dark) !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         .page-scroll {
             width: 100%;
-            padding: 40px 20px; /* This gives the card the floating space */
+            padding: 30px 20px;
             box-sizing: border-box;
         }
 
         .page-container {
             max-width: 1350px;
             margin: 0 auto;
-            background: #222222 !important; /* Grayish-black main container */
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important; /* Matching depth shadow */
-            overflow: hidden !important; /* Removes that ugly inner scrollbar */
+            background: #181818 !important;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7) !important;
+            overflow: hidden !important;
             position: relative;
+            border: 1px solid var(--border-color);
         }
 
         .site-main {
             width: 100% !important;
-            padding: 20px;
+            padding: 30px;
             box-sizing: border-box;
         }
 
@@ -64,39 +79,19 @@
         }
 
         /* =========================================
-           2. Background Adjustments
+           2. Glassmorphism Sticky Header
            ========================================= */
-        .lm-animated-bg {
-            background-image: none !important;
-            background-color: transparent !important; 
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(24, 24, 24, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 30px;
         }
 
-        /* =========================================
-           3. Statistics Numbers (Random Numbers)
-           ========================================= */
-        .modern-fact { 
-            padding: 20px 10px; 
-            transition: transform 0.3s ease; 
-            background: transparent; 
-        }
-        .modern-fact:hover { 
-            transform: translateY(-5px); 
-        }
-        .modern-fact h4 { 
-            font-size: 1.15rem; 
-            font-weight: 600; 
-            margin-bottom: 12px; 
-            color: #eeeeee; 
-        }
-        .modern-fact .fun-fact-value { 
-            font-size: 2.2rem; 
-            font-weight: 700; 
-            color: #eeeeee; 
-        }
-
-        /* =========================================
-           4. Visual Elements (Logo & Buttons)
-           ========================================= */
         .header .logo-symbol { 
             background-color: transparent !important; 
             border: none !important; 
@@ -105,8 +100,8 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            overflow: hidden; 
         }
+
         .header .logo-symbol img { 
             width: 100%; 
             height: 100%; 
@@ -114,14 +109,133 @@
             object-fit: cover; 
         }
 
-        .btn-primary { 
-            background-color: #d3d3d3 !important; 
-            border-color: #d3d3d3 !important; 
-            color: #222222 !important; 
+        /* =========================================
+           3. Modern Interactive Cards (What I Do)
+           ========================================= */
+        .info-block-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
-        .btn-primary:hover { 
-            background-color: #b0b0b0 !important; 
-            border-color: #b0b0b0 !important; 
+
+        .info-block-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px rgba(0, 122, 255, 0.15);
+        }
+
+        .info-block-card h4 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .info-block-card p {
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           4. Tech Stack & Tools Grid
+           ========================================= */
+        .tech-badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .tech-badge {
+            background: #252525;
+            border: 1px solid #3d3d3d;
+            color: #d3d3d3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .tech-badge:hover {
+            border-color: var(--accent-color);
+            color: #ffffff;
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        /* =========================================
+           5. Statistics & Highlights Section
+           ========================================= */
+        .modern-fact { 
+            padding: 20px 10px; 
+            transition: transform 0.3s ease; 
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .modern-fact:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--accent-color);
+        }
+
+        .modern-fact h4 { 
+            font-size: 1rem; 
+            font-weight: 600; 
+            margin-bottom: 10px; 
+            color: var(--text-muted); 
+        }
+
+        .modern-fact .fun-fact-value { 
+            font-size: 2.2rem; 
+            font-weight: 700; 
+            color: var(--accent-color); 
+        }
+
+        /* =========================================
+           6. Buttons & Interactive Links
+           ========================================= */
+        .btn-custom-primary { 
+            background-color: var(--accent-color) !important; 
+            border-color: var(--accent-color) !important; 
+            color: #ffffff !important; 
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom-primary:hover { 
+            background-color: var(--accent-hover) !important; 
+            border-color: var(--accent-hover) !important; 
+            transform: translateY(-2px);
+        }
+
+        .btn-custom-outline {
+            background-color: transparent !important;
+            border: 1px solid var(--border-color) !important;
+            color: var(--text-light) !important;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom-outline:hover {
+            border-color: var(--accent-color) !important;
+            color: var(--accent-color) !important;
         }
 
         /* 3D Image Hover Effect */
@@ -129,43 +243,90 @@
         .hp-inner { 
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
             transform-style: preserve-3d; 
+            height: 100%;
+            min-height: 360px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
+
         .home-photo:hover .hp-inner { 
-            transform: rotateX(8deg) rotateY(-10deg) scale(1.04); 
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5); 
+            transform: rotateX(6deg) rotateY(-8deg) scale(1.02); 
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6); 
         }
 
         /* =========================================
-           5. Mobile Menu Toggle
+           7. CV Modal Preview
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content-wrapper {
+            width: 90%;
+            max-width: 900px;
+            height: 85vh;
+            background: #222;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header-bar {
+            padding: 15px 20px;
+            background: #181818;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* =========================================
+           8. Responsive Adjustments
            ========================================= */
         .menu-toggle {
             font-size: 2rem;
             color: #eeeeee;
-            text-decoration: none !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            cursor: pointer;
         }
 
-        /* =========================================
-           6. Mobile Optimization (NO CARD ON MOBILE)
-           ========================================= */
         @media (max-width: 767px) {
             .page-container {
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
                 border-radius: 0 !important;
-                box-shadow: none !important;
+                border: none;
             }
             .page-scroll {
                 padding: 0 !important;
             }
+            .site-main {
+                padding: 15px;
+            }
         }
 
-        /* =========================================
-           7. Footer Social Icons
-           ========================================= */
+        /* Footer Icons */
         .footer-social-links {
             list-style: none;
             padding: 0;
@@ -176,31 +337,27 @@
         .footer-social-links li a svg {
             width: 24px;
             height: 24px;
-            fill: #d3d3d3; /* Neutral gray to match your theme */
+            fill: #d3d3d3;
             transition: fill 0.3s ease;
         }
         .footer-social-links li a:hover svg {
-            fill: #0a66c2; /* LinkedIn Brand Blue */
+            fill: var(--accent-color);
         }
     </style>
 </head>
 
 <body class="page">
     <div class="lm-animated-bg"></div>
-    
-    <div class="preloader" style="display: none;">
-        <div class="preloader-animation"><div class="preloader-spinner"></div></div>
-    </div>
 
     <div class="page-scroll">
-        <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right" data-animation="transition-flip-in-right">
+        <div id="page_container" class="page-container">
 
             <!-- Header -->
             <header id="site_header" class="header">
                 <div class="header-content clearfix">
                     <div class="text-logo">
                         <a href="index.html" aria-label="Go to Homepage">
-                            <div class="logo-symbol"><img src="./favicon.png" alt="Logo"></div>
+                            <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
                             <div class="logo-text">Edrees <span>Dahlan</span></div>
                         </a>
                     </div>
@@ -224,27 +381,31 @@
                     <div id="primary" class="content-area"> 
                         <div id="content" class="page-content site-content single-post" role="main">
                             
-                            <!-- Profile Top Part -->
+                            <!-- Hero / Profile Top Part -->
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="home-content">
                                         <div class="row flex-v-align">
                                             <div class="col-sm-12 col-md-5 col-lg-5">
                                                 <div class="home-photo">
-                                                    <div class="hp-inner" style="background-image: url('./img/main_photo.jpg');" role="img" aria-label="Portrait of Edrees Dahlan, E-commerce Supervisor"></div>
+                                                    <div class="hp-inner" style="background-image: url('./img/main_photo.jpg');" role="img" aria-label="Portrait of Edrees Dahlan"></div>
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-12 col-md-7 col-lg-7">
                                                 <div class="home-text hp-left">
-                                                    <h4>Computer Engineer &nbsp;|&nbsp; E-commerce Manager</h4>
+                                                    <h4 style="color: var(--accent-color); font-weight: 600;">Computer Engineer &nbsp;|&nbsp; E-commerce Manager</h4>
                                                     <h1>EDREES DAHLAN</h1>
-                                                    <h5 style="color: #a4b0be; margin-bottom: 15px;">Dammam · Eastern Region, Saudi Arabia · <a href="mailto:e.dahlan@gmail.com" style="color: #d3d3d3;" aria-label="Send an email to Edrees Dahlan">e.dahlan@gmail.com</a></h5>
-                                                    <p>Highly analytical and data-driven E-commerce Supervisor effectively scales online customer acquisition efforts and e-commerce capabilities to drive sales growth. Routinely tests new features and assets and measures results as the company grows and evolves. Strong understanding of e-commerce consumer behavior, website analytics, and backend operational workflows.</p>
+                                                    <h5 style="color: #a4b0be; margin-bottom: 20px;">Dammam · Eastern Region, Saudi Arabia · <a href="mailto:e.dahlan@gmail.com" style="color: #d3d3d3;" aria-label="Send an email to Edrees Dahlan">e.dahlan@gmail.com</a></h5>
+                                                    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">Highly analytical and data-driven E-commerce Manager effectively scaling online customer acquisition efforts and e-commerce capabilities to drive sustainable sales growth. Expert in e-commerce consumer behavior, web analytics, hardware integrations, and backend operational workflows.</p>
                                                     
-                                                    <div class="home-buttons">
-                                                        <a href="Edrees_Dahlan_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" download aria-label="Download Edrees Dahlan's Resume as a PDF">Download CV (PDF)</a>
-                                                        <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20was%20looking%20at%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background-color: #25D366; border-color: #25D366; color: white;" aria-label="Start a WhatsApp chat with Edrees Dahlan">WhatsApp Chat</a>
+                                                    <div class="home-buttons" style="margin-top: 25px; display: flex; gap: 12px; flex-wrap: wrap;">
+                                                        <button id="openCvModal" class="btn btn-custom-primary">
+                                                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                                            Preview CV
+                                                        </button>
+                                                        <a href="Edrees_Dahlan_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-custom-outline" download aria-label="Download Edrees Dahlan's Resume">Download PDF</a>
+                                                        <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20was%20looking%20at%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="btn btn-custom-outline" style="border-color: #25D366 !important; color: #25D366 !important;" aria-label="Start a WhatsApp chat">WhatsApp Chat</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -253,38 +414,75 @@
                                 </div>
                             </div>
 
-                            <!-- Services -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-50"></div><div class="block-title"><h2>What I Do</h2></div></div></div>
+                            <!-- Services / What I Do -->
+                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>What I Do</h2></div></div></div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <div class="info-list-w-icon">
-                                        <div class="info-block-w-icon"><h4>E-commerce Management</h4><p>Optimizing e-commerce fulfillment strategies, managing acquisition and retention programs, and expanding brand presence across leading platforms.</p></div>
-                                        <div class="info-block-w-icon"><h4>Web Operations & Analytics</h4><p>Utilizing Google Analytics and A/B testing to track consumer behaviors, diagnose website issues, and improve end-user experiences.</p></div>
+                                    <div class="info-block-card">
+                                        <h4>E-commerce Management</h4>
+                                        <p>Optimizing end-to-end fulfillment strategies, managing acquisition and retention programs, and expanding brand presence across enterprise storefronts.</p>
+                                    </div>
+                                    <div class="info-block-card">
+                                        <h4>Web Operations & Analytics</h4>
+                                        <p>Utilizing Google Analytics 4 and A/B testing methodologies to track consumer funnel behaviors, diagnose technical friction points, and boost conversion rates.</p>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                    <div class="info-list-w-icon">
-                                        <div class="info-block-w-icon"><h4>SEO & Feature Integration</h4><p>Coordinating with technical teams to optimize websites for SEO, redesigning functionalities, and launching new extensions and plugins.</p></div>
-                                        <div class="info-block-w-icon"><h4>Network Infrastructure</h4><p>Equipped with solid expertise in deploying end-to-end IP routing solutions, network optimization, and diagnosing hardware configurations.</p></div>
+                                    <div class="info-block-card">
+                                        <h4>SEO & Feature Integration</h4>
+                                        <p>Coordinating with development teams for technical SEO optimization, custom extension rollouts, and platform migrations (e.g., Cart2Cart, MageMe).</p>
+                                    </div>
+                                    <div class="info-block-card">
+                                        <h4>Network Infrastructure & Hardware</h4>
+                                        <p>Solid technical foundation in deploying end-to-end IP routing solutions, hardware troubleshooting, network optimization, and system automation.</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Random Numbers -->
-                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>Random Numbers</h2></div></div></div>
+                            <!-- NEW SECTION: Tech Stack & Tools Grid -->
+                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-30"></div><div class="block-title"><h2>Tech Stack & Expertise</h2></div></div></div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px;">
+                                        <h4 style="color: var(--text-light); margin-top: 0; font-size: 1.1rem;">E-commerce & Analytics</h4>
+                                        <div class="tech-badge-container">
+                                            <span class="tech-badge">Magento / Adobe Commerce</span>
+                                            <span class="tech-badge">WooCommerce</span>
+                                            <span class="tech-badge">Google Analytics 4</span>
+                                            <span class="tech-badge">Google Tag Manager</span>
+                                            <span class="tech-badge">A/B Testing</span>
+                                            <span class="tech-badge">SEO Optimization</span>
+                                        </div>
+
+                                        <h4 style="color: var(--text-light); margin-top: 25px; font-size: 1.1rem;">Engineering & Infrastructure</h4>
+                                        <div class="tech-badge-container">
+                                            <span class="tech-badge">IP Routing & Networking</span>
+                                            <span class="tech-badge">Hardware Diagnostics</span>
+                                            <span class="tech-badge">Automated Systems</span>
+                                            <span class="tech-badge">Klipper Firmware</span>
+                                            <span class="tech-badge">3D Digital Modeling</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Highlights & Impact (Renamed from Random Numbers) -->
+                            <div class="row"><div class="col-xs-12 col-sm-12"><div class="p-40"></div><div class="block-title"><h2>Impact & Key Highlights</h2></div></div></div>
                             <div class="row" id="counter-section">
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Years of Experience</h4><span class="fun-fact-value">+<span class="counter" data-target="7">0</span></span></div></div>
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Products Managed</h4><span class="fun-fact-value">+<span class="counter" data-target="10">0</span>k</span></div></div>
-                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Successful Migrations</h4><span class="fun-fact-value"><span class="counter" data-target="100">0</span>%</span></div></div>
+                                <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Migration Success Rate</h4><span class="fun-fact-value"><span class="counter" data-target="100">0</span>%</span></div></div>
                                 <div class="col-xs-12 col-sm-3"><div class="fun-fact text-center modern-fact"><h4>Coffee Cups Brewed</h4><span class="fun-fact-value"><span class="counter" id="coffee-counter" data-target="1286">0</span></span></div></div>
                             </div>
-                            <div class="p-40"></div>
+                            <div class="p-30"></div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <footer class="site-footer clearfix">
+            <!-- Footer -->
+            <footer class="site-footer clearfix" style="border-top: 1px solid var(--border-color); padding: 20px 30px;">
                 <div class="footer-social">
                     <ul class="footer-social-links">
                         <li>
@@ -301,36 +499,53 @@
         </div>
     </div>
 
+    <!-- CV Modal Preview Window -->
+    <div id="cvModal" class="modal-overlay">
+        <div class="modal-content-wrapper">
+            <div class="modal-header-bar">
+                <h4 style="margin: 0; color: #fff; font-size: 1.1rem;">Edrees Dahlan - Resume Preview</h4>
+                <button id="closeCvModal" class="modal-close-btn">&times;</button>
+            </div>
+            <iframe src="Edrees_Dahlan_Resume.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="./assets/jquery-2.1.3.min.js.download"></script>
     <script src="./assets/bootstrap.min.js.download"></script>
     <script src="./assets/owl.carousel.min.js.download"></script>
     <script src="./assets/main.js.download"></script>
 
-    <!-- Script for counters, copyright year, and mobile menu toggle -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. Auto-update Copyright Year
+            // 1. Auto Copyright Year
             const yearEl = document.getElementById('current-year');
-            if (yearEl) {
-                yearEl.textContent = new Date().getFullYear();
-            }
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
 
             // 2. Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const siteNav = document.querySelector('.site-nav');
-
             if (menuToggle && siteNav) {
-                menuToggle.addEventListener('click', function(e) {
+                menuToggle.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (siteNav.classList.contains('mobile-menu-hide')) {
-                        siteNav.classList.remove('mobile-menu-hide');
-                    } else {
-                        siteNav.classList.add('mobile-menu-hide');
-                    }
+                    siteNav.classList.toggle('mobile-menu-hide');
                 });
             }
 
-            // 3. Interactive Coffee Counter
+            // 3. Modal Preview Handler
+            const cvModal = document.getElementById('cvModal');
+            const openBtn = document.getElementById('openCvModal');
+            const closeBtn = document.getElementById('closeCvModal');
+
+            if (openBtn && cvModal && closeBtn) {
+                openBtn.addEventListener('click', () => cvModal.style.display = 'flex');
+                closeBtn.addEventListener('click', () => cvModal.style.display = 'none');
+                cvModal.addEventListener('click', (e) => {
+                    if (e.target === cvModal) cvModal.style.display = 'none';
+                });
+            }
+
+            // 4. Dynamic Coffee Counter
             const coffeeCounter = document.getElementById('coffee-counter');
             if (coffeeCounter) {
                 const startDate = new Date('2026-07-13T00:00:00'); 
@@ -338,27 +553,30 @@
                 coffeeCounter.setAttribute('data-target', Math.min(1286 + (diffDays * 2), 9999));
             }
 
-            // 4. Run Statistics Counter on scroll intersection
+            // 5. Counter Animations via IntersectionObserver
             const counters = document.querySelectorAll('.counter');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const counter = entry.target;
-                        const update = () => {
-                            const target = +counter.getAttribute('data-target');
+                        const target = +counter.getAttribute('data-target');
+                        const speed = target / 40; 
+
+                        const updateCount = () => {
                             const count = +counter.innerText;
-                            if (count < target) { 
-                                counter.innerText = Math.ceil(count + (target / 100)); 
-                                setTimeout(update, 15); 
-                            } else { 
-                                counter.innerText = target; 
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + speed);
+                                setTimeout(updateCount, 25);
+                            } else {
+                                counter.innerText = target;
                             }
                         };
-                        update();
+                        updateCount();
                         observer.unobserve(counter);
                     }
                 });
             }, { threshold: 0.5 });
+
             counters.forEach(c => observer.observe(c));
         });
     </script>
