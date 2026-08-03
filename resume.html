@@ -1,355 +1,676 @@
 <!DOCTYPE html>
-<html lang="en" class="js no-touch cssanimations csstransforms csstransforms3d csstransitions">
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <title>Edrees Dahlan - Resume</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Resume of Edrees Dahlan - Ecommerce Supervisor and Computer Engineer highlighting experience in Magento management, ERP integration, and network infrastructure.">
-    <meta name="author" content="Edrees Dahlan">
-
-    <!-- Open Graph / Social Sharing Tags -->
-    <meta property="og:title" content="Edrees Dahlan - Resume">
-    <meta property="og:description" content="Professional portfolio of Edrees Dahlan, specializing in E-commerce management, technical optimization, and backend operational workflows.">
-    <meta property="og:image" content="./img/main_photo.jpg">
-    <meta property="og:url" content="https://yourwebsite.com/resume.html">
-    <meta property="og:type" content="website">
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Resume - Edrees Dahlan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resume of Edrees Dahlan - E-commerce Manager and Computer Engineer.">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./favicon.png">
 
-    <link rel="stylesheet" href="./assets/normalize.css" type="text/css">
-    <link rel="stylesheet" href="./assets/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./assets/main.css" type="text/css">
-    
-    <script src="./assets/modernizr.custom.js.download"></script>
-    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* =========================================
-           1. Card Layout and Container Styles
-           ========================================= */
-        html, body {
+        :root {
+            --bg-base: #020617;
+            --panel-bg: rgba(15, 23, 42, 0.7);
+            --neon-blue: #38bdf8;
+            --neon-purple: #c084fc;
+            --neon-pink: #f472b6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #111111 !important;
         }
 
-        .page-scroll {
-            width: 100%;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
             padding: 40px 20px;
-            box-sizing: border-box;
-        }
-
-        .page-container {
-            max-width: 1350px;
-            margin: 0 auto;
-            background: #222222 !important;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
-            overflow: hidden !important;
             position: relative;
+            overflow-x: hidden;
         }
 
-        .site-main {
-            width: 100% !important;
-            padding: 20px;
-            box-sizing: border-box;
+        /* Interactive Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .row {
-            margin-right: 0 !important;
-            margin-left: 0 !important;
+        /* Custom Cursor Light Spot */
+        .cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(192, 132, 252, 0.05) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            filter: blur(50px);
+            transition: width 0.3s, height 0.3s;
         }
 
-        /* =========================================
-           2. Visual Elements & Overrides
-           ========================================= */
-        .lm-animated-bg {
-            background-image: none !important;
-            background-color: transparent !important;
+        /* Main Holographic Wrapper */
+        .main-wrapper {
+            width: 100%;
+            max-width: 1180px;
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 36px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            overflow: hidden;
+            position: relative;
+            animation: heroEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .header .logo-symbol { 
-            background-color: transparent !important; 
-            border: none !important; 
-            width: 45px; 
-            height: 45px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden; 
+        @keyframes heroEntrance {
+            0% { opacity: 0; transform: translateY(40px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .header .logo-symbol img { 
-            width: 100%; 
-            height: 100%; 
-            border-radius: 50%; 
-            object-fit: cover; 
+
+        /* Header / Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(15, 23, 42, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-symbol {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            transition: var(--transition);
+        }
+
+        .logo-symbol:hover {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.7);
+        }
+
+        .logo-symbol img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 22px;
+            border-radius: 40px;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        nav ul li.current-menu-item a,
+        nav ul li a:hover {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
-            font-size: 2rem;
-            color: #eeeeee;
-            text-decoration: none !important;
-            display: flex;
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
             align-items: center;
             justify-content: center;
         }
 
-        /* =========================================
-           3. Mobile Optimization
-           ========================================= */
-        @media (max-width: 767px) {
-            .page-container {
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
-                border-radius: 0 !important;
-                box-shadow: none !important;
+        .content-container {
+            padding: 65px 48px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent);
+        }
+
+        /* Resume Grid Layout */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .resume-grid {
+                grid-template-columns: 1fr;
             }
-            .page-scroll {
-                padding: 0 !important;
+        }
+
+        /* Resume Card Items */
+        .resume-card {
+            background: rgba(255, 255, 255, 0.012);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .resume-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(700px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(56, 189, 248, 0.12), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .resume-card:hover::before {
+            opacity: 1;
+        }
+
+        .resume-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .resume-badge {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-purple);
+            background: rgba(192, 132, 252, 0.1);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+
+        .resume-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .resume-card h4 {
+            font-size: 0.95rem;
+            color: var(--neon-blue);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .resume-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .resume-card ul li {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .resume-card ul li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        /* Skills Container / Badges */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 14px;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 48px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(15, 23, 42, 0.6);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            list-style: none;
+            gap: 14px;
+        }
+
+        .footer-social-links a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-social-links a:hover {
+            background: #0a66c2;
+            color: #ffffff;
+            border-color: #0a66c2;
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 12px 25px rgba(10, 102, 194, 0.5);
+        }
+
+        .footer-copyrights p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .cursor-glow { display: none; }
+            .main-wrapper {
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
+            header { padding: 20px; }
+            .content-container { padding: 40px 20px; }
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 20px;
+            }
+            nav.active { display: block; }
+            nav ul {
+                flex-direction: column;
+                background: transparent;
+                border: none;
+                padding: 0;
+            }
+            nav ul li a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .menu-toggle { display: flex; }
+            footer {
+                padding: 24px 20px;
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
+<body>
 
-<body class="page">
-    <div class="lm-animated-bg"></div>
+    <!-- Interactive Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="page-scroll">
-        <div id="page_container" class="page-container bg-move-effect animated transition-flip-in-right" data-animation="transition-flip-in-right">
+    <!-- Cursor Follower Light -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
-            <!-- Header -->
-            <header id="site_header" class="header">
-                <div class="header-content clearfix">
-                    <div class="text-logo">
-                        <a href="index.html" aria-label="Go to Homepage">
-                            <div class="logo-symbol"><img src="./favicon.png" alt="Logo"></div>
-                            <div class="logo-text">Edrees <span>Dahlan</span></div>
-                        </a>
-                    </div>
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-area">
+                <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
+                <div class="logo-text">Edrees <span>Dahlan</span></div>
+            </a>
 
-                    <div class="site-nav mobile-menu-hide">
-                        <ul class="leven-classic-menu site-main-menu">
-                            <li class="menu-item"><a href="index.html">About Me</a></li>
-                            <li class="menu-item current-menu-item"><a href="resume.html">Resume</a></li>
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
+            <nav>
+                <ul>
+                    <li><a href="index.html">About Me</a></li>
+                    <li class="current-menu-item"><a href="resume.html">Resume</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="menu-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </header>
+
+        <!-- Content Body -->
+        <div class="content-container">
+            
+            <!-- Work Experience Section -->
+            <div class="section-header">
+                <h2>Work Experience</h2>
+            </div>
+            
+            <div class="resume-grid">
+                <!-- Left Column: Experience -->
+                <div>
+                    <div class="resume-card">
+                        <span class="resume-badge">2026 - Present</span>
+                        <h3>E-commerce Manager</h3>
+                        <h4>Alharam Perfect Machinery & Equipment Co, Dammam</h4>
+                        <ul>
+                            <li>Leading overall e-commerce strategy, digital channel expansion, and technical operations.</li>
+                            <li>Managing online product catalogs, platform migrations, and backend workflow integrations.</li>
                         </ul>
                     </div>
 
-                    <a class="menu-toggle mobile-visible" aria-label="Open mobile menu">&#9776;</a>
+                    <div class="resume-card">
+                        <span class="resume-badge">2019 - 2026</span>
+                        <h3>E-commerce Supervisor</h3>
+                        <h4>Albawardi Tools & Hardware Co, Dammam</h4>
+                        <ul>
+                            <li>Managed Magento content, development teams, and operational workflows for peak performance.</li>
+                            <li>Directed technical optimization projects (SEO restructuring, site speed, WebP conversion).</li>
+                            <li>Implemented automated Oracle ERP price sync with strict controls for promotional pricing.</li>
+                            <li>Optimized fulfillment strategies to reduce costs and maximize profit margins.</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-card">
+                        <span class="resume-badge">2017 - 2018</span>
+                        <h3>Training Program in IT</h3>
+                        <h4>Albawardi Group, Dammam</h4>
+                        <ul>
+                            <li>Provided end-to-end installation of route-based IP network solutions.</li>
+                            <li>Advanced troubleshooting for Cisco platforms and deep packet analysis.</li>
+                        </ul>
+                    </div>
                 </div>
-            </header>
 
-            <div id="main" class="site-main">
-                <div id="main-content" class="single-page-content">
-                    <div id="primary" class="content-area"> 
-                        <div id="content" class="page-content site-content single-post" role="main">
-                            
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="block-title"><h2>Resume</h2></div>
-                                </div>
-                            </div>
+                <!-- Right Column: Education & Certifications -->
+                <div>
+                    <div class="section-header" style="margin-top: 0;">
+                        <h2>Education</h2>
+                    </div>
 
-                            <!-- Experience & Education -->
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-7">
-                                    <div class="block-title"><h3>Experience</h3></div>
-                                    <div class="timeline timeline-second-style clearfix">
+                    <div class="resume-card">
+                        <span class="resume-badge">2012 - 2018</span>
+                        <h3>Bachelor of Computer Engineering</h3>
+                        <h4>University of Hail</h4>
+                        <ul>
+                            <li>Accredited by ASIC Service for International Schools & Universities.</li>
+                        </ul>
+                    </div>
 
-                                        <!-- Alharam Perfect Machinery & Equipment Experience -->
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2026 - Present</h5>
-                                                <span class="item-company">Alharam Perfect Machinery & Equipment Co, Dammam</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">E-commerce Manager</h4>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Albawardi Tools Experience -->
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2019 - 2026</h5>
-                                                <span class="item-company">Albawardi Tools & Hardware Co, Dammam</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">E-commerce Supervisor</h4>
-                                                <p>• Managed Magento content, development teams, and operational workflows to ensure a seamless e-commerce performance.</p>
-                                                <p>• Directed technical optimization projects, including SEO restructuring, site speed upgrades, and WebP image conversion.</p>
-                                                <p>• Implemented automated Oracle ERP price synchronization, establishing strict manual controls to protect promotional discount pricing.</p>
-                                                <p>• Optimized e-commerce fulfillment strategy to minimize costs while maximizing profits and customer satisfaction.</p>
-                                                <p>• Leveraged Google Analytics and A/B testing to monitor effectiveness of online marketing strategies and user behavior.</p>
-                                            </div>
-                                        </div>
+                    <div class="section-header" style="margin-top: 40px;">
+                        <h2>Certifications</h2>
+                    </div>
 
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2017 - 2018</h5>
-                                                <span class="item-company">Albawardi Group, Dammam</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">Training Program in IT</h4>
-                                                <p>• Provided complete end-to-end engineering and installation of route-based IP network solutions.</p>
-                                                <p>• Analyzed problems and worked with teams to develop hardware and technical solutions.</p>
-                                                <p>• Performed advanced troubleshooting for Cisco platforms and deep packet analysis.</p>
-                                                <p>• Provided network support services for devices such as hubs, bridges, routers, and other hardware.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-5">
-                                    <div class="block-title"><h3>Education</h3></div>
-                                    <div class="timeline timeline-second-style clearfix">
-                                        <div class="timeline-item clearfix">
-                                            <div class="left-part">
-                                                <h5 class="item-period">2012 - 2018</h5>
-                                                <span class="item-company">University of Hail</span>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="right-part">
-                                                <h4 class="item-title">Bachelor of Computer Engineer</h4>
-                                                <p>Certified as a PREMIER UNIVERSITY by Accreditation Service for International Schools, Colleges & Universities (ASIC).</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="p-20"></div>
-
-                                    <div class="block-title"><h3>Certifications</h3></div>
-                                    <div class="timeline timeline-second-style clearfix">
-                                        <div class="timeline-item clearfix" style="padding-bottom:10px;">
-                                            <div class="right-part" style="padding-left:0;">
-                                                <h4 class="item-title" style="margin:0;">Designing & Digital Marketing</h4>
-                                                <span class="item-company">Collage of Central England · 2021</span>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item clearfix" style="padding-bottom:10px;">
-                                            <div class="right-part" style="padding-left:0;">
-                                                <h4 class="item-title" style="margin:0;">Social Media Marketing</h4>
-                                                <span class="item-company">Pioneers Academy · 2021</span>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item clearfix" style="padding-bottom:10px;">
-                                            <div class="right-part" style="padding-left:0;">
-                                                <h4 class="item-title" style="margin:0;">CCNA - Routing and Switching</h4>
-                                                <span class="item-company">CISCO · 2016</span>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item clearfix" style="padding-bottom:10px;">
-                                            <div class="right-part" style="padding-left:0;">
-                                                <h4 class="item-title" style="margin:0;">Cloud Infrastructures and Services</h4>
-                                                <span class="item-company">DELL EMC Academic Associate · 2016</span>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item clearfix" style="padding-bottom:10px;">
-                                            <div class="right-part" style="padding-left:0;">
-                                                <h4 class="item-title" style="margin:0;">JAVA Foundations</h4>
-                                                <span class="item-company">Oracle Academy · 2016</span>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item clearfix" style="padding-bottom:10px;">
-                                            <div class="right-part" style="padding-left:0;">
-                                                <h4 class="item-title" style="margin:0;">MTA 98-367 Security</h4>
-                                                <span class="item-company">Microsoft · 2016</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-30"></div>
-                            <hr>
-                            <div class="p-20"></div>
-
-                            <!-- Skills -->
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-4">
-                                    <div class="block-title"><h3>Skills</h3></div>
-                                    <ul class="knowledges">
-                                        <li>Magento Content Management</li>
-                                        <li>Oracle ERP Integration</li>
-                                        <li>Docker & Grafana</li>
-                                        <li>Pi-hole & Network Security</li>
-                                        <li>SEO & Web Performance</li>
-                                        <li>Hardware Maintenance</li>
-                                        <li>Java & Arduino</li>
-                                        <li>Adobe Photoshop</li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-4">
-                                    <div class="block-title"><h3>Affiliations</h3></div>
-                                    <ul class="knowledges">
-                                        <li>Member of Saudi Council of Engineers</li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-4">
-                                    <div class="block-title"><h3>Languages</h3></div>
-                                    <ul class="knowledges">
-                                        <li>Arabic (Excellent)</li>
-                                        <li>English (Very Good)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="p-40"></div>
-                        </div>
+                    <div class="resume-card">
+                        <span class="resume-badge">Professional Credentials</span>
+                        <h3>Certificates & Courses</h3>
+                        <ul>
+                            <li><strong>Designing & Digital Marketing</strong> · College of Central England (2021)</li>
+                            <li><strong>Social Media Marketing</strong> · Pioneers Academy (2021)</li>
+                            <li><strong>CCNA - Routing & Switching</strong> · Cisco (2016)</li>
+                            <li><strong>Cloud Infrastructures & Services</strong> · DELL EMC Academic Associate (2016)</li>
+                            <li><strong>JAVA Foundations & MTA Security</strong> · Oracle & Microsoft (2016)</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <footer class="site-footer clearfix">
-                <div class="footer-social">
-                    <ul class="footer-social-links">
-                        <li>
-                            <a href="https://linkedin.dahlan.me/" target="_blank" rel="noopener noreferrer" aria-label="Visit Edrees Dahlan's LinkedIn Profile" style="display: inline-block; color: #a5a6a7; transition: color 0.3s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='#a5a6a7'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-copyrights">
-                    <p>© <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p>
-                </div>
-            </footer>
+            <!-- Skills Section -->
+            <div class="section-header" style="margin-top: 20px;">
+                <h2>Key Technical Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-tag">Magento CMS</div>
+                <div class="skill-tag">Oracle ERP Integration</div>
+                <div class="skill-tag">Docker & Grafana</div>
+                <div class="skill-tag">Pi-hole & Network Security</div>
+                <div class="skill-tag">SEO & Performance Optimization</div>
+                <div class="skill-tag">Hardware Maintenance</div>
+                <div class="skill-tag">Computer Engineering</div>
+                <div class="skill-tag">Digital Strategy</div>
+            </div>
+
         </div>
+
+        <!-- Footer -->
+        <footer>
+            <ul class="footer-social-links">
+                <li>
+                    <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="footer-copyrights">
+                <p>&copy; <span id="current-year"></span> All rights reserved. Edrees Dahlan.</p>
+            </div>
+        </footer>
     </div>
 
-    <script src="./assets/jquery-2.1.3.min.js.download"></script>
-    <script src="./assets/bootstrap.min.js.download"></script>
-    <script src="./assets/main.js.download"></script>
-
+    <!-- Scripts for Canvas Particle Network & Effects -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Update Copyright Year
+            // 1. Auto Year
             const yearEl = document.getElementById('current-year');
-            if (yearEl) {
-                yearEl.textContent = new Date().getFullYear();
-            }
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-            // Mobile Menu Toggle
+            // 2. Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
-            const siteNav = document.querySelector('.site-nav');
-
-            if (menuToggle && siteNav) {
-                menuToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (siteNav.classList.contains('mobile-menu-hide')) {
-                        siteNav.classList.remove('mobile-menu-hide');
-                    } else {
-                        siteNav.classList.add('mobile-menu-hide');
-                    }
-                });
+            const nav = document.querySelector('nav');
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
             }
+
+            // 3. Mouse Follower Light
+            const cursorGlow = document.getElementById('cursorGlow');
+            window.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+            });
+
+            // 4. Resume Cards Dynamic Mouse Glow Tracker
+            const resumeCards = document.querySelectorAll('.resume-card');
+            resumeCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+            });
+
+            // 5. Canvas Background Living Particle / Node Network Animation
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray = [];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.6;
+                    this.speedY = (Math.random() - 0.5) * 0.6;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x > canvas.width) this.x = 0;
+                    else if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    else if (this.y < 0) this.y = canvas.height;
+                }
+                draw() {
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.width * canvas.height) / 15000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+            initParticles();
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+
+                    for (let j = i; j < particlesArray.length; j++) {
+                        let dx = particlesArray[i].x - particlesArray[j].x;
+                        let dy = particlesArray[i].y - particlesArray[j].y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 110) {
+                            ctx.strokeStyle = `rgba(192, 132, 252, ${0.12 * (1 - distance / 110)})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
         });
     </script>
 </body>
