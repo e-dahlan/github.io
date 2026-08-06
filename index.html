@@ -132,6 +132,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
         }
 
         .logo-text {
@@ -929,158 +930,147 @@
             window.runCliCommand = function(cmd) {
                 const cleanCmd = cmd.trim().toLowerCase();
                 
-                // Print user command
                 const userLine = document.createElement('div');
                 userLine.className = 'terminal-output';
-                userLine.innerHTML = `<p><span style="color:var(--neon-purple)">edrees@cli:~$</span> ${cleanCmd}</p>`;
+                userLine.innerHTML = `<p><span style="color: var(--neon-purple);">edrees@cli:~$</span> ${cmd}</p>`;
                 terminalBody.appendChild(userLine);
 
-                // Process command response
-                const respLine = document.createElement('div');
-                respLine.className = 'terminal-output';
+                const responseLine = document.createElement('div');
+                responseLine.className = 'terminal-output';
 
-                switch(cleanCmd) {
+                switch (cleanCmd) {
                     case 'help':
-                        respLine.innerHTML = `<p>Available commands:<br>
-                        - <span>about</span>: Quick summary of Edrees Dahlan<br>
-                        - <span>skills</span>: List core expertise & technical stack<br>
-                        - <span>contact</span>: Get email and WhatsApp links<br>
-                        - <span>clear</span>: Clean terminal screen</p>`;
-                        break;
-                    case 'about':
-                        respLine.innerHTML = `<p>Edrees Dahlan is an E-commerce Supervisor & Computer Engineer based in Dammam, Saudi Arabia, specializing in web operations, online growth, and infrastructure.</p>`;
+                        responseLine.innerHTML = `
+                            <p>Available commands:</p>
+                            <p><span>skills</span> - Display core technical & operational skill sets</p>
+                            <p><span>contact</span> - Retrieve direct communication channels</p>
+                            <p><span>clear</span> - Clear the terminal output display</p>
+                            <p><span>help</span> - Show this help menu</p>
+                        `;
                         break;
                     case 'skills':
-                        respLine.innerHTML = `<p>Core Skills: E-Commerce Management, Magento, WooCommerce, Google Analytics, SEO Optimization, Network Infrastructure, Troubleshooting.</p>`;
+                        responseLine.innerHTML = `
+                            <p><span>E-commerce Platform Expertise:</span> Magento, WooCommerce, Cart2Cart, Extension Integrations</p>
+                            <p><span>Analytics & Ops:</span> Google Analytics, A/B Testing, SEO Optimization, Conversion Rate Optimization (CRO)</p>
+                            <p><span>IT & Hardware:</span> Network Infrastructure, IP Routing, Hardware Diagnostic & Maintenance</p>
+                        `;
                         break;
                     case 'contact':
-                        respLine.innerHTML = `<p>Email: <a href="mailto:e.dahlan@gmail.com" style="color:var(--neon-blue)">e.dahlan@gmail.com</a><br>WhatsApp: <a href="https://wa.me/966568329898" target="_blank" style="color:var(--whatsapp)">+966 56 832 9898</a></p>`;
+                        responseLine.innerHTML = `
+                            <p><span>Email:</span> e.dahlan@gmail.com</p>
+                            <p><span>WhatsApp:</span> +966 56 832 9898</p>
+                            <p><span>LinkedIn:</span> linkedin.dahlan.me</p>
+                            <p><span>Location:</span> Dammam, Eastern Region, Saudi Arabia</p>
+                        `;
                         break;
                     case 'clear':
                         terminalBody.innerHTML = '';
+                        if (cliInput) cliInput.value = '';
                         return;
                     default:
-                        respLine.innerHTML = `<p style="color:#ef4444">Command not recognized: '${cleanCmd}'. Type <span>help</span> for available commands.</p>`;
+                        responseLine.innerHTML = `<p>Command not recognized: "<span>${cmd}</span>". Type <span>help</span> for assistance.</p>`;
+                        break;
                 }
 
-                terminalBody.appendChild(respLine);
+                terminalBody.appendChild(responseLine);
                 terminalBody.scrollTop = terminalBody.scrollHeight;
-            }
+                if (cliInput) cliInput.value = '';
+            };
 
             if (cliInput) {
-                cliInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
+                cliInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && cliInput.value.trim() !== '') {
                         runCliCommand(cliInput.value);
-                        cliInput.value = '';
                     }
                 });
             }
 
-            // 7. Intersection Observer for Live Animated Counters
+            // 7. Animated Counter Logic
             const counters = document.querySelectorAll('.counter');
-            let animated = false;
-
-            function runCounters() {
+            const animateCounters = () => {
                 counters.forEach(counter => {
                     const target = +counter.getAttribute('data-target');
                     let count = 0;
-                    const speed = target / 40; // speed adjustment
-
-                    function updateCount() {
+                    const speed = target / 50;
+                    const updateCount = () => {
                         count += speed;
                         if (count < target) {
                             counter.innerText = Math.ceil(count);
-                            setTimeout(updateCount, 30);
+                            setTimeout(updateCount, 25);
                         } else {
                             counter.innerText = target;
                         }
-                    }
+                    };
                     updateCount();
                 });
-            }
+            };
 
             const statsSection = document.querySelector('.stats-grid');
             if (statsSection) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting && !animated) {
-                            runCounters();
-                            animated = true;
+                        if (entry.isIntersecting) {
+                            animateCounters();
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.4 });
                 observer.observe(statsSection);
             }
 
-            // 8. Canvas Background Living Particle / Node Network Animation
+            // 8. Canvas Particle Network Background
             const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-            let particlesArray = [];
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let width = canvas.width = window.innerWidth;
+                let height = canvas.height = window.innerHeight;
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+                window.addEventListener('resize', () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                });
 
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.6;
-                    this.speedY = (Math.random() - 0.5) * 0.6;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x > canvas.width) this.x = 0;
-                    else if (this.x < 0) this.x = canvas.width;
-                    if (this.y > canvas.height) this.y = 0;
-                    else if (this.y < 0) this.y = canvas.height;
-                }
-                draw() {
-                    ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
+                const particles = Array.from({ length: 45 }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.6,
+                    vy: (Math.random() - 0.5) * 0.6,
+                    radius: Math.random() * 2 + 1
+                }));
 
-            function initParticles() {
-                particlesArray = [];
-                let numberOfParticles = (canvas.width * canvas.height) / 15000;
-                for (let i = 0; i < numberOfParticles; i++) {
-                    particlesArray.push(new Particle());
-                }
-            }
-            initParticles();
+                function renderParticles() {
+                    ctx.clearRect(0, 0, width, height);
 
-            function animateParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < particlesArray.length; i++) {
-                    particlesArray[i].update();
-                    particlesArray[i].draw();
+                    for (let i = 0; i < particles.length; i++) {
+                        let p = particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
 
-                    for (let j = i; j < particlesArray.length; j++) {
-                        let dx = particlesArray[i].x - particlesArray[j].x;
-                        let dy = particlesArray[i].y - particlesArray[j].y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (p.x < 0 || p.x > width) p.vx *= -1;
+                        if (p.y < 0 || p.y > height) p.vy *= -1;
 
-                        if (distance < 110) {
-                            ctx.strokeStyle = `rgba(192, 132, 252, ${0.12 * (1 - distance / 110)})`;
-                            ctx.lineWidth = 1;
-                            ctx.beginPath();
-                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                            ctx.stroke();
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+                        ctx.fill();
+
+                        for (let j = i + 1; j < particles.length; j++) {
+                            let p2 = particles[j];
+                            let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                            if (dist < 140) {
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 140)})`;
+                                ctx.lineWidth = 0.8;
+                                ctx.stroke();
+                            }
                         }
                     }
+                    requestAnimationFrame(renderParticles);
                 }
-                requestAnimationFrame(animateParticles);
+                renderParticles();
             }
-            animateParticles();
         });
     </script>
 </body>
