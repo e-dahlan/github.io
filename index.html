@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edrees Dahlan - Ultra Interactive Portfolio & CLI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edrees Dahlan - Ultra Modern Interactive Portfolio of an E-commerce Manager and Computer Engineer.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dahlan.me/"> 
+    <meta property="og:title" content="Edrees Dahlan - Ultra Interactive Portfolio & CLI">
+    <meta property="og:description" content="Edrees Dahlan - Ultra Modern Interactive Portfolio of an E-commerce Manager and Computer Engineer.">
+    <meta property="og:image" content="./img/main_photo.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dahlan.me/">
+    <meta property="twitter:title" content="Edrees Dahlan - Ultra Interactive Portfolio & CLI">
+    <meta property="twitter:description" content="Edrees Dahlan - Ultra Modern Interactive Portfolio of an E-commerce Manager and Computer Engineer.">
+    <meta property="twitter:image" content="./img/main_photo.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicon.png">
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Interactive Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Cursor Follower Light -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-area">
+                <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
+                <div class="logo-text">Edrees <span>Dahlan</span></div>
+            </a>
+
+            <div class="nav-controls">
+                <nav>
+                    <ul>
+                        <li class="current-menu-item"><a href="index.html">About Me</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Dark / Light Theme Toggle Button -->
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <div class="content-container">
+            <!-- Hero Profile Section -->
+            <div class="hero-section">
+                <div class="profile-card-container">
+                    <div class="profile-photo-box" id="tiltCard" style="background-image: url('./img/main_photo.jpg');"></div>
+                </div>
+
+                <div class="hero-details">
+                    <h4>Computer Engineer &nbsp;|&nbsp; E-commerce Manager</h4>
+                    <h1>EDREES DAHLAN</h1>
+                    <div class="location-email">
+                        <span><i class="fa-solid fa-location-dot"></i> Dammam · Eastern Region, Saudi Arabia</span>
+                        <span>·</span>
+                        <span><i class="fa-solid fa-envelope"></i> <a href="mailto:e.dahlan@gmail.com">e.dahlan@gmail.com</a></span>
+                    </div>
+                    <p>Highly analytical and data-driven E-commerce Supervisor effectively scales online customer acquisition efforts and e-commerce capabilities to drive sales growth. Routinely tests new features and assets and measures results as the company grows and evolves. Strong understanding of e-commerce consumer behavior, website analytics, and backend operational workflows.</p>
+                    
+                    <div class="action-buttons">
+                        <a href="Edrees_Dahlan_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-cv" download>
+                            <i class="fa-solid fa-file-arrow-down"></i> Download CV (PDF)
+                        </a>
+                        <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20was%20looking%20at%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp Chat
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Terminal / CLI Section -->
+            <div class="section-header">
+                <h2>Interactive CLI</h2>
+            </div>
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div class="terminal-title">visitor@edrees-terminal:~</div>
+                    <div></div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="terminal-output">
+                        <p>Welcome to Edrees Dahlan's Interactive Shell v2.6. Type <span>help</span> to see available commands.</p>
+                    </div>
+                </div>
+                <div class="terminal-quick-chips">
+                    <button class="cli-chip" data-command="help">help</button>
+                    <button class="cli-chip" data-command="skills">skills</button>
+                    <button class="cli-chip" data-command="projects">projects</button>
+                    <button class="cli-chip" data-command="contact">contact</button>
+                    <button class="cli-chip" data-command="clear">clear</button>
+                </div>
+                <div style="padding: 0 24px 20px 24px;">
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">edrees@cli:~$</span>
+                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command here..." autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <!-- What I Do Section -->
+            <div class="section-header">
+                <h2>What I Do</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <h4>E-commerce Management</h4>
+                    <p>Optimizing e-commerce fulfillment strategies, managing acquisition and retention programs, and expanding brand presence across leading platforms.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4>Web Operations & Analytics</h4>
+                    <p>Utilizing Google Analytics and A/B testing to track consumer behaviors, diagnose website issues, and improve end-user experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h4>SEO & Feature Integration</h4>
+                    <p>Coordinating with technical teams to optimize websites for SEO, redesigning functionalities, and launching new extensions and plugins.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h4>Network Infrastructure</h4>
+                    <p>Equipped with solid expertise in deploying end-to-end IP routing solutions, network optimization, and diagnosing hardware configurations.</p>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="section-header">
+                <h2>Random Numbers</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Years of Experience</h4>
+                    <div class="stat-value">+<span class="counter" data-target="7">0</span></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Products Managed</h4>
+                    <div class="stat-value">+<span class="counter" data-target="10">0</span>k</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Successful Migrations</h4>
+                    <div class="stat-value"><span class="counter" data-target="99">0</span>%</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Coffee Cups Brewed</h4>
+                    <div class="stat-value"><span class="counter" data-target="1347">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <ul class="footer-social-links">
+                <li>
+                    <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="footer-copyrights">
+<p>&copy; <span id="current-year"></span> Made with <i class="fa-solid fa-heart" style="color: var(--neon-purple);"></i> Edrees Dahlan. All rights reserved.</p>            </div>
+        </footer>
+    </div>
+
+    <!-- External Script -->
+    <script src="main.js"></script>
+</body>
+</html>
