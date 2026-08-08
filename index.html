@@ -41,7 +41,7 @@
             --header-bg: rgba(255, 255, 255, 0.75);
             --card-bg: rgba(255, 255, 255, 0.6);
             --card-hover-bg: rgba(255, 255, 255, 0.95);
-            --terminal-bg: rgba(15, 23, 42, 0.95); /* Keep CLI dark for contrast */
+            --terminal-bg: rgba(15, 23, 42, 0.95);
             --border-color: rgba(0, 0, 0, 0.08);
             --text-main: #0f172a;
             --text-muted: #475569;
@@ -262,13 +262,16 @@
             perspective: 1200px;
         }
 
+        /* Circular frame with uncropped full photo fitting inside */
         .profile-photo-box {
             width: 360px;
             height: 360px;
             margin: 0 auto;
-            border-radius: 50%;
-            background-size: cover;
+            border-radius: 50%; /* Keeps frame circular */
+            background-size: contain; /* Fits full photo inside without cutting edges */
+            background-repeat: no-repeat;
             background-position: center;
+            background-color: rgba(15, 23, 42, 0.4); /* Fills extra circular space smoothly */
             border: 2px solid var(--border-color);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
             transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
