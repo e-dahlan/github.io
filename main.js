@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 0. Header Scroll State Management (Dynamic border-radius and clip-path fix)
+    const header = document.querySelector("header");
+    
+    if (header) {
+        const toggleHeaderScrollState = () => {
+            if (window.scrollY > 20) {
+                header.classList.add("is-scrolled");
+            } else {
+                header.classList.remove("is-scrolled");
+            }
+        };
+
+        // التحقق عند التحميل والتمرير
+        window.addEventListener("scroll", toggleHeaderScrollState);
+        toggleHeaderScrollState();
+    }
+
     // 1. Theme Toggle Logic (with safe localStorage handling)
     const themeToggleBtn = document.getElementById('themeToggle');
     if (themeToggleBtn) {
@@ -210,78 +227,88 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 9. Interactive CLI Shell Command Handling & Autofocus Logic
-    const cliInput = document.getElementById('cliInput');
-    const terminalBody = document.getElementById('terminalBody');
-    const terminalContainer = document.querySelector('.terminal-container');
+    // 9. Interactive CLI Shell Command Handling & Dynamic Responses
+    const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
+    const terminalBody = document.querySelector('.terminal-body') || document.getElementById('terminalBody');
+    const cliChips = document.querySelectorAll('.cli-chip');
 
-    if (terminalContainer && cliInput) {
-        terminalContainer.addEventListener('click', () => {
-            cliInput.focus();
-        });
-    }
+    // الأوامر المتاحة واستجاباتها التفصيلية
+    const commands = {
+        help: `Available commands: 
+  <span style="color: var(--neon-blue);">skills</span>      - View technical skill set
+  <span style="color: var(--neon-blue);">projects</span>    - Key platform & system integrations
+  <span style="color: var(--neon-blue);">experience</span>  - E-commerce & engineering background
+  <span style="color: var(--neon-blue);">contact</span>     - Direct contact channels
+  <span style="color: var(--neon-blue);">coffee</span>      - V60 extraction status ☕
+  <span style="color: var(--neon-blue);">clear</span>       - Clear the terminal screen`,
 
-    function runCliCommand(cmd) {
+        skills: `Technical Stack:
+  • <strong style="color: var(--neon-purple);">E-Commerce:</strong> Magento, Shopify, Web Operations, Analytics & SEO
+  • <strong style="color: var(--neon-purple);">Engineering:</strong> Cloudflare Workers (APIs/SOAP), JavaScript, Network Infrastructure (AdGuard/Home Assistant)
+  • <strong style="color: var(--neon-purple);">Hardware/IoT:</strong> Klipper 3D Printing, Raspberry Pi Cluster, Electronics Soldering`,
+
+        projects: `Highlighted Integrations:
+  1. <strong style="color: var(--neon-blue);">Logistics Cloudflare Worker:</strong> Custom SOAP/XML carrier tracking integration.
+  2. <strong style="color: var(--neon-blue);">E-Commerce Architecture:</strong> High-scale platform cataloging & conversion optimization.
+  3. <strong style="color: var(--neon-blue);">Home Infrastructure:</strong> Pi-hole/AdGuard Home & Automated IoT Dashboard.`,
+
+        experience: `Role: <strong style="color: var(--neon-pink);">E-Commerce Manager & Computer Engineer</strong>
+Location: Dammam, Eastern Province, KSA
+Focus: E-commerce platform scaling, system optimization & automated backend integrations.`,
+
+        contact: `Reach out directly:
+  • Email: <a href="mailto:e.dahlan@gmail.com" style="color: var(--neon-blue);">e.dahlan@gmail.com</a>
+  • WhatsApp: <a href="https://wa.me/966568329898" target="_blank" style="color: #25d366;">+966 56 832 9898</a>`,
+
+        coffee: `Brew Status: <span style="color: #f59e0b;">V60 Anaerobic Single Origin Calibration Ready ☕</span>
+Grind Calibration: Lido ET Precision | Temp: 92°C`,
+
+        sudo: `<span style="color: #ef4444;">Permission denied: User is not in the sudoers file. This incident will be reported. 😉</span>`
+    };
+
+    function processCommand(cmd) {
         const cleanCmd = cmd.trim().toLowerCase();
         if (!cleanCmd || !terminalBody) return;
 
-        const userLine = document.createElement('div');
-        userLine.className = 'terminal-output';
-        userLine.innerHTML = `<p><span style="color: var(--neon-pink);">edrees@cli:~$</span> ${escapeHtml(cmd)}</p>`;
-        terminalBody.appendChild(userLine);
+        // إنشاء عنصر مخرجات جديد
+        const outputLine = document.createElement('div');
+        outputLine.className = 'terminal-output';
+        outputLine.style.marginBottom = '12px';
 
-        const responseLine = document.createElement('div');
-        responseLine.className = 'terminal-output';
-
-        switch (cleanCmd) {
-            case 'help':
-                responseLine.innerHTML = `
-                    <p>Available commands:</p>
-                    <p>  <span>about</span>    - Brief overview of Edrees Dahlan</p>
-                    <p>  <span>skills</span>   - List technical competencies</p>
-                    <p>  <span>projects</span> - View key e-commerce & hardware projects</p>
-                    <p>  <span>contact</span>  - Get communication handles & email</p>
-                    <p>  <span>clear</span>    - Clear terminal screen</p>
-                `;
-                break;
-            case 'about':
-                responseLine.innerHTML = `<p>Computer Engineer & E-commerce Manager based in Dammam, KSA. Specialized in Magento platforms, ERP sync, and operational infrastructure</p>`;
-                break;
-            case 'skills':
-                responseLine.innerHTML = `<p>Core Skills: Magento CMS, Oracle ERP Integration, Docker, Grafana, Pi-hole, Network Security, SEO, Computer Engineering.</p>`;
-                break;
-            case 'projects':
-                responseLine.innerHTML = `<p>Projects: Industrial Tools E-commerce Overhaul, Oracle ERP Price Synchronization, Home Automation & Network Administration</p>`;
-                break;
-            case 'contact':
-                responseLine.innerHTML = `<p>Email: <a href="mailto:e.dahlan@gmail.com" style="color: var(--neon-blue);">e.dahlan@gmail.com</a> | WhatsApp: +966 56 832 9898</p>`;
-                break;
-            case 'clear':
-                terminalBody.innerHTML = `<div class="terminal-output"><p>Terminal cleared. Type <span>help</span> for commands.</p></div>`;
-                return;
-            default:
-                responseLine.innerHTML = `<p style="color: #ef4444;">Command not recognized: "${escapeHtml(cmd)}". Type <span>help</span> for valid commands.</p>`;
-                break;
+        if (cleanCmd === 'clear') {
+            terminalBody.innerHTML = '';
+            return;
         }
 
-        terminalBody.appendChild(responseLine);
+        const promptText = `<div style="margin-bottom: 4px;"><span style="color: var(--neon-pink); font-weight: bold;">edrees@cli:~$</span> ${escapeHtml(cmd)}</div>`;
+
+        if (commands[cleanCmd]) {
+            outputLine.innerHTML = promptText + `<div>${commands[cleanCmd]}</div>`;
+        } else {
+            outputLine.innerHTML = promptText + `<div style="color: #ef4444;">Command not found: '${escapeHtml(cleanCmd)}'. Type <span style="color: var(--neon-blue);">help</span> for available commands.</div>`;
+        }
+
+        terminalBody.appendChild(outputLine);
         terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
-    if (cliInput) {
-        cliInput.addEventListener('keydown', (e) => {
+    if (terminalInput) {
+        terminalInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                runCliCommand(cliInput.value);
-                cliInput.value = '';
+                e.preventDefault();
+                const val = terminalInput.value;
+                processCommand(val);
+                terminalInput.value = '';
             }
         });
     }
 
-    document.addEventListener('click', (e) => {
-        const chip = e.target.closest('.cli-chip');
-        if (chip && chip.hasAttribute('data-command')) {
-            runCliCommand(chip.getAttribute('data-command'));
-        }
+    // تفعيل النقر على أزرار الاختصارات السريعة (Chips)
+    cliChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const cmd = chip.getAttribute('data-command') || chip.textContent.trim();
+            processCommand(cmd);
+        });
     });
 
     function escapeHtml(text) {
