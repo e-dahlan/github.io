@@ -63,7 +63,7 @@ body {
     justify-content: flex-start;
     padding: 40px 20px;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: clip; /* clip تضمن عدم وجود سكرول أفقي بدون تعطيل sticky[cite: 11] */
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -102,7 +102,6 @@ body {
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
-    overflow: hidden;
     position: relative;
     contain: layout style paint;
     animation: heroEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -126,7 +125,7 @@ body {
     transform: translateY(0);
 }
 
-/* Header & Nav Structure */
+/* Header & Nav Structure with Glassmorphism Effect */
 header {
     display: flex;
     justify-content: space-between;
@@ -134,11 +133,31 @@ header {
     padding: 28px 48px;
     border-bottom: 1px solid var(--border-color);
     background: var(--header-bg);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: relative; /* افتراضياً للجوال ليس sticky */
+    z-index: 1000;
     backdrop-filter: blur(20px);
-    transition: var(--transition);
+    -webkit-backdrop-filter: blur(20px);
+    transition: border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1), clip-path 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, padding 0.4s ease;
+    
+    /* الحالة الافتراضية (في أعلى الصفحة): زوايا دائرية متوافقة مع الحاوية */
+    border-top-left-radius: 36px;
+    border-top-right-radius: 36px;
+    clip-path: inset(0 round 36px 36px 0 0);
+}
+
+/* الحالة عند التمرير للشاشات الكبيرة: تصبح الزوايا حادة تماماً وتفعل خاصية الـ sticky */
+@media (min-width: 768px) {
+    header {
+        position: sticky;
+        top: 0;
+    }
+}
+
+header.is-scrolled {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    clip-path: inset(0 round 0px 0px 0 0);
+    padding: 20px 48px; /* تصغير طفيف اختياري عند التمرير لزيادة الأناقة */
 }
 
 .logo-area {
@@ -461,6 +480,10 @@ nav ul li a:hover {
 form.terminal-body {
     max-height: none;
     overflow-y: visible;
+}
+
+.terminal-output {
+    margin-bottom: 12px;
 }
 
 .terminal-output p {
@@ -788,7 +811,6 @@ form.terminal-body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Unified Default Icon Style for ALL Cards (Email, WhatsApp, Location) */
 .channel-icon {
     width: 48px;
     height: 48px;
@@ -810,7 +832,6 @@ form.terminal-body {
     transition: color 0.35s ease;
 }
 
-/* Universal Hover Transformation for Channel Icons */
 .channel-card:hover .channel-icon {
     transform: translateY(-4px) rotate(10deg);
     color: #ffffff !important;
@@ -822,7 +843,6 @@ form.terminal-body {
     fill: #ffffff !important;
 }
 
-/* Specific Channel Hover Styles */
 .channel-card.location:hover .channel-icon,
 .channel-card:has(.fa-location-dot):hover .channel-icon,
 .channel-card:has(.fa-map-marker-alt):hover .channel-icon,
@@ -976,10 +996,7 @@ form.terminal-body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==========================================================================
-   Universal Social Links & Footer Animations (ALL Platforms Included)
-   ========================================================================== */
-
+/* Footer */
 footer {
     display: flex;
     justify-content: space-between;
@@ -990,6 +1007,8 @@ footer {
     flex-wrap: wrap;
     gap: 20px;
     transition: var(--transition);
+    border-bottom-left-radius: 36px;
+    border-bottom-right-radius: 36px;
 }
 
 .footer-social-links {
@@ -1008,11 +1027,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* Default icon color in Dark/Light themes */
     color: var(--icon-color); 
     text-decoration: none;
-    
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
                 box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
                 border-color 0.35s ease, 
@@ -1027,17 +1043,12 @@ footer {
     transition: color 0.35s ease;
 }
 
-/* Universal hover lift for all social items */
 .footer-social-links a:hover {
     color: #ffffff !important;
     transform: translateY(-5px) rotate(10deg);
 }
 
-/* --------------------------------------------------------------------------
-   Hover Colors, Brand Backgrounds & Glow per Platform
-   -------------------------------------------------------------------------- */
-
-/* LinkedIn */
+/* Platform-specific hover colors */
 .footer-social-links a.linkedin:hover,
 .footer-social-links a[title*="LinkedIn"]:hover,
 .footer-social-links a[aria-label*="LinkedIn"]:hover,
@@ -1047,7 +1058,6 @@ footer {
     box-shadow: 0 12px 25px rgba(10, 102, 194, 0.45);
 }
 
-/* GitHub */
 .footer-social-links a.github:hover,
 .footer-social-links a[title*="GitHub"]:hover,
 .footer-social-links a[aria-label*="GitHub"]:hover,
@@ -1057,7 +1067,6 @@ footer {
     box-shadow: 0 12px 25px rgba(36, 41, 46, 0.5);
 }
 
-/* Twitter / X */
 .footer-social-links a.twitter:hover,
 .footer-social-links a.x-twitter:hover,
 .footer-social-links a[title*="Twitter"]:hover,
@@ -1069,7 +1078,6 @@ footer {
     box-shadow: 0 12px 25px rgba(29, 161, 242, 0.45);
 }
 
-/* Instagram */
 .footer-social-links a.instagram:hover,
 .footer-social-links a[title*="Instagram"]:hover,
 .footer-social-links a[href*="instagram.com"]:hover {
@@ -1078,7 +1086,6 @@ footer {
     box-shadow: 0 12px 25px rgba(220, 39, 67, 0.45);
 }
 
-/* WhatsApp */
 .footer-social-links a.whatsapp:hover,
 .footer-social-links a[title*="WhatsApp"]:hover,
 .footer-social-links a[href*="wa.me"]:hover,
@@ -1088,7 +1095,6 @@ footer {
     box-shadow: 0 12px 25px rgba(37, 211, 102, 0.45);
 }
 
-/* Telegram */
 .footer-social-links a.telegram:hover,
 .footer-social-links a[title*="Telegram"]:hover,
 .footer-social-links a[href*="t.me"]:hover {
@@ -1097,7 +1103,6 @@ footer {
     box-shadow: 0 12px 25px rgba(34, 158, 217, 0.45);
 }
 
-/* YouTube */
 .footer-social-links a.youtube:hover,
 .footer-social-links a[title*="YouTube"]:hover,
 .footer-social-links a[href*="youtube.com"]:hover {
@@ -1106,7 +1111,6 @@ footer {
     box-shadow: 0 12px 25px rgba(255, 0, 0, 0.45);
 }
 
-/* Email / Mailto */
 .footer-social-links a.email:hover,
 .footer-social-links a[title*="Email"]:hover,
 .footer-social-links a[href^="mailto:"]:hover {
@@ -1115,7 +1119,6 @@ footer {
     box-shadow: 0 12px 25px rgba(234, 67, 53, 0.45);
 }
 
-/* Discord */
 .footer-social-links a.discord:hover,
 .footer-social-links a[title*="Discord"]:hover,
 .footer-social-links a[href*="discord"]:hover {
@@ -1124,7 +1127,6 @@ footer {
     box-shadow: 0 12px 25px rgba(88, 101, 242, 0.45);
 }
 
-/* Facebook */
 .footer-social-links a.facebook:hover,
 .footer-social-links a[title*="Facebook"]:hover,
 .footer-social-links a[href*="facebook.com"]:hover {
@@ -1133,7 +1135,6 @@ footer {
     box-shadow: 0 12px 25px rgba(24, 119, 242, 0.45);
 }
 
-/* TikTok */
 .footer-social-links a.tiktok:hover,
 .footer-social-links a[title*="TikTok"]:hover,
 .footer-social-links a[href*="tiktok.com"]:hover {
@@ -1142,7 +1143,6 @@ footer {
     box-shadow: 0 12px 25px rgba(37, 244, 238, 0.45);
 }
 
-/* Behance */
 .footer-social-links a.behance:hover,
 .footer-social-links a[title*="Behance"]:hover,
 .footer-social-links a[href*="behance.net"]:hover {
@@ -1151,7 +1151,6 @@ footer {
     box-shadow: 0 12px 25px rgba(23, 105, 255, 0.45);
 }
 
-/* Dribbble */
 .footer-social-links a.dribbble:hover,
 .footer-social-links a[title*="Dribbble"]:hover,
 .footer-social-links a[href*="dribbble.com"]:hover {
@@ -1160,7 +1159,6 @@ footer {
     box-shadow: 0 12px 25px rgba(234, 76, 137, 0.45);
 }
 
-/* Medium */
 .footer-social-links a.medium:hover,
 .footer-social-links a[title*="Medium"]:hover,
 .footer-social-links a[href*="medium.com"]:hover {
@@ -1169,15 +1167,10 @@ footer {
     box-shadow: 0 12px 25px rgba(255, 255, 255, 0.25);
 }
 
-.footer-copyrights p {
-    font-size: 0.92rem;
-    color: var(--text-muted);
-}
-
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 ::-webkit-scrollbar-track {
     background: var(--bg-base);
@@ -1217,6 +1210,12 @@ footer {
     }
     header {
         padding: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        clip-path: none;
+    }
+    header.is-scrolled {
+        padding: 16px 20px;
     }
     .content-container {
         padding: 40px 20px;
@@ -1226,14 +1225,18 @@ footer {
     }
     nav {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed; /* تم التغيير إلى fixed لضمان تغطية الشاشة وثباته مهما كان موقع التمرير */
+        top: 70px;         /* مسافة تقريبية أسفل الهيدر (يمكن تعديلها حسب ارتفاع الهيدر لديك) */
         left: 0;
         width: 100%;
+        height: calc(100vh - 70px);
+        overflow-y: auto;
         background: var(--header-bg);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border-color);
         padding: 20px;
+        z-index: 999;
     }
     nav.active {
         display: block;
@@ -1256,5 +1259,7 @@ footer {
         padding: 24px 20px;
         flex-direction: column;
         text-align: center;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
