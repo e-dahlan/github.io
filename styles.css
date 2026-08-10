@@ -1,4 +1,6 @@
-/* Variables & Themes */
+/* ==========================================================================
+   Variables & Theme Definitions
+   ========================================================================== */
 :root {
     --bg-base: #020617;
     --panel-bg: rgba(15, 23, 42, 0.7);
@@ -16,6 +18,13 @@
     
     --input-bg: rgba(15, 23, 42, 0.6);
     --terminal-header-bg: rgba(15, 23, 42, 0.9);
+
+    /* Dynamic Universal Icon Fill Color */
+    --icon-color: var(--text-main);
+
+    /* Google Maps Accent Colors */
+    --gmaps-blue: #4285f4;
+    --gmaps-blue-glow: rgba(66, 133, 244, 0.45);
 }
 
 body.light-theme {
@@ -31,8 +40,12 @@ body.light-theme {
     
     --input-bg: rgba(255, 255, 255, 0.8);
     --terminal-header-bg: rgba(226, 232, 240, 0.9);
+
+    /* Dynamic Universal Icon Fill Color (Light Theme) */
+    --icon-color: var(--text-main);
 }
 
+/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -79,7 +92,7 @@ body {
     transition: width 0.3s, height 0.3s;
 }
 
-/* Main Layout Wrapper with CSS Containment Hint */
+/* Main Layout Wrapper */
 .main-wrapper {
     width: 100%;
     max-width: 1180px;
@@ -101,7 +114,7 @@ body {
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Scroll Reveal Animation Classes */
+/* Scroll Reveal Classes */
 .reveal-item {
     opacity: 0;
     transform: translateY(35px);
@@ -113,7 +126,7 @@ body {
     transform: translateY(0);
 }
 
-/* Navigation Header */
+/* Header & Nav Structure */
 header {
     display: flex;
     justify-content: space-between;
@@ -213,7 +226,7 @@ nav ul li a:hover {
     border-radius: 50%;
     width: 42px;
     height: 42px;
-    color: var(--text-main);
+    color: var(--icon-color);
     font-size: 1.1rem;
     cursor: pointer;
     display: flex;
@@ -235,7 +248,7 @@ nav ul li a:hover {
     border-radius: 12px;
     width: 42px;
     height: 42px;
-    color: var(--text-main);
+    color: var(--icon-color);
     font-size: 1.2rem;
     cursor: pointer;
     align-items: center;
@@ -246,7 +259,7 @@ nav ul li a:hover {
     padding: 65px 48px;
 }
 
-/* Section Common Headers */
+/* Section Header Structure */
 .section-header {
     display: flex;
     align-items: center;
@@ -323,6 +336,11 @@ nav ul li a:hover {
     flex-wrap: wrap;
 }
 
+.location-email i, .location-email svg {
+    color: var(--icon-color);
+    transition: var(--transition);
+}
+
 .location-email a {
     color: var(--text-muted);
     text-decoration: none;
@@ -358,6 +376,10 @@ nav ul li a:hover {
     transition: var(--transition);
 }
 
+.btn i, .btn svg {
+    color: currentColor;
+}
+
 .btn-cv {
     background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
     color: #ffffff;
@@ -382,7 +404,7 @@ nav ul li a:hover {
     box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
 }
 
-/* Interactive Shell / Terminal Component */
+/* Interactive Terminal Component */
 .terminal-container {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -502,7 +524,7 @@ form.terminal-body {
     width: 100%;
 }
 
-/* What I Do / Services Grid */
+/* Services Grid & Generic Icons */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -528,19 +550,22 @@ form.terminal-body {
     width: 50px;
     height: 50px;
     border-radius: 14px;
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--neon-blue);
+    background: rgba(125, 125, 125, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--icon-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
     margin-bottom: 20px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
 }
 
 .service-card:hover .service-icon {
-    transform: translateY(-3px) rotate(8deg);
-    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+    transform: translateY(-4px) rotate(8deg);
+    background: var(--neon-blue);
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
 }
 
 .service-card h4 {
@@ -712,7 +737,7 @@ form.terminal-body {
     transform: translateY(-2px);
 }
 
-/* Contact Page Layout */
+/* Contact Page Layout & Cards */
 .contact-hero {
     margin-bottom: 50px;
 }
@@ -763,43 +788,69 @@ form.terminal-body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* Unified Default Icon Style for ALL Cards (Email, WhatsApp, Location) */
 .channel-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    color: var(--neon-blue);
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(125, 125, 125, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--icon-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    font-size: 1.3rem;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
 }
 
+.channel-icon i,
+.channel-icon svg {
+    color: var(--icon-color);
+    fill: currentColor;
+    transition: color 0.35s ease;
+}
+
+/* Universal Hover Transformation for Channel Icons */
 .channel-card:hover .channel-icon {
     transform: translateY(-4px) rotate(10deg);
-    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+    color: #ffffff !important;
 }
 
-.channel-card:nth-child(2) .channel-icon {
-    background: rgba(34, 197, 94, 0.1);
-    border-color: rgba(34, 197, 94, 0.2);
-    color: #22c55e;
+.channel-card:hover .channel-icon i,
+.channel-card:hover .channel-icon svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
-.channel-card:nth-child(2):hover .channel-icon {
-    box-shadow: 0 10px 20px rgba(34, 197, 94, 0.4);
+/* Specific Channel Hover Styles */
+.channel-card.location:hover .channel-icon,
+.channel-card:has(.fa-location-dot):hover .channel-icon,
+.channel-card:has(.fa-map-marker-alt):hover .channel-icon,
+.channel-card:has(a[href*="maps"]):hover .channel-icon {
+    background: var(--gmaps-blue) !important;
+    border-color: var(--gmaps-blue) !important;
+    box-shadow: 0 10px 25px var(--gmaps-blue-glow) !important;
 }
 
-.channel-card:nth-child(3) .channel-icon {
-    background: rgba(192, 132, 252, 0.1);
-    border-color: rgba(192, 132, 252, 0.2);
-    color: var(--neon-purple);
+.channel-card.email:hover .channel-icon,
+.channel-card:has(a[href^="mailto:"]):hover .channel-icon {
+    background: #ea4335 !important;
+    border-color: #ea4335 !important;
+    box-shadow: 0 10px 20px rgba(234, 67, 53, 0.4) !important;
 }
 
-.channel-card:nth-child(3):hover .channel-icon {
-    box-shadow: 0 10px 20px rgba(192, 132, 252, 0.4);
+.channel-card.whatsapp:hover .channel-icon,
+.channel-card:has(a[href*="wa.me"]):hover .channel-icon {
+    background: #25d366 !important;
+    border-color: #25d366 !important;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4) !important;
+}
+
+.channel-card.linkedin:hover .channel-icon,
+.channel-card:has(a[href*="linkedin.com"]):hover .channel-icon {
+    background: #0a66c2 !important;
+    border-color: #0a66c2 !important;
+    box-shadow: 0 10px 20px rgba(10, 102, 194, 0.4) !important;
 }
 
 .channel-info h3 {
@@ -821,7 +872,7 @@ form.terminal-body {
     color: var(--neon-blue);
 }
 
-/* Form Styling */
+/* Form Controls */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -890,7 +941,7 @@ form.terminal-body {
     box-shadow: 0 15px 30px rgba(192, 132, 252, 0.4);
 }
 
-/* Terminal Form Status Feedback States */
+/* Feedback Notifications */
 .terminal-status-loading {
     background: rgba(56, 189, 248, 0.1);
     border: 1px solid rgba(56, 189, 248, 0.3);
@@ -925,7 +976,10 @@ form.terminal-body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Footer Components & Social Links Animation */
+/* ==========================================================================
+   Universal Social Links & Footer Animations (ALL Platforms Included)
+   ========================================================================== */
+
 footer {
     display: flex;
     justify-content: space-between;
@@ -942,6 +996,7 @@ footer {
     display: flex;
     list-style: none;
     gap: 14px;
+    flex-wrap: wrap;
 }
 
 .footer-social-links a {
@@ -953,81 +1008,165 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-muted);
+    
+    /* Default icon color in Dark/Light themes */
+    color: var(--icon-color); 
     text-decoration: none;
-    /* الحركة السلسة بـ transition مخصص لارتفاع وتدوير جميع الأيقونات */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+    
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.35s ease, 
+                background 0.35s ease, 
+                color 0.35s ease;
 }
 
-/* الحركة الأساسية لجميع أيقونات الفوتر عند مرور الماوس (Hover) */
+.footer-social-links a i,
+.footer-social-links a svg {
+    color: currentColor;
+    font-size: 1.2rem;
+    transition: color 0.35s ease;
+}
+
+/* Universal hover lift for all social items */
 .footer-social-links a:hover {
-    color: #ffffff;
+    color: #ffffff !important;
     transform: translateY(-5px) rotate(10deg);
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-    border-color: var(--neon-blue);
-    box-shadow: 0 12px 25px rgba(56, 189, 248, 0.5);
 }
 
-/* تخصيص ألوان الهوفر والأشعة لكل منصة مع الحفاظ على نفس حركة الارتفاع والتدوير */
+/* --------------------------------------------------------------------------
+   Hover Colors, Brand Backgrounds & Glow per Platform
+   -------------------------------------------------------------------------- */
+
+/* LinkedIn */
 .footer-social-links a.linkedin:hover,
 .footer-social-links a[title*="LinkedIn"]:hover,
-.footer-social-links a[aria-label*="LinkedIn"]:hover {
+.footer-social-links a[aria-label*="LinkedIn"]:hover,
+.footer-social-links a[href*="linkedin.com"]:hover {
     background: #0a66c2;
     border-color: #0a66c2;
-    box-shadow: 0 12px 25px rgba(10, 102, 194, 0.5);
+    box-shadow: 0 12px 25px rgba(10, 102, 194, 0.45);
 }
 
+/* GitHub */
 .footer-social-links a.github:hover,
 .footer-social-links a[title*="GitHub"]:hover,
-.footer-social-links a[aria-label*="GitHub"]:hover {
+.footer-social-links a[aria-label*="GitHub"]:hover,
+.footer-social-links a[href*="github.com"]:hover {
     background: #24292e;
-    border-color: #24292e;
-    box-shadow: 0 12px 25px rgba(36, 41, 46, 0.6);
+    border-color: #444c56;
+    box-shadow: 0 12px 25px rgba(36, 41, 46, 0.5);
 }
 
+/* Twitter / X */
 .footer-social-links a.twitter:hover,
 .footer-social-links a.x-twitter:hover,
 .footer-social-links a[title*="Twitter"]:hover,
-.footer-social-links a[title*="X"]:hover {
+.footer-social-links a[title*="X"]:hover,
+.footer-social-links a[href*="twitter.com"]:hover,
+.footer-social-links a[href*="x.com"]:hover {
     background: #1da1f2;
     border-color: #1da1f2;
-    box-shadow: 0 12px 25px rgba(29, 161, 242, 0.5);
+    box-shadow: 0 12px 25px rgba(29, 161, 242, 0.45);
 }
 
+/* Instagram */
 .footer-social-links a.instagram:hover,
-.footer-social-links a[title*="Instagram"]:hover {
+.footer-social-links a[title*="Instagram"]:hover,
+.footer-social-links a[href*="instagram.com"]:hover {
     background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
     border-color: #dc2743;
-    box-shadow: 0 12px 25px rgba(220, 39, 67, 0.5);
+    box-shadow: 0 12px 25px rgba(220, 39, 67, 0.45);
 }
 
+/* WhatsApp */
 .footer-social-links a.whatsapp:hover,
-.footer-social-links a[title*="WhatsApp"]:hover {
+.footer-social-links a[title*="WhatsApp"]:hover,
+.footer-social-links a[href*="wa.me"]:hover,
+.footer-social-links a[href*="whatsapp.com"]:hover {
     background: #25d366;
     border-color: #25d366;
-    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.45);
 }
 
+/* Telegram */
 .footer-social-links a.telegram:hover,
-.footer-social-links a[title*="Telegram"]:hover {
+.footer-social-links a[title*="Telegram"]:hover,
+.footer-social-links a[href*="t.me"]:hover {
     background: #229ed9;
     border-color: #229ed9;
-    box-shadow: 0 12px 25px rgba(34, 158, 217, 0.5);
+    box-shadow: 0 12px 25px rgba(34, 158, 217, 0.45);
 }
 
+/* YouTube */
 .footer-social-links a.youtube:hover,
-.footer-social-links a[title*="YouTube"]:hover {
+.footer-social-links a[title*="YouTube"]:hover,
+.footer-social-links a[href*="youtube.com"]:hover {
     background: #ff0000;
     border-color: #ff0000;
-    box-shadow: 0 12px 25px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 12px 25px rgba(255, 0, 0, 0.45);
 }
 
+/* Email / Mailto */
 .footer-social-links a.email:hover,
 .footer-social-links a[title*="Email"]:hover,
 .footer-social-links a[href^="mailto:"]:hover {
     background: #ea4335;
     border-color: #ea4335;
-    box-shadow: 0 12px 25px rgba(234, 67, 53, 0.5);
+    box-shadow: 0 12px 25px rgba(234, 67, 53, 0.45);
+}
+
+/* Discord */
+.footer-social-links a.discord:hover,
+.footer-social-links a[title*="Discord"]:hover,
+.footer-social-links a[href*="discord"]:hover {
+    background: #5865f2;
+    border-color: #5865f2;
+    box-shadow: 0 12px 25px rgba(88, 101, 242, 0.45);
+}
+
+/* Facebook */
+.footer-social-links a.facebook:hover,
+.footer-social-links a[title*="Facebook"]:hover,
+.footer-social-links a[href*="facebook.com"]:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+    box-shadow: 0 12px 25px rgba(24, 119, 242, 0.45);
+}
+
+/* TikTok */
+.footer-social-links a.tiktok:hover,
+.footer-social-links a[title*="TikTok"]:hover,
+.footer-social-links a[href*="tiktok.com"]:hover {
+    background: #000000;
+    border-color: #25f4ee;
+    box-shadow: 0 12px 25px rgba(37, 244, 238, 0.45);
+}
+
+/* Behance */
+.footer-social-links a.behance:hover,
+.footer-social-links a[title*="Behance"]:hover,
+.footer-social-links a[href*="behance.net"]:hover {
+    background: #1769ff;
+    border-color: #1769ff;
+    box-shadow: 0 12px 25px rgba(23, 105, 255, 0.45);
+}
+
+/* Dribbble */
+.footer-social-links a.dribbble:hover,
+.footer-social-links a[title*="Dribbble"]:hover,
+.footer-social-links a[href*="dribbble.com"]:hover {
+    background: #ea4c89;
+    border-color: #ea4c89;
+    box-shadow: 0 12px 25px rgba(234, 76, 137, 0.45);
+}
+
+/* Medium */
+.footer-social-links a.medium:hover,
+.footer-social-links a[title*="Medium"]:hover,
+.footer-social-links a[href*="medium.com"]:hover {
+    background: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 12px 25px rgba(255, 255, 255, 0.25);
 }
 
 .footer-copyrights p {
@@ -1035,7 +1174,7 @@ footer {
     color: var(--text-muted);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
