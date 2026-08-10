@@ -535,6 +535,12 @@ form.terminal-body {
     justify-content: center;
     font-size: 1.4rem;
     margin-bottom: 20px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: translateY(-3px) rotate(8deg);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
 }
 
 .service-card h4 {
@@ -768,6 +774,12 @@ form.terminal-body {
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.channel-card:hover .channel-icon {
+    transform: translateY(-4px) rotate(10deg);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
 }
 
 .channel-card:nth-child(2) .channel-icon {
@@ -776,10 +788,18 @@ form.terminal-body {
     color: #22c55e;
 }
 
+.channel-card:nth-child(2):hover .channel-icon {
+    box-shadow: 0 10px 20px rgba(34, 197, 94, 0.4);
+}
+
 .channel-card:nth-child(3) .channel-icon {
     background: rgba(192, 132, 252, 0.1);
     border-color: rgba(192, 132, 252, 0.2);
     color: var(--neon-purple);
+}
+
+.channel-card:nth-child(3):hover .channel-icon {
+    box-shadow: 0 10px 20px rgba(192, 132, 252, 0.4);
 }
 
 .channel-info h3 {
@@ -905,7 +925,7 @@ form.terminal-body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Footer Components */
+/* Footer Components & Social Links Animation */
 footer {
     display: flex;
     justify-content: space-between;
@@ -935,15 +955,79 @@ footer {
     justify-content: center;
     color: var(--text-muted);
     text-decoration: none;
-    transition: var(--transition);
+    /* الحركة السلسة بـ transition مخصص لارتفاع وتدوير جميع الأيقونات */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
+/* الحركة الأساسية لجميع أيقونات الفوتر عند مرور الماوس (Hover) */
 .footer-social-links a:hover {
-    background: #0a66c2;
     color: #ffffff;
-    border-color: #0a66c2;
     transform: translateY(-5px) rotate(10deg);
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    border-color: var(--neon-blue);
+    box-shadow: 0 12px 25px rgba(56, 189, 248, 0.5);
+}
+
+/* تخصيص ألوان الهوفر والأشعة لكل منصة مع الحفاظ على نفس حركة الارتفاع والتدوير */
+.footer-social-links a.linkedin:hover,
+.footer-social-links a[title*="LinkedIn"]:hover,
+.footer-social-links a[aria-label*="LinkedIn"]:hover {
+    background: #0a66c2;
+    border-color: #0a66c2;
     box-shadow: 0 12px 25px rgba(10, 102, 194, 0.5);
+}
+
+.footer-social-links a.github:hover,
+.footer-social-links a[title*="GitHub"]:hover,
+.footer-social-links a[aria-label*="GitHub"]:hover {
+    background: #24292e;
+    border-color: #24292e;
+    box-shadow: 0 12px 25px rgba(36, 41, 46, 0.6);
+}
+
+.footer-social-links a.twitter:hover,
+.footer-social-links a.x-twitter:hover,
+.footer-social-links a[title*="Twitter"]:hover,
+.footer-social-links a[title*="X"]:hover {
+    background: #1da1f2;
+    border-color: #1da1f2;
+    box-shadow: 0 12px 25px rgba(29, 161, 242, 0.5);
+}
+
+.footer-social-links a.instagram:hover,
+.footer-social-links a[title*="Instagram"]:hover {
+    background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+    border-color: #dc2743;
+    box-shadow: 0 12px 25px rgba(220, 39, 67, 0.5);
+}
+
+.footer-social-links a.whatsapp:hover,
+.footer-social-links a[title*="WhatsApp"]:hover {
+    background: #25d366;
+    border-color: #25d366;
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+}
+
+.footer-social-links a.telegram:hover,
+.footer-social-links a[title*="Telegram"]:hover {
+    background: #229ed9;
+    border-color: #229ed9;
+    box-shadow: 0 12px 25px rgba(34, 158, 217, 0.5);
+}
+
+.footer-social-links a.youtube:hover,
+.footer-social-links a[title*="YouTube"]:hover {
+    background: #ff0000;
+    border-color: #ff0000;
+    box-shadow: 0 12px 25px rgba(255, 0, 0, 0.5);
+}
+
+.footer-social-links a.email:hover,
+.footer-social-links a[title*="Email"]:hover,
+.footer-social-links a[href^="mailto:"]:hover {
+    background: #ea4335;
+    border-color: #ea4335;
+    box-shadow: 0 12px 25px rgba(234, 67, 53, 0.5);
 }
 
 .footer-copyrights p {
