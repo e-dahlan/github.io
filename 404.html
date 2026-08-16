@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edrees Dahlan - 404 System Critical</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicon.png">
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- jQuery for the interactive mini-game -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- External Shared Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Additional 404 Game Specific Overrides matching your theme */
+        .error-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        #wordsearch {
+            width: 100%;
+        }
+
+        #wordsearch ul {
+            margin: 0px;
+            padding: 0px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+        }
+
+        #wordsearch ul li {
+            aspect-ratio: 1 / 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #wordsearch ul li:hover {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        #wordsearch ul li.selected, 
+        #wordsearch ul li.user-selected {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .error-content h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ef4444 30%, var(--neon-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .error-content p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        #timer-display {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        #lock-message {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-pink);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        #word-bank {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        #word-bank h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        #word-bank p.instructions {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .word {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-purple);
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .word:hover {
+            border-color: var(--neon-purple);
+            background: rgba(192, 132, 252, 0.1);
+        }
+
+        .word.found {
+            text-decoration: line-through;
+            opacity: 0.3;
+            background: transparent;
+        }
+
+        #estop-btn {
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+            transition: var(--transition);
+        }
+
+        #estop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.5);
+        }
+
+        #navigation {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .error-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip link for keyboard and screen-reader users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Interactive Canvas Background (decorative) -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- Cursor Follower Light (decorative) -->
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-area" aria-label="Edrees Dahlan Home">
+                <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
+                <div class="logo-text">Edrees <span>Dahlan</span></div>
+            </a>
+
+            <div class="nav-controls">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">About Me</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Dark / Light Theme Toggle Button -->
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <div class="content-container" id="main-content">
+            <div class="error-wrapper">
+                
+                <!-- Left Grid: Word Search Grid -->
+                <div id="wordsearch">
+                    <ul>
+                        <li>😁</li><li>D</li><li>A</li><li>H</li><li>L</li><li>A</li><li>N</li><li>😊</li>
+                        <li>E</li><li>A</li><li>S</li><li>Y</li><li class="one">4</li><li class="two">0</li><li class="three">4</li><li>S</li>
+                        <li>C</li><li>U</li><li>R</li><li>A</li><li>T</li><li>O</li><li>O</li><li>N</li>
+                        <li>O</li><li>N</li><li class="four">P</li><li class="five">A</li><li class="six">G</li><li class="seven">E</li><li>3</li><li>D</li>
+                        <li>M</li><li class="eight">N</li><li class="nine">O</li><li class="ten">T</li><li>L</li><li>I</li><li>D</li><li>O</li>
+                        <li>W</li><li>K</li><li>L</li><li>I</li><li>P</li><li>P</li><li>E</li><li>R</li>
+                        <li>E</li><li class="eleven">F</li><li class="twelve">O</li><li class="thirteen">U</li><li class="fourteen">N</li><li class="fifteen">D</li><li>I</li><li>T</li>
+                        <li>B</li><li>A</li><li>J</li><li>A</li><li>K</li><li>I</li><li>M</li><li>O</li>
+                    </ul>
+                </div>
+
+                <!-- Right Grid: Error Info & Puzzle Actions -->
+                <div class="error-content">
+                    <div id="timer-display">
+                        <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> SYSTEM COLLAPSE IN: <span id="time-left">90</span>s
+                    </div>
+
+                    <h1>SYSTEM CRITICAL (404)</h1>
+
+                    <p>You’ve stumbled into the digital void. The server environment is unstable and you are locked in.</p>
+
+                    <!-- The lock message -->
+                    <div id="lock-message">
+                        🔒 <strong>SECURITY PROTOCOL ACTIVE!</strong> Cross off all 11 words below to unlock the exit door. (0/11 found)
+                    </div>
+
+                    <!-- The playable Word Bank box -->
+                    <div id="word-bank">
+                        <h3>Manual Override Puzzle</h3>
+                        <p class="instructions">Find the hidden words in the grid and click them below to cross them off.</p>
+                        <div class="words-container">
+                            <span class="word">DAHLAN</span>
+                            <span class="word">ECOMWEB</span>
+                            <span class="word">EASY</span>
+                            <span class="word">CURA</span>
+                            <span class="word">TOOL</span>
+                            <span class="word">3D</span>
+                            <span class="word">LIDO</span>
+                            <span class="word">KLIPPER</span>
+                            <span class="word">IT</span>
+                            <span class="word">BAJA</span>
+                            <span class="word">KIMO</span>
+                        </div>
+                    </div>
+
+                    <!-- Panic Button -->
+                    <div id="estop-container">
+                        <button id="estop-btn"><i class="fa-solid fa-power-off" aria-hidden="true"></i> Emergency Override</button>
+                    </div>
+
+                    <!-- Hidden until solved -->
+                    <div id="navigation" style="margin-top: 15px;">
+                        <a href="index.html" class="btn btn-cv">
+                            <i class="fa-solid fa-unlock" aria-hidden="true"></i> Escape to Dahlan.me
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <ul class="footer-social-links">
+                <li>
+                    <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="footer-copyrights">
+                <p>&copy; <span id="current-year"></span> Made with <i class="fa-solid fa-heart" style="color: var(--neon-pink);" aria-hidden="true"></i> Edrees Dahlan. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- External Script (handles Canvas particles, dark/light toggle, and mouse glow) -->
+    <script src="main.js"></script>
+
+    <!-- 404 Mini-game Logic Script -->
+    <script>
+        $(function () {
+            /* 404 sequence highlight animation */
+            $(this).delay(1500).queue(function () {
+                $(".one").addClass("selected"); $(this).dequeue();
+            })
+            .delay(400).queue(function () { $(".two").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".three").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".four").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".five").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".six").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".seven").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".eight").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".nine").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".ten").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".eleven").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".twelve").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".thirteen").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".fourteen").addClass("selected"); $(this).dequeue(); })
+            .delay(400).queue(function () { $(".fifteen").addClass("selected"); $(this).dequeue(); });
+        });
+
+        /* Timer & Game Mechanics */
+        $(function() {
+            var totalWords = $('.word').length;
+            var timeLeft = 90;
+            var doorUnlocked = false;
+            
+            var countdown = setInterval(function() {
+                if(doorUnlocked) {
+                    clearInterval(countdown);
+                    return;
+                }
+                
+                timeLeft--;
+                $('#time-left').text(timeLeft);
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    unlockProtocol('timeout');
+                }
+            }, 1000);
+
+            function unlockProtocol(method) {
+                doorUnlocked = true;
+                $('#estop-container').slideUp(300);
+                $('#timer-display').css('border-color', '#22c55e').css('color', '#22c55e').html('<i class="fa-solid fa-check" aria-hidden="true"></i> STATUS: STABILIZED');
+
+                if (method === 'win') {
+                    $('#lock-message').html('🔓 <strong>Manual override successful. You cracked the code!</strong>');
+                } else if (method === 'estop') {
+                    $('#lock-message').html('🚨 <strong>EMERGENCY OVERRIDE ENGAGED!</strong> Security doors forced open.');
+                } else if (method === 'timeout') {
+                    $('#lock-message').html('💥 <strong>SYSTEM TIMEOUT!</strong> The void collapsed, doors broke open.');
+                }
+                
+                $('#navigation').slideDown(500);
+            }
+
+            $('#estop-btn').on('click', function() {
+                if(!doorUnlocked) { unlockProtocol('estop'); }
+            });
+
+            $('.word').on('click', function() {
+                if(doorUnlocked) return;
+                $(this).toggleClass('found');
+                var foundWords = $('.word.found').length;
+                
+                if (foundWords === totalWords) {
+                    unlockProtocol('win');
+                } else {
+                    $('#lock-message').html('🔒 <strong>SECURITY PROTOCOL ACTIVE!</strong> Cross off all ' + totalWords + ' words. (' + foundWords + '/' + totalWords + ' found)');
+                }
+            });
+
+            $('#wordsearch ul li').not('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve, .thirteen, .fourteen, .fifteen').on('click', function() {
+                $(this).toggleClass('user-selected');
+            });
+        });
+    </script>
+
+</body>
+</html>
