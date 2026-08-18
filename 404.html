@@ -14,9 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- jQuery for the interactive mini-game -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <!-- External Shared Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 
@@ -320,43 +317,40 @@
     <!-- External Script (handles Canvas particles, dark/light toggle, and mouse glow) -->
     <script src="main.js"></script>
 
-    <!-- 404 Mini-game Logic Script -->
+    <!-- 404 Mini-game Logic Script (Vanilla JS) -->
     <script>
-        $(function () {
+        document.addEventListener("DOMContentLoaded", function () {
             /* 404 sequence highlight animation */
-            $(this).delay(1500).queue(function () {
-                $(".one").addClass("selected"); $(this).dequeue();
-            })
-            .delay(400).queue(function () { $(".two").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".three").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".four").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".five").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".six").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".seven").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".eight").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".nine").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".ten").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".eleven").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".twelve").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".thirteen").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".fourteen").addClass("selected"); $(this).dequeue(); })
-            .delay(400).queue(function () { $(".fifteen").addClass("selected"); $(this).dequeue(); });
-        });
-
-        /* Timer & Game Mechanics */
-        $(function() {
-            var totalWords = $('.word').length;
-            var timeLeft = 90;
-            var doorUnlocked = false;
+            const highlightClasses = ['.one', '.two', '.three', '.four', '.five', '.six', '.seven', '.eight', '.nine', '.ten', '.eleven', '.twelve', '.thirteen', '.fourteen', '.fifteen'];
             
-            var countdown = setInterval(function() {
-                if(doorUnlocked) {
+            highlightClasses.forEach((cls, index) => {
+                setTimeout(() => {
+                    const el = document.querySelector(cls);
+                    if (el) el.classList.add("selected");
+                }, 1500 + (index * 400));
+            });
+
+            /* Timer & Game Mechanics */
+            const words = document.querySelectorAll('.word');
+            const totalWords = words.length;
+            let timeLeft = 90;
+            let doorUnlocked = false;
+            
+            const timeLeftEl = document.getElementById('time-left');
+            const timerDisplay = document.getElementById('timer-display');
+            const lockMessage = document.getElementById('lock-message');
+            const estopContainer = document.getElementById('estop-container');
+            const navigation = document.getElementById('navigation');
+            const estopBtn = document.getElementById('estop-btn');
+            
+            const countdown = setInterval(function() {
+                if (doorUnlocked) {
                     clearInterval(countdown);
                     return;
                 }
                 
                 timeLeft--;
-                $('#time-left').text(timeLeft);
+                if(timeLeftEl) timeLeftEl.textContent = timeLeft;
                 
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
@@ -366,41 +360,64 @@
 
             function unlockProtocol(method) {
                 doorUnlocked = true;
-                $('#estop-container').slideUp(300);
-                $('#timer-display').css('border-color', '#22c55e').css('color', '#22c55e').html('<i class="fa-solid fa-check" aria-hidden="true"></i> STATUS: STABILIZED');
+                if(estopContainer) estopContainer.style.display = 'none';
+                
+                if(timerDisplay) {
+                    timerDisplay.style.borderColor = '#22c55e';
+                    timerDisplay.style.color = '#22c55e';
+                    timerDisplay.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> STATUS: STABILIZED';
+                }
 
                 if (method === 'win') {
-                    $('#lock-message').html('🔓 <strong>Manual override successful. You cracked the code!</strong>');
+                    lockMessage.innerHTML = '🔓 <strong>Manual override successful. You cracked the code!</strong>';
                 } else if (method === 'estop') {
-                    $('#lock-message').html('🚨 <strong>EMERGENCY OVERRIDE ENGAGED!</strong> Security doors forced open.');
+                    lockMessage.innerHTML = '🚨 <strong>EMERGENCY OVERRIDE ENGAGED!</strong> Security doors forced open.';
                 } else if (method === 'timeout') {
-                    $('#lock-message').html('💥 <strong>SYSTEM TIMEOUT!</strong> The void collapsed, doors broke open.');
+                    lockMessage.innerHTML = '💥 <strong>SYSTEM TIMEOUT!</strong> The void collapsed, doors broke open.';
                 }
                 
-                $('#navigation').slideDown(500);
+                if(navigation) {
+                    // Triggering slide down effect
+                    navigation.style.display = 'block';
+                    navigation.style.opacity = 0;
+                    let opacity = 0;
+                    let fadeIn = setInterval(() => {
+                        if (opacity >= 1) clearInterval(fadeIn);
+                        navigation.style.opacity = opacity;
+                        opacity += 0.1;
+                    }, 30);
+                }
             }
 
-            $('#estop-btn').on('click', function() {
-                if(!doorUnlocked) { unlockProtocol('estop'); }
+            if(estopBtn) {
+                estopBtn.addEventListener('click', function() {
+                    if (!doorUnlocked) { unlockProtocol('estop'); }
+                });
+            }
+
+            words.forEach(word => {
+                word.addEventListener('click', function() {
+                    if (doorUnlocked) return;
+                    this.classList.toggle('found');
+                    const foundWords = document.querySelectorAll('.word.found').length;
+                    
+                    if (foundWords === totalWords) {
+                        unlockProtocol('win');
+                    } else {
+                        lockMessage.innerHTML = '🔒 <strong>SECURITY PROTOCOL ACTIVE!</strong> Cross off all ' + totalWords + ' words. (' + foundWords + '/' + totalWords + ' found)';
+                    }
+                });
             });
 
-            $('.word').on('click', function() {
-                if(doorUnlocked) return;
-                $(this).toggleClass('found');
-                var foundWords = $('.word.found').length;
-                
-                if (foundWords === totalWords) {
-                    unlockProtocol('win');
-                } else {
-                    $('#lock-message').html('🔒 <strong>SECURITY PROTOCOL ACTIVE!</strong> Cross off all ' + totalWords + ' words. (' + foundWords + '/' + totalWords + ' found)');
-                }
-            });
-
-            $('#wordsearch ul li').not('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve, .thirteen, .fourteen, .fifteen').on('click', function() {
-                $(this).toggleClass('user-selected');
+            // Grid elements click handling (excluding the predefined selected path classes)
+            const gridItems = document.querySelectorAll('#wordsearch ul li:not(.one):not(.two):not(.three):not(.four):not(.five):not(.six):not(.seven):not(.eight):not(.nine):not(.ten):not(.eleven):not(.twelve):not(.thirteen):not(.fourteen):not(.fifteen)');
+            
+            gridItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('user-selected');
+                });
             });
         });
     </script>
-
 </body>
 </html>
