@@ -78,15 +78,18 @@ body {
     z-index: -1;
 }
 
-/* Cursor Glow */
+/* Cursor Glow - Hardware Accelerated */
 .cursor-glow {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 500px;
     height: 500px;
     background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(192, 132, 252, 0.05) 50%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
+    will-change: transform;
     z-index: 9999;
     filter: blur(50px);
     transition: width 0.3s, height 0.3s;
