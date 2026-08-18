@@ -84,10 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. Custom Mouse Glow Tracker
+    // 4. Custom Mouse Glow Tracker - Hardware Accelerated version
     const cursorGlow = document.getElementById('cursorGlow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
+    let glowX = mouseX;
+    let glowY = mouseY;
 
     if (cursorGlow) {
         if (prefersReducedMotion) {
@@ -96,9 +98,15 @@ document.addEventListener("DOMContentLoaded", () => {
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-                cursorGlow.style.left = mouseX + 'px';
-                cursorGlow.style.top = mouseY + 'px';
             });
+
+            const animateGlow = () => {
+                glowX += (mouseX - glowX) * 0.15;
+                glowY += (mouseY - glowY) * 0.15;
+                cursorGlow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+                requestAnimationFrame(animateGlow);
+            };
+            animateGlow();
         }
     }
 
@@ -234,7 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const tiltContainer = document.querySelector('.profile-card-container');
 
     if (tiltCard && !prefersReducedMotion) {
-        // Desktop Mouse Interactivity
         if (tiltContainer) {
             tiltContainer.addEventListener('mousemove', (e) => {
                 const rect = tiltContainer.getBoundingClientRect();
@@ -257,12 +264,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Mobile Gyroscope Interactivity
         const handleOrientation = (event) => {
             if (event.beta === null || event.gamma === null) return;
-
-            // Clamping values: beta (-45 to 45), gamma (-45 to 45)
-            let beta = Math.max(-45, Math.min(45, event.beta - 45)); // Assumes natural holding angle (~45 deg)
+            let beta = Math.max(-45, Math.min(45, event.beta - 45));
             let gamma = Math.max(-45, Math.min(45, event.gamma));
 
             const rotateX = (beta / 45) * 15;
@@ -274,7 +278,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const initGyro = () => {
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                // Request permission on iOS 13+ devices upon user touch
                 document.body.addEventListener('touchstart', () => {
                     DeviceOrientationEvent.requestPermission()
                         .then((permissionState) => {
@@ -292,9 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
         initGyro();
     }
 
-    // ==========================================================================
     // 9. DYNAMIC DATA EXTRACTOR & INTERACTIVE CLI SYSTEM
-    // ==========================================================================
     const pageCache = {};
 
     async function fetchAndParsePage(url) {
@@ -321,7 +322,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return await fetchAndParsePage(filename);
     }
 
-    // --- Dynamic Content Generators ---
     async function getAboutData() {
         const doc = await getDocumentForPage('index.html');
         if (!doc) return "Edrees Dahlan - E-commerce Manager & Computer Engineer.";
@@ -431,7 +431,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return services.length > 0 ? services.join('<br>') : "Projects and integrations initialized.";
     }
 
-    // --- CLI Command Processing ---
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
     const terminalBody = document.querySelector('.terminal-body') || document.getElementById('terminalBody');
     const cliChips = document.querySelectorAll('.cli-chip');
@@ -461,16 +460,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 responseText = `Available commands (parsed dynamically):
   <span style="color: var(--neon-blue);">about</span>         - Bio & summary from About Me page
   <span style="color: var(--neon-blue);">skills</span>        - Extracted skill set from Resume
-  <span style="color: var(--neon-blue);">experience</span>  - Career timeline from Resume
-  <span style="color: var(--neon-blue);">certs</span>         - Technical certifications & credentials
-  <span style="color: var(--neon-blue);">techstack</span>     - Infrastructure, APIs & core frameworks
   <span style="color: var(--neon-blue);">projects</span>      - Services & system architecture
   <span style="color: var(--neon-blue);">contact</span>       - Direct channels from Contact page
+  <span style="color: var(--neon-blue);">cv</span>            - Download my Resume (PDF)
   <span style="color: var(--neon-blue);">sysinfo</span>       - Local client session metrics
   <span style="color: var(--neon-blue);">coffee</span>        - V60 brew status ☕
-  <span style="color: var(--neon-blue);">df / disk</span>     - Filesystem disk usage (Total, Used, Available)
-  <span style="color: var(--neon-blue);">screen / tig</span>  - Terminal multiplexer & git browser stats
-  <span style="color: var(--neon-blue);">aws / sqlite3</span> - Cloud & database tools
+  <span style="color: var(--neon-blue);">pihole</span>        - Local DNS stats
+  <span style="color: var(--neon-blue);">klipper</span>       - 3D Printer status
+  <span style="color: var(--neon-blue);">isopods</span>       - Vivarium culture check
+  <span style="color: var(--neon-blue);">terrarium</span>     - Closed Ecosystem stats
   <span style="color: var(--neon-blue);">clear</span>         - Clear terminal`;
                 break;
 
@@ -506,12 +504,23 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'contact':
                 responseText = await getContactData();
                 break;
+                
+            case 'cv':
+            case 'download cv':
+                responseText = `Initiating CV download...<br><span style="color: #22c55e;">[SUCCESS] Edrees_Dahlan_Resume.pdf has been downloaded!</span>`;
+                const link = document.createElement('a');
+                link.href = 'Edrees_Dahlan_Resume.pdf';
+                link.download = 'Edrees_Dahlan_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                break;
 
             case 'sysinfo':
             case 'specs':
                 let browserName = "Modern Browser";
                 let osName = navigator.platform;
-
+                
                 if (navigator.userAgentData && navigator.userAgentData.brands) {
                     const realBrand = navigator.userAgentData.brands.find(
                         b => !b.brand.includes("Not") && !b.brand.includes("Brand")
@@ -530,25 +539,42 @@ document.addEventListener("DOMContentLoaded", () => {
                     else if (ua.includes("Chrome")) browserName = "Google Chrome";
                     else if (ua.includes("Firefox")) browserName = "Mozilla Firefox";
                     else if (ua.includes("Safari")) browserName = "Apple Safari";
-
-                    if (ua.includes("Win")) osName = "Windows";
-                    else if (ua.includes("Mac")) osName = "macOS";
-                    else if (ua.includes("Linux")) osName = "Linux";
-                    else if (ua.includes("Android")) osName = "Android";
-                    else if (ua.includes("iPhone")) osName = "iOS";
                 }
 
                 responseText = `<strong style="color: var(--neon-blue);">Client Environment Metrics:</strong><br>` +
                                `  • <strong>Browser:</strong> ${browserName}<br>` +
                                `  • <strong>OS / Platform:</strong> ${osName}<br>` +
-                               `  • <strong>Screen Resolution:</strong> ${window.screen.width}x${window.screen.height} (Viewport: ${window.innerWidth}x${window.innerHeight})<br>` +
-                               `  • <strong>Device Memory:</strong> ${navigator.deviceMemory ? navigator.deviceMemory + ' GB' : 'N/A'}<br>` +
-                               `  • <strong>CPU Cores:</strong> ${navigator.hardwareConcurrency || 'N/A'}<br>` +
+                               `  • <strong>Screen Resolution:</strong> ${window.screen.width}x${window.screen.height}<br>` +
                                `  • <strong>Online Status:</strong> ${navigator.onLine ? '<span style="color:#22c55e;">Online</span>' : '<span style="color:#ef4444;">Offline</span>'}`;
                 break;
 
             case 'coffee':
                 responseText = `Brew Status: <span style="color: #f59e0b;">V60 Anaerobic Single Origin Calibration Ready ☕</span><br>Grind Calibration: Lido ET Precision | Temp: 92°C<br><span style="color: var(--neon-purple);">Note: Code runs on coffee, coffee runs on code! ☕</span>`;
+                break;
+                
+            case 'pihole':
+                responseText = `<strong style="color: var(--neon-purple);">Pi-hole Network-wide Ad Blocking:</strong><br>` +
+                               `  • Status: <span style="color: #22c55e;">Active</span> (Raspberry Pi Local)<br>` +
+                               `  • Queries Blocked Today: 14,231 (18.4%)<br>` +
+                               `  • Domains on Adlists: 1,340,921`;
+                break;
+                
+            case 'klipper':
+                responseText = `<strong style="color: var(--neon-blue);">Ender 3 S1 Pro (Klipper Firmware):</strong><br>` +
+                               `  • Connection: <span style="color: #22c55e;">Online</span> (Local Host via Ethernet)<br>` +
+                               `  • Extruder Temp: 210°C / Target: 210°C<br>` +
+                               `  • Bed Temp: 60°C / Target: 60°C<br>` +
+                               `  • Webcam Stream: <span style="color: #22c55e;">Active</span>`;
+                break;
+                
+            case 'isopods':
+                responseText = `Culture Bin Status Check... 🐛<br>` +
+                               `<span style="color: #f59e0b;">Observation result:</span> <span style="color: var(--neon-pink);">100% Males detected.</span><br>` +
+                               `Action required: Need to introduce females for successful breeding setup.`;
+                break;
+                
+            case 'terrarium':
+                responseText = `Closed Ecosystem Status: Aralia and springtails thriving. Humidity stable at 85%.`;
                 break;
 
             case 'df':
@@ -562,135 +588,6 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'su':
             case 'root':
                 responseText = `<span style="color: #ef4444;">Permission denied: User is not in the sudoers file. Incident reported 😉</span>`;
-                break;
-
-            case 'ls':
-            case 'dir':
-                responseText = `drwxr-xr-x  about.html<br>` +
-                               `drwxr-xr-x  resume.html<br>` +
-                               `drwxr-xr-x  projects.html<br>` +
-                               `drwxr-xr-x  contact.html<br>` +
-                               `-rw-r--r--  coffee_recipe.v60<br>` +
-                               `-rw-r--r--  klipper_config.cfg`;
-                break;
-
-            case 'pwd':
-                responseText = `/home/visitor/edrees-portfolio`;
-                break;
-
-            case 'cd':
-                responseText = `Already in the root directory. Type <span style="color: var(--neon-blue);">help</span> to explore sections!`;
-                break;
-
-            case 'whoami':
-                responseText = `Guest Visitor @ Edrees Dahlan's Terminal`;
-                break;
-
-            case 'exit':
-            case 'quit':
-                responseText = `Cannot exit live web session. You are stuck here forever! 🚀`;
-                break;
-
-            case 'date':
-                responseText = `${new Date().toString()}`;
-                break;
-
-            case 'ping':
-                responseText = `PING edrees.dev (127.0.0.1): 56 data bytes<br>` +
-                               `64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.042 ms<br>` +
-                               `<span style="color: #22c55e;">0.00% packet loss — Connection solid!</span>`;
-                break;
-
-            case 'cat':
-            case 'read':
-                responseText = `Usage: Type <span style="color: var(--neon-blue);">about</span>, <span style="color: var(--neon-blue);">skills</span>, or <span style="color: var(--neon-blue);">projects</span> to inspect data directly.`;
-                break;
-
-            case 'curl':
-            case 'wget':
-                responseText = `<span style="color: var(--neon-purple);">HTTP/2 200 OK — Header inspection verified. Connection to portfolio backend secure.</span>`;
-                break;
-
-            case 'git':
-                responseText = `git status: On branch main. Your branch is up to date with 'origin/main'. Clean working tree.`;
-                break;
-
-            case 'ssh':
-                responseText = `ssh visitor@edrees.dev: Connection established. Welcome to the inner shell!`;
-                break;
-
-            case 'top':
-            case 'htop':
-                responseText = `Tasks: 42 total, 1 running, 41 sleeping.<br>` +
-                               `CPU usage: 1.2% user, 0.4% sys. Memory: 420MB / 16GB used.<br>` +
-                               `<span style="color: #22c55e;">Status: System performance optimal.</span>`;
-                break;
-
-            case 'screen':
-                responseText = `[screen 4.8.0 active] Home session multiplexer running. Background services & monitoring stable.`;
-                break;
-
-            case 'tig':
-                responseText = `tig v2.5.0: Text-mode interface for git history loaded successfully. Branch graph rendering...`;
-                break;
-
-            case 'sqlite3':
-                responseText = `SQLite version 3.37.2. Database connected. Query execution ready.`;
-                break;
-
-            case 'aws':
-                responseText = `AWS CLI v2.7.x configured. Cloud infrastructure operational.`;
-                break;
-
-            case 'keep':
-                responseText = `Utility reference loaded. State preserved across active sessions.`;
-                break;
-
-            case 'find':
-                responseText = `Usage: find [path] [expression]. Indexing file search tree...`;
-                break;
-
-            case './backup-output.sh':
-                responseText = `<span style="color: #22c55e;">Executing backup script...</span><br>[SUCCESS] Core logs and workspace snapshots archived safely.`;
-                break;
-
-            case 'grep':
-                responseText = `Usage: grep [pattern] [file]. Try filtering skills or projects via site sections.`;
-                break;
-
-            case 'nano':
-            case 'vim':
-                responseText = `<span style="color: #ef4444;">Error: Read-only sandbox environment. You cannot edit live server code here!</span>`;
-                break;
-
-            case 'less':
-            case 'more':
-            case 'tail':
-                responseText = `Log monitor active: No new error logs. All systems operating normally.`;
-                break;
-
-            case 'chmod':
-                responseText = `Permission denied: Cannot modify file permissions in visitor mode.`;
-                break;
-
-            case 'mkdir':
-                responseText = `Directory created virtually in temporary session storage.`;
-                break;
-
-            case 'rm':
-            case 'rmdir':
-                responseText = `<span style="color: #ef4444;">Nice try! File deletion commands are disabled for security reasons. 😉</span>`;
-                break;
-
-            case 'cp':
-            case 'mv':
-                responseText = `File operation simulated successfully.`;
-                break;
-
-            case 'fzf':
-            case 'zoxide':
-            case 'tldr':
-                responseText = `Modern CLI tool loaded! Type <span style="color: var(--neon-blue);">help</span> for available commands.`;
                 break;
 
             default:
@@ -736,6 +633,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const formStatus = document.getElementById('formStatus');
             const honeypot = document.getElementById('website');
 
+            const formData = new FormData(contactForm);
+            const turnstileResponse = formData.get('cf-turnstile-response');
+
+            // 1. Check Cloudflare Turnstile CAPTCHA first
+            if (!turnstileResponse) {
+                formStatus.style.display = 'flex';
+                formStatus.className = 'terminal-status-loading';
+                formStatus.style.color = '#f59e0b';
+                formStatus.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+                formStatus.style.background = 'rgba(245, 158, 11, 0.1)';
+                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> Security Check Required: Please verify you are human.`;
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+                return; // Stop submission until captcha is solved
+            }
+
+            // 2. Check traditional Honeypot for bots
             if (honeypot && honeypot.value.trim() !== '') {
                 submitBtn.style.display = 'none';
                 formStatus.style.display = 'flex';
@@ -749,13 +664,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            // Proceed to API submission
             submitBtn.style.display = 'none';
             formStatus.style.display = 'flex';
             formStatus.className = 'terminal-status-loading';
             formStatus.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Executing transmission protocol...`;
 
             try {
-                const formData = new FormData(contactForm);
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     body: formData
