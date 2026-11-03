@@ -923,7 +923,6 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
             terminalInput.addEventListener('keydown', cancelWelcome, { once: true });
             terminalInput.addEventListener('pointerdown', cancelWelcome, { once: true });
             cliChips.forEach(chip => chip.addEventListener('click', cancelWelcome, { once: true }));
-            cliTypingToggle?.addEventListener('click', cancelWelcome, { once: true });
 
             const scheduleWelcome = () => {
                 if (welcomeCancelled) return;
