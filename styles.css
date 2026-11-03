@@ -560,6 +560,23 @@ nav ul li a:hover {
     color: #22c55e;
 }
 
+.cli-motion-toggle {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--neon-blue);
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 9px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.cli-motion-toggle[aria-pressed="false"] {
+    color: var(--text-muted);
+}
+
 .terminal-body {
     padding: 24px;
     min-height: 240px;
