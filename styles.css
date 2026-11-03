@@ -187,9 +187,10 @@ textarea:focus-visible,
     transition: var(--transition);
 }
 
+/* Keep the entrance movement, but don't fade out the entire page: this can hide LCP candidates from Lighthouse. */
 @keyframes heroEntrance {
-    0% { opacity: 0; transform: translateY(40px) scale(0.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+    0% { transform: translateY(40px) scale(0.97); }
+    100% { transform: translateY(0) scale(1); }
 }
 
 /* Scroll Reveal Classes */
@@ -367,6 +368,7 @@ nav ul li a:hover {
     margin-bottom: 30px;
 }
 
+.section-header h1,
 .section-header h2 {
     font-family: 'Outfit', sans-serif;
     font-size: 1.6rem;
@@ -407,7 +409,7 @@ nav ul li a:hover {
     will-change: transform;
 }
 
-.hero-details h4 {
+.hero-details .hero-kicker {
     color: var(--neon-blue);
     font-size: 0.95rem;
     font-weight: 700;
@@ -673,7 +675,7 @@ form.terminal-body {
     box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
 }
 
-.service-card h4 {
+.service-card h3 {
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
@@ -719,7 +721,7 @@ form.terminal-body {
     box-shadow: 0 12px 30px rgba(192, 132, 252, 0.15);
 }
 
-.stat-card h4,
+.stat-card h3,
 .stat-label {
     font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
@@ -1307,6 +1309,38 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* Keep the same glassmorphism style with less GPU-heavy blur on phones. */
+    .main-wrapper {
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    header, nav {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Allow the CLI and status messages to fit narrow screens. */
+    .terminal-body {
+        overflow-wrap: anywhere;
+        padding: 20px 16px;
+    }
+
+    .terminal-input-line {
+        min-width: 0;
+    }
+
+    .terminal-prompt {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 0.78rem;
+    }
+
+    .terminal-input {
+        min-width: 0;
+        font-size: 16px;
+    }
+
     body {
         padding: 12px;
     }
