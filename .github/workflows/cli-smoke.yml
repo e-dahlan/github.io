@@ -4,18 +4,28 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'resume.html'
+      - 'contact.html'
+      - 'projects.html'
+      - 'projects/**'
       - 'main.js'
       - 'styles.css'
       - 'tests/cli-smoke.mjs'
+      - 'tests/projects-smoke.mjs'
       - '.github/workflows/cli-smoke.yml'
   push:
     branches:
-      - cli-inline-terminal-hotfix-2026-11-03
+      - featured-projects-case-studies-2026-11-03
     paths:
       - 'index.html'
+      - 'resume.html'
+      - 'contact.html'
+      - 'projects.html'
+      - 'projects/**'
       - 'main.js'
       - 'styles.css'
       - 'tests/cli-smoke.mjs'
+      - 'tests/projects-smoke.mjs'
       - '.github/workflows/cli-smoke.yml'
 
 jobs:
@@ -36,3 +46,4 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/dahlan-cli-http.log 2>&1 &
           sleep 2
           node tests/cli-smoke.mjs
+          node tests/projects-smoke.mjs
