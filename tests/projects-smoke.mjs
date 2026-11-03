@@ -26,9 +26,29 @@ try {
       if (file === 'index.html' || file === 'projects.html') {
         assert.equal(await page.locator('.project-card').count(), 3, 'Expected 3 case study cards on ' + file);
         assert.equal(await page.locator('a.project-case-link').count(), 3);
+        assert.equal(await page.locator('.project-proof-thumb').count(), 2);
+        for (const image of await page.locator('.project-proof-thumb').all()) {
+          await image.scrollIntoViewIfNeeded();
+          await image.evaluate(async img => {
+            if (!img.complete) await new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
+          });
+          const width = await image.evaluate(img => img.naturalWidth);
+          assert.ok(width > 0, file + ' has a missing evidence thumbnail');
+        }
       } else {
         assert.equal(await page.locator('.case-content .case-section').count(), 3);
         assert.equal(await page.locator('.case-breadcrumb a').count(), 2);
+        if (file.includes('ecommerce-platform') || file.includes('engineering-lab')) {
+          const evidence = page.locator('.case-evidence img');
+          assert.equal(await evidence.count(), 1);
+          await evidence.scrollIntoViewIfNeeded();
+          await evidence.evaluate(async img => {
+            if (!img.complete) await new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
+          });
+          assert.ok(await evidence.evaluate(img => img.naturalWidth > 0), 'Case evidence should load');
+        } else {
+          assert.equal(await page.locator('.case-evidence').count(), 0);
+        }
       }
     }
     assert.deepEqual(scriptErrors, [], 'Browser errors on ' + viewport.width + 'px');
@@ -48,10 +68,10 @@ try {
   ]);
   await home.locator('a.project-case-link').first().click();
   await home.waitForURL(/projects\/ecommerce-platform\.html/);
-  assert.match(await home.locator('main').innerText(), /Alharam Tools/);
-  assert.match(await home.locator('main').innerText(), /الهرم المثالي/);
+  assert.match(await home.locator('main').innerText(), /AL Haram Perfect Machinery & Equipment CO\.L\.L\.C\./);
+  assert.doesNotMatch(await home.locator('main').innerText(), /Alharam Tools/);
   assert.equal(await home.locator('a[href="https://alharamtools.com.sa/"]').count(), 1);
-  console.log('PASS project card navigation and public Alharam Tools attribution');
+  console.log('PASS project card navigation, screenshot evidence, and official company name');
 
   await home.goto(base, { waitUntil: 'domcontentloaded' });
   await home.waitForFunction(() => document.documentElement.dataset.cliReady === '3.1');
