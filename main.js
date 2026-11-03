@@ -634,16 +634,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const honeypot = document.getElementById('website');
 
             const formData = new FormData(contactForm);
-            const turnstileResponse = formData.get('cf-turnstile-response');
+            const captchaResponse = formData.get('h-captcha-response');
 
-            // 1. Check Cloudflare Turnstile CAPTCHA first
-            if (!turnstileResponse) {
+            // 1. Verify hCaptcha response before submitting to Web3Forms
+            if (!captchaResponse) {
                 formStatus.style.display = 'flex';
                 formStatus.className = 'terminal-status-loading';
                 formStatus.style.color = '#f59e0b';
                 formStatus.style.borderColor = 'rgba(245, 158, 11, 0.3)';
                 formStatus.style.background = 'rgba(245, 158, 11, 0.1)';
-                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> Security Check Required: Please verify you are human.`;
+                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> Security Check Required: Please complete hCaptcha to send your message.`;
                 setTimeout(() => {
                     formStatus.style.display = 'none';
                 }, 5000);
