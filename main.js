@@ -455,20 +455,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switch (cleanCmd) {
             case 'help':
-                responseText = `Available commands (parsed dynamically):
-  <span style="color: var(--neon-blue);">about</span>         - Bio & summary from About Me page
-  <span style="color: var(--neon-blue);">skills</span>        - Extracted skill set from Resume
-  <span style="color: var(--neon-blue);">projects</span>      - Services and capabilities
-  <span style="color: var(--neon-blue);">contact</span>       - Direct channels from Contact page
-  <span style="color: var(--neon-blue);">cv</span>            - Download my Resume (PDF)
-  <span style="color: var(--neon-blue);">sysinfo</span>       - Local client session metrics
-  <span style="color: var(--neon-blue);">coffee</span>        - V60 brew status ☕
-  <span style="color: var(--neon-blue);">pihole</span>        - DNS filtering demo
-  <span style="color: var(--neon-blue);">klipper</span>       - 3D printer demo
-  <span style="color: var(--neon-blue);">isopods</span>       - Vivarium culture check
-  <span style="color: var(--neon-blue);">terrarium</span>     - Closed Ecosystem stats
-  <span style="color: var(--neon-blue);">history</span>       - Recent commands
-  <span style="color: var(--neon-blue);">clear</span>         - Clear terminal`;
+                responseText = `<strong style="color: var(--neon-purple);">Portfolio commands</strong><br>
+<span style="color: var(--neon-blue);">about</span>          Profile summary<br>
+<span style="color: var(--neon-blue);">experience</span>     Work experience<br>
+<span style="color: var(--neon-blue);">skills</span>         Technical skills<br>
+<span style="color: var(--neon-blue);">certs</span>          Certifications and training<br>
+<span style="color: var(--neon-blue);">techstack</span>      Technology stack<br>
+<span style="color: var(--neon-blue);">projects</span>       Areas of work and capabilities<br>
+<span style="color: var(--neon-blue);">contact</span>        Contact details<br>
+<span style="color: var(--neon-blue);">cv</span>             Download resume PDF<br>
+<span style="color: var(--neon-blue);">sysinfo</span>        Your browser environment<br>
+<span style="color: var(--neon-blue);">history</span>        Recent session commands<br>
+<span style="color: var(--neon-blue);">clear</span>          Clear terminal<br><br>
+<strong style="color: var(--neon-purple);">Explore (demos and easter eggs)</strong><br>
+coffee · pihole · klipper · isopods · terrarium · disk`;
                 break;
 
             case 'history':
