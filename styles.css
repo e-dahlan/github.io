@@ -1610,6 +1610,57 @@ footer {
     }
 }
 
+/* Genuine screenshot thumbnails from previously shared project images. */
+.project-proof-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    display: block;
+}
+.project-card-visual:has(.project-proof-thumb)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(2, 6, 23, 0.60), transparent 35%, transparent 62%, rgba(2, 6, 23, 0.72));
+    pointer-events: none;
+}
+.project-card-visual:has(.project-proof-thumb) .project-visual-index,
+.project-card-visual:has(.project-proof-thumb) .project-visual-bottom {
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.85);
+}
+.case-evidence {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    background: var(--card-bg);
+    margin: 0 0 24px;
+}
+.case-evidence img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+.case-evidence figcaption {
+    flex: 1 1 200px;
+    color: var(--text-muted);
+    font-size: .87rem;
+    line-height: 1.7;
+}
+
 /* ==========================================================================
    Featured Projects & Case Studies
    Lightweight, accessible and consistent with the existing dark/light theme.
