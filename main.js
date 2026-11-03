@@ -320,8 +320,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!doc) return "Edrees Dahlan - E-commerce Manager & Computer Engineer.";
         
         const title = doc.querySelector('.hero-details h1')?.textContent.trim() || "EDREES DAHLAN";
-        const subtitle = doc.querySelector('.hero-details h4')?.textContent.trim() || "Computer Engineer | E-commerce Manager";
-        const bio = doc.querySelector('.hero-details p')?.textContent.trim() || "";
+        const subtitle = doc.querySelector('.hero-details .hero-kicker')?.textContent.trim() || "Computer Engineer | E-commerce Manager";
+        const bio = doc.querySelector('.hero-details p:not(.hero-kicker)')?.textContent.trim() || "";
         
         return `<strong style="color: var(--neon-blue);">${title}</strong> (${subtitle})<br>${bio}`;
     }
