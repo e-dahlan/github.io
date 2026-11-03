@@ -547,7 +547,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 break;
 
             case 'whoami':
-                responseText = 'visitor — exploring the Edrees Dahlan portfolio';
+                responseText = '<strong style="color: var(--neon-blue);">Edrees Dahlan</strong> — E-commerce Manager & Computer Engineer<br><span style="color: var(--text-muted);">Session: visitor (portfolio simulation)</span>';
                 break;
 
             case 'pwd':
@@ -822,11 +822,118 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
 
     // Visible self-check: if this does not say Ready, the terminal JS did not initialize.
     if (cliStatus) {
-        cliStatus.textContent = 'v2.9 · Ready';
+        cliStatus.textContent = 'v3.0 · Ready';
         cliStatus.classList.add('cli-ready');
     }
     if (terminalInput && terminalBody && cliChips.length) {
-        document.documentElement.dataset.cliReady = '2.9';
+        document.documentElement.dataset.cliReady = '3.0';
+    }
+
+    // First-visit welcome: a non-blocking, decorative shell demo.
+    // It is intentionally separate from normal command execution, so the visitor
+    // can start using the terminal immediately and interrupt the animation.
+    const welcomeStorageKey = 'edrees-cli-intro-v3';
+    let welcomeCancelled = false;
+    let welcomeTimer = null;
+
+    function rememberWelcome() {
+        try { sessionStorage.setItem(welcomeStorageKey, '1'); } catch (error) {
+            // Private browsing may disallow storage; the terminal still works.
+        }
+    }
+
+    function cancelWelcome() {
+        welcomeCancelled = true;
+        if (welcomeTimer !== null) {
+            clearTimeout(welcomeTimer);
+            welcomeTimer = null;
+        }
+        rememberWelcome();
+    }
+
+    async function writeWelcomeText(node, text, delayMs) {
+        if (!typingEnabled) {
+            node.textContent = text;
+            return !welcomeCancelled;
+        }
+
+        for (const character of Array.from(text)) {
+            if (welcomeCancelled) return false;
+            node.textContent += character;
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+            await sleep(delayMs);
+        }
+        return !welcomeCancelled;
+    }
+
+    async function showWelcomeCommand(command, answer) {
+        if (welcomeCancelled || !terminalBody || !livePrompt) return false;
+
+        const line = document.createElement('div');
+        line.className = 'terminal-output cli-welcome-output';
+
+        const commandRow = document.createElement('div');
+        commandRow.className = 'cli-welcome-command';
+        const promptText = document.createElement('span');
+        promptText.className = 'terminal-prompt';
+        promptText.textContent = 'edrees@cli:~$ ';
+        const typedText = document.createElement('span');
+        commandRow.append(promptText, typedText);
+
+        const resultRow = document.createElement('div');
+        resultRow.className = 'cli-welcome-result';
+
+        line.append(commandRow, resultRow);
+        terminalBody.insertBefore(line, livePrompt);
+
+        const commandComplete = await writeWelcomeText(typedText, command, 47);
+        if (!commandComplete) { line.remove(); return false; }
+
+        await sleep(140);
+        const answerComplete = await writeWelcomeText(resultRow, answer, 13);
+        if (!answerComplete) { line.remove(); return false; }
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        return true;
+    }
+
+    async function playWelcome() {
+        welcomeTimer = null;
+        if (welcomeCancelled || cliBusy || document.hidden) return;
+        rememberWelcome();
+
+        const identity = 'Edrees Dahlan — E-commerce Manager & Computer Engineer';
+        if (!await showWelcomeCommand('whoami', identity)) return;
+        if (welcomeCancelled) return;
+
+        await sleep(240);
+        if (welcomeCancelled || !await showWelcomeCommand(
+            'help',
+            'Available commands: about, skills, projects, experience, contact, cv, history, clear. Type help to see more.'
+        )) return;
+
+        document.documentElement.dataset.cliIntro = 'complete';
+    }
+
+    if (terminalInput && terminalBody && livePrompt) {
+        let alreadySeen = false;
+        try { alreadySeen = sessionStorage.getItem(welcomeStorageKey) === '1'; } catch (error) {}
+
+        if (!alreadySeen) {
+            // Any intentional interaction takes precedence over the demo.
+            terminalInput.addEventListener('keydown', cancelWelcome, { once: true });
+            terminalInput.addEventListener('pointerdown', cancelWelcome, { once: true });
+            cliChips.forEach(chip => chip.addEventListener('click', cancelWelcome, { once: true }));
+
+            const scheduleWelcome = () => {
+                if (welcomeCancelled) return;
+                welcomeTimer = setTimeout(() => { void playWelcome(); }, 1900);
+            };
+            if (document.readyState === 'complete') {
+                scheduleWelcome();
+            } else {
+                window.addEventListener('load', scheduleWelcome, { once: true });
+            }
+        }
     }
 
     function escapeHtml(text) {
