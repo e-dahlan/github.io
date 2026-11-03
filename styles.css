@@ -550,10 +550,20 @@ nav ul li a:hover {
     color: var(--text-muted);
 }
 
+.cli-status {
+    font-size: 0.72rem;
+    color: var(--neon-pink);
+    margin-left: 8px;
+}
+
+.cli-status.cli-ready {
+    color: #22c55e;
+}
+
 .terminal-body {
     padding: 24px;
-    min-height: 160px;
-    max-height: 280px;
+    min-height: 240px;
+    max-height: 380px;
     overflow-y: auto;
     font-family: 'Fira Code', monospace;
     font-size: 0.9rem;
@@ -634,6 +644,17 @@ form.terminal-body {
     font-family: 'Fira Code', monospace;
     font-size: 0.75rem;
     line-height: 1.5;
+}
+
+.terminal-body > .terminal-input-line {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    margin-top: 4px;
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    background: var(--terminal-header-bg);
+    border-radius: 10px;
 }
 
 .terminal-input-line {
