@@ -368,6 +368,7 @@ nav ul li a:hover {
     margin-bottom: 30px;
 }
 
+.section-header h1,
 .section-header h2 {
     font-family: 'Outfit', sans-serif;
     font-size: 1.6rem;
