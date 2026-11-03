@@ -434,6 +434,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const cliChips = document.querySelectorAll('.cli-chip');
     const livePrompt = document.getElementById('cliPrompt');
     const cliStatus = document.getElementById('cliStatus');
+    const cliTypingToggle = document.getElementById('cliTypingToggle');
+    let typingEnabled = !prefersReducedMotion;
+
+    function renderTypingToggle() {
+        if (!cliTypingToggle) return;
+        cliTypingToggle.textContent = typingEnabled ? 'Typing: ON' : 'Typing: OFF';
+        cliTypingToggle.setAttribute('aria-pressed', String(typingEnabled));
+    }
+    if (cliTypingToggle) {
+        cliTypingToggle.addEventListener('click', () => {
+            typingEnabled = !typingEnabled;
+            renderTypingToggle();
+        });
+        renderTypingToggle();
+    }
 
     // Render HTML responses progressively without breaking the markup or executing commands.
     // Displaying actual output in the terminal makes clicking a command feel like a shell.
@@ -457,7 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         copyTree(parsed, target);
 
-        if (prefersReducedMotion) {
+        if (!typingEnabled) {
             parts.forEach(part => { part.node.textContent = part.text; });
             return;
         }
@@ -726,7 +741,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 terminalInput.focus({ preventScroll: true });
                 const chars = Array.from(command);
 
-                if (prefersReducedMotion) {
+                if (!typingEnabled) {
                     terminalInput.value = command;
                 } else {
                     for (const char of chars) {
