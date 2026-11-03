@@ -138,19 +138,23 @@
             <div class="section-header">
                 <h2>Interactive CLI</h2>
             </div>
-            <div class="terminal-container">
+            <div class="terminal-container" data-cli-version="2.9">
                 <div class="terminal-header">
                     <div class="terminal-dots">
                         <div class="terminal-dot dot-red"></div>
                         <div class="terminal-dot dot-yellow"></div>
                         <div class="terminal-dot dot-green"></div>
                     </div>
-                    <div class="terminal-title">visitor@edrees-terminal:~</div>
-                    <div></div>
+                    <div class="terminal-title">visitor@edrees-terminal:~ <span id="cliStatus" class="cli-status" aria-live="polite">v2.9 · Loading…</span></div>
+                    <button id="cliTypingToggle" class="cli-motion-toggle" type="button" aria-pressed="true" aria-label="Toggle terminal typing animation">Typing: ON</button>
                 </div>
                 <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-label="Interactive terminal output">
                     <div class="terminal-output">
-                        <p>Welcome to Edrees Dahlan's Interactive Shell v2.8. Type <span>help</span> to see available commands.</p>
+                        <p>Welcome to Edrees Dahlan's Interactive Shell v2.9. Type <span>help</span> to see available commands.</p>
+                    </div>
+                    <div class="terminal-input-line" id="cliPrompt">
+                        <span class="terminal-prompt">edrees@cli:~$</span>
+                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-label="Terminal command" aria-describedby="cliHint">
                     </div>
                 </div>
                 <div class="terminal-quick-chips">
@@ -160,13 +164,7 @@
                     <button class="cli-chip" data-command="contact">contact</button>
                     <button class="cli-chip" data-command="clear">clear</button>
                 </div>
-                <p class="terminal-hint" id="cliHint">Click a command to watch it type and display results. Use ↑ / ↓ for history, Tab to complete, or Esc to skip.</p>
-                <div style="padding: 0 24px 20px 24px;">
-                    <div class="terminal-input-line">
-                        <span class="terminal-prompt">edrees@cli:~$</span>
-                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command here..." autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" aria-describedby="cliHint">
-                    </div>
-                </div>
+                <p class="terminal-hint" id="cliHint">Select a command or type your own. ↑ / ↓ history · Tab autocomplete · Esc skips animation.</p>
             </div>
 
             <!-- What I Do Section -->
@@ -236,6 +234,6 @@
     </div>
 
     <!-- External Script -->
-    <script src="main.js?v=20261103-cli2"></script>
+    <script src="main.js?v=20261103-cli3"></script>
 </body>
 </html>

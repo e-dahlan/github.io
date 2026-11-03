@@ -1,0 +1,38 @@
+name: CLI browser smoke test
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'main.js'
+      - 'styles.css'
+      - 'tests/cli-smoke.mjs'
+      - '.github/workflows/cli-smoke.yml'
+  push:
+    branches:
+      - cli-inline-terminal-hotfix-2026-11-03
+    paths:
+      - 'index.html'
+      - 'main.js'
+      - 'styles.css'
+      - 'tests/cli-smoke.mjs'
+      - '.github/workflows/cli-smoke.yml'
+
+jobs:
+  cli-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium --with-deps
+      - name: Serve static site and test CLI in Chromium
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/dahlan-cli-http.log 2>&1 &
+          sleep 2
+          node tests/cli-smoke.mjs
