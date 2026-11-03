@@ -433,6 +433,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const terminalBody = document.querySelector('.terminal-body') || document.getElementById('terminalBody');
     const cliChips = document.querySelectorAll('.cli-chip');
 
+    // Render HTML responses progressively without breaking the markup or executing commands.
+    // Displaying actual output in the terminal makes clicking a command feel like a shell.
+    async function typeTerminalResponse(target, html) {
+        const parsed = document.createElement('div');
+        parsed.innerHTML = html;
+        const parts = [];
+
+        function copyTree(source, destination) {
+            Array.from(source.childNodes).forEach(node => {
+                if (node.nodeType === 3) {
+                    const textNode = document.createTextNode('');
+                    destination.appendChild(textNode);
+                    parts.push({ node: textNode, text: node.textContent || '' });
+                } else if (node.nodeType === 1) {
+                    const element = node.cloneNode(false);
+                    destination.appendChild(element);
+                    copyTree(node, element);
+                }
+            });
+        }
+        copyTree(parsed, target);
+
+        if (prefersReducedMotion) {
+            parts.forEach(part => { part.node.textContent = part.text; });
+            return;
+        }
+
+        const totalChars = parts.reduce((total, part) => total + part.text.length, 0);
+        // Keep longer outputs readable without keeping the visitor waiting.
+        const charsPerTick = Math.max(2, Math.ceil(totalChars / 85));
+        for (const part of parts) {
+            for (let i = 0; i < part.text.length; i += charsPerTick) {
+                if (skipTyping) {
+                    part.node.textContent = part.text;
+                    break;
+                }
+                part.node.textContent = part.text.slice(0, i + charsPerTick);
+                if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
+                await sleep(16);
+            }
+        }
+    }
+
     async function processCommand(cmd) {
         const cleanCmd = cmd.trim().toLowerCase();
         if (!cleanCmd || !terminalBody) return;
@@ -453,7 +496,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let responseText = "";
 
-        switch (cleanCmd) {
+        if (cleanCmd.startsWith('echo ')) {
+            responseText = escapeHtml(cmd.trim().slice(5));
+        } else switch (cleanCmd) {
             case 'help':
                 responseText = `<strong style="color: var(--neon-purple);">Portfolio commands</strong><br>
 <span style="color: var(--neon-blue);">about</span>          Profile summary<br>
@@ -466,9 +511,35 @@ document.addEventListener("DOMContentLoaded", () => {
 <span style="color: var(--neon-blue);">cv</span>             Download resume PDF<br>
 <span style="color: var(--neon-blue);">sysinfo</span>        Your browser environment<br>
 <span style="color: var(--neon-blue);">history</span>        Recent session commands<br>
+<span style="color: var(--neon-blue);">whoami</span>         Visitor session<br>
+<span style="color: var(--neon-blue);">ls</span> / <span style="color: var(--neon-blue);">pwd</span>       Virtual portfolio directory<br>
+<span style="color: var(--neon-blue);">cat about.md</span>   Read about me<br>
+<span style="color: var(--neon-blue);">date</span>           Local date & time<br>
+<span style="color: var(--neon-blue);">echo</span>           Echo a message<br>
 <span style="color: var(--neon-blue);">clear</span>          Clear terminal<br><br>
 <strong style="color: var(--neon-purple);">Explore (demos and easter eggs)</strong><br>
 coffee · pihole · klipper · isopods · terrarium · disk`;
+                break;
+
+            case 'whoami':
+                responseText = 'visitor — exploring the Edrees Dahlan portfolio';
+                break;
+
+            case 'pwd':
+                responseText = '/home/visitor/portfolio (virtual directory)';
+                break;
+
+            case 'ls':
+                responseText = '<span style="color: var(--neon-blue);">about.md</span>  <span style="color: var(--neon-purple);">skills/</span>  <span style="color: var(--neon-purple);">projects/</span>  resume.pdf  contact.md<br><span style="color: var(--text-muted);">Virtual portfolio entries, not server files.</span>';
+                break;
+
+            case 'date':
+                responseText = escapeHtml(new Date().toLocaleString());
+                break;
+
+            case 'cat readme.md':
+            case 'cat about.md':
+                responseText = await getAboutData();
                 break;
 
             case 'history':
@@ -595,12 +666,32 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 break;
         }
 
-        outputLine.innerHTML = promptHeader + `<div>${responseText}</div>`;
-        terminalBody.scrollTop = terminalBody.scrollHeight;
+        outputLine.innerHTML = promptHeader + '<div class="cli-response" aria-hidden="true"></div>';
+        const responseArea = outputLine.querySelector('.cli-response');
+        if (!responseArea) {
+            outputLine.innerHTML = promptHeader + `<div>${responseText}</div>`;
+            return;
+        }
+
+        terminalBody.setAttribute('aria-busy', 'true');
+        try {
+            await typeTerminalResponse(responseArea, responseText);
+        } finally {
+            responseArea.removeAttribute('aria-hidden');
+            terminalBody.removeAttribute('aria-busy');
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
     }
 
     // Click-to-type CLI: type visibly into the actual input before executing.
     // Reduced-motion preference is respected, and commands are serialized.
+    const autoCompleteCommands = [
+        'help', 'whoami', 'pwd', 'ls', 'date', 'cat about.md',
+        'about', 'skills', 'experience', 'certs', 'techstack',
+        'projects', 'contact', 'cv', 'sysinfo', 'coffee',
+        'pihole', 'klipper', 'isopods', 'terrarium', 'disk',
+        'history', 'clear'
+    ];
     const commandHistory = [];
     let historyIndex = 0;
     let cliBusy = false;
@@ -666,6 +757,16 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
 
             if (cliBusy) {
                 if (event.key === 'Enter') event.preventDefault();
+                return;
+            }
+
+            if (event.key === 'Tab' && terminalInput.value.trim()) {
+                const typed = terminalInput.value.trim().toLowerCase();
+                const matches = autoCompleteCommands.filter(command => command.startsWith(typed));
+                if (matches.length === 1) {
+                    event.preventDefault();
+                    terminalInput.value = matches[0];
+                }
                 return;
             }
 
