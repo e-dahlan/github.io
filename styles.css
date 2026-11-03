@@ -1307,6 +1307,38 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* Keep the same glassmorphism style with less GPU-heavy blur on phones. */
+    .main-wrapper {
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    header, nav {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Allow the CLI and status messages to fit narrow screens. */
+    .terminal-body {
+        overflow-wrap: anywhere;
+        padding: 20px 16px;
+    }
+
+    .terminal-input-line {
+        min-width: 0;
+    }
+
+    .terminal-prompt {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 0.78rem;
+    }
+
+    .terminal-input {
+        min-width: 0;
+        font-size: 16px;
+    }
+
     body {
         padding: 12px;
     }
