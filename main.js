@@ -415,18 +415,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function getProjectsData() {
         const docIndex = await getDocumentForPage('index.html');
-        let services = [];
+        if (!docIndex) return "Project listings are temporarily unavailable.";
 
-        if (docIndex) {
-            const cards = docIndex.querySelectorAll('.service-card');
-            cards.forEach(c => {
-                const heading = c.querySelector('h3, h4')?.textContent.trim();
-                const p = c.querySelector('p')?.textContent.trim();
-                if (heading && p) services.push(`  • <strong style="color: var(--neon-blue);">${escapeHtml(heading)}:</strong> ${escapeHtml(p)}`);
-            });
-        }
+        const cards = Array.from(docIndex.querySelectorAll('.project-card'));
+        const projects = cards.map(card => {
+            const title = card.querySelector('h3')?.textContent.trim();
+            const summary = card.querySelector('.project-card-content > p:not(.project-client)')?.textContent.trim();
+            const link = card.querySelector('a.project-case-link');
+            const href = link?.getAttribute('href') || '';
 
-        return services.length > 0 ? `<strong>Capabilities and services:</strong><br>${services.join('<br>')}` : "No capability details available.";
+            // Link only to internally known case study pages.
+            if (!title || !/^projects\/[a-z0-9-]+\.html$/.test(href)) return '';
+            return `• <strong style="color:var(--neon-blue);">${escapeHtml(title)}</strong><br>` +
+                   `  ${escapeHtml(summary || '')}<br>` +
+                   `  <a href="${href}" style="color:var(--neon-purple);">Read case study</a>`;
+        }).filter(Boolean);
+
+        return projects.length
+            ? `<strong style="color:var(--neon-purple);">Featured Projects</strong><br>` + projects.join('<br><br>') +
+              '<br><br><a href="projects.html" style="color:var(--neon-blue);">View all projects</a>'
+            : 'Project case studies are coming soon.';
     }
 
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
@@ -525,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <span style="color: var(--neon-blue);">skills</span>         Technical skills<br>
 <span style="color: var(--neon-blue);">certs</span>          Certifications and training<br>
 <span style="color: var(--neon-blue);">techstack</span>      Technology stack<br>
-<span style="color: var(--neon-blue);">projects</span>       Areas of work and capabilities<br>
+<span style="color: var(--neon-blue);">projects</span>       Featured projects and case studies<br>
 <span style="color: var(--neon-blue);">contact</span>        Contact details<br>
 <span style="color: var(--neon-blue);">cv</span>             Download resume PDF<br>
 <span style="color: var(--neon-blue);">sysinfo</span>        Your browser environment<br>
