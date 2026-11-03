@@ -35,8 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Cloudflare Turnstile API -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <!-- Web3Forms hCaptcha (supported on the free plan) -->
 
     <!-- External Stylesheet -->
     <link rel="stylesheet" href="styles.css">
@@ -183,8 +182,8 @@
                         <textarea id="visitor_message" name="message" class="form-textarea" placeholder="Write your message here..." required></textarea>
                     </div>
 
-                    <!-- Cloudflare Turnstile Production Widget -->
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAETo035k2GdNrv6w" data-theme="dark" style="margin-top: 10px;"></div>
+                    <!-- Free hCaptcha spam protection via Web3Forms -->
+                    <div class="h-captcha" data-captcha="true" data-theme="dark" style="margin-top: 10px;"></div>
 
                     <button type="submit" class="btn-submit" id="submitBtn">
                         <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Execute Send
@@ -214,5 +213,6 @@
 
     <!-- External Script -->
     <script src="main.js"></script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>
