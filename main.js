@@ -432,6 +432,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
     const terminalBody = document.querySelector('.terminal-body') || document.getElementById('terminalBody');
     const cliChips = document.querySelectorAll('.cli-chip');
+    const livePrompt = document.getElementById('cliPrompt');
+    const cliStatus = document.getElementById('cliStatus');
 
     // Render HTML responses progressively without breaking the markup or executing commands.
     // Displaying actual output in the terminal makes clicking a command feel like a shell.
@@ -481,7 +483,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!cleanCmd || !terminalBody) return;
 
         if (cleanCmd === 'clear') {
-            terminalBody.innerHTML = '';
+            // Preserve the live interactive prompt; only clear command output.
+            Array.from(terminalBody.children).forEach(node => {
+                if (node !== livePrompt) node.remove();
+            });
+            terminalBody.scrollTop = terminalBody.scrollHeight;
             return;
         }
 
@@ -491,7 +497,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const promptHeader = `<div style="margin-bottom: 4px;"><span style="color: var(--neon-pink); font-weight: bold;">edrees@cli:~$</span> ${escapeHtml(cmd)}</div>`;
         outputLine.innerHTML = promptHeader + `<div style="color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Reading site data...</div>`;
-        terminalBody.appendChild(outputLine);
+        if (livePrompt && livePrompt.parentElement === terminalBody) {
+            terminalBody.insertBefore(outputLine, livePrompt);
+        } else {
+            terminalBody.appendChild(outputLine);
+        }
         terminalBody.scrollTop = terminalBody.scrollHeight;
 
         let responseText = "";
@@ -725,6 +735,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                             break;
                         }
                         terminalInput.value += char;
+                        if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
                         await sleep(42 + Math.round(Math.random() * 22));
                     }
                     if (!skipTyping) await sleep(110);
@@ -793,6 +804,15 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
             void runCliCommand(command, true);
         });
     });
+
+    // Visible self-check: if this does not say Ready, the terminal JS did not initialize.
+    if (cliStatus) {
+        cliStatus.textContent = 'v2.9 · Ready';
+        cliStatus.classList.add('cli-ready');
+    }
+    if (terminalInput && terminalBody && cliChips.length) {
+        document.documentElement.dataset.cliReady = '2.9';
+    }
 
     function escapeHtml(text) {
         const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
