@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // 0. Accessibility: respect the visitor's reduced-motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     // 0.1 Header Scroll State Management
     const header = document.querySelector("header");
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let glowY = mouseY;
 
     if (cursorGlow) {
-        if (prefersReducedMotion) {
+        if (prefersReducedMotion || !hasFinePointer) {
             cursorGlow.style.display = 'none';
         } else {
             window.addEventListener('mousemove', (e) => {
@@ -118,10 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-        let isPageVisible = true;
+        // Preserve the full desktop effect while reducing work on mobile devices.
+        const mobileMotion = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+        const mobileFrameInterval = 1000 / 30;
+        let lastFrameAt = 0;
+        let frameId = null;
 
+        const scheduleFrame = () => {
+            if (frameId === null && !document.hidden) {
+                frameId = requestAnimationFrame(renderParticles);
+            }
+        };
+
+        // Fully suspend rendering in background tabs instead of polling each frame.
         document.addEventListener('visibilitychange', () => {
-            isPageVisible = !document.hidden;
+            if (document.hidden && frameId !== null) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            } else if (!document.hidden) {
+                lastFrameAt = 0;
+                scheduleFrame();
+            }
         });
 
         window.addEventListener('resize', () => {
@@ -129,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             height = canvas.height = window.innerHeight;
         });
 
-        const particles = Array.from({ length: 50 }, () => ({
+        const particles = Array.from({ length: mobileMotion ? 24 : 50 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
             vx: (Math.random() - 0.5) * 0.7,
@@ -137,11 +155,14 @@ document.addEventListener("DOMContentLoaded", () => {
             radius: Math.random() * 2 + 1
         }));
 
-        function renderParticles() {
-            if (!isPageVisible) {
-                requestAnimationFrame(renderParticles);
+        function renderParticles(timestamp) {
+            frameId = null;
+            if (document.hidden) return;
+            if (mobileMotion && timestamp - lastFrameAt < mobileFrameInterval) {
+                scheduleFrame();
                 return;
             }
+            lastFrameAt = timestamp;
 
             ctx.clearRect(0, 0, width, height);
 
@@ -181,9 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             }
-            requestAnimationFrame(renderParticles);
+            scheduleFrame();
         }
-        renderParticles();
+        scheduleFrame();
     }
 
     // 6. Scroll-Triggered Stat Counter Animation
@@ -241,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tiltCard = document.getElementById('tiltCard') || document.querySelector('.profile-photo-box');
     const tiltContainer = document.querySelector('.profile-card-container');
 
-    if (tiltCard && !prefersReducedMotion) {
+    if (tiltCard && !prefersReducedMotion && hasFinePointer) {
         if (tiltContainer) {
             tiltContainer.addEventListener('mousemove', (e) => {
                 const rect = tiltContainer.getBoundingClientRect();
@@ -264,35 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        const handleOrientation = (event) => {
-            if (event.beta === null || event.gamma === null) return;
-            let beta = Math.max(-45, Math.min(45, event.beta - 45));
-            let gamma = Math.max(-45, Math.min(45, event.gamma));
 
-            const rotateX = (beta / 45) * 15;
-            const rotateY = (gamma / 45) * 15;
-
-            tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-            tiltCard.style.boxShadow = `${-rotateY}px ${rotateX + 10}px 30px rgba(56, 189, 248, 0.25)`;
-        };
-
-        const initGyro = () => {
-            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                document.body.addEventListener('touchstart', () => {
-                    DeviceOrientationEvent.requestPermission()
-                        .then((permissionState) => {
-                            if (permissionState === 'granted') {
-                                window.addEventListener('deviceorientation', handleOrientation);
-                            }
-                        })
-                        .catch(console.error);
-                }, { once: true });
-            } else if ('DeviceOrientationEvent' in window) {
-                window.addEventListener('deviceorientation', handleOrientation);
-            }
-        };
-
-        initGyro();
     }
 
     // 9. DYNAMIC DATA EXTRACTOR & INTERACTIVE CLI SYSTEM
