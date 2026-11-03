@@ -580,6 +580,23 @@ form.terminal-body {
     color: var(--neon-blue);
 }
 
+/* Show a subtle caret while the CLI response is streaming. */
+.cli-response {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.cli-response[aria-hidden="true"]::after {
+    content: "▋";
+    display: inline;
+    color: var(--neon-purple);
+    animation: cli-caret-blink 0.65s steps(1, end) infinite;
+}
+
+@keyframes cli-caret-blink {
+    50% { opacity: 0; }
+}
+
 .terminal-quick-chips {
     display: flex;
     gap: 10px;
