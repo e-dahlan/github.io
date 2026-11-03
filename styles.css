@@ -605,6 +605,20 @@ form.terminal-body {
     background: rgba(192, 132, 252, 0.1);
 }
 
+.cli-chip:disabled {
+    opacity: 0.55;
+    cursor: progress;
+}
+
+.terminal-hint {
+    margin: 0;
+    padding: 0 24px 12px;
+    color: var(--text-muted);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
 .terminal-input-line {
     display: flex;
     align-items: center;
@@ -623,6 +637,7 @@ form.terminal-body {
 }
 
 .terminal-input {
+    caret-color: var(--neon-purple);
     background: transparent;
     border: none;
     outline: none;
@@ -1327,6 +1342,10 @@ footer {
     .terminal-body {
         overflow-wrap: anywhere;
         padding: 20px 16px;
+    }
+
+    .terminal-hint {
+        padding: 0 16px 12px;
     }
 
     .terminal-input-line {

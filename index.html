@@ -148,7 +148,7 @@
                     <div class="terminal-title">visitor@edrees-terminal:~</div>
                     <div></div>
                 </div>
-                <div class="terminal-body" id="terminalBody">
+                <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-label="Interactive terminal output">
                     <div class="terminal-output">
                         <p>Welcome to Edrees Dahlan's Interactive Shell v2.6. Type <span>help</span> to see available commands.</p>
                     </div>
@@ -160,10 +160,11 @@
                     <button class="cli-chip" data-command="contact">contact</button>
                     <button class="cli-chip" data-command="clear">clear</button>
                 </div>
+                <p class="terminal-hint" id="cliHint">Click a command to watch it type. Use ↑ / ↓ for history, or Esc to skip the animation.</p>
                 <div style="padding: 0 24px 20px 24px;">
                     <div class="terminal-input-line">
                         <span class="terminal-prompt">edrees@cli:~$</span>
-                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command here..." autocomplete="off">
+                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command here..." autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" aria-describedby="cliHint">
                     </div>
                 </div>
             </div>

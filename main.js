@@ -368,18 +368,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const docResume = await getDocumentForPage('resume.html');
         if (!docResume) return "Certifications data unavailable.";
 
-        const certElements = docResume.querySelectorAll('.cert-card, .certificates-list li');
-        let certs = [];
+        const heading = Array.from(docResume.querySelectorAll('.section-column-title'))
+            .find(el => el.textContent.includes('Certifications & Professional Training'));
+        const groups = [];
+        let card = heading?.nextElementSibling;
 
-        certElements.forEach(c => certs.push(`  • ${c.textContent.trim()}`));
-
-        if (certs.length === 0) {
-            return `<strong style="color: var(--neon-blue);">Core Certifications & Training:</strong><br>` +
-                   `  • E-Commerce Platform Management & SEO Systems<br>` +
-                   `  • Computer Engineering & Network Architecture`;
+        while (card && card.classList.contains('resume-card')) {
+            const title = card.querySelector('h3')?.textContent.trim();
+            const items = Array.from(card.querySelectorAll('.resume-list li'))
+                .map(el => `  • ${escapeHtml(el.textContent.trim())}`);
+            if (title && items.length) {
+                groups.push(`<strong style="color: var(--neon-blue);">${escapeHtml(title)}</strong><br>${items.join('<br>')}`);
+            }
+            card = card.nextElementSibling;
         }
-
-        return `<strong style="color: var(--neon-blue);">Extracted Certifications:</strong><br>` + certs.join('<br>');
+        return groups.length
+            ? `<strong>Certifications & training:</strong><br>${groups.join('<br><br>')}`
+            : "Certification details currently unavailable.";
     }
 
     async function getContactData() {
@@ -415,13 +420,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (docIndex) {
             const cards = docIndex.querySelectorAll('.service-card');
             cards.forEach(c => {
-                const h4 = c.querySelector('h4')?.textContent.trim();
+                const heading = c.querySelector('h3, h4')?.textContent.trim();
                 const p = c.querySelector('p')?.textContent.trim();
-                if (h4 && p) services.push(`  • <strong style="color: var(--neon-blue);">${h4}:</strong> ${p}`);
+                if (heading && p) services.push(`  • <strong style="color: var(--neon-blue);">${escapeHtml(heading)}:</strong> ${escapeHtml(p)}`);
             });
         }
 
-        return services.length > 0 ? services.join('<br>') : "Projects and integrations initialized.";
+        return services.length > 0 ? `<strong>Capabilities and services:</strong><br>${services.join('<br>')}` : "No capability details available.";
     }
 
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
@@ -450,19 +455,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switch (cleanCmd) {
             case 'help':
-                responseText = `Available commands (parsed dynamically):
-  <span style="color: var(--neon-blue);">about</span>         - Bio & summary from About Me page
-  <span style="color: var(--neon-blue);">skills</span>        - Extracted skill set from Resume
-  <span style="color: var(--neon-blue);">projects</span>      - Services & system architecture
-  <span style="color: var(--neon-blue);">contact</span>       - Direct channels from Contact page
-  <span style="color: var(--neon-blue);">cv</span>            - Download my Resume (PDF)
-  <span style="color: var(--neon-blue);">sysinfo</span>       - Local client session metrics
-  <span style="color: var(--neon-blue);">coffee</span>        - V60 brew status ☕
-  <span style="color: var(--neon-blue);">pihole</span>        - Local DNS stats
-  <span style="color: var(--neon-blue);">klipper</span>       - 3D Printer status
-  <span style="color: var(--neon-blue);">isopods</span>       - Vivarium culture check
-  <span style="color: var(--neon-blue);">terrarium</span>     - Closed Ecosystem stats
-  <span style="color: var(--neon-blue);">clear</span>         - Clear terminal`;
+                responseText = `<strong style="color: var(--neon-purple);">Portfolio commands</strong><br>
+<span style="color: var(--neon-blue);">about</span>          Profile summary<br>
+<span style="color: var(--neon-blue);">experience</span>     Work experience<br>
+<span style="color: var(--neon-blue);">skills</span>         Technical skills<br>
+<span style="color: var(--neon-blue);">certs</span>          Certifications and training<br>
+<span style="color: var(--neon-blue);">techstack</span>      Technology stack<br>
+<span style="color: var(--neon-blue);">projects</span>       Areas of work and capabilities<br>
+<span style="color: var(--neon-blue);">contact</span>        Contact details<br>
+<span style="color: var(--neon-blue);">cv</span>             Download resume PDF<br>
+<span style="color: var(--neon-blue);">sysinfo</span>        Your browser environment<br>
+<span style="color: var(--neon-blue);">history</span>        Recent session commands<br>
+<span style="color: var(--neon-blue);">clear</span>          Clear terminal<br><br>
+<strong style="color: var(--neon-purple);">Explore (demos and easter eggs)</strong><br>
+coffee · pihole · klipper · isopods · terrarium · disk`;
+                break;
+
+            case 'history':
+                responseText = commandHistory.length
+                    ? commandHistory.map((entry, index) => `${String(index + 1).padStart(2, ' ')}  ${escapeHtml(entry)}`).join('<br>')
+                    : 'No commands in this session.';
                 break;
 
             case 'about':
@@ -500,7 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
             case 'cv':
             case 'download cv':
-                responseText = `Initiating CV download...<br><span style="color: #22c55e;">[SUCCESS] Edrees_Dahlan_Resume.pdf has been downloaded!</span>`;
+                responseText = `Starting your resume download...<br><span style="color: #22c55e;">If your browser allows downloads, the PDF will be saved.</span>`;
                 const link = document.createElement('a');
                 link.href = 'Edrees_Dahlan_Resume.pdf';
                 link.download = 'Edrees_Dahlan_Resume.pdf';
@@ -535,8 +547,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 responseText = `<strong style="color: var(--neon-blue);">Client Environment Metrics:</strong><br>` +
-                               `  • <strong>Browser:</strong> ${browserName}<br>` +
-                               `  • <strong>OS / Platform:</strong> ${osName}<br>` +
+                               `  • <strong>Browser:</strong> ${escapeHtml(browserName)}<br>` +
+                               `  • <strong>OS / Platform:</strong> ${escapeHtml(osName)}<br>` +
                                `  • <strong>Screen Resolution:</strong> ${window.screen.width}x${window.screen.height}<br>` +
                                `  • <strong>Online Status:</strong> ${navigator.onLine ? '<span style="color:#22c55e;">Online</span>' : '<span style="color:#ef4444;">Offline</span>'}`;
                 break;
@@ -546,35 +558,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
                 
             case 'pihole':
-                responseText = `<strong style="color: var(--neon-purple);">Pi-hole Network-wide Ad Blocking:</strong><br>` +
-                               `  • Status: <span style="color: #22c55e;">Active</span> (Raspberry Pi Local)<br>` +
-                               `  • Queries Blocked Today: 14,231 (18.4%)<br>` +
-                               `  • Domains on Adlists: 1,340,921`;
+                responseText = `<strong style="color: var(--neon-purple);">DNS Filtering / Pi-hole:</strong><br>` +
+                               `  • Live telemetry: Not connected<br>` +
+                               `  • This CLI showcases experience with local DNS systems; it does not access a visitor's network.`;
                 break;
-                
+
             case 'klipper':
-                responseText = `<strong style="color: var(--neon-blue);">Ender 3 S1 Pro (Klipper Firmware):</strong><br>` +
-                               `  • Connection: <span style="color: #22c55e;">Online</span> (Local Host via Ethernet)<br>` +
-                               `  • Extruder Temp: 210°C / Target: 210°C<br>` +
-                               `  • Bed Temp: 60°C / Target: 60°C<br>` +
-                               `  • Webcam Stream: <span style="color: #22c55e;">Active</span>`;
+                responseText = `<strong style="color: var(--neon-blue);">Creality K2 SE / Klipper:</strong><br>` +
+                               `  • Live printer monitoring: Not connected<br>` +
+                               `  • Demonstration only — no temperatures or camera feeds are being read.`;
                 break;
-                
+
             case 'isopods':
-                responseText = `Culture Bin Status Check... 🐛<br>` +
+                responseText = `Playful demo (not live): Culture Bin Status Check... 🐛<br>` +
                                `<span style="color: #f59e0b;">Observation result:</span> <span style="color: var(--neon-pink);">100% Males detected.</span><br>` +
                                `Action required: Need to introduce females for successful breeding setup.`;
                 break;
                 
             case 'terrarium':
-                responseText = `Closed Ecosystem Status: Aralia and springtails thriving. Humidity stable at 85%.`;
+                responseText = `Playful ecosystem example (not live sensor data): Aralia and springtail habitat.`;
                 break;
 
             case 'df':
             case 'disk':
-                responseText = `Filesystem     1K-blocks      Used Available Use% Mounted on<br>` +
-                               `/dev/nvme0n1p2 512000000 214580000 297420000  42% /<br>` +
-                               `<span style="color: var(--neon-blue);">Total:</span> 512 GB | <span style="color: #f59e0b;">Used:</span> ~214.5 GB (42%) | <span style="color: #22c55e;">Remaining:</span> ~297.4 GB`;
+                responseText = `Filesystem demo: no server disk statistics are exposed through this portfolio.`;
                 break;
 
             case 'sudo':
@@ -592,21 +599,97 @@ document.addEventListener("DOMContentLoaded", () => {
         terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
-    if (terminalInput) {
-        terminalInput.addEventListener('keydown', async (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const val = terminalInput.value;
+    // Click-to-type CLI: type visibly into the actual input before executing.
+    // Reduced-motion preference is respected, and commands are serialized.
+    const commandHistory = [];
+    let historyIndex = 0;
+    let cliBusy = false;
+    let skipTyping = false;
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    async function runCliCommand(rawCommand, animateTyping = false) {
+        const command = String(rawCommand).trim();
+        if (!command || cliBusy) return;
+
+        cliBusy = true;
+        skipTyping = false;
+        cliChips.forEach(chip => { chip.disabled = true; });
+        if (terminalInput) {
+            terminalInput.readOnly = true;
+            terminalInput.setAttribute('aria-busy', 'true');
+        }
+
+        try {
+            if (terminalInput && animateTyping) {
                 terminalInput.value = '';
-                await processCommand(val);
+                terminalInput.focus({ preventScroll: true });
+                const chars = Array.from(command);
+
+                if (prefersReducedMotion) {
+                    terminalInput.value = command;
+                } else {
+                    for (const char of chars) {
+                        if (skipTyping) {
+                            terminalInput.value = command;
+                            break;
+                        }
+                        terminalInput.value += char;
+                        await sleep(42 + Math.round(Math.random() * 22));
+                    }
+                    if (!skipTyping) await sleep(110);
+                }
+            }
+            if (terminalInput) terminalInput.value = '';
+
+            commandHistory.push(command);
+            if (commandHistory.length > 40) commandHistory.shift();
+            historyIndex = commandHistory.length;
+            await processCommand(command);
+        } finally {
+            cliBusy = false;
+            skipTyping = false;
+            cliChips.forEach(chip => { chip.disabled = false; });
+            if (terminalInput) {
+                terminalInput.readOnly = false;
+                terminalInput.removeAttribute('aria-busy');
+            }
+        }
+    }
+
+    if (terminalInput) {
+        terminalInput.addEventListener('keydown', async (event) => {
+            if (event.key === 'Escape' && cliBusy) {
+                event.preventDefault();
+                skipTyping = true;
+                return;
+            }
+
+            if (cliBusy) {
+                if (event.key === 'Enter') event.preventDefault();
+                return;
+            }
+
+            if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                if (!commandHistory.length) return;
+                event.preventDefault();
+                const delta = event.key === 'ArrowUp' ? -1 : 1;
+                historyIndex = Math.max(0, Math.min(commandHistory.length, historyIndex + delta));
+                terminalInput.value = commandHistory[historyIndex] || '';
+                terminalInput.setSelectionRange(terminalInput.value.length, terminalInput.value.length);
+                return;
+            }
+
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                await runCliCommand(terminalInput.value);
             }
         });
     }
 
     cliChips.forEach(chip => {
-        chip.addEventListener('click', async () => {
-            const cmd = chip.getAttribute('data-command') || chip.textContent.trim();
-            await processCommand(cmd);
+        chip.addEventListener('click', () => {
+            const command = chip.getAttribute('data-command') || chip.textContent.trim();
+            void runCliCommand(command, true);
         });
     });
 
