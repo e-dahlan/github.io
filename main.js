@@ -463,8 +463,8 @@ document.addEventListener("DOMContentLoaded", () => {
   <span style="color: var(--neon-blue);">cv</span>            - Download my Resume (PDF)
   <span style="color: var(--neon-blue);">sysinfo</span>       - Local client session metrics
   <span style="color: var(--neon-blue);">coffee</span>        - V60 brew status ☕
-  <span style="color: var(--neon-blue);">pihole</span>        - Local DNS stats
-  <span style="color: var(--neon-blue);">klipper</span>       - 3D Printer status
+  <span style="color: var(--neon-blue);">pihole</span>        - DNS filtering demo
+  <span style="color: var(--neon-blue);">klipper</span>       - 3D printer demo
   <span style="color: var(--neon-blue);">isopods</span>       - Vivarium culture check
   <span style="color: var(--neon-blue);">terrarium</span>     - Closed Ecosystem stats
   <span style="color: var(--neon-blue);">history</span>       - Recent commands
@@ -512,7 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
             case 'cv':
             case 'download cv':
-                responseText = `Initiating CV download...<br><span style="color: #22c55e;">[SUCCESS] Edrees_Dahlan_Resume.pdf has been downloaded!</span>`;
+                responseText = `Starting your resume download...<br><span style="color: #22c55e;">If your browser allows downloads, the PDF will be saved.</span>`;
                 const link = document.createElement('a');
                 link.href = 'Edrees_Dahlan_Resume.pdf';
                 link.download = 'Edrees_Dahlan_Resume.pdf';
@@ -570,13 +570,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
 
             case 'isopods':
-                responseText = `Culture Bin Status Check... 🐛<br>` +
+                responseText = `Playful demo (not live): Culture Bin Status Check... 🐛<br>` +
                                `<span style="color: #f59e0b;">Observation result:</span> <span style="color: var(--neon-pink);">100% Males detected.</span><br>` +
                                `Action required: Need to introduce females for successful breeding setup.`;
                 break;
                 
             case 'terrarium':
-                responseText = `Closed Ecosystem Status: Aralia and springtails thriving. Humidity stable at 85%.`;
+                responseText = `Playful ecosystem example (not live sensor data): Aralia and springtail habitat.`;
                 break;
 
             case 'df':
