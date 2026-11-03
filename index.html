@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=20261103-cli30">
+    <link rel="stylesheet" href="styles.css?v=20261103-cli31">
 
     <!-- Structured Data (schema.org Person) for richer search results -->
     <script type="application/ld+json">
@@ -138,20 +138,23 @@
             <div class="section-header">
                 <h2>Interactive CLI</h2>
             </div>
-            <div class="terminal-container" data-cli-version="3.0">
+            <div class="terminal-container" data-cli-version="3.1">
                 <div class="terminal-header">
                     <div class="terminal-dots">
                         <div class="terminal-dot dot-red"></div>
                         <div class="terminal-dot dot-yellow"></div>
                         <div class="terminal-dot dot-green"></div>
                     </div>
-                    <div class="terminal-title">visitor@edrees-terminal:~ <span id="cliStatus" class="cli-status" aria-live="polite">v3.0 · Loading…</span></div>
+                    <div class="terminal-title">visitor@edrees-terminal:~ <span id="cliStatus" class="cli-status" aria-live="polite">v3.1 · Loading…</span></div>
                     <button id="cliTypingToggle" class="cli-motion-toggle" type="button" aria-pressed="true" aria-label="Toggle terminal typing animation">Typing: ON</button>
                 </div>
                 <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-label="Interactive terminal output">
                     <div class="terminal-output">
-                        <p>Welcome to Edrees Dahlan's Interactive Shell v3.0. Type <span>help</span> to see available commands.</p>
+                        <p>Welcome to Edrees Dahlan's Interactive Shell v3.1. Type <span>help</span> to see available commands.</p>
                     </div>
+                </div>
+                <!-- Fixed input dock below the scrollable output, just above command shortcuts. -->
+                <div class="terminal-input-dock" id="cliInputDock">
                     <div class="terminal-input-line" id="cliPrompt">
                         <span class="terminal-prompt">edrees@cli:~$</span>
                         <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-label="Terminal command" aria-describedby="cliHint">
@@ -234,6 +237,6 @@
     </div>
 
     <!-- External Script -->
-    <script src="main.js?v=20261103-cli30"></script>
+    <script src="main.js?v=20261103-cli31"></script>
 </body>
 </html>

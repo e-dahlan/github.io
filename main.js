@@ -498,11 +498,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!cleanCmd || !terminalBody) return;
 
         if (cleanCmd === 'clear') {
-            // Preserve the live interactive prompt; only clear command output.
-            Array.from(terminalBody.children).forEach(node => {
-                if (node !== livePrompt) node.remove();
-            });
-            terminalBody.scrollTop = terminalBody.scrollHeight;
+            // Only the transcript is scrollable; the prompt lives outside it.
+            terminalBody.replaceChildren();
+            terminalBody.scrollTop = 0;
             return;
         }
 
@@ -512,11 +510,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const promptHeader = `<div style="margin-bottom: 4px;"><span style="color: var(--neon-pink); font-weight: bold;">edrees@cli:~$</span> ${escapeHtml(cmd)}</div>`;
         outputLine.innerHTML = promptHeader + `<div style="color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Reading site data...</div>`;
-        if (livePrompt && livePrompt.parentElement === terminalBody) {
-            terminalBody.insertBefore(outputLine, livePrompt);
-        } else {
-            terminalBody.appendChild(outputLine);
-        }
+        terminalBody.appendChild(outputLine);
         terminalBody.scrollTop = terminalBody.scrollHeight;
 
         let responseText = "";
@@ -822,11 +816,11 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
 
     // Visible self-check: if this does not say Ready, the terminal JS did not initialize.
     if (cliStatus) {
-        cliStatus.textContent = 'v3.0 · Ready';
+        cliStatus.textContent = 'v3.1 · Ready';
         cliStatus.classList.add('cli-ready');
     }
     if (terminalInput && terminalBody && cliChips.length) {
-        document.documentElement.dataset.cliReady = '3.0';
+        document.documentElement.dataset.cliReady = '3.1';
     }
 
     // First-visit welcome: a non-blocking, decorative shell demo.
@@ -884,7 +878,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
         resultRow.className = 'cli-welcome-result';
 
         line.append(commandRow, resultRow);
-        terminalBody.insertBefore(line, livePrompt);
+        terminalBody.appendChild(line);
 
         const commandComplete = await writeWelcomeText(typedText, command, 47);
         if (!commandComplete) { line.remove(); return false; }
