@@ -50,22 +50,24 @@ try {
         assert.equal(await page.locator('.case-section[aria-labelledby="outcome-title"] .impact-list li').count(), 5, 'Each project needs five specific impact outcomes');
         assert.match(await page.locator('.case-section[aria-labelledby="outcome-title"]').innerText(), /Results & Impact/);
         if (file.includes('ecommerce-platform')) {
-          assert.equal(await page.locator('.case-performance .performance-score-ring').count(), 9);
+          assert.equal(await page.locator('.case-performance .performance-score-ring').count(), 8);
           const values = await page.locator('.performance-score-ring > span').allInnerTexts();
-          assert.deepEqual(values, ['89','48','93','96','92','76','93','96','92']);
+          assert.deepEqual(values, ['48','93','96','92','82','93','96','92']);
           assert.equal(await page.locator('.case-performance .performance-report-link').count(), 2);
           assert.match(await page.locator('.performance-methodology').innerText(), /same homepage URL/);
-          assert.match(await page.locator('.performance-peak-note').innerText(), /owner|reported/i);
-          assert.equal(await page.locator('.performance-peak .performance-score-ring').count(), 1);
+          assert.equal(await page.locator('.performance-peak').count(), 0, 'Unarchived peak should not be shown');
           const reportUrls = await page.locator('.performance-report-link').evaluateAll(
             links => links.map(a => a.getAttribute('href'))
           );
           assert.deepEqual(reportUrls, [
             'https://pagespeed.web.dev/analysis/https-www-alharamtools-com-sa/5k6d4fmwzo?form_factor=mobile',
-            'https://pagespeed.web.dev/analysis/https-www-alharamtools-com-sa/8v63aez0ss?form_factor=mobile'
+            'https://pagespeed.web.dev/analysis/https-www-alharamtools-com-sa/787eeb3a0v?form_factor=mobile'
           ]);
           assert.equal(await page.locator('main a[href*="alharamtools-com-sa-collections"]').count(), 0);
-          assert.match(await page.locator('.performance-measurements').innerText(), /895 KiB smaller/);
+          assert.ok(!(await page.locator('.case-performance').innerText()).includes('89'), 'No undocumented score should remain');
+          assert.match(await page.locator('.performance-measurements').innerText(), /720 ms less/);
+          assert.match(await page.locator('.performance-measurements').innerText(), /5.3 s faster/);
+          assert.match(await page.locator('.performance-measurements').innerText(), /816 KiB smaller/);
           const ring = page.locator('.performance-score-ring').first();
           const style = await ring.evaluate(el => getComputedStyle(el).backgroundImage);
           assert.match(style, /conic-gradient/, 'Performance circles must actually render CSS score arcs');
