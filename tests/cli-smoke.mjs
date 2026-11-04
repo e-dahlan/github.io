@@ -9,7 +9,7 @@ try {
 
   await page.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.cliReady === '3.1', { timeout: 10000 });
-  assert.equal(await page.locator('#cliStatus').innerText(), 'v3.1 · Ready');
+  assert.equal((await page.locator('#cliStatus').textContent()).trim(), 'v3.1 · Ready');
   assert.equal(await page.locator('#cliPrompt').evaluate(el => el.parentElement?.id), 'cliInputDock');
   assert.equal(await page.locator('#cliInputDock').evaluate(el => el.previousElementSibling?.id), 'terminalBody');
   assert.equal(await page.locator('#cliInputDock').evaluate(el => el.nextElementSibling?.classList.contains('terminal-quick-chips')), true);
