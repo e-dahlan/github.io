@@ -29,11 +29,15 @@ jobs:
         run: node .github/pagespeed-reports/archive-from-google.mjs
       - name: Verify report PDF files
         run: |
-          for f in .github/pagespeed-reports/pdf/*.pdf; do
-            test -s "$f"
-            pdfinfo "$f" | grep 'Pages:'
-          done
-          test "$(find .github/pagespeed-reports/pdf -name '*.pdf' | wc -l)" -eq 4
+          python3 - <<'PY'
+          from pathlib import Path
+          files=list(Path(".github/pagespeed-reports/pdf").glob("*.pdf"))
+          assert len(files)==4, f"Expected four reports, got {len(files)}"
+          for p in files:
+              data=p.read_bytes()
+              assert data.startswith(b"%PDF-") and len(data)>15000, f"Invalid PDF: {p}"
+              print(f"Verified {p}: {len(data)} bytes")
+          PY
       - name: Commit PDFs to archive branch
         run: |
           git config user.name "github-actions[bot]"
