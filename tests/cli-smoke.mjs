@@ -13,6 +13,9 @@ try {
   assert.equal(await page.locator('#cliPrompt').evaluate(el => el.parentElement?.id), 'cliInputDock');
   assert.equal(await page.locator('#cliInputDock').evaluate(el => el.previousElementSibling?.id), 'terminalBody');
   assert.equal(await page.locator('#cliInputDock').evaluate(el => el.nextElementSibling?.classList.contains('terminal-quick-chips')), true);
+  assert.equal(await page.locator('#cliDisclosure').getAttribute('open'), null, 'Interactive terminal should not fill home by default');
+  await page.locator('#cliDisclosure > summary').click();
+  assert.ok(await page.locator('#terminalBody').isVisible());
   assert.equal(await page.locator('#cliTypingToggle').getAttribute('aria-pressed'), 'true');
 
   const input = page.locator('#cliInput');
@@ -71,6 +74,7 @@ try {
   await reduced.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'domcontentloaded' });
   await reduced.waitForFunction(() => document.documentElement.dataset.cliReady === '3.1');
   assert.equal(await reduced.locator('#cliTypingToggle').getAttribute('aria-pressed'), 'false');
+  await reduced.locator('#cliDisclosure > summary').click();
   await reduced.locator('#cliTypingToggle').click();
   assert.equal(await reduced.locator('#cliTypingToggle').getAttribute('aria-pressed'), 'true');
   console.log('PASS reduced motion: explicit opt-in enables animation');
@@ -84,6 +88,8 @@ try {
   intro.on('pageerror', error => introErrors.push(error.message));
 
   await intro.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'domcontentloaded' });
+  assert.equal(await intro.locator('#cliDisclosure').getAttribute('open'), null);
+  await intro.locator('#cliDisclosure > summary').click();
   await intro.waitForFunction(() => document.documentElement.dataset.cliIntro === 'complete', { timeout: 25000 });
   const items = await intro.locator('#terminalBody .cli-welcome-output').allInnerTexts();
   assert.equal(items.length, 2, 'Autoplay should show precisely two commands');
