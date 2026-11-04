@@ -6,8 +6,13 @@ const pages = [
   'index.html',
   'projects.html',
   'projects/ecommerce-platform.html',
+  'projects/ecommerce-migration.html',
+  'projects/oracle-erp-integration.html',
   'projects/systems-integration.html',
-  'projects/engineering-lab.html'
+  'projects/engineering-lab.html',
+  'projects/home-network-selfhosting.html',
+  'projects/smart-home-automation.html',
+  'projects/baja-5b-maintenance.html'
 ];
 const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 try {
@@ -24,9 +29,18 @@ try {
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 3);
       assert.ok(!overflow, file + ' must not overflow viewport width ' + viewport.width);
       if (file === 'index.html' || file === 'projects.html') {
-        assert.equal(await page.locator('.project-card').count(), 3, 'Expected 3 case study cards on ' + file);
-        assert.equal(await page.locator('a.project-case-link').count(), 3);
+        const expected = file === 'index.html' ? 3 : 8;
+        assert.equal(await page.locator('.project-card').count(), expected, 'Expected ' + expected + ' project cards on ' + file);
+        assert.equal(await page.locator('a.project-case-link').count(), expected);
         assert.equal(await page.locator('.project-proof-thumb').count(), 2);
+        if (file === 'projects.html') {
+          assert.equal(await page.locator('.project-group').count(), 3);
+          assert.deepEqual(await page.locator('.project-group .project-card').evaluateAll(
+            cards => ['professional', 'home-lab', 'hobby'].map(x =>
+              cards.filter(c => c.closest('[data-project-group]')?.dataset.projectGroup === x).length)
+          ), [4, 3, 1]);
+          assert.equal(await page.locator('.project-category-nav a').count(), 3);
+        }
         for (const image of await page.locator('.project-proof-thumb').all()) {
           await image.scrollIntoViewIfNeeded();
           await image.evaluate(async img => {
@@ -78,11 +92,16 @@ try {
   await home.locator('.cli-chip[data-command="projects"]').click();
   await home.waitForFunction(() => {
     const out = document.querySelector('#terminalBody')?.textContent || '';
-    return out.includes('Featured Projects') && out.includes('Raspberry Pi & 3D Printing Lab');
+    return out.includes('Professional Work') && out.includes('HPI Baja 5B');
   }, { timeout: 15000 });
   await home.waitForFunction(() => !document.querySelector('#cliInput')?.readOnly);
   assert.equal(await home.locator('#terminalBody a[href="projects/ecommerce-platform.html"]').count(), 1);
   assert.equal(await home.locator('#terminalBody a[href="projects/engineering-lab.html"]').count(), 1);
+  assert.equal(await home.locator('#terminalBody a[href="projects/ecommerce-migration.html"]').count(), 1);
+  assert.equal(await home.locator('#terminalBody a[href="projects/oracle-erp-integration.html"]').count(), 1);
+  assert.equal(await home.locator('#terminalBody a[href="projects/home-network-selfhosting.html"]').count(), 1);
+  assert.equal(await home.locator('#terminalBody a[href="projects/smart-home-automation.html"]').count(), 1);
+  assert.equal(await home.locator('#terminalBody a[href="projects/baja-5b-maintenance.html"]').count(), 1);
   assert.equal(await home.locator('#cliInputDock').count(), 1);
   console.log('PASS CLI projects lists linked case studies and preserves input dock');
 
@@ -90,6 +109,24 @@ try {
   await home.locator('#themeToggle').click();
   assert.equal(await home.locator('body.light-theme').count(), 1);
   console.log('PASS project index retains existing theme toggle');
+
+  const cases = [
+    ['ecommerce-migration.html', ['WooCommerce', 'Magento', 'previous professional role']],
+    ['oracle-erp-integration.html', ['Oracle', 'stock', 'prices', 'invoice']],
+    ['home-network-selfhosting.html', ['Netgear', 'Totolink X30', 'ZeroTier', 'Pi-hole', 'Uptime Kuma', 'Obico', 'Moonraker']],
+    ['smart-home-automation.html', ['Home Assistant', 'openHAB', 'different brands']],
+    ['baja-5b-maintenance.html', ['Baja 5B', 'Sub-C', '18650', 'kill-switch', 'carburetor']],
+    ['engineering-lab.html', ['Ender 3 S1 Pro', 'BLTouch', 'Mainsail', 'Crowsnest', 'OrcaSlicer', 'Creality K2 SE Combo', 'CFS']]
+  ];
+  for (const [file, phrases] of cases) {
+    await home.goto(base + 'projects/' + file, { waitUntil: 'domcontentloaded' });
+    const actual = (await home.locator('main').innerText()).toLowerCase();
+    for (const phrase of phrases) assert.ok(actual.includes(phrase.toLowerCase()), file + ' missing ' + phrase);
+  }
+  await home.goto(base + 'projects/ecommerce-migration.html', { waitUntil: 'domcontentloaded' });
+  assert.ok(!(await home.locator('main').innerText()).includes('AL Haram Perfect Machinery & Equipment'));
+  console.log('PASS career-migration scope, Oracle automation, home-lab details, hobby separation, and employer distinction');
+
   await home.close();
 } catch (err) {
   console.error(err);

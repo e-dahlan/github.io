@@ -414,27 +414,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function getProjectsData() {
-        const docIndex = await getDocumentForPage('index.html');
-        if (!docIndex) return "Project listings are temporarily unavailable.";
+        // Use the full Projects directory, not just three homepage highlights.
+        const docProjects = await getDocumentForPage('projects.html');
+        if (!docProjects) return "Project listings are temporarily unavailable.";
 
-        const cards = Array.from(docIndex.querySelectorAll('.project-card'));
-        const projects = cards.map(card => {
-            const title = card.querySelector('h3')?.textContent.trim();
-            const summary = card.querySelector('.project-card-content > p:not(.project-client)')?.textContent.trim();
-            const link = card.querySelector('a.project-case-link');
-            const href = link?.getAttribute('href') || '';
+        const sections = Array.from(docProjects.querySelectorAll('.project-group'));
+        const output = sections.map(section => {
+            const heading = section.querySelector('.project-group-header h2')?.textContent.trim() || 'Projects';
+            const lines = Array.from(section.querySelectorAll('.project-card')).map(card => {
+                const title = card.querySelector('h3')?.textContent.trim();
+                const link = card.querySelector('a.project-case-link');
+                const href = link?.getAttribute('href') || '';
 
-            // Link only to internally known case study pages.
-            if (!title || !/^projects\/[a-z0-9-]+\.html$/.test(href)) return '';
-            return `• <strong style="color:var(--neon-blue);">${escapeHtml(title)}</strong><br>` +
-                   `  ${escapeHtml(summary || '')}<br>` +
-                   `  <a href="${href}" style="color:var(--neon-purple);">Read case study</a>`;
+                // Only output links to local case study pages.
+                if (!title || !/^projects\/[a-z0-9-]+\.html$/.test(href)) return '';
+                return `• <a href="${href}" style="color:var(--neon-blue);">${escapeHtml(title)}</a>`;
+            }).filter(Boolean);
+            if (!lines.length) return '';
+            return `<strong style="color:var(--neon-purple);">${escapeHtml(heading)}</strong><br>` + lines.join('<br>');
         }).filter(Boolean);
 
-        return projects.length
-            ? `<strong style="color:var(--neon-purple);">Featured Projects</strong><br>` + projects.join('<br><br>') +
-              '<br><br><a href="projects.html" style="color:var(--neon-blue);">View all projects</a>'
-            : 'Project case studies are coming soon.';
+        return output.length
+            ? output.join('<br><br>') +
+              '<br><br><a href="projects.html" style="color:var(--neon-blue);">Browse all case studies</a>'
+            : 'Project case studies are temporarily unavailable.';
     }
 
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');

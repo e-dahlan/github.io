@@ -1963,3 +1963,128 @@ footer {
     .case-hero { border-radius: 20px; }
     .case-article, .case-sidebar { padding: 22px; }
 }
+
+/* Portfolio project groups 2026: distinguish professional work from hobbies. */
+.project-category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 34px;
+}
+.project-category-nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: .83rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 13px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    border-radius: 10px;
+    transition: border-color .2s ease;
+}
+.project-category-nav a span {
+    color: var(--neon-blue);
+    font-family: 'Fira Code', monospace;
+    font-size: .7rem;
+}
+.project-category-nav a:hover,
+.project-category-nav a:focus-visible {
+    border-color: var(--neon-blue);
+}
+.project-group {
+    margin-bottom: 52px;
+    scroll-margin-top: 24px;
+}
+.project-group-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+    margin-bottom: 22px;
+}
+.project-group-header h2 {
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    line-height: 1.25;
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    margin: 0 0 7px;
+}
+.project-group-header p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 790px;
+    font-size: .91rem;
+}
+.project-group-professional .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.project-group-hobbies .project-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 620px;
+}
+.project-card-hobby .project-card-visual {
+    background: radial-gradient(circle at 65% 18%, rgba(251, 191, 36, .22), transparent 62%),
+                linear-gradient(135deg, #263049, #111828);
+}
+.project-card-hobby .project-card-visual > i {
+    color: #fcd34d;
+}
+.project-prior-work {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 23px;
+    padding: 17px 0 3px;
+}
+.project-prior-label {
+    color: var(--text-muted);
+    font-size: .77rem;
+    font-weight: 600;
+}
+.project-prior-work a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 650;
+}
+.project-prior-work a:hover { color: var(--neon-purple); }
+.project-prior-work a i { font-size: .72rem; margin-left: 3px; }
+.case-section h3 {
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.06rem;
+    margin: 22px 0 10px;
+    line-height: 1.4;
+}
+.case-inline-link {
+    padding-top: 16px;
+    margin-top: 17px;
+    border-top: 1px solid var(--border-color);
+}
+.case-inline-link a {
+    color: var(--neon-blue);
+    font-weight: 650;
+    text-decoration: none;
+}
+.case-inline-link a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .project-group-professional .project-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .project-group { margin-bottom: 40px; }
+    .project-category-nav { gap: 8px; }
+    .project-prior-work {
+        gap: 11px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-category-nav a,
+    .project-card { transition: none; }
+}

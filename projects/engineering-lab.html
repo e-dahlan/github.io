@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Raspberry Pi & 3D Printing Lab | Edrees Dahlan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A personal environment for Linux services, Docker camera streaming, printer administration and reliable backup workflows.">
+    <meta name="description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#020617">
     <link rel="canonical" href="https://dahlan.me/projects/engineering-lab.html">
@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://dahlan.me/projects/engineering-lab.html"> 
     <meta property="og:site_name" content="Edrees Dahlan">
     <meta property="og:title" content="Raspberry Pi & 3D Printing Lab | Edrees Dahlan">
-    <meta property="og:description" content="A personal environment for Linux services, Docker camera streaming, printer administration and reliable backup workflows.">
+    <meta property="og:description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
     <meta property="og:image" content="https://dahlan.me/img/main_photo.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="1200">
@@ -25,7 +25,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://dahlan.me/projects/engineering-lab.html">
     <meta property="twitter:title" content="Raspberry Pi & 3D Printing Lab | Edrees Dahlan">
-    <meta property="twitter:description" content="A personal environment for Linux services, Docker camera streaming, printer administration and reliable backup workflows.">
+    <meta property="twitter:description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
     <meta property="twitter:image" content="https://dahlan.me/img/main_photo.jpg">
 
     <!-- Favicon -->
@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="../styles.css?v=20261103-projects1">
+    <link rel="stylesheet" href="../styles.css?v=20261104-projects2">
 
     <!-- Structured Data (schema.org BreadcrumbList) -->
     <script type="application/ld+json">
@@ -118,10 +118,10 @@
             <div class="case-hero">
                 <span class="project-eyebrow">Personal engineering project</span>
                 <h1>Raspberry Pi & 3D Printing Lab</h1>
-                <p class="case-lead">A personal environment for Linux services, Docker camera streaming, printer administration and reliable backup workflows.</p>
+                <p class="case-lead">Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.</p>
                 <dl class="case-facts">
-                    <div class="case-fact"><dt>Context</dt><dd>Independent Raspberry Pi / 3D printing lab</dd></div>
-                    <div class="case-fact"><dt>Role</dt><dd>Linux services & technical troubleshooting</dd></div>
+                    <div class="case-fact"><dt>Context</dt><dd>Ender 3 S1 Pro, Creality K2 SE Combo and Raspberry Pi 4</dd></div>
+                    <div class="case-fact"><dt>Role</dt><dd>Firmware configuration, printer monitoring and troubleshooting</dd></div>
                     <div class="case-fact"><dt>Project type</dt><dd>Personal engineering project</dd></div>
                 </dl>
             </div>
@@ -133,25 +133,36 @@
                 <article class="case-article">
                     <section class="case-section" aria-labelledby="challenge-title">
                         <h2 id="challenge-title">The Challenge</h2>
-                        <p>Combining a printer, a network camera and a Raspberry Pi requires dependable local networking, compatible services, diagnostic tools and a repeatable backup approach.</p>
+                        <p>Running and improving multiple 3D printers calls for compatible firmware, reliable bed leveling, accessible monitoring, capable slicing software and safe configuration changes.</p>
                     </section>
                     <section class="case-section" aria-labelledby="approach-title">
                         <h2 id="approach-title">My Approach</h2>
-                        <ul class="case-bullets"><li>Configured Raspberry Pi 4 services for Linux-based control and experimentation.</li>
-                            <li>Used Docker and Wyze Bridge to test camera streams, video properties and still snapshots.</li>
-                            <li>Integrated printer administration workflows with Klipper and Fluidd and investigated UI and connectivity issues.</li>
-                            <li>Created and checked configuration and service backups before system changes.</li></ul>
+                        <h3>Ender 3 S1 Pro</h3>
+                        <ul class="case-bullets">
+                            <li>Configured Klipper firmware on an Ender 3 S1 Pro and worked with BLTouch-assisted bed leveling.</li>
+                            <li>Set up Mainsail and Fluidd interfaces with Crowsnest camera monitoring.</li>
+                            <li>Used OrcaSlicer within the slicing and printer-control workflow.</li>
+                            <li>Enabled remote print monitoring through private home-network access, without a separate paid remote-printing subscription.</li>
+                        </ul>
+                        <h3>Creality K2 SE Combo</h3>
+                        <ul class="case-bullets">
+                            <li>Worked with Klipper/Fluidd access, printer monitoring and troubleshooting on the K2 SE Combo.</li>
+                            <li>Integrated a Wyze camera feed through Docker and Wyze Bridge, checking stream quality and snapshots.</li>
+                            <li>Explored CFS multi-color workflow configuration and printer diagnostics.</li>
+                            <li>Created and verified backups before system modifications.</li>
+                        </ul>
+                        <p class="case-inline-link">Related project: <a href="home-network-selfhosting.html">Home Networking &amp; Remote VPN Access</a>.</p>
                     </section>
                     <section class="case-section" aria-labelledby="outcome-title">
                         <h2 id="outcome-title">Outcome</h2>
-                        <p>The setup demonstrates practical system configuration, working camera-stream and snapshot checks, and verified backups. It is a personal lab rather than a public production monitoring service.</p>
+                        <p>The work spans a Klipper-modified Ender 3 S1 Pro and a Creality K2 SE Combo, combining slicing, remote monitoring, camera integration and verified backups. It is a private engineering lab, not a public printer-access service.</p>
                     </section>
                 </article>
                 <aside class="case-sidebar" aria-label="Project details">
                     <h2>Tools &amp; Technologies</h2>
-                    <ul class="project-tech" aria-label="Technology stack"><li>Raspberry Pi 4</li><li>Linux</li><li>Docker</li><li>Klipper / Fluidd</li><li>Wyze Bridge</li></ul>
+                    <ul class="project-tech" aria-label="Technology stack"><li>Ender 3 S1 Pro</li><li>Creality K2 SE Combo</li><li>Klipper / Fluidd</li><li>Mainsail</li><li>Crowsnest</li><li>OrcaSlicer</li><li>Docker / Wyze Bridge</li></ul>
                     <h2>Project Notes</h2>
-                    <p>No live camera feeds, printer controls, private IP addresses or device credentials are shared.</p>
+                    <p>The included camera image documents the K2 SE, not the older Ender 3 S1 Pro. Private camera URLs, device addresses and credentials are not exposed.</p>
                     
                 </aside>
             </div>
@@ -177,6 +188,6 @@
     </div>
 
     <!-- External Script -->
-    <script src="../main.js?v=20261103-projects1"></script>
+    <script src="../main.js?v=20261104-projects2"></script>
 </body>
 </html>
