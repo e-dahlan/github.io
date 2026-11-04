@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="../styles.css?v=20261104-projects2">
+    <link rel="stylesheet" href="../styles.css?v=20261104-impact">
 
     <!-- Structured Data (schema.org BreadcrumbList) -->
     <script type="application/ld+json">
@@ -141,15 +141,23 @@
                         </ul>
                     </section>
                     <section class="case-section" aria-labelledby="outcome-title">
-                        <h2 id="outcome-title">Outcome</h2>
-                        <p>Created a practical home networking and service environment for remote printer/LAN access, DNS-level filtering and local service monitoring. Software availability and free-tier terms can change; no permanent zero-cost guarantee is implied.</p>
+                        <h2 id="outcome-title">Results &amp; Impact</h2>
+                        <p>The home network evolved into a connected, privately accessible environment rather than a collection of isolated devices. The network layout, self-hosted services and VPN access made it easier to manage home resources while away and reduced the need for separate vendor-specific remote access paths.</p>
+                        <ul class="case-bullets impact-list">
+                            <li><strong>Private access to home resources.</strong> ZeroTier provided an authorized route to selected LAN services, including 3D printer monitoring, without exposing printer control panels directly to the open internet.</li>
+                            <li><strong>More consistent wireless connectivity.</strong> The 5G router, Netgear XR1000 and Totolink X30 access-point arrangement created a more organized foundation for devices that depend on Wi-Fi throughout the home.</li>
+                            <li><strong>Less distracting browsing on configured devices.</strong> Pi-hole introduced centralized DNS-based ad and unwanted-domain filtering, reducing the need to configure the same basic blocking rules separately on every compatible device.</li>
+                            <li><strong>Better awareness of service outages.</strong> Uptime Kuma made self-hosted service availability easier to check, so connectivity and application issues could be identified and investigated instead of discovered only after a task failed.</li>
+                            <li><strong>More control over recurring costs and maintenance.</strong> Self-hosted services and private network access provided practical alternatives to some paid remote-monitoring workflows, while keeping configuration and troubleshooting under personal control.</li>
+                        </ul>
+                        <p class="impact-conclusion">The outcome was a home-lab platform that is easier to reach, observe and maintain, with improved visibility into service availability and less dependence on disconnected device applications.</p>
                     </section>
                 </article>
                 <aside class="case-sidebar" aria-label="Project details">
                     <h2>Tools &amp; Technologies</h2>
                     <ul class="project-tech" aria-label="Technology stack"><li>Netgear XR1000 / DumaOS</li><li>Totolink X30 Mesh</li><li>ZeroTier</li><li>Pi-hole</li><li>Raspberry Pi 4</li><li>Uptime Kuma</li></ul>
                     <h2>Project Notes</h2>
-                    <p>Public documentation omits the internal topology, addresses, credentials, private hostnames, and remote-access configuration details.</p>
+                    <p>Home infrastructure includes 5G connectivity, gaming router, mesh access points, private VPN access, DNS-based filtering and service-health monitoring.</p>
                 </aside>
             </div>
             <nav class="case-next" aria-label="Project navigation">

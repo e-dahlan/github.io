@@ -47,6 +47,20 @@ try {
       } else {
         assert.equal(await page.locator('.case-content .case-section').count(), 3);
         assert.equal(await page.locator('.case-breadcrumb a').count(), 2);
+        assert.equal(await page.locator('.case-section[aria-labelledby="outcome-title"] .impact-list li').count(), 5, 'Each project needs five specific impact outcomes');
+        assert.match(await page.locator('.case-section[aria-labelledby="outcome-title"]').innerText(), /Results & Impact/);
+        if (file.includes('ecommerce-platform')) {
+          assert.equal(await page.locator('.case-performance .performance-score-ring').count(), 8);
+          const values = await page.locator('.performance-score-ring > span').allInnerTexts();
+          assert.deepEqual(values, ['48','93','96','92','88','95','96','92']);
+          assert.equal(await page.locator('.case-performance .performance-report-link').count(), 2);
+          assert.match(await page.locator('.performance-methodology').innerText(), /different URLs/);
+          const ring = page.locator('.performance-score-ring').first();
+          const style = await ring.evaluate(el => getComputedStyle(el).backgroundImage);
+          assert.match(style, /conic-gradient/, 'Performance circles must actually render CSS score arcs');
+          const rect = await ring.boundingBox();
+          assert.ok(rect.width > 45 && rect.height > 45, 'Performance circles must be visible and legible');
+        }
         if (file.includes('ecommerce-platform') || file.includes('engineering-lab')) {
           const evidence = page.locator('.case-section[aria-labelledby="approach-title"] .case-evidence img');
           assert.equal(await evidence.count(), 1, 'Screenshot should be inside the approach section, not the hero');
