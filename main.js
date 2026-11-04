@@ -391,17 +391,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const heading = Array.from(docResume.querySelectorAll('.section-column-title'))
             .find(el => el.textContent.includes('Certifications & Professional Training'));
         const groups = [];
-        let card = heading?.nextElementSibling;
-
-        while (card && card.classList.contains('resume-card')) {
+        const following = heading?.nextElementSibling;
+        const cards = following?.matches('details.resume-extra')
+            ? Array.from(following.querySelectorAll('.resume-card'))
+            : Array.from(docResume.querySelectorAll('.resume-card')).filter(card => card.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_PRECEDING);
+        cards.forEach(card => {
             const title = card.querySelector('h3')?.textContent.trim();
             const items = Array.from(card.querySelectorAll('.resume-list li'))
                 .map(el => `  • ${escapeHtml(el.textContent.trim())}`);
             if (title && items.length) {
                 groups.push(`<strong style="color: var(--neon-blue);">${escapeHtml(title)}</strong><br>${items.join('<br>')}`);
             }
-            card = card.nextElementSibling;
-        }
+        });
         return groups.length
             ? `<strong>Certifications & training:</strong><br>${groups.join('<br><br>')}`
             : "Certification details currently unavailable.";
