@@ -97,13 +97,15 @@
             <nav class="case-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Projects</span></nav>
             <div class="project-index-top">
                 <div class="section-header"><h1>Selected Projects</h1></div>
-                <p class="project-section-intro">A curated selection of professional e-commerce projects, personal engineering systems and hands-on hobbies. Professional experience is presented separately from at-home experiments.</p>
+                <p class="project-section-intro">Browse my professional e-commerce work, personal engineering systems and hands-on hobbies. Use the filters to focus on what interests you.</p>
             </div>
-            <nav class="project-category-nav" aria-label="Project categories">
-                <a href="#professional-work">Professional Work <span>4</span></a>
-                <a href="#home-lab">Home Lab &amp; Engineering <span>3</span></a>
-                <a href="#hobbies">Hobbies <span>1</span></a>
-            </nav>
+            <div class="project-category-nav" role="group" aria-label="Filter projects by category">
+                <button type="button" class="project-filter" data-project-filter="all" aria-pressed="true">All Projects <span>8</span></button>
+                <button type="button" class="project-filter" data-project-filter="professional" aria-pressed="false">Professional Work <span>4</span></button>
+                <button type="button" class="project-filter" data-project-filter="home-lab" aria-pressed="false">Home Lab <span>3</span></button>
+                <button type="button" class="project-filter" data-project-filter="hobby" aria-pressed="false">Hobbies <span>1</span></button>
+            </div>
+            <p class="filter-status" id="projectFilterStatus" role="status" aria-live="polite">Showing all 8 projects</p>
             <section class="project-group project-group-professional" id="professional-work" data-project-group="professional" aria-labelledby="professionalProjectsTitle">
                 <div class="project-group-header">
                     <h2 id="professionalProjectsTitle">Professional Work</h2>
