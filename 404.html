@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Edrees Dahlan - 404 System Critical</title>
+    <title>Page Not Found (404) | Edrees Dahlan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
     
@@ -20,6 +20,15 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
+        .error-landing { max-width: 760px; margin: 0 0 34px; }
+        .error-landing h1 { color: var(--text-main); font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); margin: 12px 0 14px; }
+        .error-landing p { color: var(--text-muted); line-height: 1.75; font-size: 1rem; }
+        .error-game { border: 1px solid var(--border-color); border-radius: 18px; background: var(--card-bg); }
+        .error-game > summary { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; color:var(--text-main); font-weight:700; list-style:none; }
+        .error-game > summary::-webkit-details-marker { display:none; }
+        .error-game[open] > summary i { transform:rotate(180deg); }
+        .error-game > .error-wrapper { padding:22px; border-top:1px solid var(--border-color); }
+        @media(max-width:768px){ .error-game > .error-wrapper { padding:15px; } }
         /* Additional 404 Game Specific Overrides matching your theme */
         .error-wrapper {
             display: grid;
@@ -73,7 +82,7 @@
             box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
         }
 
-        .error-content h1 {
+        .error-content h2 {
             font-family: 'Outfit', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
@@ -218,10 +227,11 @@
             </a>
 
             <div class="nav-controls">
-                <nav>
+                <nav id="primary-navigation" aria-label="Main navigation">
                     <ul>
                         <li><a href="index.html">About Me</a></li>
                         <li><a href="resume.html">Resume</a></li>
+                        <li><a href="projects.html">Projects</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -230,11 +240,22 @@
                 <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
                     <i class="fa-solid fa-sun" aria-hidden="true"></i>
                 </button>
+                <button class="menu-toggle" aria-label="Toggle Navigation" aria-controls="primary-navigation" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
             </div>
         </header>
 
         <!-- Content Body -->
         <main class="content-container" id="main-content">
+            <section class="error-landing" aria-labelledby="notFoundTitle">
+                <span class="project-eyebrow">ERROR 404 · PAGE NOT FOUND</span>
+                <h1 id="notFoundTitle">Lost your way?</h1>
+                <p>This page couldn't be found. Head back to the portfolio, explore projects or try the optional terminal puzzle below.</p>
+                <div class="error-quick-actions">
+                    <a class="error-back-link" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Back to Home</a>
+                    <a class="error-back-link secondary" href="projects.html"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Explore Projects</a>
+                </div>
+            </section>
+            <details class="error-game"><summary>Optional: try the 404 word puzzle <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
             <div class="error-wrapper">
                 
                 <!-- Left Grid: Word Search Grid -->
@@ -257,7 +278,7 @@
                         <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> SYSTEM COLLAPSE IN: <span id="time-left">90</span>s
                     </div>
 
-                    <h1>SYSTEM CRITICAL (404)</h1>
+                    <h2>SYSTEM CRITICAL (404)</h2>
 
                     <p>You’ve stumbled into the digital void. The server environment is unstable and you are locked in.</p>
 
@@ -299,6 +320,7 @@
                 </div>
 
             </div>
+            </details>
         </main>
 
         <!-- Footer -->
