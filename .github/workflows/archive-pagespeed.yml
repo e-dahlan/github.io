@@ -1,0 +1,45 @@
+name: One-time PageSpeed report archive
+
+on:
+  push:
+    branches:
+      - pagespeed-mobile-desktop-report-archive-2026-11-04
+    paths:
+      - '.github/workflows/archive-pagespeed.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium --with-deps
+      - name: Generate PDF snapshots from saved PageSpeed report URLs
+        run: node .github/pagespeed-reports/archive-from-google.mjs
+      - name: Verify report PDF files
+        run: |
+          for f in .github/pagespeed-reports/pdf/*.pdf; do
+            test -s "$f"
+            pdfinfo "$f" | grep 'Pages:'
+          done
+          test "$(find .github/pagespeed-reports/pdf -name '*.pdf' | wc -l)" -eq 4
+      - name: Commit PDFs to archive branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/pagespeed-reports/pdf/
+          if ! git diff --staged --quiet; then
+            git commit -m "Archive 4 PageSpeed Insights report snapshots as PDFs"
+            git push origin HEAD:pagespeed-mobile-desktop-report-archive-2026-11-04
+          fi
