@@ -1,0 +1,33 @@
+name: One-time visual audit (non-production)
+
+on:
+  push:
+    branches: [visual-audit-only-2026-11-04]
+    paths:
+      - '.github/workflows/visual-audit.yml'
+permissions:
+  contents: write
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright
+          npx playwright install chromium --with-deps
+      - name: Capture visual audit from repository HTML
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/static-site.log 2>&1 &
+          sleep 2
+          node .github/visual-audit.mjs
+      - name: Save diagnostic screenshots in audit branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .audit-screens/
+          git commit -m "Capture nonproduction screenshots for visual review"
+          git push origin HEAD:visual-audit-only-2026-11-04
