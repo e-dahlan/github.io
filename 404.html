@@ -370,20 +370,30 @@
             const navigation = document.getElementById('navigation');
             const estopBtn = document.getElementById('estop-btn');
             
-            const countdown = setInterval(function() {
-                if (doorUnlocked) {
-                    clearInterval(countdown);
-                    return;
-                }
-                
-                timeLeft--;
-                if(timeLeftEl) timeLeftEl.textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    unlockProtocol('timeout');
-                }
-            }, 1000);
+            // The optional puzzle timer begins only when a visitor opens it.
+            let countdown = null;
+            const startPuzzleTimer = () => {
+                if (countdown !== null) return;
+                countdown = setInterval(function() {
+                    if (doorUnlocked) {
+                        clearInterval(countdown);
+                        return;
+                    }
+                    timeLeft--;
+                    if (timeLeftEl) timeLeftEl.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        unlockProtocol('timeout');
+                    }
+                }, 1000);
+            };
+            const optionalPuzzle = document.querySelector('.error-game');
+            if (optionalPuzzle) {
+                optionalPuzzle.addEventListener('toggle', () => {
+                    if (optionalPuzzle.open) startPuzzleTimer();
+                });
+                if (optionalPuzzle.open) startPuzzleTimer();
+            }
 
             function unlockProtocol(method) {
                 doorUnlocked = true;
