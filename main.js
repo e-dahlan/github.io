@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Mobile Navigation Menu Toggle with ARIA State Support
     const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+    const nav = document.getElementById('primary-navigation');
     if (menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
             nav.classList.toggle('active');
@@ -83,6 +83,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (header) header.classList.remove('nav-open');
             }
         });
+    }
+
+    // Filter case studies in place without jumping down the page.
+    const categoryButtons = Array.from(document.querySelectorAll('.project-filter'));
+    const groups = Array.from(document.querySelectorAll('.project-group[data-project-group]'));
+    const filterStatus = document.getElementById('projectFilterStatus');
+    if (categoryButtons.length && groups.length) {
+        categoryButtons.forEach(button => button.addEventListener('click', () => {
+            const value = button.dataset.projectFilter;
+            categoryButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+            let visibleCount = 0;
+            groups.forEach(group => {
+                const visible = value === 'all' || group.dataset.projectGroup === value;
+                group.hidden = !visible;
+                if (visible) visibleCount += group.querySelectorAll('.project-card').length;
+            });
+            if (filterStatus) filterStatus.textContent =
+                value === 'all' ? 'Showing all ' + visibleCount + ' projects'
+                : 'Showing ' + visibleCount + ' ' + button.textContent.replace(/\s+\d+\s*$/, '').trim() + ' projects';
+        }));
     }
 
     // 4. Custom Mouse Glow Tracker - Hardware Accelerated version
@@ -933,7 +953,13 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 if (welcomeCancelled) return;
                 welcomeTimer = setTimeout(() => { void playWelcome(); }, 1900);
             };
-            if (document.readyState === 'complete') {
+            const disclosure = document.getElementById('cliDisclosure');
+            // A collapsed CLI must not start an animation before a visitor opens it.
+            if (disclosure && !disclosure.open) {
+                disclosure.addEventListener('toggle', () => {
+                    if (disclosure.open && !welcomeCancelled && !welcomeTimer) scheduleWelcome();
+                }, { once: true });
+            } else if (document.readyState === 'complete') {
                 scheduleWelcome();
             } else {
                 window.addEventListener('load', scheduleWelcome, { once: true });
