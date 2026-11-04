@@ -10,35 +10,43 @@
     <meta name="theme-color" content="#020617">
     <link rel="canonical" href="https://dahlan.me/">
 
-    <!-- Open Graph / Facebook -->
+    
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dahlan.me/"> 
     <meta property="og:site_name" content="Edrees Dahlan">
     <meta property="og:title" content="Edrees Dahlan | E-commerce Manager & Computer Engineer">
     <meta property="og:description" content="Edrees Dahlan is an E-commerce Manager and Computer Engineer based in Dammam, Saudi Arabia, specializing in Magento migrations, Cloudflare integrations, and conversion rate optimization.">
-    <meta property="og:image" content="https://dahlan.me/img/main_photo.jpg">
+    <meta property="og:image" content="https://dahlan.me/img/social/portfolio.png">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
 
-    <!-- Twitter -->
+    
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://dahlan.me/">
     <meta property="twitter:title" content="Edrees Dahlan | E-commerce Manager & Computer Engineer">
     <meta property="twitter:description" content="Edrees Dahlan is an E-commerce Manager and Computer Engineer based in Dammam, Saudi Arabia, specializing in Magento migrations, Cloudflare integrations, and conversion rate optimization.">
-    <meta property="twitter:image" content="https://dahlan.me/img/main_photo.jpg">
+    <meta property="twitter:image" content="https://dahlan.me/img/social/portfolio.png">
 
-    <!-- Favicon -->
+    
     <link rel="icon" type="image/png" href="./favicon.png">
+    
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Edrees Dahlan">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- External Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="styles.css?v=20261104-v7">
 
-    <!-- Structured Data (schema.org Person) for richer search results -->
+    
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -63,20 +71,21 @@
         }
     }
     </script>
+    <script src="/pwa.js?v=20261104-app2" defer></script>
 </head>
 <body>
 
-    <!-- Skip link for keyboard and screen-reader users -->
+    
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Interactive Canvas Background (decorative) -->
+    
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-    <!-- Cursor Follower Light (decorative) -->
+    
     <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
     <div class="main-wrapper">
-        <!-- Header -->
+        
         <header>
             <a href="index.html" class="logo-area">
                 <div class="logo-symbol"><img src="./favicon.png" alt="Edrees Dahlan Logo"></div>
@@ -88,11 +97,12 @@
                     <ul>
                         <li class="current-menu-item"><a href="index.html" aria-current="page">About Me</a></li>
                         <li><a href="resume.html">Resume</a></li>
+                        <li><a href="projects.html">Projects</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
 
-                <!-- Dark / Light Theme Toggle Button -->
+                
                 <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
                     <i class="fa-solid fa-sun" aria-hidden="true"></i>
                 </button>
@@ -103,52 +113,130 @@
             </div>
         </header>
 
-        <!-- Content Body -->
-        <div class="content-container" id="main-content">
-            <!-- Hero Profile Section -->
+        
+        <main class="content-container" id="main-content">
+            
             <div class="hero-section">
                 <div class="profile-card-container">
-                    <div class="profile-photo-box" id="tiltCard" role="img" aria-label="Portrait photo of Edrees Dahlan" style="background-image: url('./img/main_photo.jpg');"></div>
+                    <img class="profile-photo-box" id="tiltCard" src="./img/main_photo.jpg" alt="Portrait photo of Edrees Dahlan" width="320" height="320" loading="eager" fetchpriority="high">
                 </div>
 
                 <div class="hero-details">
-                    <h4>Computer Engineer &nbsp;|&nbsp; E-commerce Manager</h4>
+                    <p class="hero-kicker">Computer Engineer &nbsp;|&nbsp; E-commerce Manager</p>
                     <h1>EDREES DAHLAN</h1>
                     <div class="location-email">
                         <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Dammam · Eastern Region, Saudi Arabia</span>
                         <span>·</span>
                         <span><i class="fa-solid fa-envelope" aria-hidden="true"></i> <a href="mailto:e.dahlan@gmail.com">e.dahlan@gmail.com</a></span>
                     </div>
-                    <p>Highly analytical and data-driven E-commerce Manager & Computer Engineer specializing in scaling online retail capabilities, platform migrations (WooCommerce to Magento), Cloudflare integrations, and technical conversion rate optimization. Proven track record in managing high-volume catalogs, API middleware, and backend operational workflows.</p>
+                    <p>I make e-commerce easier to use and simpler to operate—improving storefront performance, connecting product data to business systems, and automating repetitive workflows.</p>
                     
                     <div class="action-buttons">
-                        <a href="Edrees_Dahlan_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-cv" download>
-                            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV (PDF)
-                        </a>
-                        <a href="https://wa.me/966568329898?text=Hi%20Edrees,%20I%20was%20looking%20at%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
-                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Chat
-                        </a>
+                        <a href="projects.html" class="btn btn-cv"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Explore Projects</a>
+                        <a href="Edrees_Dahlan_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" download><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV</a>
                     </div>
+                    <a class="hero-contact-link" href="contact.html">Get in touch <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
 
-            <!-- Interactive Terminal / CLI Section -->
-            <div class="section-header">
-                <h2>Interactive CLI</h2>
-            </div>
-            <div class="terminal-container">
+            <section class="featured-projects" id="featured-projects" aria-labelledby="featuredProjectsHeading">
+                <div class="section-header">
+                    <h2 id="featuredProjectsHeading">Featured Projects</h2>
+                </div>
+                <p class="project-section-intro">A selection of projects I’ve worked on, from Shopify storefront improvements to Magento migration and Oracle ERP automation. Each case study covers the challenge, my approach and the results.</p>
+                <div class="project-grid">
+<article class="project-card project-card-commerce">
+                        <div class="project-card-visual" aria-hidden="true">
+                            <span class="project-visual-index">01 / E-COMMERCE</span>
+                            <i class="fa-solid fa-store" aria-hidden="true"></i>
+                            <span class="project-visual-bottom">STORE EXPERIENCE</span>
+                        </div>
+                        <div class="project-card-content">
+                            <span class="project-eyebrow">Professional project</span>
+                            <h3>E-commerce Platform Optimization</h3>
+                            <p class="project-client">AL Haram Perfect Machinery &amp; Equipment CO.L.L.C.</p>
+                            <p>Improving multilingual product discovery, variant/SKU presentation, product information and order-tracking experiences in a Shopify storefront.</p>
+                            <ul class="project-tech" aria-label="Technologies"><li>Shopify</li><li>Liquid</li><li>JavaScript</li><li>UX</li></ul>
+                            <a class="project-case-link" href="projects/ecommerce-platform.html">View case study <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+<article class="project-card project-card-systems">
+                        <div class="project-card-visual" aria-hidden="true">
+                            <span class="project-visual-index">02 / PLATFORM MIGRATION</span>
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                            <span class="project-visual-bottom">PREVIOUS ROLE</span>
+                        </div>
+                        <div class="project-card-content">
+                            <span class="project-eyebrow">Professional experience</span>
+                            <h3>WooCommerce to Magento Migration</h3>
+                            <p class="project-client">Albawardi Tools and Hardware Co. L.L.C.</p>
+                            <p>Migrating a storefront from WooCommerce to Magento, alongside interface and loading-speed improvements.</p>
+                            <ul class="project-tech" aria-label="Technologies"><li>WooCommerce</li><li>Magento</li><li>UX</li><li>Performance</li></ul>
+                            <a class="project-case-link" href="projects/ecommerce-migration.html">View case study <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+<article class="project-card project-card-systems">
+                        <div class="project-card-visual" aria-hidden="true">
+                            <span class="project-visual-index">03 / ERP AUTOMATION</span>
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            <span class="project-visual-bottom">CONNECTED COMMERCE</span>
+                        </div>
+                        <div class="project-card-content">
+                            <span class="project-eyebrow">Professional experience</span>
+                            <h3>Oracle ERP &amp; E-commerce Automation</h3>
+                            <p class="project-client">Albawardi Tools and Hardware Co. L.L.C.</p>
+                            <p>Connecting store and Oracle workflows to update inventory and prices and support automated invoice issuance.</p>
+                            <ul class="project-tech" aria-label="Technologies"><li>Oracle ERP</li><li>Stock Sync</li><li>Prices</li><li>Invoicing</li></ul>
+                            <a class="project-case-link" href="projects/oracle-erp-integration.html">View case study <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+                </div>
+                <a class="projects-all-link" href="projects.html">Explore all projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </section>
+
+            <section class="expertise-section" id="expertise" aria-labelledby="expertise-title">
+                <div class="section-header"><h2 id="expertise-title">What I Do</h2></div>
+                <div class="services-grid">
+                    <article class="service-card"><div class="service-icon"><i class="fa-solid fa-store" aria-hidden="true"></i></div><h3>E-commerce Experience</h3><p>Clearer storefronts, faster browsing, multilingual product discovery, variant information and customer journeys that make shopping simpler.</p></article>
+                    <article class="service-card"><div class="service-icon"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></div><h3>ERP &amp; Automation</h3><p>Connecting online stores to stock, pricing and invoicing workflows so teams spend less time re-entering information and resolving inconsistencies.</p></article>
+                    <article class="service-card"><div class="service-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div><h3>Performance &amp; Infrastructure</h3><p>Practical improvements to website performance, integrations, DNS, monitoring and the systems behind reliable digital operations.</p></article>
+                </div>
+            </section>
+            <section class="lab-spotlight" id="personal-lab" aria-labelledby="lab-title">
+                <div class="section-header"><h2 id="lab-title">Personal Engineering Lab</h2></div>
+                <p class="project-section-intro">Outside the storefront, I build and maintain the systems I use every day: 3D printing, private networks and cross-brand home automation.</p>
+                <div class="lab-link-grid">
+                    <a href="projects/engineering-lab.html"><i class="fa-solid fa-cubes-stacked" aria-hidden="true"></i><span><strong>3D Printing &amp; Klipper</strong><small>Ender 3 S1 Pro and K2 SE Combo</small></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                    <a href="projects/home-network-selfhosting.html"><i class="fa-solid fa-network-wired" aria-hidden="true"></i><span><strong>Home Networking &amp; VPN</strong><small>Raspberry Pi, ZeroTier, Pi-hole and monitoring</small></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                    <a href="projects/smart-home-automation.html"><i class="fa-solid fa-house-signal" aria-hidden="true"></i><span><strong>Smart Home Automation</strong><small>Home Assistant, openHAB and multi-brand control</small></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                </div>
+                <a class="projects-all-link" href="projects.html#home-lab">Explore personal projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </section>
+            <section class="cli-section" id="interactive-cli" aria-labelledby="cli-title">
+                <div class="section-header"><h2 id="cli-title">Interactive CLI</h2></div>
+                <p class="project-section-intro">A little something for fellow engineers: explore the portfolio using terminal commands, or use the normal navigation above.</p>
+                <details class="cli-disclosure" id="cliDisclosure">
+                    <summary><span><i class="fa-solid fa-terminal" aria-hidden="true"></i> Open interactive terminal</span><span class="cli-summary-action">Launch CLI <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span></summary>
+            <div class="terminal-container" data-cli-version="3.1">
                 <div class="terminal-header">
                     <div class="terminal-dots">
                         <div class="terminal-dot dot-red"></div>
                         <div class="terminal-dot dot-yellow"></div>
                         <div class="terminal-dot dot-green"></div>
                     </div>
-                    <div class="terminal-title">visitor@edrees-terminal:~</div>
-                    <div></div>
+                    <div class="terminal-title">visitor@edrees-terminal:~ <span id="cliStatus" class="cli-status" aria-live="polite">v3.1 · Loading…</span></div>
+                    <button id="cliTypingToggle" class="cli-motion-toggle" type="button" aria-pressed="true" aria-label="Toggle terminal typing animation">Typing: ON</button>
                 </div>
-                <div class="terminal-body" id="terminalBody">
+                <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-label="Interactive terminal output">
                     <div class="terminal-output">
-                        <p>Welcome to Edrees Dahlan's Interactive Shell v2.6. Type <span>help</span> to see available commands.</p>
+                        <p>Welcome to Edrees Dahlan's Interactive Shell v3.1. Type <span>help</span> to see available commands.</p>
+                    </div>
+                </div>
+                
+                <div class="terminal-input-dock" id="cliInputDock">
+                    <div class="terminal-input-line" id="cliPrompt">
+                        <span class="terminal-prompt">edrees@cli:~$</span>
+                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-label="Terminal command" aria-describedby="cliHint">
                     </div>
                 </div>
                 <div class="terminal-quick-chips">
@@ -158,81 +246,36 @@
                     <button class="cli-chip" data-command="contact">contact</button>
                     <button class="cli-chip" data-command="clear">clear</button>
                 </div>
-                <div style="padding: 0 24px 20px 24px;">
-                    <div class="terminal-input-line">
-                        <span class="terminal-prompt">edrees@cli:~$</span>
-                        <input type="text" id="cliInput" class="terminal-input" placeholder="Type a command here..." autocomplete="off">
-                    </div>
-                </div>
+                <p class="terminal-hint" id="cliHint">First visit: watch the CLI introduce the portfolio. Click a command anytime to take control. ↑ / ↓ history · Tab autocomplete · Esc skips animation.</p>
             </div>
+                </details>
+            </section>
+            <section class="home-final-cta" aria-labelledby="final-cta-title">
+                <span class="project-eyebrow">LET'S CONNECT</span>
+                <h2 id="final-cta-title">Have a project or an interesting challenge?</h2>
+                <p>Happy to discuss e-commerce operations, platform integrations, automation and engineering ideas.</p>
+                <div class="action-buttons"><a class="btn btn-cv" href="contact.html"><i class="fa-regular fa-envelope" aria-hidden="true"></i> Contact Me</a><a class="home-link-secondary" href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+            </section>
+        </main>
 
-            <!-- What I Do Section -->
-            <div class="section-header">
-                <h2>What I Do</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></div>
-                    <h4>E-commerce Management</h4>
-                    <p>Optimizing fulfillment strategies, executing seamless catalog data migrations (WooCommerce to Magento), and scaling omnichannel retail growth.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
-                    <h4>Web Operations & Analytics</h4>
-                    <p>Leveraging Google Analytics 4, A/B testing, and custom Cloudflare Workers API proxies to optimize conversion funnels and user experiences.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
-                    <h4>Technical SEO & Integrations</h4>
-                    <p>Architecting technical SEO, core web vitals optimization, automated ERP integrations (Oracle), and custom API logistics tracking.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div>
-                    <h4>Network & Infrastructure</h4>
-                    <p>Deploying route-based IP solutions, DNS security, system recovery, and custom serverless proxies with hands-on computer engineering expertise.</p>
-                </div>
-            </div>
-
-            <!-- Statistics Section -->
-            <div class="section-header">
-                <h2>By the Numbers</h2>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h4>Years of Experience</h4>
-                    <div class="stat-value">+<span class="counter" data-target="7">0</span></div>
-                </div>
-                <div class="stat-card">
-                    <h4>Products Managed</h4>
-                    <div class="stat-value">+<span class="counter" data-target="10">0</span>k</div>
-                </div>
-                <div class="stat-card">
-                    <h4>Migration Uptime</h4>
-                    <div class="stat-value"><span class="counter" data-target="100">0</span>%</div>
-                </div>
-            </div>
-            <p class="fun-fact-badge">
-                <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
-                <span>...and <strong><span class="counter" data-target="1347">0</span></strong> cups of coffee along the way</span>
-            </p>
-        </div>
-
-        <!-- Footer -->
-        <footer>
+        
+        <footer class="site-footer">
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </nav>
             <ul class="footer-social-links">
-                <li>
-                    <a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
-                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-                    </a>
-                </li>
+                <li><a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
             </ul>
             <div class="footer-copyrights">
-                <p>&copy; <span id="current-year"></span> Made with <i class="fa-solid fa-heart" style="color: var(--neon-purple);" aria-hidden="true"></i> Edrees Dahlan. All rights reserved.</p>
+                <p>&copy; <span id="current-year">2026</span> Edrees Dahlan · E-commerce &amp; Computer Engineering.</p>
             </div>
         </footer>
     </div>
 
-    <!-- External Script -->
-    <script src="main.js"></script>
+    
+    <script src="main.js?v=20261104-v5"></script>
 </body>
 </html>

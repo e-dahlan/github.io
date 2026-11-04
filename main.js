@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 0. Accessibility: respect the visitor's reduced-motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    // 0.1 Header Scroll State Management
     const header = document.querySelector("header");
     
     if (header) {
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleHeaderScrollState();
     }
 
-    // 1. Theme Toggle Logic
     const themeToggleBtn = document.getElementById('themeToggle');
     if (themeToggleBtn) {
         const themeIcon = themeToggleBtn.querySelector('i');
@@ -47,15 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. Current Dynamic Year
     const yearEl = document.getElementById('current-year');
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
     }
 
-    // 3. Mobile Navigation Menu Toggle with ARIA State Support
     const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+    const nav = document.getElementById('primary-navigation');
     if (menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
             nav.classList.toggle('active');
@@ -84,7 +80,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. Custom Mouse Glow Tracker - Hardware Accelerated version
+    const categoryButtons = Array.from(document.querySelectorAll('.project-filter'));
+    const groups = Array.from(document.querySelectorAll('.project-group[data-project-group]'));
+    const filterStatus = document.getElementById('projectFilterStatus');
+    if (categoryButtons.length && groups.length) {
+        categoryButtons.forEach(button => button.addEventListener('click', () => {
+            const value = button.dataset.projectFilter;
+            categoryButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+            let visibleCount = 0;
+            groups.forEach(group => {
+                const visible = value === 'all' || group.dataset.projectGroup === value;
+                group.hidden = !visible;
+                if (visible) visibleCount += group.querySelectorAll('.project-card').length;
+            });
+            if (filterStatus) filterStatus.textContent =
+                value === 'all' ? 'Showing all ' + visibleCount + ' projects'
+                : 'Showing ' + visibleCount + ' ' + button.textContent.replace(/\s+\d+\s*$/, '').trim() + ' projects';
+        }));
+    }
+
     const cursorGlow = document.getElementById('cursorGlow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -92,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let glowY = mouseY;
 
     if (cursorGlow) {
-        if (prefersReducedMotion) {
+        if (prefersReducedMotion || !hasFinePointer) {
             cursorGlow.style.display = 'none';
         } else {
             window.addEventListener('mousemove', (e) => {
@@ -110,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 5. Interactive Particle Canvas
     const canvas = document.getElementById('bg-canvas');
     if (canvas && prefersReducedMotion) {
         canvas.style.display = 'none';
@@ -118,10 +131,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-        let isPageVisible = true;
+        const mobileMotion = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+        const mobileFrameInterval = 1000 / 30;
+        let lastFrameAt = 0;
+        let frameId = null;
+
+        const scheduleFrame = () => {
+            if (frameId === null && !document.hidden) {
+                frameId = requestAnimationFrame(renderParticles);
+            }
+        };
 
         document.addEventListener('visibilitychange', () => {
-            isPageVisible = !document.hidden;
+            if (document.hidden && frameId !== null) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            } else if (!document.hidden) {
+                lastFrameAt = 0;
+                scheduleFrame();
+            }
         });
 
         window.addEventListener('resize', () => {
@@ -129,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             height = canvas.height = window.innerHeight;
         });
 
-        const particles = Array.from({ length: 50 }, () => ({
+        const particles = Array.from({ length: mobileMotion ? 24 : 50 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
             vx: (Math.random() - 0.5) * 0.7,
@@ -137,11 +165,14 @@ document.addEventListener("DOMContentLoaded", () => {
             radius: Math.random() * 2 + 1
         }));
 
-        function renderParticles() {
-            if (!isPageVisible) {
-                requestAnimationFrame(renderParticles);
+        function renderParticles(timestamp) {
+            frameId = null;
+            if (document.hidden) return;
+            if (mobileMotion && timestamp - lastFrameAt < mobileFrameInterval) {
+                scheduleFrame();
                 return;
             }
+            lastFrameAt = timestamp;
 
             ctx.clearRect(0, 0, width, height);
 
@@ -181,12 +212,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             }
-            requestAnimationFrame(renderParticles);
+            scheduleFrame();
         }
-        renderParticles();
+        scheduleFrame();
     }
 
-    // 6. Scroll-Triggered Stat Counter Animation
     const statsSection = document.querySelector('.stats-grid');
     const counters = document.querySelectorAll('.counter');
     let countersStarted = false;
@@ -222,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
         counterObserver.observe(statsSection);
     }
 
-    // 7. General Scroll-Reveal Animation for Cards
     const revealElements = document.querySelectorAll('.service-card, .stat-card, .resume-card, .channel-card, .terminal-container');
     revealElements.forEach(el => el.classList.add('reveal-item'));
 
@@ -237,11 +266,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 8. 3D Tilt Effect for Main Profile Photo (Mouse + Mobile Gyroscope)
     const tiltCard = document.getElementById('tiltCard') || document.querySelector('.profile-photo-box');
     const tiltContainer = document.querySelector('.profile-card-container');
 
-    if (tiltCard && !prefersReducedMotion) {
+    if (tiltCard && !prefersReducedMotion && hasFinePointer) {
         if (tiltContainer) {
             tiltContainer.addEventListener('mousemove', (e) => {
                 const rect = tiltContainer.getBoundingClientRect();
@@ -264,38 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        const handleOrientation = (event) => {
-            if (event.beta === null || event.gamma === null) return;
-            let beta = Math.max(-45, Math.min(45, event.beta - 45));
-            let gamma = Math.max(-45, Math.min(45, event.gamma));
 
-            const rotateX = (beta / 45) * 15;
-            const rotateY = (gamma / 45) * 15;
-
-            tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-            tiltCard.style.boxShadow = `${-rotateY}px ${rotateX + 10}px 30px rgba(56, 189, 248, 0.25)`;
-        };
-
-        const initGyro = () => {
-            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                document.body.addEventListener('touchstart', () => {
-                    DeviceOrientationEvent.requestPermission()
-                        .then((permissionState) => {
-                            if (permissionState === 'granted') {
-                                window.addEventListener('deviceorientation', handleOrientation);
-                            }
-                        })
-                        .catch(console.error);
-                }, { once: true });
-            } else if ('DeviceOrientationEvent' in window) {
-                window.addEventListener('deviceorientation', handleOrientation);
-            }
-        };
-
-        initGyro();
     }
 
-    // 9. DYNAMIC DATA EXTRACTOR & INTERACTIVE CLI SYSTEM
     const pageCache = {};
 
     async function fetchAndParsePage(url) {
@@ -327,8 +326,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!doc) return "Edrees Dahlan - E-commerce Manager & Computer Engineer.";
         
         const title = doc.querySelector('.hero-details h1')?.textContent.trim() || "EDREES DAHLAN";
-        const subtitle = doc.querySelector('.hero-details h4')?.textContent.trim() || "Computer Engineer | E-commerce Manager";
-        const bio = doc.querySelector('.hero-details p')?.textContent.trim() || "";
+        const subtitle = doc.querySelector('.hero-details .hero-kicker')?.textContent.trim() || "Computer Engineer | E-commerce Manager";
+        const bio = doc.querySelector('.hero-details p:not(.hero-kicker)')?.textContent.trim() || "";
         
         return `<strong style="color: var(--neon-blue);">${title}</strong> (${subtitle})<br>${bio}`;
     }
@@ -375,18 +374,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const docResume = await getDocumentForPage('resume.html');
         if (!docResume) return "Certifications data unavailable.";
 
-        const certElements = docResume.querySelectorAll('.cert-card, .certificates-list li');
-        let certs = [];
-
-        certElements.forEach(c => certs.push(`  • ${c.textContent.trim()}`));
-
-        if (certs.length === 0) {
-            return `<strong style="color: var(--neon-blue);">Core Certifications & Training:</strong><br>` +
-                   `  • E-Commerce Platform Management & SEO Systems<br>` +
-                   `  • Computer Engineering & Network Architecture`;
-        }
-
-        return `<strong style="color: var(--neon-blue);">Extracted Certifications:</strong><br>` + certs.join('<br>');
+        const heading = Array.from(docResume.querySelectorAll('.section-column-title'))
+            .find(el => el.textContent.includes('Certifications & Professional Training'));
+        const groups = [];
+        const following = heading?.nextElementSibling;
+        const cards = following?.matches('details.resume-extra, .resume-training-grid')
+            ? Array.from(following.querySelectorAll('.resume-card'))
+            : Array.from(docResume.querySelectorAll('.resume-card')).filter(card => card.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_PRECEDING);
+        cards.forEach(card => {
+            const title = card.querySelector('h3')?.textContent.trim();
+            const items = Array.from(card.querySelectorAll('.resume-list li'))
+                .map(el => `  • ${escapeHtml(el.textContent.trim())}`);
+            if (title && items.length) {
+                groups.push(`<strong style="color: var(--neon-blue);">${escapeHtml(title)}</strong><br>${items.join('<br>')}`);
+            }
+        });
+        return groups.length
+            ? `<strong>Certifications & training:</strong><br>${groups.join('<br><br>')}`
+            : "Certification details currently unavailable.";
     }
 
     async function getContactData() {
@@ -416,31 +421,98 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function getProjectsData() {
-        const docIndex = await getDocumentForPage('index.html');
-        let services = [];
+        const docProjects = await getDocumentForPage('projects.html');
+        if (!docProjects) return "Project listings are temporarily unavailable.";
 
-        if (docIndex) {
-            const cards = docIndex.querySelectorAll('.service-card');
-            cards.forEach(c => {
-                const h4 = c.querySelector('h4')?.textContent.trim();
-                const p = c.querySelector('p')?.textContent.trim();
-                if (h4 && p) services.push(`  • <strong style="color: var(--neon-blue);">${h4}:</strong> ${p}`);
-            });
-        }
+        const sections = Array.from(docProjects.querySelectorAll('.project-group'));
+        const output = sections.map(section => {
+            const heading = section.querySelector('.project-group-header h2')?.textContent.trim() || 'Projects';
+            const lines = Array.from(section.querySelectorAll('.project-card')).map(card => {
+                const title = card.querySelector('h3')?.textContent.trim();
+                const link = card.querySelector('a.project-case-link');
+                const href = link?.getAttribute('href') || '';
 
-        return services.length > 0 ? services.join('<br>') : "Projects and integrations initialized.";
+                if (!title || !/^projects\/[a-z0-9-]+\.html$/.test(href)) return '';
+                return `• <a href="${href}" style="color:var(--neon-blue);">${escapeHtml(title)}</a>`;
+            }).filter(Boolean);
+            if (!lines.length) return '';
+            return `<strong style="color:var(--neon-purple);">${escapeHtml(heading)}</strong><br>` + lines.join('<br>');
+        }).filter(Boolean);
+
+        return output.length
+            ? output.join('<br><br>') +
+              '<br><br><a href="projects.html" style="color:var(--neon-blue);">Browse all case studies</a>'
+            : 'Project case studies are temporarily unavailable.';
     }
 
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
     const terminalBody = document.querySelector('.terminal-body') || document.getElementById('terminalBody');
     const cliChips = document.querySelectorAll('.cli-chip');
+    const livePrompt = document.getElementById('cliPrompt');
+    const cliStatus = document.getElementById('cliStatus');
+    const cliTypingToggle = document.getElementById('cliTypingToggle');
+    let typingEnabled = !prefersReducedMotion;
+
+    function renderTypingToggle() {
+        if (!cliTypingToggle) return;
+        cliTypingToggle.textContent = typingEnabled ? 'Typing: ON' : 'Typing: OFF';
+        cliTypingToggle.setAttribute('aria-pressed', String(typingEnabled));
+    }
+    if (cliTypingToggle) {
+        cliTypingToggle.addEventListener('click', () => {
+            typingEnabled = !typingEnabled;
+            renderTypingToggle();
+        });
+        renderTypingToggle();
+    }
+
+    async function typeTerminalResponse(target, html) {
+        const parsed = document.createElement('div');
+        parsed.innerHTML = html;
+        const parts = [];
+
+        function copyTree(source, destination) {
+            Array.from(source.childNodes).forEach(node => {
+                if (node.nodeType === 3) {
+                    const textNode = document.createTextNode('');
+                    destination.appendChild(textNode);
+                    parts.push({ node: textNode, text: node.textContent || '' });
+                } else if (node.nodeType === 1) {
+                    const element = node.cloneNode(false);
+                    destination.appendChild(element);
+                    copyTree(node, element);
+                }
+            });
+        }
+        copyTree(parsed, target);
+
+        if (!typingEnabled) {
+            parts.forEach(part => { part.node.textContent = part.text; });
+            return;
+        }
+
+        const totalChars = parts.reduce((total, part) => total + part.text.length, 0);
+        const charsPerTick = Math.max(2, Math.ceil(totalChars / 85));
+        for (const part of parts) {
+            for (let i = 0; i < part.text.length; i += charsPerTick) {
+                if (skipTyping) {
+                    part.node.textContent = part.text;
+                    break;
+                }
+                part.node.textContent = part.text.slice(0, i + charsPerTick);
+                if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
+                await sleep(16);
+            }
+        }
+    }
 
     async function processCommand(cmd) {
         const cleanCmd = cmd.trim().toLowerCase();
         if (!cleanCmd || !terminalBody) return;
 
         if (cleanCmd === 'clear') {
-            terminalBody.innerHTML = '';
+            terminalBody.replaceChildren();
+            terminalBody.scrollTop = 0;
             return;
         }
 
@@ -455,21 +527,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let responseText = "";
 
-        switch (cleanCmd) {
+        if (cleanCmd.startsWith('echo ')) {
+            responseText = escapeHtml(cmd.trim().slice(5));
+        } else switch (cleanCmd) {
             case 'help':
-                responseText = `Available commands (parsed dynamically):
-  <span style="color: var(--neon-blue);">about</span>         - Bio & summary from About Me page
-  <span style="color: var(--neon-blue);">skills</span>        - Extracted skill set from Resume
-  <span style="color: var(--neon-blue);">projects</span>      - Services & system architecture
-  <span style="color: var(--neon-blue);">contact</span>       - Direct channels from Contact page
-  <span style="color: var(--neon-blue);">cv</span>            - Download my Resume (PDF)
-  <span style="color: var(--neon-blue);">sysinfo</span>       - Local client session metrics
-  <span style="color: var(--neon-blue);">coffee</span>        - V60 brew status ☕
-  <span style="color: var(--neon-blue);">pihole</span>        - Local DNS stats
-  <span style="color: var(--neon-blue);">klipper</span>       - 3D Printer status
-  <span style="color: var(--neon-blue);">isopods</span>       - Vivarium culture check
-  <span style="color: var(--neon-blue);">terrarium</span>     - Closed Ecosystem stats
-  <span style="color: var(--neon-blue);">clear</span>         - Clear terminal`;
+                responseText = `<strong style="color: var(--neon-purple);">Portfolio commands</strong><br>
+<span style="color: var(--neon-blue);">about</span>          Profile summary<br>
+<span style="color: var(--neon-blue);">experience</span>     Work experience<br>
+<span style="color: var(--neon-blue);">skills</span>         Technical skills<br>
+<span style="color: var(--neon-blue);">certs</span>          Certifications and training<br>
+<span style="color: var(--neon-blue);">techstack</span>      Technology stack<br>
+<span style="color: var(--neon-blue);">projects</span>       Featured projects and case studies<br>
+<span style="color: var(--neon-blue);">contact</span>        Contact details<br>
+<span style="color: var(--neon-blue);">cv</span>             Download resume PDF<br>
+<span style="color: var(--neon-blue);">sysinfo</span>        Your browser environment<br>
+<span style="color: var(--neon-blue);">history</span>        Recent session commands<br>
+<span style="color: var(--neon-blue);">whoami</span>         Visitor session<br>
+<span style="color: var(--neon-blue);">ls</span> / <span style="color: var(--neon-blue);">pwd</span>       Virtual portfolio directory<br>
+<span style="color: var(--neon-blue);">cat about.md</span>   Read about me<br>
+<span style="color: var(--neon-blue);">date</span>           Local date & time<br>
+<span style="color: var(--neon-blue);">echo</span>           Echo a message<br>
+<span style="color: var(--neon-blue);">clear</span>          Clear terminal<br><br>
+<strong style="color: var(--neon-purple);">Explore (demos and easter eggs)</strong><br>
+coffee · pihole · klipper · isopods · terrarium · disk`;
+                break;
+
+            case 'whoami':
+                responseText = '<strong style="color: var(--neon-blue);">Edrees Dahlan</strong> — E-commerce Manager & Computer Engineer<br><span style="color: var(--text-muted);">Session: visitor (portfolio simulation)</span>';
+                break;
+
+            case 'pwd':
+                responseText = '/home/visitor/portfolio (virtual directory)';
+                break;
+
+            case 'ls':
+                responseText = '<span style="color: var(--neon-blue);">about.md</span>  <span style="color: var(--neon-purple);">skills/</span>  <span style="color: var(--neon-purple);">projects/</span>  resume.pdf  contact.md<br><span style="color: var(--text-muted);">Virtual portfolio entries, not server files.</span>';
+                break;
+
+            case 'date':
+                responseText = escapeHtml(new Date().toLocaleString());
+                break;
+
+            case 'cat readme.md':
+            case 'cat about.md':
+                responseText = await getAboutData();
+                break;
+
+            case 'history':
+                responseText = commandHistory.length
+                    ? commandHistory.map((entry, index) => `${String(index + 1).padStart(2, ' ')}  ${escapeHtml(entry)}`).join('<br>')
+                    : 'No commands in this session.';
                 break;
 
             case 'about':
@@ -507,7 +614,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
             case 'cv':
             case 'download cv':
-                responseText = `Initiating CV download...<br><span style="color: #22c55e;">[SUCCESS] Edrees_Dahlan_Resume.pdf has been downloaded!</span>`;
+                responseText = `Starting your resume download...<br><span style="color: #22c55e;">If your browser allows downloads, the PDF will be saved.</span>`;
                 const link = document.createElement('a');
                 link.href = 'Edrees_Dahlan_Resume.pdf';
                 link.download = 'Edrees_Dahlan_Resume.pdf';
@@ -542,8 +649,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 responseText = `<strong style="color: var(--neon-blue);">Client Environment Metrics:</strong><br>` +
-                               `  • <strong>Browser:</strong> ${browserName}<br>` +
-                               `  • <strong>OS / Platform:</strong> ${osName}<br>` +
+                               `  • <strong>Browser:</strong> ${escapeHtml(browserName)}<br>` +
+                               `  • <strong>OS / Platform:</strong> ${escapeHtml(osName)}<br>` +
                                `  • <strong>Screen Resolution:</strong> ${window.screen.width}x${window.screen.height}<br>` +
                                `  • <strong>Online Status:</strong> ${navigator.onLine ? '<span style="color:#22c55e;">Online</span>' : '<span style="color:#ef4444;">Offline</span>'}`;
                 break;
@@ -553,35 +660,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
                 
             case 'pihole':
-                responseText = `<strong style="color: var(--neon-purple);">Pi-hole Network-wide Ad Blocking:</strong><br>` +
-                               `  • Status: <span style="color: #22c55e;">Active</span> (Raspberry Pi Local)<br>` +
-                               `  • Queries Blocked Today: 14,231 (18.4%)<br>` +
-                               `  • Domains on Adlists: 1,340,921`;
+                responseText = `<strong style="color: var(--neon-purple);">DNS Filtering / Pi-hole:</strong><br>` +
+                               `  • Live telemetry: Not connected<br>` +
+                               `  • This CLI showcases experience with local DNS systems; it does not access a visitor's network.`;
                 break;
-                
+
             case 'klipper':
-                responseText = `<strong style="color: var(--neon-blue);">Ender 3 S1 Pro (Klipper Firmware):</strong><br>` +
-                               `  • Connection: <span style="color: #22c55e;">Online</span> (Local Host via Ethernet)<br>` +
-                               `  • Extruder Temp: 210°C / Target: 210°C<br>` +
-                               `  • Bed Temp: 60°C / Target: 60°C<br>` +
-                               `  • Webcam Stream: <span style="color: #22c55e;">Active</span>`;
+                responseText = `<strong style="color: var(--neon-blue);">Creality K2 SE / Klipper:</strong><br>` +
+                               `  • Live printer monitoring: Not connected<br>` +
+                               `  • Demonstration only — no temperatures or camera feeds are being read.`;
                 break;
-                
+
             case 'isopods':
-                responseText = `Culture Bin Status Check... 🐛<br>` +
+                responseText = `Playful demo (not live): Culture Bin Status Check... 🐛<br>` +
                                `<span style="color: #f59e0b;">Observation result:</span> <span style="color: var(--neon-pink);">100% Males detected.</span><br>` +
                                `Action required: Need to introduce females for successful breeding setup.`;
                 break;
                 
             case 'terrarium':
-                responseText = `Closed Ecosystem Status: Aralia and springtails thriving. Humidity stable at 85%.`;
+                responseText = `Playful ecosystem example (not live sensor data): Aralia and springtail habitat.`;
                 break;
 
             case 'df':
             case 'disk':
-                responseText = `Filesystem     1K-blocks      Used Available Use% Mounted on<br>` +
-                               `/dev/nvme0n1p2 512000000 214580000 297420000  42% /<br>` +
-                               `<span style="color: var(--neon-blue);">Total:</span> 512 GB | <span style="color: #f59e0b;">Used:</span> ~214.5 GB (42%) | <span style="color: #22c55e;">Remaining:</span> ~297.4 GB`;
+                responseText = `Filesystem demo: no server disk statistics are exposed through this portfolio.`;
                 break;
 
             case 'sudo':
@@ -595,34 +697,253 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
         }
 
-        outputLine.innerHTML = promptHeader + `<div>${responseText}</div>`;
-        terminalBody.scrollTop = terminalBody.scrollHeight;
+        outputLine.innerHTML = promptHeader + '<div class="cli-response" aria-hidden="true"></div>';
+        const responseArea = outputLine.querySelector('.cli-response');
+        if (!responseArea) {
+            outputLine.innerHTML = promptHeader + `<div>${responseText}</div>`;
+            return;
+        }
+
+        terminalBody.setAttribute('aria-busy', 'true');
+        try {
+            await typeTerminalResponse(responseArea, responseText);
+        } finally {
+            responseArea.removeAttribute('aria-hidden');
+            terminalBody.removeAttribute('aria-busy');
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+    }
+
+    const autoCompleteCommands = [
+        'help', 'whoami', 'pwd', 'ls', 'date', 'cat about.md',
+        'about', 'skills', 'experience', 'certs', 'techstack',
+        'projects', 'contact', 'cv', 'sysinfo', 'coffee',
+        'pihole', 'klipper', 'isopods', 'terrarium', 'disk',
+        'history', 'clear'
+    ];
+    const commandHistory = [];
+    let historyIndex = 0;
+    let cliBusy = false;
+    let skipTyping = false;
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    async function runCliCommand(rawCommand, animateTyping = false) {
+        const command = String(rawCommand).trim();
+        if (!command || cliBusy) return;
+
+        cliBusy = true;
+        skipTyping = false;
+        cliChips.forEach(chip => { chip.disabled = true; });
+        if (terminalInput) {
+            terminalInput.readOnly = true;
+            terminalInput.setAttribute('aria-busy', 'true');
+        }
+
+        try {
+            if (terminalInput && animateTyping) {
+                terminalInput.value = '';
+                terminalInput.focus({ preventScroll: true });
+                const chars = Array.from(command);
+
+                if (!typingEnabled) {
+                    terminalInput.value = command;
+                } else {
+                    for (const char of chars) {
+                        if (skipTyping) {
+                            terminalInput.value = command;
+                            break;
+                        }
+                        terminalInput.value += char;
+                        if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
+                        await sleep(42 + Math.round(Math.random() * 22));
+                    }
+                    if (!skipTyping) await sleep(110);
+                }
+            }
+            if (terminalInput) terminalInput.value = '';
+
+            commandHistory.push(command);
+            if (commandHistory.length > 40) commandHistory.shift();
+            historyIndex = commandHistory.length;
+            await processCommand(command);
+        } finally {
+            cliBusy = false;
+            skipTyping = false;
+            cliChips.forEach(chip => { chip.disabled = false; });
+            if (terminalInput) {
+                terminalInput.readOnly = false;
+                terminalInput.removeAttribute('aria-busy');
+            }
+        }
     }
 
     if (terminalInput) {
-        terminalInput.addEventListener('keydown', async (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const val = terminalInput.value;
-                terminalInput.value = '';
-                await processCommand(val);
+        terminalInput.addEventListener('keydown', async (event) => {
+            if (event.key === 'Escape' && cliBusy) {
+                event.preventDefault();
+                skipTyping = true;
+                return;
+            }
+
+            if (cliBusy) {
+                if (event.key === 'Enter') event.preventDefault();
+                return;
+            }
+
+            if (event.key === 'Tab' && terminalInput.value.trim()) {
+                const typed = terminalInput.value.trim().toLowerCase();
+                const matches = autoCompleteCommands.filter(command => command.startsWith(typed));
+                if (matches.length === 1) {
+                    event.preventDefault();
+                    terminalInput.value = matches[0];
+                }
+                return;
+            }
+
+            if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                if (!commandHistory.length) return;
+                event.preventDefault();
+                const delta = event.key === 'ArrowUp' ? -1 : 1;
+                historyIndex = Math.max(0, Math.min(commandHistory.length, historyIndex + delta));
+                terminalInput.value = commandHistory[historyIndex] || '';
+                terminalInput.setSelectionRange(terminalInput.value.length, terminalInput.value.length);
+                return;
+            }
+
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                await runCliCommand(terminalInput.value);
             }
         });
     }
 
     cliChips.forEach(chip => {
-        chip.addEventListener('click', async () => {
-            const cmd = chip.getAttribute('data-command') || chip.textContent.trim();
-            await processCommand(cmd);
+        chip.addEventListener('click', () => {
+            const command = chip.getAttribute('data-command') || chip.textContent.trim();
+            void runCliCommand(command, true);
         });
     });
+
+    if (cliStatus) {
+        cliStatus.textContent = 'v3.1 · Ready';
+        cliStatus.classList.add('cli-ready');
+    }
+    if (terminalInput && terminalBody && cliChips.length) {
+        document.documentElement.dataset.cliReady = '3.1';
+    }
+
+    const welcomeStorageKey = 'edrees-cli-intro-v3';
+    let welcomeCancelled = false;
+    let welcomeTimer = null;
+
+    function rememberWelcome() {
+        try { sessionStorage.setItem(welcomeStorageKey, '1'); } catch (error) {
+        }
+    }
+
+    function cancelWelcome() {
+        welcomeCancelled = true;
+        if (welcomeTimer !== null) {
+            clearTimeout(welcomeTimer);
+            welcomeTimer = null;
+        }
+        rememberWelcome();
+    }
+
+    async function writeWelcomeText(node, text, delayMs) {
+        if (!typingEnabled) {
+            node.textContent = text;
+            return !welcomeCancelled;
+        }
+
+        for (const character of Array.from(text)) {
+            if (welcomeCancelled) return false;
+            node.textContent += character;
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+            await sleep(delayMs);
+        }
+        return !welcomeCancelled;
+    }
+
+    async function showWelcomeCommand(command, answer) {
+        if (welcomeCancelled || !terminalBody || !livePrompt) return false;
+
+        const line = document.createElement('div');
+        line.className = 'terminal-output cli-welcome-output';
+
+        const commandRow = document.createElement('div');
+        commandRow.className = 'cli-welcome-command';
+        const promptText = document.createElement('span');
+        promptText.className = 'terminal-prompt';
+        promptText.textContent = 'edrees@cli:~$ ';
+        const typedText = document.createElement('span');
+        commandRow.append(promptText, typedText);
+
+        const resultRow = document.createElement('div');
+        resultRow.className = 'cli-welcome-result';
+
+        line.append(commandRow, resultRow);
+        terminalBody.appendChild(line);
+
+        const commandComplete = await writeWelcomeText(typedText, command, 47);
+        if (!commandComplete) { line.remove(); return false; }
+
+        await sleep(140);
+        const answerComplete = await writeWelcomeText(resultRow, answer, 13);
+        if (!answerComplete) { line.remove(); return false; }
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        return true;
+    }
+
+    async function playWelcome() {
+        welcomeTimer = null;
+        if (welcomeCancelled || cliBusy || document.hidden) return;
+        rememberWelcome();
+
+        const identity = 'Edrees Dahlan — E-commerce Manager & Computer Engineer';
+        if (!await showWelcomeCommand('whoami', identity)) return;
+        if (welcomeCancelled) return;
+
+        await sleep(240);
+        if (welcomeCancelled || !await showWelcomeCommand(
+            'help',
+            'Available commands: about, skills, projects, experience, contact, cv, history, clear. Type help to see more.'
+        )) return;
+
+        document.documentElement.dataset.cliIntro = 'complete';
+    }
+
+    if (terminalInput && terminalBody && livePrompt) {
+        let alreadySeen = false;
+        try { alreadySeen = sessionStorage.getItem(welcomeStorageKey) === '1'; } catch (error) {}
+
+        if (!alreadySeen) {
+            terminalInput.addEventListener('keydown', cancelWelcome, { once: true });
+            terminalInput.addEventListener('pointerdown', cancelWelcome, { once: true });
+            cliChips.forEach(chip => chip.addEventListener('click', cancelWelcome, { once: true }));
+
+            const scheduleWelcome = () => {
+                if (welcomeCancelled) return;
+                welcomeTimer = setTimeout(() => { void playWelcome(); }, 1900);
+            };
+            const disclosure = document.getElementById('cliDisclosure');
+            if (disclosure && !disclosure.open) {
+                disclosure.addEventListener('toggle', () => {
+                    if (disclosure.open && !welcomeCancelled && !welcomeTimer) scheduleWelcome();
+                }, { once: true });
+            } else if (document.readyState === 'complete') {
+                scheduleWelcome();
+            } else {
+                window.addEventListener('load', scheduleWelcome, { once: true });
+            }
+        }
+    }
 
     function escapeHtml(text) {
         const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
         return text.replace(/[&<>"']/g, m => map[m]);
     }
 
-    // 10. Contact Form Submission Handler with Web3Forms AJAX Integration
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -634,23 +955,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const honeypot = document.getElementById('website');
 
             const formData = new FormData(contactForm);
-            const turnstileResponse = formData.get('cf-turnstile-response');
+            const captchaResponse = formData.get('h-captcha-response');
 
-            // 1. Check Cloudflare Turnstile CAPTCHA first
-            if (!turnstileResponse) {
+            if (!captchaResponse) {
                 formStatus.style.display = 'flex';
                 formStatus.className = 'terminal-status-loading';
                 formStatus.style.color = '#f59e0b';
                 formStatus.style.borderColor = 'rgba(245, 158, 11, 0.3)';
                 formStatus.style.background = 'rgba(245, 158, 11, 0.1)';
-                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> Security Check Required: Please verify you are human.`;
+                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> Security Check Required: Please complete hCaptcha to send your message.`;
                 setTimeout(() => {
                     formStatus.style.display = 'none';
                 }, 5000);
-                return; // Stop submission until captcha is solved
+                return;
             }
 
-            // 2. Check traditional Honeypot for bots
             if (honeypot && honeypot.value.trim() !== '') {
                 submitBtn.style.display = 'none';
                 formStatus.style.display = 'flex';
@@ -664,7 +983,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Proceed to API submission
             submitBtn.style.display = 'none';
             formStatus.style.display = 'flex';
             formStatus.className = 'terminal-status-loading';

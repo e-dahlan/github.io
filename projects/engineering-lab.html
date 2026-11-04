@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Raspberry Pi & 3D Printing Lab | Edrees Dahlan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#020617">
+    <link rel="canonical" href="https://dahlan.me/projects/engineering-lab.html">
+
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dahlan.me/projects/engineering-lab.html"> 
+    <meta property="og:site_name" content="Edrees Dahlan">
+    <meta property="og:title" content="Raspberry Pi & 3D Printing Lab | Edrees Dahlan">
+    <meta property="og:description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
+    <meta property="og:image" content="https://dahlan.me/img/social/engineering.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dahlan.me/projects/engineering-lab.html">
+    <meta property="twitter:title" content="Raspberry Pi & 3D Printing Lab | Edrees Dahlan">
+    <meta property="twitter:description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
+    <meta property="twitter:image" content="https://dahlan.me/img/social/engineering.png">
+
+    
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Edrees Dahlan">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <link rel="stylesheet" href="../styles.css?v=20261104-v7">
+
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://dahlan.me/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": "https://dahlan.me/projects.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Raspberry Pi & 3D Printing Lab",
+            "item": "https://dahlan.me/projects/engineering-lab.html"
+        }
+    ]
+}
+    </script>
+    <script src="/pwa.js?v=20261104-app2" defer></script>
+</head>
+<body>
+
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+        
+        <header>
+            <a href="../index.html" class="logo-area">
+                <div class="logo-symbol"><img src="../favicon.png" alt="Edrees Dahlan Logo"></div>
+                <div class="logo-text">Edrees <span>Dahlan</span></div>
+            </a>
+
+            <div class="nav-controls">
+                <nav id="primary-navigation">
+                    <ul>
+                        <li><a href="../index.html">About Me</a></li>
+                        <li><a href="../resume.html">Resume</a></li>
+                        <li class="current-menu-item"><a href="../projects.html" aria-current="page">Projects</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                </button>
+
+                <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="primary-navigation">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        
+        <main class="content-container" id="main-content">
+            <nav class="case-breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a><span aria-hidden="true">/</span>
+                <a href="../projects.html">Projects</a><span aria-hidden="true">/</span>
+                <span aria-current="page">Raspberry Pi & 3D Printing Lab</span>
+            </nav>
+            <div class="case-hero">
+                <span class="project-eyebrow">Personal engineering project</span>
+                <h1>Raspberry Pi & 3D Printing Lab</h1>
+                <p class="case-lead">My 3D printing lab brings together an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.</p>
+                <dl class="case-facts">
+                    <div class="case-fact"><dt>Context</dt><dd>Ender 3 S1 Pro, Creality K2 SE Combo and Raspberry Pi 4</dd></div>
+                    <div class="case-fact"><dt>Role</dt><dd>Firmware configuration, printer monitoring and troubleshooting</dd></div>
+                    <div class="case-fact"><dt>Project type</dt><dd>Personal engineering project</dd></div>
+                </dl>
+            </div>
+            <section class="case-key-outcomes" aria-label="Key project outcomes">
+                <h2>Key Outcomes</h2>
+                <ul><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>Control from a clearer interface</span></li><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>More practical remote monitoring</span></li><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>Earlier awareness of print problems</span></li></ul>
+            </section>
+            <div class="case-content">
+                <article class="case-article">
+                    <section class="case-section" aria-labelledby="challenge-title">
+                        <h2 id="challenge-title">The Challenge</h2>
+                        <p>Running and improving multiple 3D printers calls for compatible firmware, reliable bed leveling, accessible monitoring, capable slicing software and safe configuration changes.</p>
+                    </section>
+                    <section class="case-section" aria-labelledby="approach-title">
+                        <h2 id="approach-title">My Approach</h2>
+                        <h3>Ender 3 S1 Pro</h3>
+                        <ul class="case-bullets">
+                            <li>Configured Klipper firmware on an Ender 3 S1 Pro and worked with BLTouch-assisted bed leveling.</li>
+                            <li>Set up Mainsail and Fluidd interfaces with Crowsnest camera monitoring.</li>
+                            <li>Used OrcaSlicer within the slicing and printer-control workflow.</li>
+                            <li>Enabled remote print monitoring through private home-network access, without a separate paid remote-printing subscription.</li>
+                        </ul>
+                        <h3>Creality K2 SE Combo</h3>
+                        <ul class="case-bullets">
+                            <li>Worked with Klipper/Fluidd access, printer monitoring and troubleshooting on the K2 SE Combo.</li>
+                            <li>Integrated a Wyze camera feed through Docker and Wyze Bridge, checking stream quality and snapshots.</li>
+                            <li>Explored CFS multi-color workflow configuration and printer diagnostics.</li>
+                            <li>Created and verified backups before system modifications.</li>
+                        </ul>
+                        <p class="case-inline-link">Related project: <a href="home-network-selfhosting.html">Home Networking &amp; Remote VPN Access</a>.</p>
+                        
+                    </section>
+                    <section class="case-section" aria-labelledby="outcome-title">
+                        <h2 id="outcome-title">Results &amp; Impact</h2>
+                        <p>The printing lab became a more accessible and maintainable environment across both the Klipper-modified Ender 3 S1 Pro and the Creality K2 SE Combo. Bringing printer controls, camera feeds and service diagnostics together made experimentation easier to manage without constant physical checks.</p>
+                        <ul class="case-bullets impact-list">
+                            <li><strong>Control from a clearer interface.</strong> Klipper, Mainsail and Fluidd made it easier to review printer status, settings and diagnostics from a browser instead of relying only on a printer's built-in controls.</li>
+                            <li><strong>More practical remote monitoring.</strong> Camera streams and private remote access enabled checking print progress while away from the printer, reducing unnecessary trips just to see whether a job is still running.</li>
+                            <li><strong>Earlier awareness of print problems.</strong> Live snapshots and monitoring tools made visible issues easier to notice so a failing print could be investigated sooner, helping avoid unnecessary wasted printing time and material.</li>
+                            <li><strong>A repeatable print-preparation workflow.</strong> Combining bed-leveling configuration, OrcaSlicer and printer administration created a more structured route from slicer settings to monitored execution.</li>
+                            <li><strong>Safer changes and faster recovery.</strong> Verified backups before configuration work reduced the risk of losing known-working settings, allowing firmware and camera integrations to be tested more confidently.</li>
+                        </ul>
+                        <p class="impact-conclusion">The main improvement was practical reliability and control: multiple printers could be managed with clearer visibility, documented configuration and fewer avoidable interruptions during technical experimentation.</p>
+                    </section>
+                </article>
+                <aside class="case-sidebar" aria-label="Project details">
+                    <h2>Tools &amp; Technologies</h2>
+                    <ul class="project-tech" aria-label="Technology stack"><li>Ender 3 S1 Pro</li><li>Creality K2 SE Combo</li><li>Klipper / Fluidd</li><li>Mainsail</li><li>Crowsnest</li><li>OrcaSlicer</li><li>Docker / Wyze Bridge</li></ul>
+                    <h2>Project Notes</h2>
+                    <p>I use a Wyze camera with Docker and Wyze Bridge for monitoring the K2 SE setup. My earlier Ender 3 S1 Pro project used Klipper, Mainsail/Fluidd and Crowsnest.</p>
+                    
+                </aside>
+            </div>
+            <aside class="case-related" aria-label="Related projects">
+                <h2>Explore related work</h2>
+                <a href="home-network-selfhosting.html">Home Networking & VPN <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a> <span aria-hidden="true"> · </span> <a href="smart-home-automation.html">Home Automation <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+            </aside>
+            <nav class="case-next" aria-label="Project navigation">
+                <a href="../projects.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All projects</a>
+                <a href="ecommerce-platform.html">E-commerce Platform Optimization <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </nav>
+        </main>
+
+        
+        <footer class="site-footer">
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="../index.html">Home</a>
+                <a href="../projects.html">Projects</a>
+                <a href="../resume.html">Resume</a>
+                <a href="../contact.html">Contact</a>
+            </nav>
+            <ul class="footer-social-links">
+                <li><a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+            </ul>
+            <div class="footer-copyrights">
+                <p>&copy; <span id="current-year">2026</span> Edrees Dahlan · E-commerce &amp; Computer Engineering.</p>
+            </div>
+        </footer>
+    </div>
+
+    
+    <script src="../main.js?v=20261104-v5"></script>
+</body>
+</html>
