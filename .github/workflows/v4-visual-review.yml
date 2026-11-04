@@ -1,0 +1,31 @@
+name: One-time portfolio v4 visual review
+on:
+  push:
+    branches: [portfolio-v4-professional-refresh-2026-11-04]
+    paths: ['.github/workflows/v4-visual-review.yml']
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright
+          npx playwright install chromium --with-deps
+      - run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/visual.log 2>&1 &
+          sleep 2
+          node .github/v4-visual-audit.mjs
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .v4-screens
+          git commit -m "Temporary visual snapshots of updated pages"
+          git push origin HEAD:portfolio-v4-professional-refresh-2026-11-04
