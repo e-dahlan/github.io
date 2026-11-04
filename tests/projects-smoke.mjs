@@ -104,11 +104,17 @@ try {
   await home.goto(base + 'projects.html', { waitUntil: 'domcontentloaded' });
   await home.locator('#themeToggle').click();
   assert.equal(await home.locator('body.light-theme').count(), 1);
-  console.log('PASS project index retains existing theme toggle');
+  const albawardiName = 'Albawardi Tools and Hardware Co. L.L.C.';
+  const priorRoleClients = await home.locator('#professional-work .project-card').evaluateAll(cards =>
+    cards.filter(card => /ecommerce-migration|oracle-erp-integration/.test(card.querySelector('a.project-case-link')?.getAttribute('href') || ''))
+      .map(card => card.querySelector('.project-client')?.textContent.trim())
+  );
+  assert.deepEqual(priorRoleClients, [albawardiName, albawardiName]);
+  console.log('PASS project index retains existing theme toggle and Albawardi attribution');
 
   const cases = [
-    ['ecommerce-migration.html', ['WooCommerce', 'Magento', 'previous professional role']],
-    ['oracle-erp-integration.html', ['Oracle', 'stock', 'prices', 'invoice']],
+    ['ecommerce-migration.html', ['WooCommerce', 'Magento', 'previous professional role', 'Albawardi Tools and Hardware Co. L.L.C.']],
+    ['oracle-erp-integration.html', ['Oracle', 'stock', 'prices', 'invoice', 'Albawardi Tools and Hardware Co. L.L.C.']],
     ['home-network-selfhosting.html', ['Netgear', 'Totolink X30', 'ZeroTier', 'Pi-hole', 'Uptime Kuma', 'Obico', 'Moonraker']],
     ['smart-home-automation.html', ['Home Assistant', 'openHAB', 'different brands']],
     ['baja-5b-maintenance.html', ['Baja 5B', 'Sub-C', '18650', 'kill-switch', 'carburetor']],
