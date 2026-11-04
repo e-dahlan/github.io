@@ -2601,3 +2601,14 @@ footer .footer-copyrights { width: 100%; font-size: .78rem; }
 @media (prefers-reduced-motion: reduce) {
     .impact-card,.lab-link-grid a,.project-card,.service-card { transform: none !important; transition: none !important; }
 }
+
+.case-performance-jump {
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 20px; padding: 12px 15px;
+    font-size: .86rem; color: var(--neon-blue); font-weight: 700;
+    text-decoration: none; border: 1px solid var(--border-color); border-radius: 10px;
+    background: var(--card-bg);
+}
+.case-performance-jump:hover, .case-performance-jump:focus-visible {
+    border-color: var(--neon-blue); text-decoration: underline;
+}
