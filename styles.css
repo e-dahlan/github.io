@@ -1610,31 +1610,6 @@ footer {
     }
 }
 
-/* Genuine screenshot thumbnails from previously shared project images. */
-.project-proof-thumb {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: 0;
-    display: block;
-}
-.project-card-visual:has(.project-proof-thumb)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(to bottom, rgba(2, 6, 23, 0.60), transparent 35%, transparent 62%, rgba(2, 6, 23, 0.72));
-    pointer-events: none;
-}
-.project-card-visual:has(.project-proof-thumb) .project-visual-index,
-.project-card-visual:has(.project-proof-thumb) .project-visual-bottom {
-    z-index: 2;
-    color: #fff;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.85);
-}
 .case-evidence {
     display: flex;
     flex-wrap: wrap;
@@ -1659,6 +1634,26 @@ footer {
     color: var(--text-muted);
     font-size: .87rem;
     line-height: 1.7;
+}
+
+/* The screenshot belongs inside the written case study, never on listing cards. */
+.case-article .case-evidence {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 24px 0 0;
+    padding: 16px;
+}
+.case-article .case-evidence img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.case-article .case-evidence figcaption {
+    flex: none;
+    max-width: 100%;
 }
 
 /* ==========================================================================

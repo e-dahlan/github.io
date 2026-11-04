@@ -32,7 +32,10 @@ try {
         const expected = file === 'index.html' ? 3 : 8;
         assert.equal(await page.locator('.project-card').count(), expected, 'Expected ' + expected + ' project cards on ' + file);
         assert.equal(await page.locator('a.project-case-link').count(), expected);
-        assert.equal(await page.locator('.project-proof-thumb').count(), 2);
+        // All project overview cards use consistent icons, never screenshots.
+        assert.equal(await page.locator('.project-proof-thumb').count(), 0);
+        assert.equal(await page.locator('.project-card-visual > img').count(), 0);
+        assert.equal(await page.locator('.project-card-visual > i').count(), expected);
         if (file === 'projects.html') {
           assert.equal(await page.locator('.project-group').count(), 3);
           assert.deepEqual(await page.locator('.project-group .project-card').evaluateAll(
@@ -41,20 +44,13 @@ try {
           ), [4, 3, 1]);
           assert.equal(await page.locator('.project-category-nav a').count(), 3);
         }
-        for (const image of await page.locator('.project-proof-thumb').all()) {
-          await image.scrollIntoViewIfNeeded();
-          await image.evaluate(async img => {
-            if (!img.complete) await new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
-          });
-          const width = await image.evaluate(img => img.naturalWidth);
-          assert.ok(width > 0, file + ' has a missing evidence thumbnail');
-        }
       } else {
         assert.equal(await page.locator('.case-content .case-section').count(), 3);
         assert.equal(await page.locator('.case-breadcrumb a').count(), 2);
         if (file.includes('ecommerce-platform') || file.includes('engineering-lab')) {
-          const evidence = page.locator('.case-evidence img');
-          assert.equal(await evidence.count(), 1);
+          const evidence = page.locator('.case-section[aria-labelledby="approach-title"] .case-evidence img');
+          assert.equal(await evidence.count(), 1, 'Screenshot should be inside the approach section, not the hero');
+          assert.equal(await page.locator('main > .case-evidence').count(), 0);
           await evidence.scrollIntoViewIfNeeded();
           await evidence.evaluate(async img => {
             if (!img.complete) await new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
