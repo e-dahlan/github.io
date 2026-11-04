@@ -42,7 +42,7 @@ try {
             cards => ['professional', 'home-lab', 'hobby'].map(x =>
               cards.filter(c => c.closest('[data-project-group]')?.dataset.projectGroup === x).length)
           ), [4, 3, 1]);
-          assert.equal(await page.locator('.project-category-nav a').count(), 3);
+          assert.equal(await page.locator('.project-filter').count(), 4);
         }
       } else {
         assert.equal(await page.locator('.case-content .case-section').count(), 3);
@@ -118,8 +118,8 @@ try {
   );
   assert.deepEqual(cardLinks, [
     'projects/ecommerce-platform.html',
-    'projects/systems-integration.html',
-    'projects/engineering-lab.html'
+    'projects/ecommerce-migration.html',
+    'projects/oracle-erp-integration.html'
   ]);
   await home.locator('a.project-case-link').first().click();
   await home.waitForURL(/projects\/ecommerce-platform\.html/);
@@ -130,6 +130,8 @@ try {
 
   await home.goto(base, { waitUntil: 'domcontentloaded' });
   await home.waitForFunction(() => document.documentElement.dataset.cliReady === '3.1');
+  assert.equal(await home.locator('#cliDisclosure').getAttribute('open'), null, 'CLI starts collapsed');
+  await home.locator('#cliDisclosure > summary').click();
   await home.locator('.cli-chip[data-command="projects"]').click();
   await home.waitForFunction(() => {
     const out = document.querySelector('#terminalBody')?.textContent || '';
@@ -149,6 +151,19 @@ try {
   await home.goto(base + 'projects.html', { waitUntil: 'domcontentloaded' });
   await home.locator('#themeToggle').click();
   assert.equal(await home.locator('body.light-theme').count(), 1);
+  // Filtering must replace the directory contents without leaving the page.
+  const projectsBefore = await home.locator('#professional-work .project-card').count();
+  assert.equal(projectsBefore, 4);
+  await home.locator('.project-filter[data-project-filter="home-lab"]').click();
+  assert.equal(await home.locator('#professional-work').isHidden(), true);
+  assert.equal(await home.locator('#home-lab').isVisible(), true);
+  assert.equal(await home.locator('#hobbies').isHidden(), true);
+  assert.match(await home.locator('#projectFilterStatus').innerText(), /3 Home Lab projects/);
+  await home.locator('.project-filter[data-project-filter="hobby"]').click();
+  assert.equal(await home.locator('#hobbies .project-card:visible').count(), 1);
+  await home.locator('.project-filter[data-project-filter="all"]').click();
+  assert.equal(await home.locator('.project-group:visible').count(), 3);
+  console.log('PASS functional project filters: Home Lab, Hobby, All');
   const albawardiName = 'Albawardi Tools and Hardware Co. L.L.C.';
   const priorRoleClients = await home.locator('#professional-work .project-card').evaluateAll(cards =>
     cards.filter(card => /ecommerce-migration|oracle-erp-integration/.test(card.querySelector('a.project-case-link')?.getAttribute('href') || ''))
