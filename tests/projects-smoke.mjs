@@ -50,25 +50,47 @@ try {
         assert.equal(await page.locator('.case-section[aria-labelledby="outcome-title"] .impact-list li').count(), 5, 'Each project needs five specific impact outcomes');
         assert.match(await page.locator('.case-section[aria-labelledby="outcome-title"]').innerText(), /Results & Impact/);
         if (file.includes('ecommerce-platform')) {
-          assert.equal(await page.locator('.case-performance .performance-device').count(), 2, 'Mobile and Desktop sections');
-          assert.equal(await page.locator('#performance-mobile .performance-score-ring').count(), 8);
-          assert.equal(await page.locator('#performance-desktop .performance-score-ring').count(), 8);
-          const mobileScores = await page.locator('#performance-mobile .performance-score-ring > span').allInnerTexts();
-          const desktopScores = await page.locator('#performance-desktop .performance-score-ring > span').allInnerTexts();
-          assert.deepEqual(mobileScores, ['48','93','96','92','82','93','96','92']);
-          assert.deepEqual(desktopScores, ['60','93','96','92','96','93','96','92']);
-          assert.equal(await page.locator('.performance-device-nav a').count(), 2);
+          const tabs = page.locator('.performance-device-nav [role="tab"]');
+          const mobileTab = page.locator('#performance-tab-mobile');
+          const desktopTab = page.locator('#performance-tab-desktop');
+          const mobilePanel = page.locator('#performance-mobile');
+          const desktopPanel = page.locator('#performance-desktop');
+          assert.equal(await tabs.count(), 2);
+          assert.equal(await page.locator('.case-performance [role="tabpanel"]').count(), 2);
+          assert.equal(await mobileTab.getAttribute('aria-selected'), 'true');
+          assert.equal(await desktopTab.getAttribute('aria-selected'), 'false');
+          assert.ok(await mobilePanel.isVisible(), 'Mobile selected by default');
+          assert.ok(await desktopPanel.isHidden(), 'Desktop not rendered below Mobile');
+          assert.equal(await mobilePanel.locator('.performance-score-ring').count(), 8);
+          assert.equal(await desktopPanel.locator('.performance-score-ring').count(), 8);
+          assert.deepEqual(await mobilePanel.locator('.performance-score-ring > span').allTextContents(),
+            ['48','93','96','92','82','93','96','92']);
+          assert.deepEqual(await desktopPanel.locator('.performance-score-ring > span').allTextContents(),
+            ['60','93','96','92','96','93','96','92']);
           assert.equal(await page.locator('.performance-table-scroll table').count(), 2);
-          assert.equal(await page.locator('.case-performance a[href*="pagespeed.web.dev"]').count(), 0, 'No PageSpeed source links on public website');
-          assert.equal(await page.locator('.performance-report-link').count(), 0);
-          assert.match(await page.locator('#performance-mobile').innerText(), /720 ms less/);
-          assert.match(await page.locator('#performance-desktop').innerText(), /1,630 ms less/);
-          assert.match(await page.locator('#performance-desktop').innerText(), /96 \/ 100/);
-          const ring = page.locator('#performance-desktop .performance-score-ring').first();
+          assert.equal(await page.locator('.case-performance a[href*="pagespeed.web.dev"]').count(), 0);
+          assert.match(await mobilePanel.innerText(), /720 ms less/);
+          await desktopTab.click();
+          assert.equal(await desktopTab.getAttribute('aria-selected'), 'true');
+          assert.equal(await mobileTab.getAttribute('aria-selected'), 'false');
+          assert.ok(await desktopPanel.isVisible(), 'Desktop now appears in the original report position');
+          assert.ok(await mobilePanel.isHidden(), 'Mobile not stacked beneath Desktop');
+          assert.match(await desktopPanel.innerText(), /1,630 ms less/);
+          const ring = desktopPanel.locator('.performance-score-ring').first();
           const style = await ring.evaluate(el => getComputedStyle(el).backgroundImage);
-          assert.match(style, /conic-gradient/, 'Score rings should visually render');
+          assert.match(style, /conic-gradient/, 'Lighthouse circles render as visual arcs');
           const rect = await ring.boundingBox();
-          assert.ok(rect.width > 45 && rect.height > 45, 'Score ring must be visible');
+          assert.ok(rect.width > 45 && rect.height > 45);
+          await desktopTab.press('ArrowLeft');
+          assert.equal(await mobileTab.getAttribute('aria-selected'), 'true', 'Keyboard arrows switch device');
+          assert.ok(await mobilePanel.isVisible());
+          assert.ok(await desktopPanel.isHidden());
+          assert.equal(await mobileTab.evaluate(el => document.activeElement === el), true);
+          await mobileTab.press('End');
+          assert.equal(await desktopTab.getAttribute('aria-selected'), 'true', 'End selects last tab');
+          await desktopTab.press('Home');
+          assert.equal(await mobileTab.getAttribute('aria-selected'), 'true', 'Home selects first tab');
+          assert.ok(await mobilePanel.isVisible());
         }
         if (file.includes('ecommerce-platform') || file.includes('engineering-lab')) {
           const evidence = page.locator('.case-section[aria-labelledby="approach-title"] .case-evidence img');
