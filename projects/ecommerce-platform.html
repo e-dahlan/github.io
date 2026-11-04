@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="../styles.css?v=20261104-best82">
+    <link rel="stylesheet" href="../styles.css?v=20261104-mobiledesktop">
 
     <!-- Structured Data (schema.org BreadcrumbList) -->
     <script type="application/ld+json">
@@ -165,60 +165,122 @@
             </div>
             <section class="case-performance" aria-labelledby="performance-heading">
                 <div class="case-performance-heading">
-                    <span class="project-eyebrow">Google PageSpeed Insights · Mobile</span>
-                    <h2 id="performance-heading">Homepage Performance Optimization</h2>
-                    <p>Mobile PageSpeed Insights audits of the same homepage demonstrate a 34-point performance score improvement, substantially lower browser blocking, and faster visual rendering. These improvements support a more responsive shopping experience.</p>
+                    <span class="project-eyebrow">Google PageSpeed Insights · Performance Study</span>
+                    <h2 id="performance-heading">Homepage Speed &amp; Experience Improvements</h2>
+                    <p>Measured Lighthouse improvements on the company's homepage, shown separately for smartphones and desktop computers. The optimization work focused on responsiveness, smoother product exploration and fewer interruptions while browsing.</p>
                 </div>
-                <div class="performance-comparison" aria-label="Historical mobile Lighthouse audits for the same homepage">
-                    <article class="performance-snapshot" aria-label="October 29 homepage mobile audit">
-                        <div class="performance-snapshot-header">
-                            <h3>Baseline audit</h3>
-                            <span class="performance-url">Homepage /</span>
+                <nav class="performance-device-nav" aria-label="Performance by device">
+                    <a href="#performance-mobile"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile</a>
+                    <a href="#performance-desktop"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Desktop</a>
+                </nav>
+                <section class="performance-device" id="performance-mobile" aria-labelledby="performance-mobile-heading">
+                    <div class="performance-device-head">
+                        <div>
+                            <span class="performance-device-eyebrow"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile Experience</span>
+                            <h3 id="performance-mobile-heading">Mobile Performance</h3>
                         </div>
-                        <p class="performance-caption">October 29, 2026 · 10:58 AM (GMT+3)</p>
-                        <div class="performance-score-grid">
-                            <div class="performance-score" aria-label="Performance: 48 out of 100"><div class="performance-score-ring" style="--score:48;--score-color:#ef4444" role="img" aria-label="Performance 48 of 100"><span>48</span></div><span class="performance-score-label">Performance</span></div>
-                            <div class="performance-score" aria-label="Accessibility: 93 out of 100"><div class="performance-score-ring" style="--score:93;--score-color:#22c55e" role="img" aria-label="Accessibility 93 of 100"><span>93</span></div><span class="performance-score-label">Accessibility</span></div>
-                            <div class="performance-score" aria-label="Best Practices: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Best Practices 96 of 100"><span>96</span></div><span class="performance-score-label">Best Practices</span></div>
-                            <div class="performance-score" aria-label="SEO: 92 out of 100"><div class="performance-score-ring" style="--score:92;--score-color:#22c55e" role="img" aria-label="SEO 92 of 100"><span>92</span></div><span class="performance-score-label">SEO</span></div>
-                        </div>
-                        <a href="https://pagespeed.web.dev/analysis/https-www-alharamtools-com-sa/5k6d4fmwzo?form_factor=mobile" target="_blank" rel="noopener noreferrer" class="performance-report-link">View baseline PageSpeed report <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                    </article>
-                    <article class="performance-snapshot" aria-label="November 4 homepage mobile audit">
-                        <div class="performance-snapshot-header">
-                            <h3>Follow-up audit</h3>
-                            <span class="performance-url">Homepage /</span>
-                        </div>
-                        <p class="performance-caption">November 4, 2026 · 10:28 AM (GMT+3)</p>
-                        <div class="performance-score-grid">
-                            <div class="performance-score" aria-label="Performance: 82 out of 100"><div class="performance-score-ring" style="--score:82;--score-color:#f59e0b" role="img" aria-label="Performance 82 of 100"><span>82</span></div><span class="performance-score-label">Performance</span></div>
-                            <div class="performance-score" aria-label="Accessibility: 93 out of 100"><div class="performance-score-ring" style="--score:93;--score-color:#22c55e" role="img" aria-label="Accessibility 93 of 100"><span>93</span></div><span class="performance-score-label">Accessibility</span></div>
-                            <div class="performance-score" aria-label="Best Practices: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Best Practices 96 of 100"><span>96</span></div><span class="performance-score-label">Best Practices</span></div>
-                            <div class="performance-score" aria-label="SEO: 92 out of 100"><div class="performance-score-ring" style="--score:92;--score-color:#22c55e" role="img" aria-label="SEO 92 of 100"><span>92</span></div><span class="performance-score-label">SEO</span></div>
-                        </div>
-                        <a href="https://pagespeed.web.dev/analysis/https-www-alharamtools-com-sa/787eeb3a0v?form_factor=mobile" target="_blank" rel="noopener noreferrer" class="performance-report-link">View follow-up PageSpeed report <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                    </article>
-                </div>
-                <div class="performance-measurements">
-                    <h3>Measured improvements on the homepage</h3>
-                    <div class="performance-table-scroll">
-                        <table>
-                            <thead><tr><th scope="col">Lighthouse metric</th><th scope="col">Baseline</th><th scope="col">Follow-up</th><th scope="col">Change</th></tr></thead>
-                            <tbody>
-                                <tr><th scope="row">Performance score</th><td>48 / 100</td><td>82 / 100</td><td>+34 points</td></tr>
-                                <tr><th scope="row">First Contentful Paint</th><td>2.9 s</td><td>1.5 s</td><td>1.4 s faster</td></tr>
-                                <tr><th scope="row">Largest Contentful Paint</th><td>5.9 s</td><td>4.7 s</td><td>1.2 s faster</td></tr>
-                                <tr><th scope="row">Total Blocking Time</th><td>790 ms</td><td>70 ms</td><td>720 ms less</td></tr>
-                                <tr><th scope="row">Speed Index</th><td>7.1 s</td><td>1.8 s</td><td>5.3 s faster</td></tr>
-                                <tr><th scope="row">Page payload</th><td>4,129 KiB</td><td>3,313 KiB</td><td>816 KiB smaller</td></tr>
-                                <tr><th scope="row">Cumulative Layout Shift</th><td>0.001</td><td>0.008</td><td>Low in both tests</td></tr>
-                            </tbody>
-                        </table>
+                        <span class="performance-gain">+34 points</span>
                     </div>
-                    <p><strong>What this meant for customers:</strong> In the archived mobile audits, the Speed Index improved from 7.1 to 1.8 seconds and Total Blocking Time dropped from 790 to 70 milliseconds, making visual progress faster and leaving the browser more responsive. These changes make a storefront feel more responsive while customers browse categories, check specifications and move toward product selection. The lighter page payload can also make the homepage more comfortable to load on mobile connections.</p>
-                    <p><strong>What this meant for operations:</strong> A more responsive storefront complements the changes to multilingual search, dynamic SKU information, customer-account navigation and order tracking. Clearer product data and more useful self-service feedback help reduce repeated clarification requests and make sales and support interactions more consistent.</p>
-                    <p class="performance-methodology"><strong>Measurement notes:</strong> Both linked Google PageSpeed Insights reports test the <strong>same homepage URL</strong> on mobile, on October 29 and November 4, 2026. Lighthouse lab scores can vary between individual runs. Core Web Vitals assessments were marked “Passed” in the supplied reports.</p>
-                </div>
+                    <div class="performance-comparison" aria-label="Mobile PageSpeed score comparisons">
+                        <article class="performance-snapshot" aria-label="Before optimization Lighthouse results">
+                    <div class="performance-snapshot-header">
+                        <h4>Before optimization</h4>
+                        <span class="performance-url">Homepage /</span>
+                    </div>
+                    <div class="performance-score-grid">
+                        <div class="performance-score" aria-label="Performance: 48 out of 100"><div class="performance-score-ring" style="--score:48;--score-color:#ef4444" role="img" aria-label="Performance 48 of 100"><span>48</span></div><span class="performance-score-label">Performance</span></div>
+                        <div class="performance-score" aria-label="Accessibility: 93 out of 100"><div class="performance-score-ring" style="--score:93;--score-color:#22c55e" role="img" aria-label="Accessibility 93 of 100"><span>93</span></div><span class="performance-score-label">Accessibility</span></div>
+                        <div class="performance-score" aria-label="Best Practices: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Best Practices 96 of 100"><span>96</span></div><span class="performance-score-label">Best Practices</span></div>
+                        <div class="performance-score" aria-label="SEO: 92 out of 100"><div class="performance-score-ring" style="--score:92;--score-color:#22c55e" role="img" aria-label="SEO 92 of 100"><span>92</span></div><span class="performance-score-label">SEO</span></div>
+                    </div>
+                </article>
+                        <article class="performance-snapshot" aria-label="After optimization Lighthouse results">
+                    <div class="performance-snapshot-header">
+                        <h4>After optimization</h4>
+                        <span class="performance-url">Homepage /</span>
+                    </div>
+                    <div class="performance-score-grid">
+                        <div class="performance-score" aria-label="Performance: 82 out of 100"><div class="performance-score-ring" style="--score:82;--score-color:#f59e0b" role="img" aria-label="Performance 82 of 100"><span>82</span></div><span class="performance-score-label">Performance</span></div>
+                        <div class="performance-score" aria-label="Accessibility: 93 out of 100"><div class="performance-score-ring" style="--score:93;--score-color:#22c55e" role="img" aria-label="Accessibility 93 of 100"><span>93</span></div><span class="performance-score-label">Accessibility</span></div>
+                        <div class="performance-score" aria-label="Best Practices: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Best Practices 96 of 100"><span>96</span></div><span class="performance-score-label">Best Practices</span></div>
+                        <div class="performance-score" aria-label="SEO: 92 out of 100"><div class="performance-score-ring" style="--score:92;--score-color:#22c55e" role="img" aria-label="SEO 92 of 100"><span>92</span></div><span class="performance-score-label">SEO</span></div>
+                    </div>
+                </article>
+                    </div>
+                    <div class="performance-measurements">
+                        <h4>Mobile Lighthouse measurements</h4>
+                        <div class="performance-table-scroll">
+                            <table>
+                                <thead><tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Change</th></tr></thead>
+                                <tbody>
+                                    <tr><th scope="row">Performance score</th><td>48 / 100</td><td>82 / 100</td><td>+34 points</td></tr>
+                                    <tr><th scope="row">First Contentful Paint</th><td>2.9 s</td><td>1.5 s</td><td>1.4 s faster</td></tr>
+                                    <tr><th scope="row">Largest Contentful Paint</th><td>5.9 s</td><td>4.7 s</td><td>1.2 s faster</td></tr>
+                                    <tr><th scope="row">Total Blocking Time</th><td>790 ms</td><td>70 ms</td><td>720 ms less</td></tr>
+                                    <tr><th scope="row">Speed Index</th><td>7.1 s</td><td>1.8 s</td><td>5.3 s faster</td></tr>
+                                    <tr><th scope="row">Page payload</th><td>4,129 KiB</td><td>3,313 KiB</td><td>816 KiB smaller</td></tr>
+                                    <tr><th scope="row">Cumulative Layout Shift</th><td>0.001</td><td>0.008</td><td>Low in both audits</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The mobile audits show faster initial visibility and a major reduction in blocking time. That supports smoother browsing on phones, especially when customers search for a product, compare sizes or review specifications before ordering.</p>
+                    </div>
+                </section>
+                <section class="performance-device" id="performance-desktop" aria-labelledby="performance-desktop-heading">
+                    <div class="performance-device-head">
+                        <div>
+                            <span class="performance-device-eyebrow"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Desktop Experience</span>
+                            <h3 id="performance-desktop-heading">Desktop Performance</h3>
+                        </div>
+                        <span class="performance-gain">+36 points</span>
+                    </div>
+                    <div class="performance-comparison" aria-label="Desktop PageSpeed score comparisons">
+                        <article class="performance-snapshot" aria-label="Before optimization Lighthouse results">
+                    <div class="performance-snapshot-header">
+                        <h4>Before optimization</h4>
+                        <span class="performance-url">Homepage /</span>
+                    </div>
+                    <div class="performance-score-grid">
+                        <div class="performance-score" aria-label="Performance: 60 out of 100"><div class="performance-score-ring" style="--score:60;--score-color:#f59e0b" role="img" aria-label="Performance 60 of 100"><span>60</span></div><span class="performance-score-label">Performance</span></div>
+                        <div class="performance-score" aria-label="Accessibility: 93 out of 100"><div class="performance-score-ring" style="--score:93;--score-color:#22c55e" role="img" aria-label="Accessibility 93 of 100"><span>93</span></div><span class="performance-score-label">Accessibility</span></div>
+                        <div class="performance-score" aria-label="Best Practices: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Best Practices 96 of 100"><span>96</span></div><span class="performance-score-label">Best Practices</span></div>
+                        <div class="performance-score" aria-label="SEO: 92 out of 100"><div class="performance-score-ring" style="--score:92;--score-color:#22c55e" role="img" aria-label="SEO 92 of 100"><span>92</span></div><span class="performance-score-label">SEO</span></div>
+                    </div>
+                </article>
+                        <article class="performance-snapshot" aria-label="After optimization Lighthouse results">
+                    <div class="performance-snapshot-header">
+                        <h4>After optimization</h4>
+                        <span class="performance-url">Homepage /</span>
+                    </div>
+                    <div class="performance-score-grid">
+                        <div class="performance-score" aria-label="Performance: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Performance 96 of 100"><span>96</span></div><span class="performance-score-label">Performance</span></div>
+                        <div class="performance-score" aria-label="Accessibility: 93 out of 100"><div class="performance-score-ring" style="--score:93;--score-color:#22c55e" role="img" aria-label="Accessibility 93 of 100"><span>93</span></div><span class="performance-score-label">Accessibility</span></div>
+                        <div class="performance-score" aria-label="Best Practices: 96 out of 100"><div class="performance-score-ring" style="--score:96;--score-color:#22c55e" role="img" aria-label="Best Practices 96 of 100"><span>96</span></div><span class="performance-score-label">Best Practices</span></div>
+                        <div class="performance-score" aria-label="SEO: 92 out of 100"><div class="performance-score-ring" style="--score:92;--score-color:#22c55e" role="img" aria-label="SEO 92 of 100"><span>92</span></div><span class="performance-score-label">SEO</span></div>
+                    </div>
+                </article>
+                    </div>
+                    <div class="performance-measurements">
+                        <h4>Desktop Lighthouse measurements</h4>
+                        <div class="performance-table-scroll">
+                            <table>
+                                <thead><tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Change</th></tr></thead>
+                                <tbody>
+                                    <tr><th scope="row">Performance score</th><td>60 / 100</td><td>96 / 100</td><td>+36 points</td></tr>
+                                    <tr><th scope="row">First Contentful Paint</th><td>0.7 s</td><td>0.3 s</td><td>0.4 s faster</td></tr>
+                                    <tr><th scope="row">Largest Contentful Paint</th><td>0.9 s</td><td>0.9 s</td><td>Unchanged</td></tr>
+                                    <tr><th scope="row">Total Blocking Time</th><td>1,770 ms</td><td>140 ms</td><td>1,630 ms less</td></tr>
+                                    <tr><th scope="row">Speed Index</th><td>3.8 s</td><td>1.0 s</td><td>2.8 s faster</td></tr>
+                                    <tr><th scope="row">Page payload</th><td>4,943 KiB</td><td>3,758 KiB</td><td>1,185 KiB smaller</td></tr>
+                                    <tr><th scope="row">Cumulative Layout Shift</th><td>0.043</td><td>0.05</td><td>Low in both audits</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>On desktop, the Lighthouse performance score rose to 96 and browser blocking fell substantially. Together with a faster Speed Index, this makes long catalog-browsing sessions and repeated product comparisons feel less interrupted for customers and staff.</p>
+                    </div>
+                </section>
+                <p class="performance-methodology"><strong>How to read these results:</strong> Each device category compares two archived Lighthouse tests of the homepage. Mobile and desktop use different testing conditions and must be interpreted separately. Scores describe the measured tests, not a guaranteed loading time for every visitor.</p>
+                <p class="performance-business-impact"><strong>Why it matters:</strong> Faster page rendering and less browser blocking make the storefront easier to explore. Combined with more reliable search, variant-specific SKUs, improved product information and clearer order-tracking feedback, the work supports more confident purchasing decisions and reduces avoidable support and order-handling friction.</p>
             </section>
             <nav class="case-next" aria-label="Project navigation">
                 <a href="../projects.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All projects</a>
