@@ -144,7 +144,7 @@ try {
     ['oracle-erp-integration.html', ['Oracle', 'stock', 'prices', 'invoice', 'Albawardi Tools and Hardware Co. L.L.C.']],
     ['home-network-selfhosting.html', ['Netgear', 'Totolink X30', 'ZeroTier', 'Pi-hole', 'Uptime Kuma', 'Obico', 'Moonraker']],
     ['smart-home-automation.html', ['Home Assistant', 'openHAB', 'different brands']],
-    ['baja-5b-maintenance.html', ['Baja 5B', 'Sub-C', '18650', 'kill-switch', 'carburetor']],
+    ['baja-5b-maintenance.html', ['Baja 5B', 'Sub-C', 'kill-switch', 'carburetor']],
     ['engineering-lab.html', ['Ender 3 S1 Pro', 'BLTouch', 'Mainsail', 'Crowsnest', 'OrcaSlicer', 'Creality K2 SE Combo', 'CFS']]
   ];
   for (const [file, phrases] of cases) {
@@ -152,6 +152,13 @@ try {
     const actual = (await home.locator('main').innerText()).toLowerCase();
     for (const phrase of phrases) assert.ok(actual.includes(phrase.toLowerCase()), file + ' missing ' + phrase);
   }
+  await home.goto(base + 'projects/baja-5b-maintenance.html', { waitUntil: 'domcontentloaded' });
+  assert.ok(!(await home.locator('main').innerText()).includes('18650'), 'Baja case study must not mention 18650 batteries');
+  await home.goto(base + 'projects.html', { waitUntil: 'domcontentloaded' });
+  const bajaCard = home.locator('.project-card:has(a[href="projects/baja-5b-maintenance.html"])');
+  assert.ok(!(await bajaCard.innerText()).includes('18650'), 'Baja project card must not mention 18650 batteries');
+  console.log('PASS Baja 5B battery correction: Sub-C only, no 18650');
+
   await home.goto(base + 'projects/ecommerce-migration.html', { waitUntil: 'domcontentloaded' });
   assert.ok(!(await home.locator('main').innerText()).includes('AL Haram Perfect Machinery & Equipment'));
   console.log('PASS career-migration scope, Oracle automation, home-lab details, hobby separation, and employer distinction');
