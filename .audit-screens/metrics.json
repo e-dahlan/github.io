@@ -1,0 +1,632 @@
+[
+  {
+    "name": "home-desktop",
+    "url": "index.html",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "screenshotBytes": 76326,
+    "exceptions": [],
+    "title": "Edrees Dahlan | E-commerce Manager & Computer Engineer",
+    "documentHeight": 3176,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "header": {
+      "x": 131,
+      "y": 41,
+      "w": 1178,
+      "h": 105
+    },
+    "hero": {
+      "x": 179,
+      "y": 211,
+      "w": 1082,
+      "h": 335
+    },
+    "featuredProjects": {
+      "x": 179,
+      "y": 606,
+      "w": 1082,
+      "h": 763
+    },
+    "terminal": {
+      "x": 179,
+      "y": 1527,
+      "w": 1082,
+      "h": 496
+    },
+    "services": {
+      "x": 179,
+      "y": 2112,
+      "w": 1082,
+      "h": 512
+    },
+    "stats": {
+      "x": 179,
+      "y": 2746,
+      "w": 1082,
+      "h": 147
+    },
+    "firstCard": {
+      "x": 179,
+      "y": 742,
+      "w": 349,
+      "h": 509
+    },
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "48px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "15.2px",
+      "line": "25.84px",
+      "color": "rgb(56, 189, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 755,
+      "y": 69,
+      "w": 452,
+      "h": 48
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "home-mobile",
+    "url": "index.html",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "screenshotBytes": 34468,
+    "exceptions": [],
+    "title": "Edrees Dahlan | E-commerce Manager & Computer Engineer",
+    "documentHeight": 5902,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "header": {
+      "x": 13,
+      "y": 13,
+      "w": 364,
+      "h": 87
+    },
+    "hero": {
+      "x": 33,
+      "y": 132,
+      "w": 324,
+      "h": 951
+    },
+    "featuredProjects": {
+      "x": 33,
+      "y": 1143,
+      "w": 324,
+      "h": 1914
+    },
+    "terminal": {
+      "x": 33,
+      "y": 3215,
+      "w": 324,
+      "h": 591
+    },
+    "services": {
+      "x": 33,
+      "y": 3894,
+      "w": 324,
+      "h": 1243
+    },
+    "stats": {
+      "x": 33,
+      "y": 5259,
+      "w": 324,
+      "h": 369
+    },
+    "firstCard": {
+      "x": 33,
+      "y": 1334,
+      "w": 324,
+      "h": 497
+    },
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "48px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "15.2px",
+      "line": "25.84px",
+      "color": "rgb(56, 189, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "projects-desktop",
+    "url": "projects.html",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "screenshotBytes": 68077,
+    "exceptions": [],
+    "title": "Selected Projects | Edrees Dahlan",
+    "documentHeight": 3010,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "header": {
+      "x": 131,
+      "y": 41,
+      "w": 1178,
+      "h": 105
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": {
+      "x": 179,
+      "y": 581,
+      "w": 532,
+      "h": 442
+    },
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "25.6px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "15.68px",
+      "line": "27.44px",
+      "color": "rgb(148, 163, 184)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 755,
+      "y": 69,
+      "w": 452,
+      "h": 48
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "projects-mobile",
+    "url": "projects.html",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "screenshotBytes": 34874,
+    "exceptions": [],
+    "title": "Selected Projects | Edrees Dahlan",
+    "documentHeight": 5172,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "header": {
+      "x": 13,
+      "y": 13,
+      "w": 364,
+      "h": 87
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": {
+      "x": 33,
+      "y": 508,
+      "w": 324,
+      "h": 497
+    },
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "25.6px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "15.68px",
+      "line": "27.44px",
+      "color": "rgb(148, 163, 184)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "resume-desktop",
+    "url": "resume.html",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "screenshotBytes": 73489,
+    "exceptions": [],
+    "title": "Resume & Experience | Edrees Dahlan",
+    "documentHeight": 2045,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "header": {
+      "x": 131,
+      "y": 41,
+      "w": 1178,
+      "h": 105
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": null,
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "25.6px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": null,
+    "nav": {
+      "x": 755,
+      "y": 69,
+      "w": 452,
+      "h": 48
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "resume-mobile",
+    "url": "resume.html",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "screenshotBytes": 31560,
+    "exceptions": [],
+    "title": "Resume & Experience | Edrees Dahlan",
+    "documentHeight": 4513,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "header": {
+      "x": 13,
+      "y": 13,
+      "w": 364,
+      "h": 87
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": null,
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "25.6px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": null,
+    "nav": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "contact-mobile",
+    "url": "contact.html",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "screenshotBytes": 26463,
+    "exceptions": [],
+    "title": "Contact | Edrees Dahlan",
+    "documentHeight": 2025,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "header": {
+      "x": 13,
+      "y": 13,
+      "w": 364,
+      "h": 87
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": {
+      "x": 33,
+      "y": 1181,
+      "w": 324,
+      "h": 625
+    },
+    "services": null,
+    "stats": null,
+    "firstCard": null,
+    "caseIntro": null,
+    "performance": null,
+    "form": {
+      "x": 34,
+      "y": 1228,
+      "w": 322,
+      "h": 577
+    },
+    "h1": {
+      "font": "44.8px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "16.8px",
+      "line": "26.88px",
+      "color": "rgb(148, 163, 184)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "case-desktop",
+    "url": "projects/ecommerce-platform.html",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "screenshotBytes": 65057,
+    "exceptions": [],
+    "title": "E-commerce Platform Optimization | Edrees Dahlan",
+    "documentHeight": 3861,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "header": {
+      "x": 131,
+      "y": 41,
+      "w": 1178,
+      "h": 105
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": null,
+    "caseIntro": {
+      "x": 179,
+      "y": 255,
+      "w": 1082,
+      "h": 391
+    },
+    "performance": {
+      "x": 179,
+      "y": 2350,
+      "w": 1082,
+      "h": 1243
+    },
+    "form": null,
+    "h1": {
+      "font": "50.4px",
+      "line": "57.456px",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "16.64px",
+      "line": "29.952px",
+      "color": "rgb(148, 163, 184)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 755,
+      "y": 69,
+      "w": 452,
+      "h": 48
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "case-performance-mobile",
+    "url": "projects/ecommerce-platform.html",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "screenshotBytes": 30408,
+    "exceptions": [],
+    "title": "E-commerce Platform Optimization | Edrees Dahlan",
+    "documentHeight": 6788,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "header": {
+      "x": 13,
+      "y": 13,
+      "w": 364,
+      "h": 93
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": null,
+    "caseIntro": {
+      "x": 33,
+      "y": 138,
+      "w": 324,
+      "h": 667
+    },
+    "performance": {
+      "x": 33,
+      "y": 4192,
+      "w": 324,
+      "h": 2370
+    },
+    "form": null,
+    "h1": {
+      "font": "32px",
+      "line": "36.48px",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "16.64px",
+      "line": "29.952px",
+      "color": "rgb(148, 163, 184)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 0,
+      "y": 4955,
+      "w": 0,
+      "h": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "404-mobile",
+    "url": "404.html",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "screenshotBytes": 34287,
+    "exceptions": [],
+    "title": "Edrees Dahlan - 404 System Critical",
+    "documentHeight": 1370,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "header": {
+      "x": 13,
+      "y": 13,
+      "w": 364,
+      "h": 87
+    },
+    "hero": null,
+    "featuredProjects": null,
+    "terminal": null,
+    "services": null,
+    "stats": null,
+    "firstCard": null,
+    "caseIntro": null,
+    "performance": null,
+    "form": null,
+    "h1": {
+      "font": "40px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "body": {
+      "font": "16px",
+      "line": "normal",
+      "color": "rgb(248, 250, 252)",
+      "background": "rgb(2, 6, 23)"
+    },
+    "paragraph": {
+      "font": "15.68px",
+      "line": "26.656px",
+      "color": "rgb(148, 163, 184)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "nav": {
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0
+    },
+    "horizontalOverflow": false
+  }
+]
