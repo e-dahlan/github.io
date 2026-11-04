@@ -12,6 +12,7 @@ on:
       - 'styles.css'
       - 'tests/cli-smoke.mjs'
       - 'tests/projects-smoke.mjs'
+      - 'tests/v4-smoke.mjs'
       - '.github/workflows/cli-smoke.yml'
   push:
     branches:
@@ -26,6 +27,7 @@ on:
       - 'styles.css'
       - 'tests/cli-smoke.mjs'
       - 'tests/projects-smoke.mjs'
+      - 'tests/v4-smoke.mjs'
       - '.github/workflows/cli-smoke.yml'
 
 jobs:
@@ -47,3 +49,4 @@ jobs:
           sleep 2
           node tests/cli-smoke.mjs
           node tests/projects-smoke.mjs
+          node tests/v4-smoke.mjs
