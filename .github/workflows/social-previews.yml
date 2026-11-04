@@ -1,0 +1,41 @@
+name: One-time original social preview generation
+on:
+  push:
+    branches: [portfolio-v4-professional-refresh-2026-11-04]
+    paths: ['.github/workflows/social-previews.yml']
+permissions:
+  contents: write
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium --with-deps
+      - name: Generate social preview images
+        run: node .github/social-preview.mjs
+      - name: Verify PNGs and commit to feature branch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          files=list(Path('img/social').glob('*.png'))
+          assert len(files)==5, f"Expected 5 previews, got {len(files)}"
+          for f in files:
+              b=f.read_bytes()
+              assert b.startswith(bytes.fromhex('89504e470d0a1a0a'))
+              assert b[16:24]==(1200).to_bytes(4,'big')+(630).to_bytes(4,'big')
+              print('PNG verified',f,len(b))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add img/social
+          git commit -m "Generate original 1200x630 portfolio social previews"
+          git push origin HEAD:portfolio-v4-professional-refresh-2026-11-04
