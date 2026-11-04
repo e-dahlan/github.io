@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- External Stylesheet -->
-    <link rel="stylesheet" href="../styles.css?v=20261104-mobiledesktop">
+    <link rel="stylesheet" href="../styles.css?v=20261104-device-tabs">
 
     <!-- Structured Data (schema.org BreadcrumbList) -->
     <script type="application/ld+json">
@@ -169,11 +169,11 @@
                     <h2 id="performance-heading">Homepage Speed &amp; Experience Improvements</h2>
                     <p>Measured Lighthouse improvements on the company's homepage, shown separately for smartphones and desktop computers. The optimization work focused on responsiveness, smoother product exploration and fewer interruptions while browsing.</p>
                 </div>
-                <nav class="performance-device-nav" aria-label="Performance by device">
-                    <a href="#performance-mobile"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile</a>
-                    <a href="#performance-desktop"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Desktop</a>
-                </nav>
-                <section class="performance-device" id="performance-mobile" aria-labelledby="performance-mobile-heading">
+                <div class="performance-device-nav" role="tablist" aria-label="Performance by device">
+                    <button type="button" role="tab" id="performance-tab-mobile" aria-controls="performance-mobile" aria-selected="true" tabindex="0"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile</button>
+                    <button type="button" role="tab" id="performance-tab-desktop" aria-controls="performance-desktop" aria-selected="false" tabindex="-1"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Desktop</button>
+                </div>
+                <section class="performance-device" id="performance-mobile" role="tabpanel" aria-labelledby="performance-tab-mobile" tabindex="0">
                     <div class="performance-device-head">
                         <div>
                             <span class="performance-device-eyebrow"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile Experience</span>
@@ -226,7 +226,7 @@
                         <p>The mobile audits show faster initial visibility and a major reduction in blocking time. That supports smoother browsing on phones, especially when customers search for a product, compare sizes or review specifications before ordering.</p>
                     </div>
                 </section>
-                <section class="performance-device" id="performance-desktop" aria-labelledby="performance-desktop-heading">
+                <section class="performance-device" id="performance-desktop" role="tabpanel" aria-labelledby="performance-tab-desktop" tabindex="0" hidden>
                     <div class="performance-device-head">
                         <div>
                             <span class="performance-device-eyebrow"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Desktop Experience</span>
@@ -303,6 +303,38 @@
         </footer>
     </div>
 
+
+    <!-- Swap PageSpeed charts and metrics in place without scrolling to another section. -->
+    <script>
+    (() => {
+        const tabs = Array.from(document.querySelectorAll('.performance-device-nav [role="tab"]'));
+        if (tabs.length !== 2) return;
+
+        const selectTab = (nextTab, focus = false) => {
+            tabs.forEach(tab => {
+                const active = tab === nextTab;
+                const panel = document.getElementById(tab.getAttribute('aria-controls'));
+                tab.setAttribute('aria-selected', String(active));
+                tab.tabIndex = active ? 0 : -1;
+                if (panel) panel.hidden = !active;
+            });
+            if (focus) nextTab.focus();
+        };
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => selectTab(tab));
+            tab.addEventListener('keydown', event => {
+                const key = event.key;
+                const targetIndex = key === 'ArrowRight' ? (index + 1) % tabs.length
+                    : key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length
+                    : key === 'Home' ? 0 : key === 'End' ? tabs.length - 1 : -1;
+                if (targetIndex < 0) return;
+                event.preventDefault();
+                selectTab(tabs[targetIndex], true);
+            });
+        });
+    })();
+    </script>
     <!-- External Script -->
     <script src="../main.js?v=20261104-projects2"></script>
 </body>
