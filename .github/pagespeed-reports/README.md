@@ -45,4 +45,13 @@ The owner supplied four PageSpeed Insights PDF exports in the portfolio editing 
 - Desktop before: `Old PageSpeed Insights.pdf`
 - Desktop after: `Desktop PageSpeed Insights.pdf`
 
-The tables above preserve the scores, measurement details, dates and original report references even where the source PDF bytes are not stored in this directory.
+## GitHub-only archived PDFs
+
+For convenient offline reference, these four PDFs were **reprinted from the saved PageSpeed Insights report URLs using Chromium** and committed to this repository:
+
+- [Mobile — before](pdf/mobile-before.pdf)
+- [Mobile — after](pdf/mobile-after.pdf)
+- [Desktop — before](pdf/desktop-before.pdf)
+- [Desktop — after](pdf/desktop-after.pdf)
+
+**Archive fidelity:** These are browser-rendered archival exports of the published Google report pages, **not byte-for-byte copies of the owner's uploaded PDFs**. The metrics table above is transcribed directly from the owner's originals and is the source of truth for the portfolio. The original Google report permalinks are kept above for future verification. None of these documents is linked from the public portfolio website.
