@@ -1,12 +1,12 @@
 
-const CACHE = 'edrees-portfolio-20261104-pwa6';
+const CACHE = 'edrees-portfolio-20261109-lab1';
 const APP_SHELL = [
     '/', '/index.html', '/projects.html', '/resume.html', '/contact.html',
     '/404.html', '/projects/ecommerce-platform.html',
     '/projects/ecommerce-migration.html', '/projects/oracle-erp-integration.html',
-    '/projects/systems-integration.html', '/projects/engineering-lab.html',
+    '/projects/systems-integration.html', '/projects/printguard-ai-monitoring.html', '/projects/engineering-lab.html',
     '/projects/home-network-selfhosting.html', '/projects/smart-home-automation.html',
-    '/projects/baja-5b-maintenance.html', '/styles.css?v=20261104-v7',
+    '/projects/baja-5b-maintenance.html', '/styles.css?v=20261109-v8',
     '/main.js?v=20261104-v5', '/pwa.js?v=20261104-app2',
     '/manifest.webmanifest', '/favicon.png',
     '/icons/icon-192.png', '/icons/icon-512.png',
