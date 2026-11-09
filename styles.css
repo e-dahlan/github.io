@@ -2814,18 +2814,18 @@ html[dir="rtl"] body,
 html[dir="rtl"] button,
 html[dir="rtl"] input,
 html[dir="rtl"] textarea,
-html[dir="rtl"] select { font-family: 'Tajawal', sans-serif; }
+html[dir="rtl"] select { font-family: 'IBM Plex Sans Arabic', sans-serif; }
 html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
 html[dir="rtl"] h4, html[dir="rtl"] .section-header,
 html[dir="rtl"] .resume-card h3, html[dir="rtl"] .resume-language-name h3,
 html[dir="rtl"] .case-hero h1 {
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
     letter-spacing: normal;
 }
 html[dir="rtl"] .hero-details h1 { letter-spacing: 0; line-height: 1.35; }
 html[dir="rtl"] .hero-kicker { letter-spacing: .01em; }
 html[dir="rtl"] .skill-tag, html[dir="rtl"] .project-tech li,
-html[dir="rtl"] .date-badge { font-family: 'Tajawal', sans-serif; }
+html[dir="rtl"] .date-badge { font-family: 'IBM Plex Sans Arabic', sans-serif; }
 html[dir="rtl"] .resume-column:first-child {
     border-left: 0;
     margin-left: 0;
@@ -2854,7 +2854,7 @@ html[dir="rtl"] .contact-intro-action .fa-arrow-down {
     transform: rotate(180deg);
 }
 html[dir="rtl"] .performance-table-scroll { direction: ltr; }
-html[dir="rtl"] .performance-table-scroll table { font-family: 'Tajawal', sans-serif; }
+html[dir="rtl"] .performance-table-scroll table { font-family: 'IBM Plex Sans Arabic', sans-serif; }
 html[dir="rtl"] .performance-table-scroll th:first-child { text-align: right; }
 html[dir="rtl"] .performance-score-ring,
 html[dir="rtl"] .performance-gain { direction: ltr; unicode-bidi: isolate; }
@@ -2874,7 +2874,7 @@ html[dir="rtl"] .contact-privacy-note { text-align: right; }
 html[dir="rtl"] .project-card, html[dir="rtl"] .case-article,
 html[dir="rtl"] .resume-card { text-align: right; }
 html[dir="rtl"] .footer-nav, html[dir="rtl"] .nav-controls { direction: rtl; }
-html[dir="rtl"] .app-nav-tab { font-family: 'Tajawal', sans-serif; font-size: .75rem; }
+html[dir="rtl"] .app-nav-tab { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: .75rem; }
 @media (max-width: 768px) {
     html[dir="rtl"] .resume-column:first-child { padding-right: 16px; padding-left: 0; }
     html[dir="rtl"] .hero-details h1 { line-height: 1.3; }
@@ -2888,3 +2888,75 @@ html[dir="rtl"] #word-bank .words-container {
     direction: ltr;
 }
 html[dir="rtl"] .error-game .error-content { text-align: right; }
+
+/* Arabic typographic system — a clear display face with a readable text face. */
+html[lang="ar"] body,
+html[lang="ar"] button,
+html[lang="ar"] input,
+html[lang="ar"] textarea,
+html[lang="ar"] select,
+html[lang="ar"] .project-tech,
+html[lang="ar"] .skill-tag,
+html[lang="ar"] .project-eyebrow,
+html[lang="ar"] .date-badge,
+html[lang="ar"] #primary-navigation ul li a {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+html[lang="ar"] :is(h1, h2, h3, h4, h5, h6,
+    .section-header h1, .section-header h2,
+    .project-card h3, .service-card h3, .case-related h2,
+    .resume-language-name h3, .resume-grid .section-column-title h2) {
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', sans-serif;
+    letter-spacing: 0;
+}
+html[lang="ar"] :is(.hero-details > p, .project-card-content p,
+    .case-lead, .case-section p, .resume-intro, .resume-card p,
+    .service-card p, .contact-intro p) {
+    line-height: 1.8;
+}
+html[lang="ar"] :is(.section-header h1, .section-header h2, .case-hero h1,
+    .project-card h3, .service-card h3, .resume-grid .section-column-title h2) {
+    line-height: 1.5;
+}
+html[lang="ar"] .logo-area { gap: 13px; min-width: 0; }
+html[lang="ar"] header .logo-text {
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 1.47rem;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+html[lang="ar"] header .logo-symbol { flex-shrink: 0; }
+html[lang="ar"] #primary-navigation ul li a {
+    font-size: .94rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+html[lang="ar"] .resume-language-name h3 {
+    font-family: 'Alexandria', sans-serif;
+}
+@media (max-width: 1024px) {
+    html[lang="ar"] header .logo-text { font-size: 1.35rem; }
+}
+@media (max-width: 768px) {
+    html[lang="ar"] header .logo-text {
+        font-size: 1.4rem;
+        font-weight: 800;
+        line-height: 1.45;
+    }
+    html[lang="ar"].app-mode header .logo-text {
+        font-size: 1.32rem;
+        font-weight: 800;
+    }
+    html[lang="ar"] .logo-area { gap: 10px; }
+    html[lang="ar"] .hero-details h1 { line-height: 1.4; }
+}
+@media (max-width: 440px) {
+    html[lang="ar"] header { padding-inline: 14px; }
+    html[lang="ar"] header .nav-controls { gap: 7px; }
+}
+@media (max-width: 365px) {
+    html[lang="ar"] header .logo-text { font-size: 1.12rem; }
+    html[lang="ar"].app-mode header .logo-text { font-size: 1.12rem; }
+}

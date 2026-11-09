@@ -1,11 +1,11 @@
-const CACHE = 'edrees-portfolio-20261109-multilang1';
+const CACHE = 'edrees-portfolio-20261109-ar-type1';
 const ROUTES = ["","projects.html","resume.html","contact.html","projects/ecommerce-platform.html","projects/ecommerce-migration.html","projects/oracle-erp-integration.html","projects/systems-integration.html","projects/printguard-ai-monitoring.html","projects/engineering-lab.html","projects/home-network-selfhosting.html","projects/smart-home-automation.html","projects/baja-5b-maintenance.html"];
 const APP_SHELL = [
   '/', '/index.html', '/ar/', '/ar/index.html',
   ...ROUTES.filter(Boolean).map(path => '/' + path),
   ...ROUTES.filter(Boolean).map(path => '/ar/' + path),
   '/404.html', '/ar/404.html',
-  '/styles.css?v=20261109-rtl1',
+  '/styles.css?v=20261109-ar-type1',
   '/main.js?v=20261109-ar1',
   '/pwa.js?v=20261109-ar1',
   '/manifest.webmanifest', '/favicon.png',
