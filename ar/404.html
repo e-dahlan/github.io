@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>الصفحة غير موجودة | إدريس دحلان</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Edrees Dahlan">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=20261109-rtl1">
+
+    <style>
+        .error-landing { max-width: 760px; margin: 0 0 34px; }
+        .error-landing h1 { color: var(--text-main); font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); margin: 12px 0 14px; }
+        .error-landing p { color: var(--text-muted); line-height: 1.75; font-size: 1rem; }
+        .error-game { border: 1px solid var(--border-color); border-radius: 18px; background: var(--card-bg); }
+        .error-game > summary { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; color:var(--text-main); font-weight:700; list-style:none; }
+        .error-game > summary::-webkit-details-marker { display:none; }
+        .error-game[open] > summary i { transform:rotate(180deg); }
+        .error-game > .error-wrapper { padding:22px; border-top:1px solid var(--border-color); }
+        @media(max-width:768px){ .error-game > .error-wrapper { padding:15px; } }
+        
+        .error-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        #wordsearch {
+            width: 100%;
+        }
+
+        #wordsearch ul {
+            margin: 0px;
+            padding: 0px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+        }
+
+        #wordsearch ul li {
+            aspect-ratio: 1 / 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #wordsearch ul li:hover {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        #wordsearch ul li.selected, 
+        #wordsearch ul li.user-selected {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .error-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ef4444 30%, var(--neon-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .error-content p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        #timer-display {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        #lock-message {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-pink);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        #word-bank {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        #word-bank h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        #word-bank p.instructions {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .word {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-purple);
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .word:hover {
+            border-color: var(--neon-purple);
+            background: rgba(192, 132, 252, 0.1);
+        }
+
+        .word.found {
+            text-decoration: line-through;
+            opacity: 0.3;
+            background: transparent;
+        }
+
+        #estop-btn {
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+            transition: var(--transition);
+        }
+
+        #estop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.5);
+        }
+
+        #navigation {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .error-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="/pwa.js?v=20261109-ar1" defer></script>
+</head>
+<body>
+
+    
+    <a href="#main-content" class="skip-link">الانتقال إلى المحتوى</a>
+
+    
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+        
+        <header>
+            <a href="index.html" class="logo-area" aria-label="العودة للرئيسية">
+                <div class="logo-symbol"><img src="/favicon.png" alt="شعار إدريس دحلان"></div>
+                <div class="logo-text">إدريس <span>دحلان</span></div>
+            </a>
+
+            <div class="nav-controls">
+                <nav id="primary-navigation" aria-label="Main navigation">
+                    <ul>
+                        <li><a href="index.html">نبذة عني</a></li>
+                        <li><a href="resume.html">السيرة الذاتية</a></li>
+                        <li><a href="projects.html">المشاريع</a></li>
+                        <li><a href="contact.html">التواصل</a></li>
+                    </ul>
+                </nav>
+
+                
+                <a class="lang-switch" href="/404.html" hreflang="en" lang="en" aria-label="Switch to English">EN</a>
+<button id="themeToggle" class="theme-toggle-btn" aria-label="تغيير المظهر">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" aria-label="فتح القائمة" aria-controls="primary-navigation" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+            </div>
+        </header>
+
+        
+        <main class="content-container" id="main-content">
+            <section class="error-landing" aria-labelledby="notFoundTitle">
+                <span class="project-eyebrow">خطأ 404 · الصفحة غير موجودة</span>
+                <h1 id="notFoundTitle">يبدو أن الصفحة غير موجودة</h1>
+                <p>لم نتمكن من العثور على هذه الصفحة. يمكنك العودة إلى الرئيسية أو استعراض المشاريع، أو تجربة لعبة الكلمات الاختيارية أدناه.</p>
+                <div class="error-quick-actions">
+                    <a class="error-back-link" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> العودة للرئيسية</a>
+                    <a class="error-back-link secondary" href="projects.html"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> استعراض المشاريع</a>
+                </div>
+            </section>
+            <details class="error-game"><summary>اختياري: جرّب لعبة الكلمات الإنجليزية <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+            <div class="error-wrapper">
+                
+                
+                <div id="wordsearch">
+                    <ul>
+                        <li>😁</li><li>D</li><li>A</li><li>H</li><li>L</li><li>A</li><li>N</li><li>😊</li>
+                        <li>E</li><li>A</li><li>S</li><li>Y</li><li class="one">4</li><li class="two">0</li><li class="three">4</li><li>S</li>
+                        <li>C</li><li>U</li><li>R</li><li>A</li><li>T</li><li>O</li><li>O</li><li>N</li>
+                        <li>O</li><li>N</li><li class="four">P</li><li class="five">A</li><li class="six">G</li><li class="seven">E</li><li>3</li><li>D</li>
+                        <li>M</li><li class="eight">N</li><li class="nine">O</li><li class="ten">T</li><li>L</li><li>I</li><li>D</li><li>O</li>
+                        <li>W</li><li>K</li><li>L</li><li>I</li><li>P</li><li>P</li><li>E</li><li>R</li>
+                        <li>E</li><li class="eleven">F</li><li class="twelve">O</li><li class="thirteen">U</li><li class="fourteen">N</li><li class="fifteen">D</li><li>I</li><li>T</li>
+                        <li>B</li><li>A</li><li>J</li><li>A</li><li>K</li><li>I</li><li>M</li><li>O</li>
+                    </ul>
+                </div>
+
+                
+                <div class="error-content">
+                    <div id="timer-display">
+                        <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> الوقت المتبقي: <span id="time-left">90</span>s
+                    </div>
+
+                    <h2>الصفحة غير متوفرة (404)</h2>
+
+                    <p>دخلت إلى صفحة غير موجودة! جرّب العثور على الكلمات الإنجليزية في الشبكة لفتح طريق العودة.</p>
+
+                    
+                    <div id="lock-message">
+                        🔒 <strong>اللعبة مفعّلة!</strong> ابحث عن الكلمات الإنجليزية الإحدى عشرة لفتح المخرج. (0/11)
+                    </div>
+
+                    
+                    <div id="word-bank">
+                        <h3>لغز تجاوز النظام</h3>
+                        <p class="instructions">اعثر على الكلمات الإنجليزية في الشبكة واضغط على كل كلمة في القائمة بعد إيجادها.</p>
+                        <div class="words-container">
+                            <span class="word">DAHLAN</span>
+                            <span class="word">ECOMWEB</span>
+                            <span class="word">EASY</span>
+                            <span class="word">CURA</span>
+                            <span class="word">TOOL</span>
+                            <span class="word">3D</span>
+                            <span class="word">LIDO</span>
+                            <span class="word">KLIPPER</span>
+                            <span class="word">IT</span>
+                            <span class="word">BAJA</span>
+                            <span class="word">KIMO</span>
+                        </div>
+                    </div>
+
+                    
+                    <div id="estop-container">
+                        <button id="estop-btn"><i class="fa-solid fa-power-off" aria-hidden="true"></i> تجاوز الطوارئ</button>
+                    </div>
+
+                    
+                    <div id="navigation" style="margin-top: 15px;">
+                        <a href="index.html" class="btn btn-cv">
+                            <i class="fa-solid fa-unlock" aria-hidden="true"></i> العودة إلى dahlan.me
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            </details>
+        </main>
+
+        
+        <footer class="site-footer">
+            <nav class="footer-nav" aria-label="روابط التذييل">
+                <a href="index.html">الرئيسية</a>
+                <a href="projects.html">المشاريع</a>
+                <a href="resume.html">السيرة الذاتية</a>
+                <a href="contact.html">التواصل</a>
+            </nav>
+            <ul class="footer-social-links">
+                <li><a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="حساب LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+            </ul>
+            <div class="footer-copyrights">
+                <p>&copy; <span id="current-year">2026</span> إدريس دحلان · هندسة الحاسب والتجارة الإلكترونية.</p>
+            </div>
+        </footer>
+    </div>
+
+    
+    <script src="/main.js?v=20261109-ar1"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            const highlightClasses = ['.one', '.two', '.three', '.four', '.five', '.six', '.seven', '.eight', '.nine', '.ten', '.eleven', '.twelve', '.thirteen', '.fourteen', '.fifteen'];
+            
+            highlightClasses.forEach((cls, index) => {
+                setTimeout(() => {
+                    const el = document.querySelector(cls);
+                    if (el) el.classList.add("selected");
+                }, 1500 + (index * 400));
+            });
+
+            
+            const words = document.querySelectorAll('.word');
+            const totalWords = words.length;
+            let timeLeft = 90;
+            let doorUnlocked = false;
+            
+            const timeLeftEl = document.getElementById('time-left');
+            const timerDisplay = document.getElementById('timer-display');
+            const lockMessage = document.getElementById('lock-message');
+            const estopContainer = document.getElementById('estop-container');
+            const navigation = document.getElementById('navigation');
+            const estopBtn = document.getElementById('estop-btn');
+            
+            let countdown = null;
+            const startPuzzleTimer = () => {
+                if (countdown !== null) return;
+                countdown = setInterval(function() {
+                    if (doorUnlocked) {
+                        clearInterval(countdown);
+                        return;
+                    }
+                    timeLeft--;
+                    if (timeLeftEl) timeLeftEl.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        unlockProtocol('timeout');
+                    }
+                }, 1000);
+            };
+            const optionalPuzzle = document.querySelector('.error-game');
+            if (optionalPuzzle) {
+                optionalPuzzle.addEventListener('toggle', () => {
+                    if (optionalPuzzle.open) startPuzzleTimer();
+                });
+                if (optionalPuzzle.open) startPuzzleTimer();
+            }
+
+            function unlockProtocol(method) {
+                doorUnlocked = true;
+                if(estopContainer) estopContainer.style.display = 'none';
+                
+                if(timerDisplay) {
+                    timerDisplay.style.borderColor = '#22c55e';
+                    timerDisplay.style.color = '#22c55e';
+                    timerDisplay.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> تم استقرار النظام';
+                }
+
+                if (method === 'win') {
+                    lockMessage.innerHTML = '🔓 <strong>نجحت في حل اللغز وفتح المخرج!</strong>';
+                } else if (method === 'estop') {
+                    lockMessage.innerHTML = '🚨 <strong>تم تشغيل تجاوز الطوارئ!</strong> تم فتح المخرج.';
+                } else if (method === 'timeout') {
+                    lockMessage.innerHTML = '💥 <strong>انتهى الوقت!</strong> تم فتح المخرج تلقائيًا.';
+                }
+                
+                if(navigation) {
+                    navigation.style.display = 'block';
+                    navigation.style.opacity = 0;
+                    let opacity = 0;
+                    let fadeIn = setInterval(() => {
+                        if (opacity >= 1) clearInterval(fadeIn);
+                        navigation.style.opacity = opacity;
+                        opacity += 0.1;
+                    }, 30);
+                }
+            }
+
+            if(estopBtn) {
+                estopBtn.addEventListener('click', function() {
+                    if (!doorUnlocked) { unlockProtocol('estop'); }
+                });
+            }
+
+            words.forEach(word => {
+                word.addEventListener('click', function() {
+                    if (doorUnlocked) return;
+                    this.classList.toggle('found');
+                    const foundWords = document.querySelectorAll('.word.found').length;
+                    
+                    if (foundWords === totalWords) {
+                        unlockProtocol('win');
+                    } else {
+                        lockMessage.innerHTML = '🔒 <strong>اللعبة مفعّلة!</strong> حدّد جميع الكلمات وعددها ' + totalWords + ' كلمة. (' + foundWords + '/' + totalWords + ' تم إيجادها)';
+                    }
+                });
+            });
+
+            const gridItems = document.querySelectorAll('#wordsearch ul li:not(.one):not(.two):not(.three):not(.four):not(.five):not(.six):not(.seven):not(.eight):not(.nine):not(.ten):not(.eleven):not(.twelve):not(.thirteen):not(.fourteen):not(.fifteen)');
+            
+            gridItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('user-selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

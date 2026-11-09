@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>الشبكات المنزلية والوصول الآمن والاستضافة الذاتية | إدريس دحلان</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="بناء شبكة منزلية خاصة مع ZeroTier وPi-hole وRaspberry Pi ومراقبة الخدمات لتسهيل الوصول الآمن إلى الأجهزة.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#020617">
+    <link rel="canonical" href="https://dahlan.me/ar/projects/home-network-selfhosting.html">
+    <link rel="alternate" hreflang="ar" href="https://dahlan.me/ar/projects/home-network-selfhosting.html">
+    <link rel="alternate" hreflang="en" href="https://dahlan.me/projects/home-network-selfhosting.html">
+    <link rel="alternate" hreflang="x-default" href="https://dahlan.me/projects/home-network-selfhosting.html">
+
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dahlan.me/ar/projects/home-network-selfhosting.html"> 
+    <meta property="og:site_name" content="Edrees Dahlan">
+    <meta property="og:title" content="الشبكات المنزلية والوصول الآمن والاستضافة الذاتية | إدريس دحلان">
+    <meta property="og:description" content="بناء شبكة منزلية خاصة مع ZeroTier وPi-hole وRaspberry Pi ومراقبة الخدمات لتسهيل الوصول الآمن إلى الأجهزة.">
+    <meta property="og:image" content="https://dahlan.me/img/social/engineering.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ar_SA">
+
+    
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dahlan.me/ar/projects/home-network-selfhosting.html">
+    <meta property="twitter:title" content="الشبكات المنزلية والوصول الآمن والاستضافة الذاتية | إدريس دحلان">
+    <meta property="twitter:description" content="بناء شبكة منزلية خاصة مع ZeroTier وPi-hole وRaspberry Pi ومراقبة الخدمات لتسهيل الوصول الآمن إلى الأجهزة.">
+    <meta property="twitter:image" content="https://dahlan.me/img/social/engineering.png">
+
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Edrees Dahlan">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=20261109-rtl1">
+
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://dahlan.me/ar/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "المشاريع",
+            "item": "https://dahlan.me/ar/projects.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "الشبكات المنزلية والوصول الآمن والاستضافة الذاتية",
+            "item": "https://dahlan.me/ar/projects/home-network-selfhosting.html"
+        }
+    ]
+}
+    </script>
+    <script src="/pwa.js?v=20261109-ar1" defer></script>
+</head>
+<body>
+
+    
+    <a href="#main-content" class="skip-link">الانتقال إلى المحتوى</a>
+
+    
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+        
+        <header>
+            <a href="../index.html" class="logo-area">
+                <div class="logo-symbol"><img src="/favicon.png" alt="شعار إدريس دحلان"></div>
+                <div class="logo-text">إدريس <span>دحلان</span></div>
+            </a>
+
+            <div class="nav-controls">
+                <nav id="primary-navigation">
+                    <ul>
+                        <li><a href="../index.html">نبذة عني</a></li>
+                        <li><a href="../resume.html">السيرة الذاتية</a></li>
+                        <li class="current-menu-item"><a href="../projects.html" aria-current="page">المشاريع</a></li>
+                        <li><a href="../contact.html">التواصل</a></li>
+                    </ul>
+                </nav>
+
+                
+                <a class="lang-switch" href="/projects/home-network-selfhosting.html" hreflang="en" lang="en" aria-label="Switch to English">EN</a>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="تغيير المظهر">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                </button>
+
+                <button class="menu-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="primary-navigation">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        
+        <main class="content-container" id="main-content"><nav class="case-breadcrumb" aria-label="مسار الصفحة"><a href="../index.html">الرئيسية</a><span aria-hidden="true">/</span><a href="../projects.html">المشاريع</a><span aria-hidden="true">/</span><span aria-current="page">الشبكات المنزلية والوصول الآمن والاستضافة الذاتية</span></nav>
+<div class="case-hero"><span class="project-eyebrow">مختبر شخصي · الشبكات والاستضافة الذاتية</span><h1>الشبكات المنزلية والوصول الآمن والاستضافة الذاتية</h1><p class="case-lead">أنشأت بيئة منزلية تربط أجهزة الشبكة والطابعات وخدمات Raspberry Pi، مع اتصال 5G وZeroTier للوصول الخاص، وPi-hole لحجب النطاقات غير المرغوبة، وأدوات لمراقبة الخدمات.</p><dl class="case-facts"><div class="case-fact"><dt>البيئة</dt><dd>شبكة منزلية خاصة وأجهزة متعددة</dd></div><div class="case-fact"><dt>التركيز</dt><dd>الشبكات والوصول عن بُعد والاستضافة الذاتية</dd></div><div class="case-fact"><dt>التصنيف</dt><dd>مشروع تقني شخصي</dd></div></dl></div>
+<section class="case-key-outcomes" aria-label="أبرز النتائج"><h2>أبرز النتائج</h2><ul><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>الوصول الآمن إلى خدمات الشبكة المنزلية</span></li><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>تنظيم الاتصال اللاسلكي والأجهزة</span></li><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>مراقبة الخدمات وحجب النطاقات المحددة</span></li></ul></section>
+<div class="case-content"><article class="case-article"><section class="case-section" aria-labelledby="challenge-title"><h2 id="challenge-title">التحدي</h2><p>احتجت إلى ربط الأجهزة المختلفة داخل شبكة موحدة مع إمكانية الوصول إلى بعض مواردها، ومنها واجهات الطابعات، أثناء وجودي خارج المنزل دون كشف واجهات التحكم للإنترنت العام.</p></section>
+<section class="case-section" aria-labelledby="approach-title"><h2 id="approach-title">كيف عملت على المشروع</h2><h3>الشبكة والاتصال</h3><ul class="case-bullets"><li>ضبطت اتصال 5G مع راوتر Netgear Nighthawk XR1000 بنظام DumaOS وعقد Totolink X30 في وضع نقاط الوصول.</li><li>استخدمت ZeroTier لتوفير وصول خاص ومصرح به إلى خدمات الشبكة المحلية.</li></ul><h3>الخدمات الذاتية</h3><ul class="case-bullets"><li>شغلت Pi-hole لتصفية النطاقات الإعلانية وغير المرغوبة على الأجهزة المهيأة.</li><li>استخدمت Raspberry Pi 4 مع Docker وUptime Kuma وخدمات مرتبطة بالطباعة مثل Moonraker وObico.</li><li>راقبت توافر الخدمات ومشكلات الاتصال وقمت بالتشخيص حسب الحاجة.</li></ul></section>
+<section class="case-section" aria-labelledby="outcome-title"><h2 id="outcome-title">النتائج والأثر</h2><p>تحولت الشبكة إلى بيئة مترابطة يسهل الوصول إلى خدماتها ومراقبتها، مع تقليل الاعتماد على تطبيقات منفصلة لكل جهاز.</p><ul class="case-bullets impact-list"><li><strong>وصول خاص.</strong> الدخول المصرح إلى خدمات داخلية دون نشر لوحات التحكم للعامة.</li><li><strong>تنظيم Wi‑Fi.</strong> توزيع الأجهزة ونقاط الوصول بصورة أوضح.</li><li><strong>ترشيح DNS.</strong> إعداد قواعد الحجب مركزيًا للأجهزة المتوافقة.</li><li><strong>مراقبة الخدمات.</strong> فحص حالة الخدمات واكتشاف حالات الانقطاع.</li><li><strong>مرونة الصيانة.</strong> الاعتماد على خدمات ذاتية قابلة للفحص والتعديل.</li></ul></section></article>
+<aside class="case-sidebar" aria-label="تفاصيل المشروع"><h2>الأدوات والتقنيات</h2><ul class="project-tech" aria-label="التقنيات"><li>Netgear XR1000 / DumaOS</li><li>Totolink X30</li><li>ZeroTier</li><li>Pi-hole</li><li>Raspberry Pi 4</li><li>Docker</li><li>Uptime Kuma</li><li>Moonraker</li></ul><h2>ملاحظات المشروع</h2><p>تتضمن البيئة الوصول إلى شبكة خاصة وخدمات محلية وأدوات مراقبة، دون كشف إعدادات الوصول الحساسة.</p></aside></div>
+<aside class="case-related" aria-label="مشاريع مرتبطة"><h2>مشاريع مرتبطة</h2><a href="engineering-lab.html">معايرة الطابعات <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a> <span aria-hidden="true">·</span> <a href="smart-home-automation.html">أتمتة المنزل <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></aside>
+<nav class="case-next" aria-label="التنقل بين المشاريع"><a href="../projects.html"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i> جميع المشاريع</a><a href="engineering-lab.html">معايرة الطابعات <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a></nav></main>
+
+        
+        <footer class="site-footer">
+            <nav class="footer-nav" aria-label="روابط التذييل">
+                <a href="../index.html">الرئيسية</a><a href="../projects.html">المشاريع</a>
+                <a href="../resume.html">السيرة الذاتية</a><a href="../contact.html">التواصل</a>
+            </nav>
+            <ul class="footer-social-links">
+                <li><a href="https://linkedin.dahlan.me" target="_blank" rel="noopener noreferrer" aria-label="حساب LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+            </ul>
+            <div class="footer-copyrights"><p>&copy; <span id="current-year">2026</span> إدريس دحلان · التجارة الإلكترونية وهندسة الحاسب.</p></div>
+        </footer>
+    </div>
+
+    
+    <script src="/main.js?v=20261109-ar1"></script>
+</body>
+</html>

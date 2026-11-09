@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const isArabic = document.documentElement.lang === 'ar';
+    const t = (arabic, english) => isArabic ? arabic : english;
+    const route = name => (isArabic ? '/ar/' : '/') + name;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -93,9 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 group.hidden = !visible;
                 if (visible) visibleCount += group.querySelectorAll('.project-card').length;
             });
-            if (filterStatus) filterStatus.textContent =
-                value === 'all' ? 'Showing all ' + visibleCount + ' projects'
-                : 'Showing ' + visibleCount + ' ' + button.textContent.replace(/\s+\d+\s*$/, '').trim() + ' projects';
+            if (filterStatus) filterStatus.textContent = isArabic
+                ? (value === 'all' ? 'عرض جميع المشاريع (' + visibleCount + ')' : 'عرض ' + visibleCount + ' مشاريع من قسم ' + button.textContent.replace(/\s+\d+\s*$/, '').trim())
+                : (value === 'all' ? 'Showing all ' + visibleCount + ' projects' : 'Showing ' + visibleCount + ' ' + button.textContent.replace(/\s+\d+\s*$/, '').trim() + ' projects');
         }));
     }
 
@@ -346,13 +349,13 @@ document.addEventListener("DOMContentLoaded", () => {
                    `• <strong style="color: var(--neon-purple);">Engineering:</strong> Cloudflare Workers, APIs, Networks, Technical SEO`;
         }
 
-        return `<strong style="color: var(--neon-purple);">Extracted Technical Skills:</strong><br>` + 
+        return `<strong style="color: var(--neon-purple);">${t('المهارات التقنية:', 'Extracted Technical Skills:')}</strong><br>` + 
                skillTags.map(s => `  • ${s}`).join('<br>');
     }
 
     async function getExperienceData() {
         const docResume = await getDocumentForPage('resume.html');
-        if (!docResume) return "Experience data currently unavailable.";
+        if (!docResume) return t('الخبرات غير متوفرة حاليًا.', 'Experience data currently unavailable.');
 
         const cards = docResume.querySelectorAll('.resume-card');
         let expText = [];
@@ -367,15 +370,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        return expText.length > 0 ? expText.join('<br>') : "No work experience details found.";
+        return expText.length > 0 ? expText.join('<br>') : t('لا توجد معلومات عن الخبرات حاليًا.', 'No work experience details found.');
     }
 
     async function getCertsData() {
         const docResume = await getDocumentForPage('resume.html');
-        if (!docResume) return "Certifications data unavailable.";
+        if (!docResume) return t('بيانات الشهادات غير متوفرة.', 'Certifications data unavailable.');
 
         const heading = Array.from(docResume.querySelectorAll('.section-column-title'))
-            .find(el => el.textContent.includes('Certifications & Professional Training'));
+            .find(el => el.textContent.includes(isArabic ? 'الشهادات والدورات المهنية' : 'Certifications & Professional Training'));
         const groups = [];
         const following = heading?.nextElementSibling;
         const cards = following?.matches('details.resume-extra, .resume-training-grid')
@@ -390,8 +393,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         return groups.length
-            ? `<strong>Certifications & training:</strong><br>${groups.join('<br><br>')}`
-            : "Certification details currently unavailable.";
+            ? `<strong>${t('الشهادات والدورات:', 'Certifications & training:')}</strong><br>${groups.join('<br><br>')}`
+            : t('تفاصيل الشهادات غير متوفرة حاليًا.', 'Certification details currently unavailable.');
     }
 
     async function getContactData() {
@@ -417,12 +420,12 @@ document.addEventListener("DOMContentLoaded", () => {
                    `  • WhatsApp: <a href="https://wa.me/966568329898" target="_blank" style="color: #25d366;">+966 56 832 9898</a>`;
         }
 
-        return `Direct Contact Channels (Live extracted):<br>` + contacts.join('<br>');
+        return `${t('قنوات التواصل المباشر:', 'Direct Contact Channels (Live extracted):')}<br>` + contacts.join('<br>');
     }
 
     async function getProjectsData() {
         const docProjects = await getDocumentForPage('projects.html');
-        if (!docProjects) return "Project listings are temporarily unavailable.";
+        if (!docProjects) return t('قائمة المشاريع غير متوفرة حاليًا.', 'Project listings are temporarily unavailable.');
 
         const sections = Array.from(docProjects.querySelectorAll('.project-group'));
         const output = sections.map(section => {
@@ -441,8 +444,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return output.length
             ? output.join('<br><br>') +
-              '<br><br><a href="projects.html" style="color:var(--neon-blue);">Browse all case studies</a>'
-            : 'Project case studies are temporarily unavailable.';
+              `<br><br><a href="${route('projects.html')}" style="color:var(--neon-blue);">${t('عرض جميع المشاريع', 'Browse all case studies')}</a>`
+            : t('تفاصيل المشاريع غير متوفرة حاليًا.', 'Project case studies are temporarily unavailable.');
     }
 
     const terminalInput = document.querySelector('.terminal-input') || document.getElementById('cliInput');
@@ -455,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderTypingToggle() {
         if (!cliTypingToggle) return;
-        cliTypingToggle.textContent = typingEnabled ? 'Typing: ON' : 'Typing: OFF';
+        cliTypingToggle.textContent = typingEnabled ? t('الكتابة: مفعّلة', 'Typing: ON') : t('الكتابة: متوقفة', 'Typing: OFF');
         cliTypingToggle.setAttribute('aria-pressed', String(typingEnabled));
     }
     if (cliTypingToggle) {
@@ -565,7 +568,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 break;
 
             case 'date':
-                responseText = escapeHtml(new Date().toLocaleString());
+                responseText = escapeHtml(new Date().toLocaleString(isArabic ? 'ar-SA' : undefined));
                 break;
 
             case 'cat readme.md':
@@ -616,7 +619,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
             case 'download cv':
                 responseText = `Starting your resume download...<br><span style="color: #22c55e;">If your browser allows downloads, the PDF will be saved.</span>`;
                 const link = document.createElement('a');
-                link.href = 'Edrees_Dahlan_Resume.pdf';
+                link.href = '/Edrees_Dahlan_Resume.pdf';
                 link.download = 'Edrees_Dahlan_Resume.pdf';
                 document.body.appendChild(link);
                 link.click();
@@ -695,6 +698,53 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
             default:
                 responseText = `<span style="color: #ef4444;">Command not found: '${escapeHtml(cleanCmd)}'. Type <span style="color: var(--neon-blue);">help</span> for available commands.</span>`;
                 break;
+        }
+
+        if (isArabic) {
+            const phrases = [
+                ['Portfolio commands','أوامر البروفايل'],
+                ['Profile summary','نبذة شخصية'],
+                ['Work experience','الخبرات العملية'],
+                ['Technical skills','المهارات التقنية'],
+                ['Certifications and training','الشهادات والدورات'],
+                ['Technology stack','التقنيات المستخدمة'],
+                ['Featured projects and case studies','المشاريع ودراسات الحالة'],
+                ['Contact details','بيانات التواصل'],
+                ['Download resume PDF','تحميل السيرة الذاتية PDF'],
+                ['Your browser environment','بيئة المتصفح'],
+                ['Recent session commands','سجل الأوامر'],
+                ['Visitor session','جلسة الزائر'],
+                ['Virtual portfolio directory','مجلد افتراضي للبروفايل'],
+                ['Read about me','قراءة النبذة'],
+                ['Local date & time','التاريخ والوقت المحليان'],
+                ['Echo a message','تكرار رسالة'],
+                ['Clear terminal','مسح الطرفية'],
+                ['Explore (demos and easter eggs)','استكشف (أمثلة وتجارب)'],
+                ['E-commerce Manager & Computer Engineer','مدير تجارة إلكترونية ومهندس حاسب'],
+                ['Session: visitor (portfolio simulation)','الجلسة: زائر (محاكاة)'],
+                ['virtual directory','مجلد افتراضي'],
+                ['Virtual portfolio entries, not server files.','عناصر بروفايل افتراضية وليست ملفات خادم.'],
+                ['No commands in this session.','لا توجد أوامر في هذه الجلسة.'],
+                ['Core Infrastructure & Tech Stack:','البنية التقنية والأدوات:'],
+                ['E-Commerce:','التجارة الإلكترونية:'],
+                ['Backend & APIs:','الخدمات الخلفية وواجهات البرمجة:'],
+                ['Web & UI:','الويب والواجهة:'],
+                ['Home Systems & IoT:','الأنظمة المنزلية وإنترنت الأشياء:'],
+                ['Starting your resume download...','جارٍ تنزيل السيرة الذاتية...'],
+                ['If your browser allows downloads, the PDF will be saved.','سيتم حفظ الملف إذا كان المتصفح يسمح بالتنزيل.'],
+                ['Client Environment Metrics:','بيانات بيئة المتصفح:'],
+                ['DNS Filtering / Pi-hole:','تصفية DNS عبر Pi-hole:'],
+                ['Creality K2 SE / Klipper:','Creality K2 SE / Klipper:'],
+                ['Playful demo (not live):','تجربة توضيحية وليست بيانات مباشرة:'],
+                ['Playful ecosystem example (not live sensor data):','مثال توضيحي لا يعتمد على مستشعرات مباشرة:'],
+                ['Filesystem demo: no server disk statistics are exposed through this portfolio.','عرض توضيحي: لا يكشف الموقع بيانات أقراص الخادم.'],
+                ['Permission denied: User is not in the sudoers file. Incident reported','الوصول مرفوض: حساب الزائر لا يملك صلاحيات المسؤول.'],
+                ['Command not found:','الأمر غير موجود:'],
+                ['for available commands.','لعرض الأوامر المتاحة.'],
+                ['Type ','اكتب '],
+                ['Browse all case studies','استعراض المشاريع']
+            ];
+            for (const [english, arabic] of phrases) responseText = responseText.replaceAll(english, arabic);
         }
 
         outputLine.innerHTML = promptHeader + '<div class="cli-response" aria-hidden="true"></div>';
@@ -963,7 +1013,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 formStatus.style.color = '#f59e0b';
                 formStatus.style.borderColor = 'rgba(245, 158, 11, 0.3)';
                 formStatus.style.background = 'rgba(245, 158, 11, 0.1)';
-                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> Security Check Required: Please complete hCaptcha to send your message.`;
+                formStatus.innerHTML = `<i class="fa-solid fa-shield-halved"></i> ${t('يرجى إكمال تحقق hCaptcha قبل إرسال الرسالة.', 'Security Check Required: Please complete hCaptcha to send your message.')}`;
                 setTimeout(() => {
                     formStatus.style.display = 'none';
                 }, 5000);
@@ -974,7 +1024,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 submitBtn.style.display = 'none';
                 formStatus.style.display = 'flex';
                 formStatus.className = 'terminal-status-success';
-                formStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> Success, ${escapeHtml(name || 'visitor')}! Protocol executed.`;
+                formStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${t('تم استلام الطلب.', 'Success, ' + escapeHtml(name || 'visitor') + '! Protocol executed.')}`;
                 contactForm.reset();
                 setTimeout(() => {
                     submitBtn.style.display = 'flex';
@@ -986,7 +1036,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
             submitBtn.style.display = 'none';
             formStatus.style.display = 'flex';
             formStatus.className = 'terminal-status-loading';
-            formStatus.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Executing transmission protocol...`;
+            formStatus.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${t('جارٍ إرسال الرسالة…', 'Executing transmission protocol...')}`;
 
             try {
                 const response = await fetch('https://api.web3forms.com/submit', {
@@ -997,7 +1047,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
 
                 if (data.success) {
                     formStatus.className = 'terminal-status-success';
-                    formStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> Success, ${escapeHtml(name)}! Protocol executed. Routing response to ${escapeHtml(email)}.`;
+                    formStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${t('تم إرسال رسالتك بنجاح. شكرًا لك يا ' + escapeHtml(name) + '، وسأرد عليك عبر ' + escapeHtml(email) + '.', 'Success, ' + escapeHtml(name) + '! Protocol executed. Routing response to ' + escapeHtml(email) + '.')}`;
                     contactForm.reset();
                 } else {
                     throw new Error(data.message || 'Transmission failed.');
@@ -1007,7 +1057,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 formStatus.style.color = '#ef4444';
                 formStatus.style.borderColor = 'rgba(239, 68, 68, 0.3)';
                 formStatus.style.background = 'rgba(239, 68, 68, 0.1)';
-                formStatus.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error: ${escapeHtml(error.message)}`;
+                formStatus.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${t('تعذر إرسال الرسالة: ', 'Error: ')}${escapeHtml(error.message)}`;
             }
 
             setTimeout(() => {
