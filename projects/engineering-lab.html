@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Raspberry Pi & 3D Printing Lab | Edrees Dahlan</title>
+    <title>Creality K2 SE — Calibration & Firmware Engineering | Edrees Dahlan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
+    <meta name="description" content="Calibration, Linux firmware diagnostics and Klipper investigation for the Creality K2 SE, alongside an earlier Ender 3 S1 Pro setup.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#020617">
     <link rel="canonical" href="https://dahlan.me/projects/engineering-lab.html">
@@ -14,8 +14,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dahlan.me/projects/engineering-lab.html"> 
     <meta property="og:site_name" content="Edrees Dahlan">
-    <meta property="og:title" content="Raspberry Pi & 3D Printing Lab | Edrees Dahlan">
-    <meta property="og:description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
+    <meta property="og:title" content="Creality K2 SE — Calibration & Firmware Engineering | Edrees Dahlan">
+    <meta property="og:description" content="Calibration, Linux firmware diagnostics and Klipper investigation for the Creality K2 SE, alongside an earlier Ender 3 S1 Pro setup.">
     <meta property="og:image" content="https://dahlan.me/img/social/engineering.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -24,8 +24,8 @@
     
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://dahlan.me/projects/engineering-lab.html">
-    <meta property="twitter:title" content="Raspberry Pi & 3D Printing Lab | Edrees Dahlan">
-    <meta property="twitter:description" content="Hands-on 3D printing projects spanning an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.">
+    <meta property="twitter:title" content="Creality K2 SE — Calibration & Firmware Engineering | Edrees Dahlan">
+    <meta property="twitter:description" content="Calibration, Linux firmware diagnostics and Klipper investigation for the Creality K2 SE, alongside an earlier Ender 3 S1 Pro setup.">
     <meta property="twitter:image" content="https://dahlan.me/img/social/engineering.png">
 
     
@@ -67,7 +67,7 @@
         {
             "@type": "ListItem",
             "position": 3,
-            "name": "Raspberry Pi & 3D Printing Lab",
+            "name": "Creality K2 SE — Calibration & Firmware Engineering",
             "item": "https://dahlan.me/projects/engineering-lab.html"
         }
     ]
@@ -117,78 +117,84 @@
 
         
         <main class="content-container" id="main-content">
+
             <nav class="case-breadcrumb" aria-label="Breadcrumb">
                 <a href="../index.html">Home</a><span aria-hidden="true">/</span>
                 <a href="../projects.html">Projects</a><span aria-hidden="true">/</span>
-                <span aria-current="page">Raspberry Pi & 3D Printing Lab</span>
+                <span aria-current="page">K2 SE Calibration &amp; Firmware Engineering</span>
             </nav>
             <div class="case-hero">
-                <span class="project-eyebrow">Personal engineering project</span>
-                <h1>Raspberry Pi & 3D Printing Lab</h1>
-                <p class="case-lead">My 3D printing lab brings together an Ender 3 S1 Pro with Klipper and a Creality K2 SE Combo, including cameras, remote monitoring and Raspberry Pi services.</p>
+                <span class="project-eyebrow">Personal engineering project · Firmware &amp; Diagnostics</span>
+                <h1>Creality K2 SE — Calibration &amp; Firmware Engineering</h1>
+                <p class="case-lead">I investigated my Creality K2 SE's calibration and Linux-based firmware environment, combining hands-on bed adjustments with Klipper, Moonraker and system-level diagnostics. This work builds on my earlier Ender 3 S1 Pro Klipper setup.</p>
                 <dl class="case-facts">
-                    <div class="case-fact"><dt>Context</dt><dd>Ender 3 S1 Pro, Creality K2 SE Combo and Raspberry Pi 4</dd></div>
-                    <div class="case-fact"><dt>Role</dt><dd>Firmware configuration, printer monitoring and troubleshooting</dd></div>
-                    <div class="case-fact"><dt>Project type</dt><dd>Personal engineering project</dd></div>
+                    <div class="case-fact"><dt>Hardware</dt><dd>Creality K2 SE · Ender 3 S1 Pro</dd></div>
+                    <div class="case-fact"><dt>My role</dt><dd>Calibration, firmware inspection and system troubleshooting</dd></div>
+                    <div class="case-fact"><dt>Status</dt><dd>Calibration and diagnostics tested · firmware recovery exploratory</dd></div>
                 </dl>
             </div>
             <section class="case-key-outcomes" aria-label="Key project outcomes">
-                <h2>Key Outcomes</h2>
-                <ul><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>Control from a clearer interface</span></li><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>More practical remote monitoring</span></li><li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>Earlier awareness of print problems</span></li></ul>
+                <h2>Engineering Milestones</h2>
+                <ul>
+                    <li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>Bed Mesh measurements and alignment adjustments</span></li>
+                    <li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>Klipper, Moonraker and Buildroot inspection</span></li>
+                    <li><i class="fa-solid fa-check-circle" aria-hidden="true"></i><span>System backups created and checked</span></li>
+                </ul>
             </section>
             <div class="case-content">
                 <article class="case-article">
                     <section class="case-section" aria-labelledby="challenge-title">
                         <h2 id="challenge-title">The Challenge</h2>
-                        <p>Running and improving multiple 3D printers calls for compatible firmware, reliable bed leveling, accessible monitoring, capable slicing software and safe configuration changes.</p>
+                        <p>Reliable first layers depend on both the physical build surface and accurate software compensation. At the same time, experimenting with printer firmware requires understanding the existing system and preserving a recovery path before changing anything.</p>
                     </section>
                     <section class="case-section" aria-labelledby="approach-title">
                         <h2 id="approach-title">My Approach</h2>
-                        <h3>Ender 3 S1 Pro</h3>
+                        <h3>K2 SE Calibration</h3>
                         <ul class="case-bullets">
-                            <li>Configured Klipper firmware on an Ender 3 S1 Pro and worked with BLTouch-assisted bed leveling.</li>
-                            <li>Set up Mainsail and Fluidd interfaces with Crowsnest camera monitoring.</li>
-                            <li>Used OrcaSlicer within the slicing and printer-control workflow.</li>
-                            <li>Enabled remote print monitoring through private home-network access, without a separate paid remote-printing subscription.</li>
+                            <li>Measured the printer bed with Bed Mesh and made mechanical adjustments while checking changes between measurements.</li>
+                            <li>Investigated first-layer adhesion, bed temperature and nozzle conditions during calibration.</li>
+                            <li>Reviewed Input Shaper and Pressure Advance settings as part of the printer-tuning workflow.</li>
                         </ul>
-                        <h3>Creality K2 SE Combo</h3>
+                        <h3>Linux &amp; Firmware Investigation</h3>
                         <ul class="case-bullets">
-                            <li>Worked with Klipper/Fluidd access, printer monitoring and troubleshooting on the K2 SE Combo.</li>
-                            <li>Integrated a Wyze camera feed through Docker and Wyze Bridge, checking stream quality and snapshots.</li>
-                            <li>Explored CFS multi-color workflow configuration and printer diagnostics.</li>
-                            <li>Created and verified backups before system modifications.</li>
+                            <li>Accessed the printer's Buildroot-based environment for root-level diagnostics and configuration inspection.</li>
+                            <li>Reviewed Klipper and Moonraker components, firmware files and relevant system logs.</li>
+                            <li>Created and verified backups before exploring configuration changes or recovery options.</li>
+                            <li>Kept experimental firmware-recovery work separate from the known-working firmware; no unverified firmware was flashed.</li>
                         </ul>
-                        <p class="case-inline-link">Related project: <a href="home-network-selfhosting.html">Home Networking &amp; Remote VPN Access</a>.</p>
-                        
+                        <h3>Earlier Printer Systems</h3>
+                        <ul class="case-bullets">
+                            <li>Configured Klipper on an Ender 3 S1 Pro with assisted bed leveling and Mainsail/Fluidd access.</li>
+                            <li>Used Crowsnest camera monitoring, OrcaSlicer and private remote access as part of the print workflow.</li>
+                        </ul>
                     </section>
                     <section class="case-section" aria-labelledby="outcome-title">
-                        <h2 id="outcome-title">Results &amp; Impact</h2>
-                        <p>The printing lab became a more accessible and maintainable environment across both the Klipper-modified Ender 3 S1 Pro and the Creality K2 SE Combo. Bringing printer controls, camera feeds and service diagnostics together made experimentation easier to manage without constant physical checks.</p>
+                        <h2 id="outcome-title">Results &amp; Current Status</h2>
+                        <p>Bringing hardware alignment, diagnostic tools and verified backups into one workflow made calibration and troubleshooting more structured. The work provides a safer basis for further experiments without confusing tested settings with unfinished firmware changes.</p>
                         <ul class="case-bullets impact-list">
-                            <li><strong>Control from a clearer interface.</strong> Klipper, Mainsail and Fluidd made it easier to review printer status, settings and diagnostics from a browser instead of relying only on a printer's built-in controls.</li>
-                            <li><strong>More practical remote monitoring.</strong> Camera streams and private remote access enabled checking print progress while away from the printer, reducing unnecessary trips just to see whether a job is still running.</li>
-                            <li><strong>Earlier awareness of print problems.</strong> Live snapshots and monitoring tools made visible issues easier to notice so a failing print could be investigated sooner, helping avoid unnecessary wasted printing time and material.</li>
-                            <li><strong>A repeatable print-preparation workflow.</strong> Combining bed-leveling configuration, OrcaSlicer and printer administration created a more structured route from slicer settings to monitored execution.</li>
-                            <li><strong>Safer changes and faster recovery.</strong> Verified backups before configuration work reduced the risk of losing known-working settings, allowing firmware and camera integrations to be tested more confidently.</li>
+                            <li><strong>Measured adjustments.</strong> Bed Mesh readings supported physical leveling decisions instead of trial and error alone.</li>
+                            <li><strong>System visibility.</strong> Linux, Klipper and Moonraker inspection made underlying services and configuration behavior easier to investigate.</li>
+                            <li><strong>Safer experimentation.</strong> Backups and controlled changes protect known-working configurations while firmware recovery remains in research.</li>
                         </ul>
-                        <p class="impact-conclusion">The main improvement was practical reliability and control: multiple printers could be managed with clearer visibility, documented configuration and fewer avoidable interruptions during technical experimentation.</p>
+                        <p class="impact-conclusion">Calibration and diagnostics have been tested; deeper firmware modifications remain exploratory.</p>
                     </section>
                 </article>
                 <aside class="case-sidebar" aria-label="Project details">
                     <h2>Tools &amp; Technologies</h2>
-                    <ul class="project-tech" aria-label="Technology stack"><li>Ender 3 S1 Pro</li><li>Creality K2 SE Combo</li><li>Klipper / Fluidd</li><li>Mainsail</li><li>Crowsnest</li><li>OrcaSlicer</li><li>Docker / Wyze Bridge</li></ul>
+                    <ul class="project-tech" aria-label="Technology stack"><li>Creality K2 SE</li><li>Ender 3 S1 Pro</li><li>Klipper</li><li>Moonraker</li><li>Fluidd</li><li>Mainsail</li><li>Linux / Buildroot</li><li>SSH</li><li>Bed Mesh</li><li>Input Shaper</li><li>Pressure Advance</li><li>OrcaSlicer</li></ul>
                     <h2>Project Notes</h2>
-                    <p>I use a Wyze camera with Docker and Wyze Bridge for monitoring the K2 SE setup. My earlier Ender 3 S1 Pro project used Klipper, Mainsail/Fluidd and Crowsnest.</p>
-                    
+                    <p>The K2 SE firmware investigation is distinct from my <a href="printguard-ai-monitoring.html">PrintGuard monitoring project</a>, which covers Wyze video, Raspberry Pi and AI inference.</p>
                 </aside>
             </div>
             <aside class="case-related" aria-label="Related projects">
                 <h2>Explore related work</h2>
-                <a href="home-network-selfhosting.html">Home Networking & VPN <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a> <span aria-hidden="true"> · </span> <a href="smart-home-automation.html">Home Automation <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                <a href="printguard-ai-monitoring.html">PrintGuard — Edge AI Monitoring <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                <span aria-hidden="true"> · </span>
+                <a href="home-network-selfhosting.html">Home Networking &amp; VPN <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
             </aside>
             <nav class="case-next" aria-label="Project navigation">
                 <a href="../projects.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All projects</a>
-                <a href="ecommerce-platform.html">E-commerce Platform Optimization <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                <a href="printguard-ai-monitoring.html">PrintGuard <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </nav>
         </main>
 
