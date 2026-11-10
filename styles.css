@@ -3001,3 +3001,52 @@ html[lang="ar"] .app-nav-tab:focus-visible {
     html[lang="ar"] .case-fact { padding: 14px; }
     html[lang="ar"] .case-hero { min-width: 0; }
 }
+
+.linkedin-contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 44px;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+.linkedin-contact-link .fa-linkedin {
+    font-size: 1.35em;
+    flex: 0 0 auto;
+}
+html[lang="ar"] .contact-form-section .terminal-body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    letter-spacing: normal;
+}
+html[lang="ar"] .contact-privacy-note {
+    direction: rtl;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: .87rem;
+    line-height: 1.85;
+    letter-spacing: normal;
+    text-align: right;
+    overflow-wrap: break-word;
+}
+html[lang="ar"] .contact-form-section #formStatus {
+    direction: rtl;
+    text-align: right;
+    justify-content: flex-start;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: .95rem;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: normal;
+    overflow-wrap: anywhere;
+}
+html[lang="ar"] .contact-hero p {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    line-height: 1.9;
+    letter-spacing: normal;
+}
+html[dir="rtl"] .contact-intro-action .fa-arrow-down {
+    transform: none;
+}

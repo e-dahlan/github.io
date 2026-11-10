@@ -1047,7 +1047,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
 
                 if (data.success) {
                     formStatus.className = 'terminal-status-success';
-                    formStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${t('تم إرسال رسالتك بنجاح. شكرًا لك يا ' + escapeHtml(name) + '، وسأرد عليك عبر ' + escapeHtml(email) + '.', 'Success, ' + escapeHtml(name) + '! Protocol executed. Routing response to ' + escapeHtml(email) + '.')}`;
+                    formStatus.innerHTML = `<i class="fa-solid fa-circle-check" aria-hidden="true"></i> ${t('تم إرسال رسالتك بنجاح. شكرًا لك، وسأرد عليك عبر ' + escapeHtml(email) + '.', 'Your message was sent successfully. I will reply to ' + escapeHtml(email) + '.')}`;
                     contactForm.reset();
                 } else {
                     throw new Error(data.message || 'Transmission failed.');
