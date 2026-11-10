@@ -326,10 +326,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function getAboutData() {
         const doc = await getDocumentForPage('index.html');
-        if (!doc) return "Edrees Dahlan - E-commerce Manager & Computer Engineer.";
+        if (!doc) return t('إدريس دحلان — مدير تجارة إلكترونية ومهندس حاسب', 'Edrees Dahlan - E-commerce Manager & Computer Engineer.');
         
-        const title = doc.querySelector('.hero-details h1')?.textContent.trim() || "EDREES DAHLAN";
-        const subtitle = doc.querySelector('.hero-details .hero-kicker')?.textContent.trim() || "Computer Engineer | E-commerce Manager";
+        const title = doc.querySelector('.hero-details h1')?.textContent.trim() || t('إدريس دحلان', 'EDREES DAHLAN');
+        const subtitle = doc.querySelector('.hero-details .hero-kicker')?.textContent.trim() || t('مهندس حاسب | مدير تجارة إلكترونية', 'Computer Engineer | E-commerce Manager');
         const bio = doc.querySelector('.hero-details p:not(.hero-kicker)')?.textContent.trim() || "";
         
         return `<strong style="color: var(--neon-blue);">${title}</strong> (${subtitle})<br>${bio}`;
@@ -524,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
         outputLine.style.marginBottom = '12px';
 
         const promptHeader = `<div style="margin-bottom: 4px;"><span style="color: var(--neon-pink); font-weight: bold;">edrees@cli:~$</span> ${escapeHtml(cmd)}</div>`;
-        outputLine.innerHTML = promptHeader + `<div style="color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Reading site data...</div>`;
+        outputLine.innerHTML = promptHeader + `<div style="color: var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> ${t('جارٍ قراءة بيانات الموقع...', 'Reading site data...')}</div>`;
         terminalBody.appendChild(outputLine);
         terminalBody.scrollTop = terminalBody.scrollHeight;
 
@@ -725,7 +725,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 ['virtual directory','مجلد افتراضي'],
                 ['Virtual portfolio entries, not server files.','عناصر بروفايل افتراضية وليست ملفات خادم.'],
                 ['No commands in this session.','لا توجد أوامر في هذه الجلسة.'],
-                ['Core Infrastructure & Tech Stack:','البنية التقنية والأدوات:'],
+                ['Core Infrastructure & Tech Stack:','التقنيات المستخدمة (Tech Stack):'],
                 ['E-Commerce:','التجارة الإلكترونية:'],
                 ['Backend & APIs:','الخدمات الخلفية وواجهات البرمجة:'],
                 ['Web & UI:','الويب والواجهة:'],
@@ -733,7 +733,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 ['Starting your resume download...','جارٍ تنزيل السيرة الذاتية...'],
                 ['If your browser allows downloads, the PDF will be saved.','سيتم حفظ الملف إذا كان المتصفح يسمح بالتنزيل.'],
                 ['Client Environment Metrics:','بيانات بيئة المتصفح:'],
-                ['DNS Filtering / Pi-hole:','تصفية DNS عبر Pi-hole:'],
+                ['DNS Filtering / Pi-hole:','DNS Filtering / Pi-hole:'],
                 ['Creality K2 SE / Klipper:','Creality K2 SE / Klipper:'],
                 ['Playful demo (not live):','تجربة توضيحية وليست بيانات مباشرة:'],
                 ['Playful ecosystem example (not live sensor data):','مثال توضيحي لا يعتمد على مستشعرات مباشرة:'],
@@ -950,14 +950,14 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
         if (welcomeCancelled || cliBusy || document.hidden) return;
         rememberWelcome();
 
-        const identity = 'Edrees Dahlan — E-commerce Manager & Computer Engineer';
+        const identity = t('إدريس دحلان — مدير تجارة إلكترونية ومهندس حاسب', 'Edrees Dahlan — E-commerce Manager & Computer Engineer');
         if (!await showWelcomeCommand('whoami', identity)) return;
         if (welcomeCancelled) return;
 
         await sleep(240);
         if (welcomeCancelled || !await showWelcomeCommand(
             'help',
-            'Available commands: about, skills, projects, experience, contact, cv, history, clear. Type help to see more.'
+            t('الأوامر المتاحة: about, skills, projects, experience, contact, cv, history, clear. اكتب help لعرض المزيد.', 'Available commands: about, skills, projects, experience, contact, cv, history, clear. Type help to see more.')
         )) return;
 
         document.documentElement.dataset.cliIntro = 'complete';
@@ -1057,7 +1057,7 @@ coffee · pihole · klipper · isopods · terrarium · disk`;
                 formStatus.style.color = '#ef4444';
                 formStatus.style.borderColor = 'rgba(239, 68, 68, 0.3)';
                 formStatus.style.background = 'rgba(239, 68, 68, 0.1)';
-                formStatus.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${t('تعذر إرسال الرسالة: ', 'Error: ')}${escapeHtml(error.message)}`;
+                formStatus.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${t('تعذر إرسال الرسالة. جرّب مرة أخرى أو استخدم البريد الإلكتروني.', 'Error: ' + escapeHtml(error.message))}`;
             }
 
             setTimeout(() => {

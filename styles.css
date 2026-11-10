@@ -2960,3 +2960,44 @@ html[lang="ar"] .resume-language-name h3 {
     html[lang="ar"] header .logo-text { font-size: 1.12rem; }
     html[lang="ar"].app-mode header .logo-text { font-size: 1.12rem; }
 }
+
+html[lang="ar"] bdi.tech-term {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: 'Plus Jakarta Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: inherit;
+    font-size: 1em;
+    letter-spacing: 0;
+}
+html[lang="ar"] :is(.case-hero h1, .project-card h3) bdi.tech-term {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-weight: inherit;
+}
+html[lang="ar"] :is(.case-hero h1, .project-card h3, .case-fact dd,
+    .resume-language-card, .case-section p, .case-bullets li,
+    .project-card-content p, .hero-details p) {
+    overflow-wrap: break-word;
+}
+html[lang="ar"] .case-fact dt {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+}
+html[lang="ar"] .case-fact dd,
+html[lang="ar"] .case-section p,
+html[lang="ar"] .case-bullets li {
+    line-height: 1.75;
+}
+html[lang="ar"] .terminal-body .cli-response { unicode-bidi: plaintext; }
+html[lang="ar"] .terminal-body .terminal-output .cli-response { text-align: start; }
+html[lang="ar"] .lang-switch:focus-visible,
+html[lang="ar"] .app-nav-tab:focus-visible {
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 3px;
+}
+@media (max-width: 440px) {
+    html[lang="ar"] .project-card h3 { font-size: 1.16rem; line-height: 1.65; }
+    html[lang="ar"] .case-hero h1 { font-size: clamp(1.65rem, 6vw, 2.2rem); }
+    html[lang="ar"] .case-fact { padding: 14px; }
+    html[lang="ar"] .case-hero { min-width: 0; }
+}
